@@ -256,7 +256,7 @@ namespace SauceNAO.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No sauce found. Maybe try &lt;a href=&quot;{0}&quot;&gt;Google Reverse Search&lt;/a&gt; or &lt;a href=&quot;{0}&quot;&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href=&quot;{0}&quot;&gt;SauceNAO website&lt;/a&gt; to see all the results..
+        ///   Looks up a localized string similar to No sauce found. Maybe try &lt;a href=&quot;{0}&quot;&gt;Google Reverse Search&lt;/a&gt; or &lt;a href=&quot;{1}&quot;&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href=&quot;{2}&quot;&gt;SauceNAO website&lt;/a&gt; to see all the results..
         /// </summary>
         internal static string NotFound {
             get {

@@ -50,7 +50,7 @@ namespace SauceNAO
             // Get chat data (group only). Otherwise return default.
             chat = await GetChatData(message.Chat).ConfigureAwait(false);
             // If text == "sauce" or text is a metion for me (bot): Search
-            if (message.Text.ToLowerInvariant() == "sauce" || message.Text.Contains($"@{Me}"))
+            if (message.Text.ToLowerInvariant() == "sauce" || message.Text.StartsWith($"@{Me}"))
             {
                 await Sauce(message).ConfigureAwait(false);
                 return;

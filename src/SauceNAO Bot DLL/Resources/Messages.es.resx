@@ -206,7 +206,7 @@ Usa el comando /clean para borrarlo.</value>
 &lt;i&gt;Si estoy en un grupo, responda a una imagen con /sauce o /source&lt;/i&gt;</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>No se encontraron resultados. ¿Quizás desee intentar la &lt;a href="{0}"&gt;Busqueda Inversa de Google&lt;/a&gt; o &lt;a href="{0}"&gt;Yandex&lt;/a&gt; en su lugar? o ver en el sitio web de &lt;a href="{0}"&gt;SauceNAO&lt;/a&gt; para ver todos los resultados.</value>
+    <value>No se encontraron resultados. ¿Quizás desee intentar la &lt;a href="{0}"&gt;Busqueda Inversa de Google&lt;/a&gt; o &lt;a href="{1}"&gt;Yandex&lt;/a&gt; en su lugar? o ver en el sitio web de &lt;a href="{2}"&gt;SauceNAO&lt;/a&gt; para ver todos los resultados.</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>

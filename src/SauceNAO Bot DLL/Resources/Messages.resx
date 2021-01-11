@@ -185,7 +185,7 @@ Use /clean command to delete it.</value>
 &lt;i&gt;If I'm in a group, reply to a image with /sauce or /source&lt;/i&gt;</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>No sauce found. Maybe try &lt;a href="{0}"&gt;Google Reverse Search&lt;/a&gt; or &lt;a href="{0}"&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href="{0}"&gt;SauceNAO website&lt;/a&gt; to see all the results.</value>
+    <value>No sauce found. Maybe try &lt;a href="{0}"&gt;Google Reverse Search&lt;/a&gt; or &lt;a href="{1}"&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href="{2}"&gt;SauceNAO website&lt;/a&gt; to see all the results.</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
