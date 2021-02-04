@@ -3,7 +3,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Telegram.BotAPI.Available_Types;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Models
 {
@@ -13,7 +13,7 @@ namespace SauceNAO.Models
         internal Whitelist(User user)
         {
             Id = user.Id;
-            Name = $"{user.First_name}{(user.Last_name == null ? string.Empty : $" {user.Last_name}")}";
+            Name = $"{user.FirstName}{(user.LastName == null ? string.Empty : $" {user.LastName}")}";
             Username = user.Username ?? string.Empty;
         }
 

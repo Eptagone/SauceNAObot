@@ -4,7 +4,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Telegram.BotAPI.Available_Types;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO
 {

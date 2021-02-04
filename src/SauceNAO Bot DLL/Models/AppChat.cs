@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Telegram.BotAPI.Available_Types;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Models
 {
@@ -17,7 +17,7 @@ namespace SauceNAO.Models
             Id = chat.Id;
             Title = chat.Title ?? string.Empty;
             Username = chat.Username ?? string.Empty;
-            InviteLink = chat.Invite_link ?? (string.IsNullOrEmpty(Username) ? string.Empty : $"https://t.me/{Username}");
+            InviteLink = chat.InviteLink ?? (string.IsNullOrEmpty(Username) ? string.Empty : $"https://t.me/{Username}");
             IsChannel = chat.Type == ChatType.Channel;
         }
 
@@ -37,7 +37,7 @@ namespace SauceNAO.Models
         {
             string _title = chat.Title ?? string.Empty;
             string _username = chat.Username ?? string.Empty;
-            string _invitelink = chat.Invite_link ?? (string.IsNullOrEmpty(Username) ? string.Empty : $"https://t.me/{Username}");
+            string _invitelink = chat.InviteLink ?? (string.IsNullOrEmpty(Username) ? string.Empty : $"https://t.me/{Username}");
             if (Title == _title && Username == _username && InviteLink == _invitelink)
             {
                 return false;

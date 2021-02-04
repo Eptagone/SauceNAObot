@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Getting_updates;
+using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO
 {
@@ -29,12 +29,12 @@ namespace SauceNAO
                         await OnMessage(update.Message).ConfigureAwait(false);
                         break;
                     // Inline Query Update
-                    case UpdateType.Inline_query:
-                        await OnInlineQuery(update.Inline_query).ConfigureAwait(false);
+                    case UpdateType.InlineQuery:
+                        await OnInlineQuery(update.InlineQuery).ConfigureAwait(false);
                         break;
                     // Callback Query Update
-                    case UpdateType.Callback_query:
-                        await OnCallbackQuery(update.Callback_query).ConfigureAwait(false);
+                    case UpdateType.CallbackQuery:
+                        await OnCallbackQuery(update.CallbackQuery).ConfigureAwait(false);
                         break;
                 }
             }

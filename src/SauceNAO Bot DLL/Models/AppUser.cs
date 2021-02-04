@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Telegram.BotAPI.Available_Types;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Models
 {
@@ -17,9 +17,9 @@ namespace SauceNAO.Models
         public AppUser(User user)
         {
             Id = user.Id;
-            Name = $"{user.First_name}{(user.Last_name == null ? string.Empty : $" {user.Last_name}")}";
+            Name = $"{user.FirstName}{(user.LastName == null ? string.Empty : $" {user.LastName}")}";
             Username = user.Username ?? string.Empty;
-            Lang = user.Language_code ?? string.Empty;
+            Lang = user.LanguageCode ?? string.Empty;
         }
         internal AppUser(User user, bool start) : this(user)
         {
@@ -38,9 +38,9 @@ namespace SauceNAO.Models
         /// <param name="tuser">User</param>
         internal bool NotEquals(User tuser)
         {
-            string _name = $"{tuser.First_name}{(tuser.Last_name == null ? string.Empty : $" {tuser.Last_name}")}";
+            string _name = $"{tuser.FirstName}{(tuser.LastName == null ? string.Empty : $" {tuser.LastName}")}";
             string _username = tuser.Username ?? string.Empty;
-            string _lang = tuser.Language_code ?? string.Empty;
+            string _lang = tuser.LanguageCode ?? string.Empty;
             if (Name == _name && _username == Username && Lang == _lang)
             {
                 return false;

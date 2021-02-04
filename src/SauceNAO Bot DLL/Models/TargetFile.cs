@@ -13,7 +13,7 @@ namespace SauceNAO.Models
         public string OriginalFileId { get; set; }
         /// <summary>Unique file Id.</summary>
         public string FileId { get; set; }
-        /// <summary>File_unique_id.</summary>
+        /// <summary>FileUniqueId.</summary>
         public string UniqueId { get; set; }
         /// <summary>Type.</summary>
         public string Type { get; set; }

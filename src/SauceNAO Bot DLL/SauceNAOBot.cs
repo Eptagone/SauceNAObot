@@ -5,9 +5,9 @@ using SauceNAO.Data;
 using System;
 using System.Net.Http.Headers;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Available_Methods;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Getting_updates;
+using Telegram.BotAPI.AvailableMethods;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO
 {
@@ -54,7 +54,7 @@ namespace SauceNAO
             Bot.DeleteWebhook(true); // Delete old webhook
             Bot.SetMyCommands(BotCommands);
 
-            Bot.SetWebhook($"{baseUrl}{securityToken}", allowed_updates: Array.Empty<string>(), max_connections: 40); // Set new webhook
+            Bot.SetWebhook($"{baseUrl}{securityToken}", allowedUpdates: Array.Empty<string>(), maxConnections: 40); // Set new webhook
         }
     }
 }

@@ -14,11 +14,11 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Available_Methods;
-using Telegram.BotAPI.Available_Types;
-using File = Telegram.BotAPI.Available_Types.File;
-using IKB = Telegram.BotAPI.Available_Types.InlineKeyboardButton;
-using IKM = Telegram.BotAPI.Available_Types.InlineKeyboardMarkup;
+using Telegram.BotAPI.AvailableMethods;
+using Telegram.BotAPI.AvailableTypes;
+using File = Telegram.BotAPI.AvailableTypes.File;
+using IKB = Telegram.BotAPI.AvailableTypes.InlineKeyboardButton;
+using IKM = Telegram.BotAPI.AvailableTypes.InlineKeyboardMarkup;
 using SDIR = SauceNAO.Resources.SauceDirectory;
 
 namespace SauceNAO
@@ -46,7 +46,7 @@ namespace SauceNAO
                     var clean = DB.History.Where(h => h.Id == user.Id);
                     DB.RemoveRange(clean);
                     await DB.SaveChangesAsync().ConfigureAwait(false);
-                    await Bot.SendMessageAsync(message.Chat.Id, MSG.HistoryDelConfirm(lang), reply_markup: new IKM(new IKB[] { IKB.SetCallbackData(MSG.Confirm(lang), "yes"), IKB.SetCallbackData(MSG.Cancel(lang), "no") })).ConfigureAwait(false);
+                    await Bot.SendMessageAsync(message.Chat.Id, MSG.HistoryDelConfirm(lang), replyMarkup: new IKM(new IKB[] { IKB.SetCallbackData(MSG.Confirm(lang), "yes"), IKB.SetCallbackData(MSG.Cancel(lang), "no") })).ConfigureAwait(false);
                     break;
                 case "help":
                     Help(message, args, lang);
@@ -55,7 +55,7 @@ namespace SauceNAO
                 case "mysauces":
                     await Bot.SendMessageAsync(
                         message.Chat.Id, MSG.History(lang),
-                        reply_markup: new IKM(new IKB[] { IKB.SetSwitchInlineQueryCurrentChat("Sauce", string.Empty) })).ConfigureAwait(false);
+                        replyMarkup: new IKM(new IKB[] { IKB.SetSwitchInlineQueryCurrentChat("Sauce", string.Empty) })).ConfigureAwait(false);
                     break;
                 case "sauce":
                 case "source":
@@ -65,7 +65,7 @@ namespace SauceNAO
                     await Sauce(message).ConfigureAwait(false);
                     break;
                 case "start":
-                    await Bot.SendMessageAsync(message.Chat.Id, MSG.About(lang), parse_mode: ParseMode.HTML).ConfigureAwait(false);
+                    await Bot.SendMessageAsync(message.Chat.Id, MSG.About(lang), parseMode: ParseMode.HTML).ConfigureAwait(false);
                     if (!user.Start)
                     {
                         user.Start = true;
@@ -91,12 +91,12 @@ namespace SauceNAO
             // If member is Owner or Administrator, run command
             if (member.Status == "creator" || member.Status == "administrator")
             {
-                if (message.Reply_to_message != default)
+                if (message.ReplyToMessage != default)
                 {
                     // Get target user
-                    var tuser = message.Reply_to_message.From;
+                    var tuser = message.ReplyToMessage.From;
                     // If target user is bot, add bot to exclude list
-                    if (tuser.Is_bot)
+                    if (tuser.IsBot)
                     {
                         if (!DB.Whitelists.Any(w => w.ChatKey == chat.Key && w.Id == tuser.Id))
                         {
@@ -114,7 +114,7 @@ namespace SauceNAO
         {
             if (args.Length == 0)
             {
-                await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), reply_to_message_id: message.Message_id)
+                await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), replyToMessageId: message.MessageId)
                         .ConfigureAwait(false);
             }
             else
@@ -134,7 +134,7 @@ namespace SauceNAO
                     {
                         case "on":
                             chat.AntiCheats = true;
-                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsOn(lang), reply_to_message_id: message.Message_id)
+                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsOn(lang), replyToMessageId: message.MessageId)
                             .ConfigureAwait(false);
                             DB.Entry(chat).State = EntityState.Modified;
                             await DB.SaveChangesAsync()
@@ -142,14 +142,14 @@ namespace SauceNAO
                             break;
                         case "off":
                             chat.AntiCheats = false;
-                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsOff(lang), reply_to_message_id: message.Message_id)
+                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsOff(lang), replyToMessageId: message.MessageId)
                             .ConfigureAwait(false);
                             DB.Entry(chat).State = EntityState.Modified;
                             await DB.SaveChangesAsync()
                                 .ConfigureAwait(false);
                             break;
                         default:
-                            await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), reply_to_message_id: message.Message_id)
+                            await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), replyToMessageId: message.MessageId)
                         .ConfigureAwait(false);
                             break;
                     }
@@ -170,12 +170,12 @@ namespace SauceNAO
             // If member is Owner or Administrator, run command
             if (member.Status == "creator" || member.Status == "administrator")
             {
-                if (message.Reply_to_message != default)
+                if (message.ReplyToMessage != default)
                 {
                     // Get target user
-                    var tuser = message.Reply_to_message.From;
+                    var tuser = message.ReplyToMessage.From;
                     // If target user is bot, remove bot from exclude list
-                    if (tuser.Is_bot)
+                    if (tuser.IsBot)
                     {
                         await Bot.SendMessageAsync(chat.Id, MSG.AnticheatsDeleted(lang, tuser.Username)).ConfigureAwait(false);
                         // Get item
@@ -205,7 +205,7 @@ namespace SauceNAO
                     switch (args[0])
                     {
                         case "anticheats":
-                            await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), reply_to_message_id: message.Message_id)
+                            await Bot.SendMessageAsync(message.Chat.Id, MSG.Anticheats(lang), replyToMessageId: message.MessageId)
                                 .ConfigureAwait(false);
                             break;
                         default:
@@ -215,7 +215,7 @@ namespace SauceNAO
                 return;
             }
         helpdefault:
-            await Bot.SendMessageAsync(message.Chat.Id, MSG.Help(lang), parse_mode: ParseMode.HTML, reply_to_message_id: message.Message_id)
+            await Bot.SendMessageAsync(message.Chat.Id, MSG.Help(lang), parseMode: ParseMode.HTML, replyToMessageId: message.MessageId)
             .ConfigureAwait(false);
         }
 
@@ -224,15 +224,15 @@ namespace SauceNAO
             // Check Anticheats
             if (chat != default)
             {
-                if (message.Reply_to_message != default)
+                if (message.ReplyToMessage != default)
                 {
-                    if (message.Reply_to_message.From.Is_bot)
+                    if (message.ReplyToMessage.From.IsBot)
                     {
                         var whitelist = DB.Whitelists.Where(w => w.ChatKey == chat.Key);
                         // If AntiCHeats On and bot is not on exclude list, return
-                        if (chat.AntiCheats && !whitelist.Any(b => b.Id == message.Reply_to_message.From.Id))
+                        if (chat.AntiCheats && !whitelist.Any(b => b.Id == message.ReplyToMessage.From.Id))
                         {
-                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(lang), reply_to_message_id: message.Message_id)
+                            await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(lang), replyToMessageId: message.MessageId)
                                 .ConfigureAwait(false);
                             return;
                         }
@@ -240,14 +240,14 @@ namespace SauceNAO
                 }
             }
             // If reply message is null
-            if (message.Reply_to_message == null)
+            if (message.ReplyToMessage == null)
             {
-                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), reply_to_message_id: message.Message_id)
+                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), replyToMessageId: message.MessageId)
                     .ConfigureAwait(false);
             }
             else // reply message is not null
             {
-                await NewSearch(message.Reply_to_message).ConfigureAwait(false);
+                await NewSearch(message.ReplyToMessage).ConfigureAwait(false);
             }
         }
 
@@ -261,7 +261,7 @@ namespace SauceNAO
             if (!target.HasMedia)
             {
                 await Bot
-                    .SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), reply_to_message_id: message.Message_id, allow_sending_without_reply: true)
+                    .SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), replyToMessageId: message.MessageId, allowSendingWithoutReply: true)
                     .ConfigureAwait(false);
                 return;
             }
@@ -269,13 +269,13 @@ namespace SauceNAO
             if (!target.Ok)
             {
                 await Bot
-                    .SendMessageAsync(message.Chat.Id, MSG.InvalidPhoto(lang), allow_sending_without_reply: true, reply_to_message_id: message.Message_id)
+                    .SendMessageAsync(message.Chat.Id, MSG.InvalidPhoto(lang), allowSendingWithoutReply: true, replyToMessageId: message.MessageId)
                     .ConfigureAwait(false);
                 return;
             }
             // Send message about a processing request
             Message output = await Bot
-                .SendMessageAsync(message.Chat.Id, MSG.Searching(lang), reply_to_message_id: message.Message_id, allow_sending_without_reply: true)
+                .SendMessageAsync(message.Chat.Id, MSG.Searching(lang), replyToMessageId: message.MessageId, allowSendingWithoutReply: true)
                 .ConfigureAwait(false);
 
             string tfilepath;
@@ -288,9 +288,9 @@ namespace SauceNAO
                 tfilepath = string.Format(
                     BotClient.BaseFilesUrl,
                     Bot.Token,
-                    file.File_path);
+                    file.FilePath);
                 filename = Path
-                    .GetFileName(file.File_path);
+                    .GetFileName(file.FilePath);
             }
             catch (BotRequestException exp)
             {
@@ -464,13 +464,13 @@ namespace SauceNAO
             // Check Anticheats
             if (chat != default)
             {
-                if (message.Reply_to_message.From.Is_bot)
+                if (message.ReplyToMessage.From.IsBot)
                 {
                     var whitelist = DB.Whitelists.Where(w => w.ChatKey == chat.Key);
                     // If AntiCHeats On and bot is not on exclude list, return
-                    if (chat.AntiCheats && !whitelist.Any(b => b.Id == message.Reply_to_message.From.Id))
+                    if (chat.AntiCheats && !whitelist.Any(b => b.Id == message.ReplyToMessage.From.Id))
                     {
-                        await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(lang), reply_to_message_id: message.Message_id)
+                        await Bot.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(lang), replyToMessageId: message.MessageId)
                             .ConfigureAwait(false);
                         return;
                     }
@@ -483,29 +483,29 @@ namespace SauceNAO
         {
             await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing)
                         .ConfigureAwait(false);
-            if (message.Reply_to_message == null)
+            if (message.ReplyToMessage == null)
             {
-                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), ParseMode.HTML, reply_to_message_id: message.Message_id, allow_sending_without_reply: true).ConfigureAwait(false);
+                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), ParseMode.HTML, replyToMessageId: message.MessageId, allowSendingWithoutReply: true).ConfigureAwait(false);
                 return;
             }
-            TargetFile target = Utilities.GetMedia(message.Reply_to_message);
+            TargetFile target = Utilities.GetMedia(message.ReplyToMessage);
             if (!target.HasMedia)
             {
-                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), reply_to_message_id: message.Message_id, allow_sending_without_reply: true).ConfigureAwait(false);
+                await Bot.SendMessageAsync(message.Chat.Id, MSG.EmptyRequest(lang), replyToMessageId: message.MessageId, allowSendingWithoutReply: true).ConfigureAwait(false);
                 return;
             }
             if (target.HasMedia && !target.Ok)
             {
-                await Bot.SendMessageAsync(message.Chat.Id, MSG.InvalidPhoto(lang), reply_to_message_id: message.Message_id, allow_sending_without_reply: true).ConfigureAwait(false);
+                await Bot.SendMessageAsync(message.Chat.Id, MSG.InvalidPhoto(lang), replyToMessageId: message.MessageId, allowSendingWithoutReply: true).ConfigureAwait(false);
                 return;
             }
             string tmpurl = string.Empty;
-            Message output = await Bot.SendMessageAsync(message.Chat.Id, MSG.GeneratingTmpUrl(lang), reply_to_message_id: message.Message_id, allow_sending_without_reply: true).ConfigureAwait(false);
+            Message output = await Bot.SendMessageAsync(message.Chat.Id, MSG.GeneratingTmpUrl(lang), replyToMessageId: message.MessageId, allowSendingWithoutReply: true).ConfigureAwait(false);
             try
             {
                 File file = await Bot.GetFileAsync(target.FileId).ConfigureAwait(false);
-                string origin = string.Format(BotClient.BaseFilesUrl, Bot.Token, file.File_path);
-                string ext = Path.GetExtension(file.File_path);
+                string origin = string.Format(BotClient.BaseFilesUrl, Bot.Token, file.FilePath);
+                string ext = Path.GetExtension(file.FilePath);
                 if (!target.IsThumb && (ext == ".mp4" || ext == ".avi" || ext == ".mkv" || message.Animation != null || message.Video != null))
                 {
                     try
@@ -525,7 +525,7 @@ namespace SauceNAO
                 }
                 else
                 {
-                    string filename = $"{file.File_unique_id}{Path.GetExtension(file.File_path)}";
+                    string filename = $"{file.FileUniqueId}{Path.GetExtension(file.FilePath)}";
                     tmpurl = await Utilities.GenerateTmpFile(filename, origin).ConfigureAwait(false);
                 }
             }

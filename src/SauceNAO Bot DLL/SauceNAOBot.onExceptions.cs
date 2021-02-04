@@ -5,8 +5,8 @@ using SauceNAO.Models;
 using System;
 using System.Threading.Tasks;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Getting_updates;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO
 {

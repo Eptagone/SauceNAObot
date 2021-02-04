@@ -8,9 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Telegram.BotAPI.Available_Types;
+using Telegram.BotAPI.AvailableTypes;
 using File = System.IO.File;
-using IKB = Telegram.BotAPI.Available_Types.InlineKeyboardButton;
+using IKB = Telegram.BotAPI.AvailableTypes.InlineKeyboardButton;
 using SDIR = SauceNAO.Resources.SauceDirectory;
 
 namespace SauceNAO
@@ -50,22 +50,22 @@ namespace SauceNAO
             // If media is a Photo
             if (message.Photo != null)
             {
-                output.Ok = true; output.FileId = message.Photo[0].File_id;
-                output.UniqueId = message.Photo[0].File_unique_id;
+                output.Ok = true; output.FileId = message.Photo[0].FileId;
+                output.UniqueId = message.Photo[0].FileUniqueId;
                 output.HasMedia = true; output.Type = "photo";
-                output.OriginalFileId = message.Photo[0].File_id;
+                output.OriginalFileId = message.Photo[0].FileId;
                 return output;
             }
             // If media is a Sticker
             if (message.Sticker != null)
             {
                 output.HasMedia = true;
-                if (!message.Sticker.Is_animated)
+                if (!message.Sticker.IsAnimated)
                 {
-                    output.Ok = true; output.FileId = message.Sticker.File_id;
-                    output.UniqueId = message.Sticker.File_unique_id;
+                    output.Ok = true; output.FileId = message.Sticker.FileId;
+                    output.UniqueId = message.Sticker.FileUniqueId;
                     output.Type = "sticker";
-                    output.OriginalFileId = message.Sticker.File_id;
+                    output.OriginalFileId = message.Sticker.FileId;
                     return output;
                 }
             }
@@ -75,17 +75,17 @@ namespace SauceNAO
                 output.Ok = true;
                 if (message.Animation.Thumb != null)
                 {
-                    output.FileId = message.Animation.Thumb.File_id;
+                    output.FileId = message.Animation.Thumb.FileId;
                     output.IsThumb = true;
                 }
                 else
                 {
-                    output.FileId = message.Animation.File_id;
+                    output.FileId = message.Animation.FileId;
                 }
                 output.HasMedia = true;
-                output.UniqueId = message.Animation.File_unique_id;
+                output.UniqueId = message.Animation.FileUniqueId;
                 output.Type = "animation";
-                output.OriginalFileId = message.Animation.File_id;
+                output.OriginalFileId = message.Animation.FileId;
                 return output;
             }
             // If media is a Video
@@ -94,29 +94,29 @@ namespace SauceNAO
                 output.Ok = true;
                 if (message.Video.Thumb != null)
                 {
-                    output.FileId = message.Video.Thumb.File_id;
+                    output.FileId = message.Video.Thumb.FileId;
                     output.IsThumb = true;
                 }
                 else
                 {
-                    output.FileId = message.Video.File_id;
+                    output.FileId = message.Video.FileId;
                 }
                 output.HasMedia = true;
-                output.UniqueId = message.Video.File_unique_id;
+                output.UniqueId = message.Video.FileUniqueId;
                 output.Type = "video";
-                output.OriginalFileId = message.Video.File_id;
+                output.OriginalFileId = message.Video.FileId;
                 return output;
             }
             // If media is a Document
             if (message.Document != null)
             {
                 output.HasMedia = true;
-                if (message.Document.Mime_type.Contains("image"))
+                if (message.Document.MimeType.Contains("image"))
                 {
-                    output.Ok = true; output.FileId = message.Document.File_id;
-                    output.UniqueId = message.Document.File_unique_id;
+                    output.Ok = true; output.FileId = message.Document.FileId;
+                    output.UniqueId = message.Document.FileUniqueId;
                     output.Type = "document";
-                    output.OriginalFileId = message.Document.File_id;
+                    output.OriginalFileId = message.Document.FileId;
                 }
             }
             return output;

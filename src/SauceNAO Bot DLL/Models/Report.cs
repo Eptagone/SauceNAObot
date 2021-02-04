@@ -4,8 +4,8 @@
 using System;
 using System.Text.Json;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Getting_updates;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO.Models
 {
@@ -25,13 +25,13 @@ namespace SauceNAO.Models
         }
         internal Report(BotRequestException exp, Update update)
         {
-            ErrorCode = exp.Error_code;
+            ErrorCode = exp.ErrorCode;
             Description = exp.Message;
             JsonMessage = JsonSerializer.Serialize(update);
         }
         internal Report(BotRequestException exp, Message message, string details)
         {
-            ErrorCode = exp.Error_code;
+            ErrorCode = exp.ErrorCode;
             Description = exp.Message;
             Details = details;
             JsonMessage = JsonSerializer.Serialize(message);

@@ -7,7 +7,7 @@ using SauceNAO.Data;
 using SauceNAO.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Telegram.BotAPI.Getting_updates;
+using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO.Controllers
 {

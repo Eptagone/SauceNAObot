@@ -8,8 +8,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Telegram.BotAPI;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Updating_messages;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.AvailableMethods;
+using Telegram.BotAPI.UpdatingMessages;
 
 namespace SauceNAO
 {
@@ -94,15 +95,15 @@ namespace SauceNAO
         {
             EditMessageTextArgs args = new EditMessageTextArgs
             {
-                Chat_id = message.Chat.Id,
-                Message_id = message.Message_id,
+                ChatId = message.Chat.Id,
+                MessageId = message.MessageId,
                 Text = string.IsNullOrEmpty(newtext) ? "unknown name" : newtext,
-                Parse_mode = ParseMode.HTML,
-                Disable_web_page_preview = true
+                ParseMode = ParseMode.HTML,
+                DisableWebPagePreview = true
             };
             if (keyboard != null)
             {
-                args.Reply_markup = keyboard;
+                args.ReplyMarkup = keyboard;
             }
 
             try

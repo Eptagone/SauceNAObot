@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Available_Methods;
-using Telegram.BotAPI.Updating_messages;
-using Telegram.BotAPI.Inline_mode;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.AvailableMethods;
+using Telegram.BotAPI.UpdatingMessages;
+using Telegram.BotAPI.InlineMode;
 using SauceNAO.Resources;
 
 namespace SauceNAO
@@ -30,12 +30,12 @@ namespace SauceNAO
                     switch (keywords[1])
                     {
                         case "yes":
-                            await Bot.AnswerCallbackQueryAsync(query.Id, MSG.HistoryErased(lang), true, cache_time: 30).ConfigureAwait(false);
-                            await Bot.DeleteMessageAsync(query.Message.Chat.Id, query.Message.Message_id).ConfigureAwait(false);
+                            await Bot.AnswerCallbackQueryAsync(query.Id, MSG.HistoryErased(lang), true, cacheTime: 30).ConfigureAwait(false);
+                            await Bot.DeleteMessageAsync(query.Message.Chat.Id, query.Message.MessageId).ConfigureAwait(false);
                             break;
                         case "no":
-                            await Bot.AnswerCallbackQueryAsync(query.Id, MSG.Cancelled(lang), true, cache_time: 30).ConfigureAwait(false);
-                            await Bot.DeleteMessageAsync(query.Message.Chat.Id, query.Message.Message_id).ConfigureAwait(false);
+                            await Bot.AnswerCallbackQueryAsync(query.Id, MSG.Cancelled(lang), true, cacheTime: 30).ConfigureAwait(false);
+                            await Bot.DeleteMessageAsync(query.Message.Chat.Id, query.Message.MessageId).ConfigureAwait(false);
                             break;
                     }
                     break;

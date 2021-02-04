@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Telegram.BotAPI.Available_Types;
-using Telegram.BotAPI.Inline_mode;
+using Telegram.BotAPI.AvailableTypes;
+using Telegram.BotAPI.AvailableMethods;
+using Telegram.BotAPI.InlineMode;
 
 namespace SauceNAO
 {
@@ -44,14 +45,14 @@ namespace SauceNAO
                                 results.Add(new InlineQueryResultCachedPhoto
                                 {
                                     Id = offset.ToString(),
-                                    Photo_file_id = sauce.OriginalFile,
+                                    PhotoFileId = sauce.OriginalFile,
                                     Title = title,
                                     Description = description,
                                     Caption = content,
-                                    Parse_mode = ParseMode.HTML,
-                                    Reply_markup = new InlineKeyboardMarkup
+                                    ParseMode = ParseMode.HTML,
+                                    ReplyMarkup = new InlineKeyboardMarkup
                                     {
-                                        Inline_keyboard = buttons
+                                        InlineKeyboard = buttons
                                     }
                                 });
                                 break;
@@ -59,15 +60,15 @@ namespace SauceNAO
                                 results.Add(new InlineQueryResultCachedSticker
                                 {
                                     Id = offset.ToString(),
-                                    Sticker_file_id = sauce.OriginalFile,
-                                    Input_message_content = new InputTextMessageContent
+                                    StickerFileId = sauce.OriginalFile,
+                                    InputMessageContent = new InputTextMessageContent
                                     {
-                                        Message_text = content,
-                                        Parse_mode = ParseMode.HTML,
+                                        MessageText = content,
+                                        ParseMode = ParseMode.HTML,
                                     },
-                                    Reply_markup = new InlineKeyboardMarkup
+                                    ReplyMarkup = new InlineKeyboardMarkup
                                     {
-                                        Inline_keyboard = buttons
+                                        InlineKeyboard = buttons
                                     }
                                 });
                                 break;
@@ -75,13 +76,13 @@ namespace SauceNAO
                                 results.Add(new InlineQueryResultCachedGif
                                 {
                                     Id = offset.ToString(),
-                                    Gif_file_id = sauce.OriginalFile,
+                                    GifFileId = sauce.OriginalFile,
                                     Title = title,
                                     Caption = content,
-                                    Parse_mode = ParseMode.HTML,
-                                    Reply_markup = new InlineKeyboardMarkup
+                                    ParseMode = ParseMode.HTML,
+                                    ReplyMarkup = new InlineKeyboardMarkup
                                     {
-                                        Inline_keyboard = buttons
+                                        InlineKeyboard = buttons
                                     }
                                 });
                                 break;
@@ -89,14 +90,14 @@ namespace SauceNAO
                                 results.Add(new InlineQueryResultCachedVideo
                                 {
                                     Id = offset.ToString(),
-                                    Video_file_id = sauce.OriginalFile,
+                                    VideoFileId = sauce.OriginalFile,
                                     Title = title,
                                     Description = description,
                                     Caption = content,
-                                    Parse_mode = ParseMode.HTML,
-                                    Reply_markup = new InlineKeyboardMarkup
+                                    ParseMode = ParseMode.HTML,
+                                    ReplyMarkup = new InlineKeyboardMarkup
                                     {
-                                        Inline_keyboard = buttons
+                                        InlineKeyboard = buttons
                                     }
                                 });
                                 break;
@@ -104,14 +105,14 @@ namespace SauceNAO
                                 results.Add(new InlineQueryResultCachedDocument
                                 {
                                     Id = offset.ToString(),
-                                    Document_file_id = sauce.OriginalFile,
+                                    DocumentFileId = sauce.OriginalFile,
                                     Title = title,
                                     Description = description,
                                     Caption = content,
-                                    Parse_mode = ParseMode.HTML,
-                                    Reply_markup = new InlineKeyboardMarkup
+                                    ParseMode = ParseMode.HTML,
+                                    ReplyMarkup = new InlineKeyboardMarkup
                                     {
-                                        Inline_keyboard = buttons
+                                        InlineKeyboard = buttons
                                     }
                                 });
                                 break;
@@ -121,10 +122,10 @@ namespace SauceNAO
             }
             var answeriquery = new AnswerInlineQueryArgs
             {
-                Inline_query_id = iquery.Id,
-                Next_offset = results.Count() < 8 ? string.Empty : offset.ToString(),
-                Is_personal = true,
-                Cache_time = 30,
+                InlineQueryId = iquery.Id,
+                NextOffset = results.Count < 8 ? string.Empty : offset.ToString(),
+                IsPersonal = true,
+                CacheTime = 30,
                 Results = results.ToArray()
             };
             await Bot.AnswerInlineQueryAsync(answeriquery).ConfigureAwait(false);
