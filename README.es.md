@@ -12,18 +12,18 @@ Pruebalo! [@SauceNAObot](https://t.me/SauceNAObot)
 
 - Historial de búsqueda personal mediante inline. Reenvía la multimedia que has buscado junto con el sauce a tus grupos o canales.
 
-- Anti-Trampas. Si en tu grupo hay bots de "adivina el persona" o similares, puedes usar la función AntiCheats de SauceNAO. Esto evitara que [@SauceNAObot](https://t.me/SauceNAObot) realice busquedas inversas de multimedia enviada por bots.
+- Anti-Trampas. Si en tu grupo hay bots de "adivina el persona" o similares, puedes usar la función AntiCheats de SauceNAO. Esto evitara que [@SauceNAObot](https://t.me/SauceNAObot) realice busquedas inversas de la multimedia enviada por los bots que especifiques. Responde a un bot con **/anticheats add** para añadirlo al control o con **/anticheats remove** para removerlo.
 
 # Lista de comandos
 
-| Nombre     | Descripción                         | Como usar                            |
-| :--------- | :---------------------------------- | :----------------------------------- |
-| addex      | Añade un bot a la lista de blanca.  | Responde a un bot con **/addex**     |
-| anticheats | Usa la función anti-trampas         | **/anticheats** on\|off              |
-| delex      | Borra un bot a la lista de blanca.  | Responde a un bot con **/delex**     |
-| help       | Ayuda                               | **/help\_**                          |
-| sauce      | Busca la fuente de la imagen        | Responde a una imagen con **/sauce** |
-| temp       | Crea un enlace temporal a la imagen | Responde a una imagen con **/temp**  |
+| Nombre     | Descripción                         | Como usar                           |
+| :--------- | :---------------------------------- | :---------------------------------- |
+| anticheats | Usa la característica Anti-Trampas  | **/anticheats** _args_              |
+| help       | Ayuda                               | **/help\_** _args_                  |
+| history    | Mira tu historial de salsas         | **/history\_**                      |
+| sauce      | Busca la salsa de la imagen         | Responde a la imagen con **/sauce** |
+| stats      | Estadisticas globales de uso        | **/stats\_**                        |
+| temp       | Crea un enlace temporal a la imagen | Responde a la imagen con **/temp**  |
 
 # Apoyame
 
