@@ -1,14 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29905.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8BA15D2-9DD3-41DF-8A1A-BACCEF8A607A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNao", "SauceNao\SauceNao.csproj", "{29BFBF8D-F637-4FFE-A140-E87C9AC79914}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C5669B0F-5CF0-400B-8CBD-60D4AA87E794}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F61C138-5F01-4139-BCF1-D7C93A996281}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Core", "SauceNao.Core\SauceNAO.Core.csproj", "{28F5308F-48DD-4730-B594-5EAC6DAE22CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Infrastructure", "SauceNao.Infrastructure\SauceNAO.Infrastructure.csproj", "{CCFCE368-5846-4C4B-9E90-D380FA68834B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Webhook", "SauceNao.Webhook\SauceNAO.Webhook.csproj", "{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Tests", "SauceNAO.Tests\SauceNAO.Tests.csproj", "{E08FB965-CC4B-45A4-8612-C032F5D5C309}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.LocalWebhook", "SauceNAO.LocalWebhook\SauceNAO.LocalWebhook.csproj", "{E447D17C-29AA-4CF2-81B4-2B22C857E196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,15 +28,42 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29BFBF8D-F637-4FFE-A140-E87C9AC79914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29BFBF8D-F637-4FFE-A140-E87C9AC79914}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29BFBF8D-F637-4FFE-A140-E87C9AC79914}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29BFBF8D-F637-4FFE-A140-E87C9AC79914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F5308F-48DD-4730-B594-5EAC6DAE22CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F5308F-48DD-4730-B594-5EAC6DAE22CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F5308F-48DD-4730-B594-5EAC6DAE22CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F5308F-48DD-4730-B594-5EAC6DAE22CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFCE368-5846-4C4B-9E90-D380FA68834B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFCE368-5846-4C4B-9E90-D380FA68834B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFCE368-5846-4C4B-9E90-D380FA68834B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFCE368-5846-4C4B-9E90-D380FA68834B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08FB965-CC4B-45A4-8612-C032F5D5C309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08FB965-CC4B-45A4-8612-C032F5D5C309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08FB965-CC4B-45A4-8612-C032F5D5C309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08FB965-CC4B-45A4-8612-C032F5D5C309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E447D17C-29AA-4CF2-81B4-2B22C857E196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E447D17C-29AA-4CF2-81B4-2B22C857E196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E447D17C-29AA-4CF2-81B4-2B22C857E196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E447D17C-29AA-4CF2-81B4-2B22C857E196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28F5308F-48DD-4730-B594-5EAC6DAE22CD} = {C5669B0F-5CF0-400B-8CBD-60D4AA87E794}
+		{CCFCE368-5846-4C4B-9E90-D380FA68834B} = {C5669B0F-5CF0-400B-8CBD-60D4AA87E794}
+		{37656CA5-0FA4-402D-9DC8-516A41A8E3EF} = {C5669B0F-5CF0-400B-8CBD-60D4AA87E794}
+		{E08FB965-CC4B-45A4-8612-C032F5D5C309} = {6F61C138-5F01-4139-BCF1-D7C93A996281}
+		{E447D17C-29AA-4CF2-81B4-2B22C857E196} = {6F61C138-5F01-4139-BCF1-D7C93A996281}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_ExcelExportMode = MultipleSheets
+		RESX_AutoCreateNewLanguageFiles = True
+		RESX_SortFileContentOnSave = True
+		RESX_PrefixTranslations = False
 		SolutionGuid = {54B9126E-BE59-4E15-8D9D-ACAFE8937A17}
 	EndGlobalSection
 EndGlobal

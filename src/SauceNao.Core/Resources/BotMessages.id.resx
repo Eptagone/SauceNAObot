@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Bot ini memberi Anda antarmuka untuk menggunakan mesin pencari gambar terbalik &lt;a href="https://saucenao.com/"&gt; SauceNAO &lt;/a&gt;.
+Kirimi saya gambar (gambar, GIF, atau STIKER) dan saya akan mencoba melakukan pencarian terbalik menggunakan API SauceNAO.
+
+This bot was created by a third party to use SauceNAO on Telegram. The project has not any affiliation with Xamayon (the creator of SauceNAO).</value>
+  </data>
+  <data name="Anticheats" xml:space="preserve">
+    <value>Gunakan fitur ini untuk memblokir pencarian terbalik dari gambar yang dikirim oleh bot tertentu dalam obrolan grup Anda.
+Untuk menambahkan bot ke daftar, balas pesan yang dikirim oleh bot dengan &lt;code&gt;/anticheats add&lt;/code&gt;.
+Untuk menghapus bot dari daftar, balas pesan yang dikirim oleh bot dengan &lt;code&gt;/anticheats remove&lt;/code&gt;.</value>
+  </data>
+  <data name="AnticheatsAdded" xml:space="preserve">
+    <value>Bot {0} telah ditambahkan ke daftar Anti-Cheat.</value>
+  </data>
+  <data name="AnticheatsAlreadyExists" xml:space="preserve">
+    <value>Bot {0} sudah ada di daftar Anti-Cheat.</value>
+  </data>
+  <data name="AnticheatsDeleted" xml:space="preserve">
+    <value>Bot {0} telah dihapus dari daftar Anti-Cheat.</value>
+  </data>
+  <data name="AnticheatsDoesNotExist" xml:space="preserve">
+    <value>Bot {0} tidak ada dalam daftar Anti-Cheat.</value>
+  </data>
+  <data name="AnticheatsMessage" xml:space="preserve">
+    <value>Wow, tidak ada kecurangan, sobat.</value>
+  </data>
+  <data name="AntiCheatsNotABot" xml:space="preserve">
+    <value>Pengguna yang ditentukan bukan bot.</value>
+  </data>
+  <data name="ApiKey" xml:space="preserve">
+    <value>If you are already supporting &lt;a href="https://www.patreon.com/saucenao"&gt;Xamayon&lt;/a&gt; (the original creator of saucenao.com), then you can configure the bot to use your own API key to get your sauces instead of using shared API keys.
+&lt;code&gt;/apikey status&lt;/code&gt; - Check the status of your saved api key.
+&lt;code&gt;/apikey set &amp;lt;your api key&amp;gt;&lt;/code&gt; - Save your API Plus key. Do not use free API keys or it will cause problems for you.
+&lt;code&gt;/apikey delete&lt;/code&gt; - Delete your saved api key.</value>
+  </data>
+  <data name="ApiKeyDeleted" xml:space="preserve">
+    <value>Kunci API yang disimpan telah dihapus.</value>
+  </data>
+  <data name="ApiKeyNew" xml:space="preserve">
+    <value>Selesai! Bot akan menggunakan kunci API Anda mulai sekarang.
+Untuk menghapusnya, gunakan &lt;i&gt;/apikey delete&lt;/i&gt;.</value>
+  </data>
+  <data name="ApiKeyNone" xml:space="preserve">
+    <value>Tidak ada kunci API yang dikonfigurasi.</value>
+  </data>
+  <data name="ApiKeyStatus" xml:space="preserve">
+    <value>&lt;b&gt;Bot is configured to use the follow api key:&lt;/b&gt;
+{0}</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>SauceNao agak jenuh saat ini. Silakan coba lagi nanti atau coba gunakan perintah /temp.
+Jika pesan ini sering muncul, lihat &lt;a href="{0}"&gt;Obrolan Dukungan&lt;/a&gt;.</value>
+  </data>
+  <data name="BuyMeACookie" xml:space="preserve">
+    <value>Kontribusi Anda digunakan untuk membayar hosting bot dan akun bersama yang kami gunakan untuk menemukan sumber Anda. Jika Anda memiliki pertanyaan lain, tanyakan di obrolan dukungan.
+- &lt;a href="https://www.buymeacoffee.com/eptagone"&gt;Buy me a cookie!&lt;/a&gt;
+- &lt;b&gt;Bitcoin:&lt;/b&gt; &lt;a href="bitcoin:BC1Q0W43TPRJN80ZN248K7XLZTU7LVHKZGY6DAK8MT?label=MyCoffe&amp;message=Invite%20me%20for%20a%20coffee"&gt;bc1q0w43tprjn80zn248k7xlztu7lvhkzgy6dak8mt&lt;/a&gt;
+- &lt;b&gt;Toncoin:&lt;/b&gt; &lt;a href="ton://transfer/EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY"&gt;EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY&lt;/a&gt;
+Note: Please be sure to confirm the amount you will donate. We don't make refunds.</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>Pencipta saya adalah &lt;a href="tg://user?id=418909573"&gt;Derek Nieves&lt;/a&gt;.</value>
+  </data>
+  <data name="EmptyRequest" xml:space="preserve">
+    <value>Anda perlu membalas file gambar (gambar, GIF, atau STIKER)</value>
+  </data>
+  <data name="FailedConvertFile" xml:space="preserve">
+    <value>File tidak dapat dikonversi ke file yang kompatibel.</value>
+  </data>
+  <data name="GeneratingTmpUrl" xml:space="preserve">
+    <value>Membuat tautan sementara...</value>
+  </data>
+  <data name="GroupsOnly" xml:space="preserve">
+    <value>Perintah ini hanya berfungsi dalam obrolan grup.</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Send me an image file (image, GIF or a sticker) to find it's sauce right now. (source)
+&lt;i&gt;If I'm in a group, reply to an image with /sauce &lt;/i&gt;.
+Forward the media files you have searched along with their sauce via bot. More Info: &lt;code&gt;/help MyHistory&lt;/code&gt;.
+Use my Anti-Cheat feature in your groups when playing "Guess the Character". More Info: &lt;code&gt;/help AntiCheats&lt;/code&gt;</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Anda dapat mengirimkan gambar dengan sumber Anda dari riwayat terbaru Anda melalui bot ini.
+Sejarah akan dihapus secara berkala. Jika Anda ingin menghapus riwayat Anda sekarang, ketik &lt;code&gt;/hapus riwayat&lt;/code&gt;.</value>
+  </data>
+  <data name="HistoryButton" xml:space="preserve">
+    <value>Lihat riwayat pencarian</value>
+  </data>
+  <data name="HistoryErased" xml:space="preserve">
+    <value>Riwayat Anda telah dihapus.
+Inline search results can take a few minutes to disappear because they are cached.</value>
+  </data>
+  <data name="InvalidPhoto" xml:space="preserve">
+    <value>That doesn't look like a photo file.</value>
+  </data>
+  <data name="MissingParams" xml:space="preserve">
+    <value>Anda belum menentukan parameter yang cukup untuk menggunakan fungsi ini.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Tidak ada hasil yang ditemukan. Mungkin Anda ingin mencoba &lt;a href="{0}"&gt;Reverse Google Search &lt;/a&gt; atau &lt;a href="{1}"&gt; Yandex &lt;/a&gt; sebagai gantinya? atau kunjungi situs web &lt;a href="{2}"&gt; SauceNAO &lt;/a&gt; untuk melihat semua hasilnya.</value>
+  </data>
+  <data name="ResultCharacter" xml:space="preserve">
+    <value>Karakter</value>
+  </data>
+  <data name="ResultCharacters" xml:space="preserve">
+    <value>Karakter-karakter</value>
+  </data>
+  <data name="ResultCreator" xml:space="preserve">
+    <value>Pencipta</value>
+  </data>
+  <data name="ResultMaterial" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="ResultPart" xml:space="preserve">
+    <value>Bagian</value>
+  </data>
+  <data name="ResultTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="ResultYear" xml:space="preserve">
+    <value>Tahun</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Searching...</value>
+  </data>
+  <data name="SetLang" xml:space="preserve">
+    <value>Gunakan perintah ini untuk mengubah bahasa balasan dalam obrolan saat ini.
+Tidak semua bahasa tersedia.
+Sintaksis:
+/setlang &amp;lt;kode bahasa&amp;gt; [-Force]
+Tentukan parameter [-Force] opsional untuk mempertahankan bahasa Anda di grup mana pun, apa pun bahasa grupnya.</value>
+  </data>
+  <data name="SetLangSaved" xml:space="preserve">
+    <value>Preferensi bahasa Anda telah disimpan.</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Sumber</value>
+  </data>
+  <data name="SupportChat" xml:space="preserve">
+    <value>Grup pendukung</value>
+  </data>
+  <data name="TemporalUrlDone" xml:space="preserve">
+    <value>Selesai! Coba &lt;a href="{0}"&gt;tautan sementara&lt;/a&gt; Anda.</value>
+  </data>
+  <data name="TooBigFile" xml:space="preserve">
+    <value>Pencarian tidak dapat dilakukan. Ukuran file terlalu besar.</value>
+  </data>
+  <data name="PrivateChatsOnly" xml:space="preserve">
+    <value>This command only works in private chats.</value>
+  </data>
+  <data name="HistoryNone" xml:space="preserve">
+    <value>This seems somewhat empty. Try to find some sauces.</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
+{0} successful searches in the last 20 days.
+Used by {1} users.
+Used by {2} groups.</value>
+  </data>
+</root>
