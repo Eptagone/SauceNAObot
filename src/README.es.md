@@ -1,33 +1,31 @@
-# SauceNAObot
+# Configuración
 
-El bot funciona usando un webhook. 
+Este bot funciona utilizando un Webhook. Usted puede ejecutar el Webhook localmente usando [NGROK](https://ngrok.com/).
 
-Si quiere probar este bot localmente, recomiendo utilizar una herramienta como [NGROK](https://ngrok.com/).
+Esta solución esta compuesta por **5** proyectos:
 
-# Configurar
+| Nombre                  | Descripción                                                               |
+| :---------------------- | :------------------------------------------------------------------------ |
+| SauceNAO.Core           | Contiene la funcionalidad principal del bot                               |
+| SauceNAO.Infrastructure | Implementa clases para el acceso a datos                                  |
+| SauceNAO.Webhook        | La aplicación Webhook                                                     |
+| SauceNAO.LocalWebhook   | La aplicación Webhook (como `SauceNAO.Webhook` pero para ejecución local) |
+| SauceNAO.Tests          | Pruebas unitarias                                                         |
 
-Antes de probar el proyecto e implementarlo en tu propio bot, deberás editar el archivo appsettings.json or tu archivo secrets.json de usuario paraa hacer que el bot funcione.
+Para ejecutar cualquiera de los proyectos de Webhook, usted necesita establecer la siguiente configuración de la aplicación meidiante un **archivo json** (`secrets.json`, `application.json`) o usando **variables de entorno**.
 
-Abre appsettings.json o secrets.json y especifica la siguiente información:
+| Nombre de la propiedad JSON | Variable de entorno           | Aplica a              | Descripción                                             |
+| :-------------------------- | :---------------------------- | :-------------------- | :------------------------------------------------------ |
+| AccessToken                 | AccessToken                   | Ambos proyectos       | El token secreto del webhook especificado por usted.    |
+| FFmpegExec                  | FFmpegExec                    | Ambos proyectos       | La ruta al ejecutable de **ffmpeg**.                    |
+| SauceNAO:ApiKey             | SauceNAO\_\_ApiKey            | Ambos proyectos       | La clave de api para usar la SauceNAO API.              |
+| Telegram:BotToken           | Telegram\_\_BotToken          | Ambos proyectos       | El token del bot.                                       |
+| Telegram:SupportChatLink    | Telegram\_\_SupportChatLink   | Ambos proyectos       | Link al chat de ayuda. (https://t.me/+8NJMCbRmiTk2Yjkx) |
+| ConnectionStrings:SauceNAO  | ConnectionStrings\_\_SauceNAO | Ambos proyectos       | La cadena de conexión a la base de datos.               |
+| AplicationUrl               | AplicationUrl                 | SauceNAO.Webhook      | La dirección base del webhook. (https://example.com)    |
+| Ngrok:Port                  | Ngrok\_\_Port                 | SauceNAO.LocalWebhook | Puerto donde se ejecuta la aplicación. (7161)           |
+| Ngrok:TunnelName            | Ngrok\_\_TunnelName           | SauceNAO.LocalWebhook | Opcional. Nombre del tunnel. (SnaoTunnel)               |
 
-- LiteDB es tu cadena de conexión a la base de datos de sqlite. Por favor especifica un nombre de archivo valido.
-- ApiKey es la clave de api de tu cuenta de Saucenao, puedes dejarla vacia o incluir tu clave para incrementar el numero de busquedas.
-- BotToken es el token del bot, proporcionado por BotFather.
-- SecretToken es tu ruta secreta, tu token del webhook. Se recomienda usar caracteres aleatorios y no proporcionar la clave a nadie.
-- WebhookUrl es la la direccion web de tu Webhook. ejemplo: https://saucenao.com/
+> Antes de ejecutar el proyecto **SauceNAO.LocalWebhook**, usted necesita iniciar **ngrok** en segundo plano. De lo contrario, la aplicación no podrá iniciar. Puede usar el siguiente comando: `ngrok start --none `.
 
-## appsettings.json, secrets.json
-
-```json
-{
-  "ConnectionStrings": {
-    "LiteDB": "Filename=saucenaobot-SECRET-GUID.db"
-  },
-  "SauceNao": {
-    "ApiKey": "<SAUCENAO-API-KEY>",
-    "BotToken": "<BOT-TOKEN>",
-    "SecretToken": "<SECRET-TOKEN>",
-    "WebhookUrl": "https://example.com/"
-  }
-}
-```
+> Actualmente, el bot usa **SQLite** para el almacenamiento de datos y también para almacenar información en caché. Si desea cambiarlo a otro proveedor, elimine la carpeta `Migrations` de `SauceNAO.Infraestructura`, modifique el archivo `Program.cs` de los proyectos de Webhooks para usar otro proveedor compatible con **Entity Framework**, y finalmente crear nuevas migraciones. Si no desea utilizar **Entity Framework**, debe implementar una clase basada en la interfaz `IBotDb` y registrar la clase en `Program.cs` desde sus proyectos Webhook. Puede tomar la clase `Data/BotDb.cs` ubicada en el proyecto `SauceNAO.Infrastructure` como ejemplo.

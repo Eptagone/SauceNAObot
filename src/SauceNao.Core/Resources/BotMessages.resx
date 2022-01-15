@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>This bot provides you with an interface to use &lt;a href="https://saucenao.com/"&gt;SauceNAO&lt;/a&gt;'s reverse image search engine.
+Send me an image (image, GIF or a sticker) and I'll try to reverse search using the SauceNAO API.
+
+This bot was created by a third party to use SauceNAO on Telegram. The project has not any affiliation with Xamayon (the creator of SauceNAO).</value>
+  </data>
+  <data name="Anticheats" xml:space="preserve">
+    <value>Use this feature to block the reverse search of images sent by specific bots in your group chats.
+To add a bot to AntiCheat list, just reply to a message sent by the bot with &lt;code&gt;/anticheats add&lt;/code&gt;.
+To remove the bot, reply to the message with &lt;code&gt;/anticheats remove &lt;/code&gt;.</value>
+  </data>
+  <data name="AnticheatsAdded" xml:space="preserve">
+    <value>Bot @{0} was added to the AntiCheats list.</value>
+  </data>
+  <data name="AnticheatsAlreadyExists" xml:space="preserve">
+    <value>Bot @{0} already exists in AntiCheats list.</value>
+  </data>
+  <data name="AnticheatsDeleted" xml:space="preserve">
+    <value>Bot @{0} was removed from the AntiCheats list.</value>
+  </data>
+  <data name="AnticheatsDoesNotExist" xml:space="preserve">
+    <value>Bot @{0} doesn't exist in the AntiCheats list.</value>
+  </data>
+  <data name="AnticheatsMessage" xml:space="preserve">
+    <value>Ups, no cheating, my friend.</value>
+  </data>
+  <data name="AntiCheatsNotABot" xml:space="preserve">
+    <value>The target user isn't a bot.</value>
+  </data>
+  <data name="ApiKey" xml:space="preserve">
+    <value>If you're already supporting &lt;a href="https://www.patreon.com/saucenao"&gt;Xamayon&lt;/a&gt; (the original creator of saucenao.com), then you can configure the bot to use your own API key to get your sauces instead of using shared API keys.
+&lt;code&gt;/apikey status&lt;/code&gt; - Check the status of your saved api key.
+&lt;code&gt;/apikey set &amp;lt;your api key&amp;gt;&lt;/code&gt; - Save your API Plus key. Don't use free API keys or it will cause problems for you.
+&lt;code&gt;/apikey delete&lt;/code&gt; - Delete your saved api key.</value>
+  </data>
+  <data name="ApiKeyDeleted" xml:space="preserve">
+    <value>The saved api key has been deleted.</value>
+  </data>
+  <data name="ApiKeyNew" xml:space="preserve">
+    <value>Done! The Bot will use your API key from now on.
+To delete it, use &lt;i&gt;/apikey delete&lt;/i&gt;.</value>
+  </data>
+  <data name="ApiKeyNone" xml:space="preserve">
+    <value>There is no api key configured.</value>
+  </data>
+  <data name="ApiKeyStatus" xml:space="preserve">
+    <value>&lt;b&gt;Bot is configured to use the follow api key:&lt;/b&gt;
+{0}</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>SauceNao is very busy right now. Please try again later or try using /temp command.
+If this message appears frequently, please check the &lt;a href="{0}"&gt;support chat&lt;/a&gt;.</value>
+  </data>
+  <data name="BuyMeACookie" xml:space="preserve">
+    <value>Your contributions are used to pay for the bot's hosting and the shared account that we use to search for your sauces. If you have any other questions, ask in the support chat.
+- &lt;a href="https://www.buymeacoffee.com/eptagone"&gt;Buy me a cookie!&lt;/a&gt;
+- &lt;b&gt;Bitcoin:&lt;/b&gt; &lt;a href="bitcoin:BC1Q0W43TPRJN80ZN248K7XLZTU7LVHKZGY6DAK8MT?label=MyCoffe&amp;message=Invite%20me%20for%20a%20coffee"&gt;bc1q0w43tprjn80zn248k7xlztu7lvhkzgy6dak8mt&lt;/a&gt;
+- &lt;b&gt;Toncoin:&lt;/b&gt; &lt;a href="ton://transfer/EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY"&gt;EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY&lt;/a&gt;
+Note: Please be sure to confirm the amount you will donate. We don't make refunds.</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>My creator is &lt;a href="tg://user?id=418909573"&gt;Derek Nieves&lt;/a&gt;.</value>
+  </data>
+  <data name="EmptyRequest" xml:space="preserve">
+    <value>You need to reply to an image file (image, GIF or a sticker)</value>
+  </data>
+  <data name="FailedConvertFile" xml:space="preserve">
+    <value>Failed to convert file to a supported file.</value>
+  </data>
+  <data name="GeneratingTmpUrl" xml:space="preserve">
+    <value>Generating temporary link...</value>
+  </data>
+  <data name="GroupsOnly" xml:space="preserve">
+    <value>This command only works in group chats.</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Send me an image file (image, GIF or a sticker) to find it's sauce right now. (source)
+&lt;i&gt;If I'm in a group, reply to an image with /sauce &lt;/i&gt;.
+Forward the media files you have searched along with their sauce via bot. More Info: &lt;code&gt;/help MyHistory&lt;/code&gt;.
+Use my Anti-Cheat feature in your groups when playing "Guess the Character". More Info: &lt;code&gt;/help AntiCheats&lt;/code&gt;</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>You can send images with sauce from your recent history via bot.
+The history will be erased periodically. If you want to delete your history right now, type &lt;code&gt; /history clear&lt;/code&gt;.</value>
+  </data>
+  <data name="HistoryButton" xml:space="preserve">
+    <value>View search history</value>
+  </data>
+  <data name="HistoryErased" xml:space="preserve">
+    <value>Your history has been erased.
+Inline search results can take a few minutes to disappear because they are cached.</value>
+  </data>
+  <data name="InvalidPhoto" xml:space="preserve">
+    <value>That doesn't look like a photo file.</value>
+  </data>
+  <data name="MissingParams" xml:space="preserve">
+    <value>You have not specified sufficient parameters to use this function.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>No sauce found. Maybe try &lt;a href="{0}"&gt;Google Reverse Search&lt;/a&gt; or &lt;a href="{1}"&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href="{2}"&gt;SauceNAO website&lt;/a&gt; to see all the results.</value>
+  </data>
+  <data name="ResultCharacter" xml:space="preserve">
+    <value>Character</value>
+  </data>
+  <data name="ResultCharacters" xml:space="preserve">
+    <value>Characters</value>
+  </data>
+  <data name="ResultCreator" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="ResultMaterial" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="ResultPart" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="ResultTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="ResultYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Searching...</value>
+  </data>
+  <data name="SetLang" xml:space="preserve">
+    <value>Use this command to change the reply language in the current chat.
+Not all languages are available.
+&lt;b&gt;Syntax:&lt;/b&gt;
+&lt;code&gt;/setlang &lt;language code&gt; [-Force]&lt;/code&gt;
+Specify the optional [-Force] parameter to keep your language in any group regardless of the group's language.</value>
+  </data>
+  <data name="SetLangSaved" xml:space="preserve">
+    <value>Your language preferences have been saved.</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="SupportChat" xml:space="preserve">
+    <value>Support Chat</value>
+  </data>
+  <data name="TemporalUrlDone" xml:space="preserve">
+    <value>Done! Check your &lt;a href="{0}"&gt;temp url&lt;/a&gt;.</value>
+  </data>
+  <data name="TooBigFile" xml:space="preserve">
+    <value>The search could not be performed. The file size is too large.</value>
+  </data>
+  <data name="PrivateChatsOnly" xml:space="preserve">
+    <value>This command only works in private chats.</value>
+  </data>
+  <data name="HistoryNone" xml:space="preserve">
+    <value>This seems somewhat empty. Try to find some sauces.</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
+{0} successful searches in the last 20 days.
+Used by {1} users.
+Used by {2} groups.</value>
+  </data>
+</root>
