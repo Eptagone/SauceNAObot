@@ -170,6 +170,10 @@ Untuk menghapusnya, gunakan &lt;i&gt;/apikey delete&lt;/i&gt;.</value>
     <value>SauceNao agak jenuh saat ini. Silakan coba lagi nanti atau coba gunakan perintah /temp.
 Jika pesan ini sering muncul, lihat &lt;a href="{0}"&gt;Obrolan Dukungan&lt;/a&gt;.</value>
   </data>
+  <data name="BusyPolling" xml:space="preserve">
+    <value>SauceNao agak jenuh saat ini. Silakan coba lagi nanti.
+Jika pesan ini sering muncul, lihat &lt;a href="{0}"&gt;Obrolan Dukungan&lt;/a&gt;.</value>
+  </data>
   <data name="BuyMeACookie" xml:space="preserve">
     <value>Kontribusi Anda digunakan untuk membayar hosting bot dan akun bersama yang kami gunakan untuk menemukan sumber Anda. Jika Anda memiliki pertanyaan lain, tanyakan di obrolan dukungan.
 - &lt;a href="https://www.buymeacoffee.com/eptagone"&gt;Buy me a cookie!&lt;/a&gt;
@@ -209,14 +213,31 @@ Sejarah akan dihapus secara berkala. Jika Anda ingin menghapus riwayat Anda seka
     <value>Riwayat Anda telah dihapus.
 Inline search results can take a few minutes to disappear because they are cached.</value>
   </data>
+  <data name="HistoryNone" xml:space="preserve">
+    <value>This seems somewhat empty. Try to find some sauces.</value>
+  </data>
   <data name="InvalidPhoto" xml:space="preserve">
     <value>That doesn't look like a photo file.</value>
+  </data>
+  <data name="LocalMode" xml:space="preserve">
+    <value>Bot sedang berjalan dalam mode lokal, jadi fitur ini dinonaktifkan.</value>
+  </data>
+  <data name="LocalModeFile" xml:space="preserve">
+    <value>File ini tidak dapat diproses saat ini, bot berjalan dalam mode lokal.
+Beberapa file perlu diunggah sebagai file sementara, tetapi fitur ini tidak tersedia dalam mode lokal.</value>
   </data>
   <data name="MissingParams" xml:space="preserve">
     <value>Anda belum menentukan parameter yang cukup untuk menggunakan fungsi ini.</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>Tidak ada hasil yang ditemukan. Mungkin Anda ingin mencoba &lt;a href="{0}"&gt;Reverse Google Search &lt;/a&gt; atau &lt;a href="{1}"&gt; Yandex &lt;/a&gt; sebagai gantinya? atau kunjungi situs web &lt;a href="{2}"&gt; SauceNAO &lt;/a&gt; untuk melihat semua hasilnya.</value>
+  </data>
+  <data name="NotFoundLocalMode" xml:space="preserve">
+    <value>Tidak ada hasil yang ditemukan.
+Tautan alternatif tidak tersedia karena bot berjalan dalam mode lokal.</value>
+  </data>
+  <data name="PrivateChatsOnly" xml:space="preserve">
+    <value>This command only works in private chats.</value>
   </data>
   <data name="ResultCharacter" xml:space="preserve">
     <value>Karakter</value>
@@ -255,6 +276,12 @@ Tentukan parameter [-Force] opsional untuk mempertahankan bahasa Anda di grup ma
   <data name="Source" xml:space="preserve">
     <value>Sumber</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
+{0} successful searches in the last 20 days.
+Used by {1} users.
+Used by {2} groups.</value>
+  </data>
   <data name="SupportChat" xml:space="preserve">
     <value>Grup pendukung</value>
   </data>
@@ -263,17 +290,5 @@ Tentukan parameter [-Force] opsional untuk mempertahankan bahasa Anda di grup ma
   </data>
   <data name="TooBigFile" xml:space="preserve">
     <value>Pencarian tidak dapat dilakukan. Ukuran file terlalu besar.</value>
-  </data>
-  <data name="PrivateChatsOnly" xml:space="preserve">
-    <value>This command only works in private chats.</value>
-  </data>
-  <data name="HistoryNone" xml:space="preserve">
-    <value>This seems somewhat empty. Try to find some sauces.</value>
-  </data>
-  <data name="Statistics" xml:space="preserve">
-    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
-{0} successful searches in the last 20 days.
-Used by {1} users.
-Used by {2} groups.</value>
   </data>
 </root>

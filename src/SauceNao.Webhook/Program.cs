@@ -2,52 +2,27 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
-using SauceNAO.Core;
 using SauceNAO.Infrastructure;
 using SauceNAO.Infrastructure.Data;
 using SauceNAO.Webhook.Services;
+using SauceNAO.Core.Extensions;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
-// Add Database services
-builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("SauceNAO")));
+// Configure database context
+var connectionString = builder.Configuration.GetConnectionString("SauceNAO");
+builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 
-var cacheConnection = $"Data Source={Path.GetTempFileName()}";
-builder.Services.AddDbContext<CacheContext>(options => options.UseSqlite(cacheConnection));
+// Configure cache context
+var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
+builder.Services.AddDbContext<CacheDbContext>(options => options.UseSqlite(cacheConnection));
 
-builder.Services.AddScoped<IBotDb, BotDb>(); // Bot data class
-builder.Services.AddScoped<IBotCache, BotCache>(); // Bot cache class
-
-// Add Telegram Bot Configurtaion
-builder.Services.AddSingleton<SnaoBotProperties>(services =>
-{
-    var telegram = builder.Configuration.GetSection("Telegram");
-    var snao = builder.Configuration.GetSection("SauceNAO");
-
-    var botToken = telegram["BotToken"];
-    var apikey = snao["ApiKey"];
-    var ffmpegExec = builder.Configuration["FFmpegExec"];
-    var supportChatLink = telegram["SupportChatLink"];
-    var appUrl = builder.Configuration["ApplicationUrl"];
-
-    var filesUrl = $"{appUrl}/temp/{{0}}";
-
-    var botConfiguration = new SnaoBotProperties(botToken, apikey, filesUrl, ffmpegExec, supportChatLink);
-
-    var accessToken = builder.Configuration["AccessToken"];
-    var webhook = $"{appUrl}/bot/{accessToken}";
-
-    botConfiguration.SetBotCommands();
-    botConfiguration.SetWebhook(webhook);
-
-    return botConfiguration;
-});
-
-builder.Services.AddScoped<SauceNaoBot>();
+// Add bot service.
+builder.Services.AddSauceBot<BotDb>(builder.Configuration);
 
 // Add Data Cleaner service
 builder.Services.AddHostedService<CleanerService>();
@@ -58,14 +33,18 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     using var context = scope.ServiceProvider.GetRequiredService<SauceNaoContext>();
-    // context.Database.Migrate(); // Create database using migrations
+#if DEBUG
+    context.Database.EnsureDeleted(); // Delete database
     context.Database.EnsureCreated(); // Create database without migrations
+#else
+    context.Database.Migrate(); // Create database using migrations
+#endif
 }
 
 // Create cache file
 using (var scope = app.Services.CreateScope())
 {
-    using var context = scope.ServiceProvider.GetRequiredService<CacheContext>();
+    using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
     context.Database.EnsureCreated();
 }
 

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SauceNAO.Core.Entities
 {
     /// <summary>Represents a cached telegram file.</summary>
-    [Table("CachedFile")]
+    [Table("CachedFile", Schema = "tg")]
     public partial class CachedTelegramFile
     {
         /// <summary>Initialize a new instance of <see cref="CachedTelegramFile"/>.</summary>

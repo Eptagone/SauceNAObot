@@ -150,6 +150,10 @@ To delete it, use &lt;i&gt;/apikey delete&lt;/i&gt;.</value>
     <value>SauceNao is very busy right now. Please try again later or try using /temp command.
 If this message appears frequently, please check the &lt;a href="{0}"&gt;support chat&lt;/a&gt;.</value>
   </data>
+  <data name="BusyPolling" xml:space="preserve">
+    <value>SauceNao is very busy right now. Please try again later.
+If this message appears frequently, please check the &lt;a href="{0}"&gt;support chat&lt;/a&gt;.</value>
+  </data>
   <data name="BuyMeACookie" xml:space="preserve">
     <value>Your contributions are used to pay for the bot's hosting and the shared account that we use to search for your sauces. If you have any other questions, ask in the support chat.
 - &lt;a href="https://www.buymeacoffee.com/eptagone"&gt;Buy me a cookie!&lt;/a&gt;
@@ -189,14 +193,31 @@ The history will be erased periodically. If you want to delete your history righ
     <value>Your history has been erased.
 Inline search results can take a few minutes to disappear because they are cached.</value>
   </data>
+  <data name="HistoryNone" xml:space="preserve">
+    <value>This seems somewhat empty. Try to find some sauces.</value>
+  </data>
   <data name="InvalidPhoto" xml:space="preserve">
     <value>That doesn't look like a photo file.</value>
+  </data>
+  <data name="LocalMode" xml:space="preserve">
+    <value>Bot is currently running in local mode, so this feature is disabled.</value>
+  </data>
+  <data name="LocalModeFile" xml:space="preserve">
+    <value>This file cannot be processed at this time, the bot is running in local mode.
+Some files need to be uploaded as temporary files, but this feature is not available in local mode.</value>
   </data>
   <data name="MissingParams" xml:space="preserve">
     <value>You have not specified sufficient parameters to use this function.</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>No sauce found. Maybe try &lt;a href="{0}"&gt;Google Reverse Search&lt;/a&gt; or &lt;a href="{1}"&gt;Yandex&lt;/a&gt; instead? or see on &lt;a href="{2}"&gt;SauceNAO website&lt;/a&gt; to see all the results.</value>
+  </data>
+  <data name="NotFoundLocalMode" xml:space="preserve">
+    <value>No sauce found.
+Alternate links are not available as the bot is running in local mode.</value>
+  </data>
+  <data name="PrivateChatsOnly" xml:space="preserve">
+    <value>This command only works in private chats.</value>
   </data>
   <data name="ResultCharacter" xml:space="preserve">
     <value>Character</value>
@@ -235,6 +256,12 @@ Specify the optional [-Force] parameter to keep your language in any group regar
   <data name="Source" xml:space="preserve">
     <value>Source</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
+{0} successful searches in the last 20 days.
+Used by {1} users.
+Used by {2} groups.</value>
+  </data>
   <data name="SupportChat" xml:space="preserve">
     <value>Support Chat</value>
   </data>
@@ -243,17 +270,5 @@ Specify the optional [-Force] parameter to keep your language in any group regar
   </data>
   <data name="TooBigFile" xml:space="preserve">
     <value>The search could not be performed. The file size is too large.</value>
-  </data>
-  <data name="PrivateChatsOnly" xml:space="preserve">
-    <value>This command only works in private chats.</value>
-  </data>
-  <data name="HistoryNone" xml:space="preserve">
-    <value>This seems somewhat empty. Try to find some sauces.</value>
-  </data>
-  <data name="Statistics" xml:space="preserve">
-    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
-{0} successful searches in the last 20 days.
-Used by {1} users.
-Used by {2} groups.</value>
   </data>
 </root>

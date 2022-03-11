@@ -158,6 +158,16 @@ namespace SauceNAO.Core.Resources
             return Res.GetString(nameof(InvalidPhoto), lang);
         }
 
+        public static string LocalMode(CultureInfo lang)
+        {
+            return Res.GetString(nameof(LocalMode), lang);
+        }
+
+        public static string LocalModeFile(CultureInfo lang)
+        {
+            return Res.GetString(nameof(LocalModeFile), lang);
+        }
+
         public static string MissingParams(CultureInfo lang)
         {
             return Res.GetString(nameof(MissingParams), lang);
@@ -172,6 +182,11 @@ namespace SauceNAO.Core.Resources
             return string.Format(_msg, google, yandex, snao);
         }
 
+        public static string NotFoundLocalMode(CultureInfo lang)
+        {
+            return Res.GetString(nameof(NotFoundLocalMode), lang);
+        }
+        
         public static string PrivateChatsOnly(CultureInfo lang)
         {
             return Res.GetString(nameof(PrivateChatsOnly), lang);

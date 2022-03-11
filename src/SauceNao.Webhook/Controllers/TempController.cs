@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using SauceNAO.Core;
+using SauceNAO.Infrastructure.Data;
 
 namespace SauceNAO.Webhook.Controllers
 {
@@ -11,12 +12,12 @@ namespace SauceNAO.Webhook.Controllers
     public sealed class TempController : ControllerBase
     {
         private readonly ILogger<TempController> _logger;
-        private readonly IBotCache _cache;
+        private readonly TemporalFileRepository _fileRepository;
 
-        public TempController(ILogger<TempController> logger, IBotCache cache)
+        public TempController(ILogger<TempController> logger, TemporalFileRepository fileRepository)
         {
             _logger = logger;
-            _cache = cache;
+            _fileRepository = fileRepository;
         }
 
         // GET: api/temp/5
@@ -25,7 +26,8 @@ namespace SauceNAO.Webhook.Controllers
         public async Task<IActionResult> GetTemporalFile(string id, CancellationToken cancellationToken)
         {
             var fileUniqueId = id;
-            var tempFile = await _cache.Files.GetFileAsync(fileUniqueId, cancellationToken).ConfigureAwait(false);
+            var tempFile = await _fileRepository.GetFileAsync(fileUniqueId, cancellationToken).ConfigureAwait(false);
+
             if (tempFile == default)
             {
                 return NotFound();

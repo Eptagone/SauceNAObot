@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SauceNAO.Core.Entities
 {
     /// <summary>Represents a sauce that was searched by a user. A user history item.</summary>
-    [Table("UserSauce")]
+    [Table("UserSauce", Schema = "tg")]
     public partial class UserSauce
     {
         /// <summary>Initialize a nes instance of UserSauce.</summary>

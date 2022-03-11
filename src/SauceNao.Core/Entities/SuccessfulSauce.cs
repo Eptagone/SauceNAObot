@@ -14,7 +14,7 @@ using IKM = Telegram.BotAPI.AvailableTypes.InlineKeyboardMarkup;
 namespace SauceNAO.Core.Entities
 {
     /// <summary>Represents a Successful Sauce.</summary>
-    [Table("Sauce")]
+    [Table("Sauce", Schema = "tg")]
     public partial class SuccessfulSauce
     {
         /// <summary>Initialize a new instance of SuccessfulSauce.</summary>

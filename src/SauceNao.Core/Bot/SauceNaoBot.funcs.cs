@@ -4,6 +4,7 @@
 using Microsoft.Extensions.Logging;
 using SauceNAO.Core.API;
 using SauceNAO.Core.Entities;
+using SauceNAO.Core.Resources;
 using SauceNAO.Core.Models;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
@@ -76,15 +77,15 @@ namespace SauceNAO.Core
             if (TryGetFilePath(target, out string ext))
             {
                 var fileName = target.FileUniqueId + ext;
-                var tempFile = cache.Files.GetFile(target.FileUniqueId);
+                var tempFile = db.Files.GetFile(target.FileUniqueId);
                 if (tempFile == default)
                 {
                     var fileBytes = await httpClient.GetByteArrayAsync(target.FilePath, cancellationToken).ConfigureAwait(false);
                     try
                     {
                         var item = new CachedTelegramFile(target.FileUniqueId, fileName, target.ContentType, fileBytes);
-                        await cache.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
-                        target.TemporalFilePath = string.Format(Properties.TempFilesUrl, target.FileUniqueId);
+                        await db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
+                        target.TemporalFilePath = string.Format(Properties.TempFilesUrl!, target.FileUniqueId);
                     }
                     catch (Exception e)
                     {
@@ -94,7 +95,7 @@ namespace SauceNAO.Core
                 }
                 else
                 {
-                    target.TemporalFilePath = string.Format(Properties.TempFilesUrl, target.FileUniqueId);
+                    target.TemporalFilePath = string.Format(Properties.TempFilesUrl!, target.FileUniqueId);
                 }
             }
             else
@@ -103,7 +104,7 @@ namespace SauceNAO.Core
             }
             return okey;
         }
-        private async Task<bool> TryGetImageFromVideo(TargetMedia targetMedia, CancellationToken cancellationToken)
+        private async Task<bool> TryGetImageFromVideo(TargetMedia targetMedia, Message message, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(targetMedia.FilePath))
             {
@@ -114,18 +115,26 @@ namespace SauceNAO.Core
             }
             var fileName = $"{targetMedia.FileUniqueId}.jpg";
             string outputPath = $"{Path.GetTempPath()}{fileName}";
-            var tempFile = cache.Files.GetFile(targetMedia.FileUniqueId);
+            var tempFile = db.Files.GetFile(targetMedia.FileUniqueId);
 
             if (tempFile == default)
             {
                 var ffmpegArgs = "-vf \"select=eq(n\\,0)\" -frames:v 1";
-                if (Properties.FFmpeg.Run(targetMedia.FilePath, outputPath, ffmpegArgs))
+                if (Properties.FFmpeg!.Run(targetMedia.FilePath, outputPath, ffmpegArgs))
                 {
-                    targetMedia.TemporalFilePath = string.Format(Properties.TempFilesUrl, targetMedia.FileUniqueId);
-
-                    var fileBytes = await File.ReadAllBytesAsync(outputPath, cancellationToken).ConfigureAwait(false);
-                    var item = new CachedTelegramFile(targetMedia.FileUniqueId, fileName, targetMedia.ContentType, fileBytes);
-                    await cache.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        targetMedia.TemporalFilePath = string.Format(Properties.TempFilesUrl!, targetMedia.FileUniqueId);
+                        var fileBytes = await File.ReadAllBytesAsync(outputPath, cancellationToken).ConfigureAwait(false);
+                        var item = new CachedTelegramFile(targetMedia.FileUniqueId, fileName, targetMedia.ContentType, fileBytes);
+                        await db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
+                    }
+                    catch (Exception)
+                    {
+                        var text = MSG.FailedConvertFile(Language);
+                        await UpdateSearchMessageAsync(message, text);
+                        throw;
+                    }
                 }
                 else
                 {
@@ -134,7 +143,7 @@ namespace SauceNAO.Core
             }
             else
             {
-                targetMedia.TemporalFilePath = string.Format(Properties.TempFilesUrl, targetMedia.FileUniqueId);
+                targetMedia.TemporalFilePath = string.Format(Properties.TempFilesUrl!, targetMedia.FileUniqueId);
             }
             return true;
         }
