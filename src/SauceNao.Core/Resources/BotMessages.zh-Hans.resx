@@ -170,6 +170,10 @@ To remove the bot, reply to the message with &lt;code&gt;/anticheats remove &lt;
     <value>SauceNao is very busy right now. Please try again later or try using /temp command.
 If this message appears frequently, please check the &lt;a href="{0}"&gt;support chat&lt;/a&gt;.</value>
   </data>
+  <data name="BusyPolling" xml:space="preserve">
+    <value>SauceNao is very busy right now. Please try again later.
+If this message appears frequently, please check the &lt;a href="{0}"&gt;support chat&lt;/a&gt;.</value>
+  </data>
   <data name="BuyMeACookie" xml:space="preserve">
     <value>Your contributions are used to pay for the bot's hosting and the shared account that we use to search for your sauces. If you have any other questions, ask in the support chat.
 - &lt;a href="https://www.buymeacoffee.com/eptagone"&gt;Buy me a cookie!&lt;/a&gt;
@@ -209,14 +213,31 @@ The history will be erased periodically. If you want to delete your history righ
     <value>您的历史记录已被删除。
 在线搜索结果可能需要几分钟才能消失，因为它们已被缓存。</value>
   </data>
+  <data name="HistoryNone" xml:space="preserve">
+    <value>This seems somewhat empty. Try to find some sauces.</value>
+  </data>
   <data name="InvalidPhoto" xml:space="preserve">
     <value>那看起来不像图像文件。</value>
+  </data>
+  <data name="LocalMode" xml:space="preserve">
+    <value>Bot is currently running in local mode, so this feature is disabled.</value>
+  </data>
+  <data name="LocalModeFile" xml:space="preserve">
+    <value>This file cannot be processed at this time, the bot is running in local mode.
+Some files need to be uploaded as temporary files, but this feature is not available in local mode.</value>
   </data>
   <data name="MissingParams" xml:space="preserve">
     <value>您没有指定足够的参数来使用此函数。</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>未找到结果。 也许您想尝试使用 &lt;a href="{0}"&gt;Google 反向搜索 &lt;/a&gt;或&lt;a href="{1}"&gt;Yandex&lt;/a&gt;代替？ 或查看&lt;a href="{2}"&gt;SauceNAO&lt;/a&gt; 网站以查看所有结果。</value>
+  </data>
+  <data name="NotFoundLocalMode" xml:space="preserve">
+    <value>未找到结果。
+由于机器人在本地模式下运行，备用链接不可用。</value>
+  </data>
+  <data name="PrivateChatsOnly" xml:space="preserve">
+    <value>This command only works in private chats.</value>
   </data>
   <data name="ResultCharacter" xml:space="preserve">
     <value>人物</value>
@@ -259,6 +280,12 @@ The history will be erased periodically. If you want to delete your history righ
   <data name="Source" xml:space="preserve">
     <value>来源</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
+{0} successful searches in the last 20 days.
+Used by {1} users.
+Used by {2} groups.</value>
+  </data>
   <data name="SupportChat" xml:space="preserve">
     <value>支持聊天</value>
   </data>
@@ -267,17 +294,5 @@ The history will be erased periodically. If you want to delete your history righ
   </data>
   <data name="TooBigFile" xml:space="preserve">
     <value>The search could not be performed. The file size is too large.</value>
-  </data>
-  <data name="PrivateChatsOnly" xml:space="preserve">
-    <value>This command only works in private chats.</value>
-  </data>
-  <data name="HistoryNone" xml:space="preserve">
-    <value>This seems somewhat empty. Try to find some sauces.</value>
-  </data>
-  <data name="Statistics" xml:space="preserve">
-    <value>&lt;b&gt;Usage Statistics&lt;/b&gt;
-{0} successful searches in the last 20 days.
-Used by {1} users.
-Used by {2} groups.</value>
   </data>
 </root>

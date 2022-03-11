@@ -38,12 +38,16 @@ namespace SauceNAO.Webhook.Controllers
         {
             if (_configuration["AccessToken"] != accessToken)
             {
+#if DEBUG
                 _logger.LogWarning("Failed access");
+#endif
                 Unauthorized();
             }
             if (update == default)
             {
+#if DEBUG
                 _logger.LogWarning("Invalid update detected");
+#endif
                 return BadRequest();
             }
             await _bot.OnUpdateAsync(update, cancellationToken).ConfigureAwait(false);

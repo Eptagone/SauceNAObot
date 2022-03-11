@@ -60,7 +60,7 @@ namespace SauceNAO.Core
             if (hasText)
             {
                 // If text == "sauce" or text is a metion for me (bot): Search
-                if ((message.Text.ToLowerInvariant() == "sauce" || message.Text.StartsWith($"@{Me.Username}")) && message.ReplyToMessage != default)
+                if ((message.Text.ToLowerInvariant() == "sauce" || message.Text.Contains($"@{Me.Username}")) && message.ReplyToMessage != default && !message.Text.StartsWith('/'))
                 {
                     await LoadDataAsync().ConfigureAwait(false); ;
                     await SauceAsync(message.ReplyToMessage, cancellationToken).ConfigureAwait(false);

@@ -5,10 +5,12 @@ using SauceNAO.Core.Data;
 
 namespace SauceNAO.Core
 {
-    public interface IBotDb
+    public interface ISauceDatabase
     {
         IUserRepository Users { get; }
         IGroupRepository Groups { get; }
         ISauceRepository Sauces { get; }
+
+        ITemporalFileRepository Files { get; }
     }
 }

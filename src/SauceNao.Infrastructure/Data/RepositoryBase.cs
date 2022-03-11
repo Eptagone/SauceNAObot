@@ -17,7 +17,7 @@ namespace SauceNAO.Infrastructure.Data
             Context = context;
         }
 
-        public TEntity Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
             if (entity == null)
             {
@@ -28,7 +28,7 @@ namespace SauceNAO.Infrastructure.Data
             return entity;
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
             if (entity == null)
             {
@@ -39,7 +39,7 @@ namespace SauceNAO.Infrastructure.Data
             return entity;
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             if (entity == null)
             {
@@ -49,7 +49,7 @@ namespace SauceNAO.Infrastructure.Data
             Context.SaveChanges();
         }
 
-        public async Task<TEntity> InsertAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
         {
             if (entity == null)
             {
@@ -60,7 +60,7 @@ namespace SauceNAO.Infrastructure.Data
             return entity;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
         {
             if (entity == null)
             {
@@ -71,7 +71,7 @@ namespace SauceNAO.Infrastructure.Data
             return entity;
         }
 
-        public async Task DeleteAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
+        public virtual async Task DeleteAsync(TEntity entity, [Optional] CancellationToken cancellationToken)
         {
             if (entity == null)
             {

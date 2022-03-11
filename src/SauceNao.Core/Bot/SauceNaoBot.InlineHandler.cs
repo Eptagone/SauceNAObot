@@ -23,6 +23,7 @@ namespace SauceNAO.Core
             var offset = string.IsNullOrEmpty(inlineQuery.Offset) ? 0 : int.Parse(inlineQuery.Offset);
             var myHistory = User.UserSauces.Where(h => h.UserId == User.Id).OrderByDescending(h => h.Date).Select(s => s.Sauce);
             var results = new List<InlineQueryResult>();
+
             if (myHistory.Any())
             {
                 void AddUserSauces(IEnumerable<SuccessfulSauce> sauces)
@@ -121,11 +122,13 @@ namespace SauceNAO.Core
                     AddUserSauces(mySauces);
                 }
             }
-            else
+
+            if (!results.Any())
             {
                 var text = MSG.HistoryNone(Language);
                 results.Add(new InlineQueryResultArticle
                 {
+                    Id = "None",
                     Title = text,
                     InputMessageContent = new InputTextMessageContent
                     {

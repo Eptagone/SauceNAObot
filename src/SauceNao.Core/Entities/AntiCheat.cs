@@ -10,7 +10,7 @@ using Telegram.BotAPI.AvailableTypes;
 namespace SauceNAO.Core.Entities
 {
     /// <summary>AntiCheat model</summary>
-    [Table("AntiCheat")]
+    [Table("AntiCheat", Schema = "tg")]
     public partial class AntiCheat
     {
         /// <summary>Initialize a new instance of AntiCheats</summary>

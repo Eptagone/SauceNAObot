@@ -38,7 +38,8 @@ namespace SauceNAO.Core.Tools
             convtask.StartInfo.FileName = _ffmpegPath;
             convtask.StartInfo.Arguments = arguments;
             convtask.StartInfo.UseShellExecute = false;
-            convtask.StartInfo.RedirectStandardOutput = true;
+            convtask.StartInfo.RedirectStandardOutput = false;
+            convtask.StartInfo.RedirectStandardError = true;
             try
             {
                 convtask.Start(); // start !

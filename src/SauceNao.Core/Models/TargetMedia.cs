@@ -8,7 +8,7 @@ namespace SauceNAO.Core.Models
 {
     internal class TargetMedia
     {
-        private readonly string targetFileId;
+        private readonly string targetFileId = null!;
         internal TargetMedia(Message message)
         {
             if (message.Photo != null) // If media is a Photo
@@ -82,14 +82,14 @@ namespace SauceNAO.Core.Models
                 }
             }
         }
-        internal string FileId { get; }
-        internal string FilePath { get; set; }
-        internal string FileUniqueId { get; }
+        internal string FileId { get; } = null!;
+        internal string FilePath { get; set; } = null!;
+        internal string FileUniqueId { get; } = null!;
         internal bool IsValid { get; }
         internal bool NeedConversion { get; }
         internal string TargetFileId => targetFileId ?? FileId;
         internal string TargetSearchPath => TemporalFilePath ?? FilePath;
-        internal string TemporalFilePath { get; set; }
+        internal string TemporalFilePath { get; set; } = null!;
         internal MediaType Type { get; }
         internal string? ContentType { get; }
     }

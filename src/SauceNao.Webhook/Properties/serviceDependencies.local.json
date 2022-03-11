@@ -7,6 +7,9 @@
       "secretStore": "LocalSecretsFile",
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:Default"
+    },
+    "appInsights1": {
+      "type": "appInsights.sdk"
     }
   }
 }

@@ -561,7 +561,7 @@ namespace SauceNAO.Core
         {
             if (message == default)
             {
-                await Api.SendMessageAsync(this.Message.Chat.Id, MSG.EmptyRequest(Language), replyToMessageId: this.Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await Api.SendMessageAsync(Message.Chat.Id, MSG.EmptyRequest(Language), replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return;
             }
             await Api.SendChatActionAsync(message.Chat.Id, ChatAction.Typing, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -569,7 +569,7 @@ namespace SauceNAO.Core
             {
                 if (Group.AntiCheats.Any(b => b.BotId == message.From.Id && b.Key == Group.Key))
                 {
-                    await Api.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(Language), replyToMessageId: this.Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    await Api.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(Language), replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return;
                 }
             }
@@ -588,30 +588,45 @@ namespace SauceNAO.Core
                 if (sauce == default)
                 {
                     var output = await Api.SendMessageAsync(message.Chat.Id, MSG.Searching(Language), replyToMessageId: message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+
                     if (!TryGetFilePath(targetMedia, out _))
                     {
                         await UpdateSearchMessageAsync(output, MSG.TooBigFile(Language)).ConfigureAwait(false);
                     }
                     else
                     {
-                        if (targetMedia.NeedConversion && !(await TryGetImageFromVideo(targetMedia, cancellationToken).ConfigureAwait(false)))
+                        if (targetMedia.NeedConversion)
                         {
-                            await UpdateSearchMessageAsync(output, MSG.FailedConvertFile(Language)).ConfigureAwait(false);
-                        }
-                        else
-                        {
-                            var sauceResult = await CookSauceAsync(targetMedia.TargetSearchPath, cancellationToken).ConfigureAwait(false);
-                            switch (sauceResult.Status)
+                            if (!Properties.WebhookMode)
                             {
-                                case SauceStatus.Found:
-                                    await UpdateSearchMessageAsync(output, sauceResult.Sauce.GetInfo(Language), sauceResult.Urls.ToInlineKeyboardMarkup()).ConfigureAwait(false);
-                                    // save sauce to db and update user's search history
-                                    sauce = new SuccessfulSauce(sauceResult, targetMedia, Date);
-                                    await db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
-                                    User.UserSauces.Add(new UserSauce(sauce.Key, Date));
-                                    await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
-                                    break;
-                                case SauceStatus.NotFound:
+                                await UpdateSearchMessageAsync(output, MSG.LocalModeFile(Language)).ConfigureAwait(false);
+                                return;
+                            }
+                            else if (!(await TryGetImageFromVideo(targetMedia, output, cancellationToken).ConfigureAwait(false)))
+                            {
+                                await UpdateSearchMessageAsync(output, MSG.FailedConvertFile(Language)).ConfigureAwait(false);
+                                return;
+                            }
+                        }
+
+                        var sauceResult = await CookSauceAsync(targetMedia.TargetSearchPath, cancellationToken).ConfigureAwait(false);
+                        switch (sauceResult.Status)
+                        {
+                            case SauceStatus.Found:
+                                await UpdateSearchMessageAsync(output, sauceResult.Sauce.GetInfo(Language), sauceResult.Urls.ToInlineKeyboardMarkup()).ConfigureAwait(false);
+                                // save sauce to db and update user's search history
+                                sauce = new SuccessfulSauce(sauceResult, targetMedia, Date);
+                                await db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
+                                User.UserSauces.Add(new UserSauce(sauce.Key, Date));
+                                await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                break;
+                            case SauceStatus.NotFound:
+                                if (!Properties.WebhookMode) // Local Mode
+                                {
+                                    await UpdateSearchMessageAsync(output, MSG.NotFoundLocalMode(Language)).ConfigureAwait(false);
+                                }
+                                else // Webhook Mode
+                                {
                                     if (string.IsNullOrEmpty(targetMedia.TemporalFilePath) && !(await TryDownloadAsync(targetMedia, cancellationToken).ConfigureAwait(false)))
                                     {
                                         await UpdateSearchMessageAsync(output, MSG.TooBigFile(Language)).ConfigureAwait(false);
@@ -620,13 +635,13 @@ namespace SauceNAO.Core
                                     {
                                         await UpdateSearchMessageAsync(output, MSG.NotFound(targetMedia.TemporalFilePath, Language)).ConfigureAwait(false);
                                     }
-                                    break;
-                                case SauceStatus.Error:
-                                case SauceStatus.BadRequest:
-                                    await UpdateSearchMessageAsync(output, MSG.Busy(Language, Properties.SupportChatLink)).ConfigureAwait(false);
-                                    OnSauceError(sauceResult.Message);
-                                    break;
-                            }
+                                }
+                                break;
+                            case SauceStatus.Error:
+                            case SauceStatus.BadRequest:
+                                await UpdateSearchMessageAsync(output, MSG.Busy(Language, Properties.SupportChatLink)).ConfigureAwait(false);
+                                OnSauceError(sauceResult.Message);
+                                break;
                         }
                     }
                 }
@@ -651,18 +666,25 @@ namespace SauceNAO.Core
         }
         private async Task TempAsync(Message message, CancellationToken cancellationToken)
         {
-            if (message == default)
+            await Api.SendChatActionAsync(Message.Chat.Id, ChatAction.Typing, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            if (!Properties.WebhookMode) // Temp command is disabled in Local Mode
             {
-                await Api.SendMessageAsync(this.Message.Chat.Id, MSG.EmptyRequest(Language), replyToMessageId: this.Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await Api.SendMessageAsync(Message.Chat.Id, MSG.LocalMode(Language), replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return;
             }
-            await Api.SendChatActionAsync(message.Chat.Id, ChatAction.Typing, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            if (message == default)
+            {
+                await Api.SendMessageAsync(Message.Chat.Id, MSG.EmptyRequest(Language), replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return;
+            }
 
             if (!isPrivate && message.From.IsBot)
             {
                 if (Group.AntiCheats.Any(b => b.BotId == message.From.Id && b.ChatKey == Group.Key))
                 {
-                    await Api.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(Language), replyToMessageId: this.Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    await Api.SendMessageAsync(message.Chat.Id, MSG.AnticheatsMessage(Language), replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return;
                 }
             }
@@ -678,7 +700,7 @@ namespace SauceNAO.Core
             else
             {
                 var output = await Api.SendMessageAsync(message.Chat.Id, MSG.GeneratingTmpUrl(Language), replyToMessageId: message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (targetMedia.NeedConversion && !(await TryGetImageFromVideo(targetMedia, cancellationToken).ConfigureAwait(false)))
+                if (targetMedia.NeedConversion && !(await TryGetImageFromVideo(targetMedia, output, cancellationToken).ConfigureAwait(false)))
                 {
                     await UpdateSearchMessageAsync(output, MSG.FailedConvertFile(Language)).ConfigureAwait(false);
                 }

@@ -198,6 +198,16 @@ namespace SauceNAO.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SauceNao is very busy right now. Please try again later.
+        ///If this message appears frequently, please check the &lt;a href=&quot;{0}&quot;&gt;support chat&lt;/a&gt;..
+        /// </summary>
+        internal static string BusyPolling {
+            get {
+                return ResourceManager.GetString("BusyPolling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your contributions are used to pay for the bot&apos;s hosting and the shared account that we use to search for your sauces. If you have any other questions, ask in the support chat.
         ///- &lt;a href=&quot;https://www.buymeacoffee.com/eptagone&quot;&gt;Buy me a cookie!&lt;/a&gt;
         ///- &lt;b&gt;Bitcoin:&lt;/b&gt; &lt;a href=&quot;bitcoin:BC1Q0W43TPRJN80ZN248K7XLZTU7LVHKZGY6DAK8MT?label=MyCoffe&amp;message=Invite%20me%20for%20a%20coffee&quot;&gt;bc1q0w43tprjn80zn248k7xlztu7lvhkzgy6dak8mt&lt;/a&gt;
@@ -314,6 +324,25 @@ namespace SauceNAO.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bot is currently running in local mode, so this feature is disabled..
+        /// </summary>
+        internal static string LocalMode {
+            get {
+                return ResourceManager.GetString("LocalMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This file cannot be processed at this time, the bot is running in local mode.
+        ///Some files need to be uploaded as temporary files, but this feature is not available in local mode..
+        /// </summary>
+        internal static string LocalModeFile {
+            get {
+                return ResourceManager.GetString("LocalModeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have not specified sufficient parameters to use this function..
         /// </summary>
         internal static string MissingParams {
@@ -328,6 +357,16 @@ namespace SauceNAO.Core.Resources {
         internal static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No sauce found.
+        ///Alternate links are not available as the bot is running in local mode..
+        /// </summary>
+        internal static string NotFoundLocalMode {
+            get {
+                return ResourceManager.GetString("NotFoundLocalMode", resourceCulture);
             }
         }
         

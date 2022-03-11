@@ -11,19 +11,21 @@ using SauceNAO.Webhook.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
-// Add Database services
+// Configure database context
 var connectionString = builder.Configuration.GetConnectionString("SauceNAO");
 builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-//builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 
-var cacheConnection = $"Data Source={Path.GetTempFileName()}";
-builder.Services.AddDbContext<CacheContext>(options => options.UseSqlite(cacheConnection));
+// Configure cache context
+var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
+builder.Services.AddDbContext<CacheDbContext>(options => options.UseSqlite(cacheConnection));
 
-builder.Services.AddScoped<IBotDb, BotDb>(); // Bot data class
-builder.Services.AddScoped<IBotCache, BotCache>(); // Bot cache class
+// Add temp repository
+builder.Services.AddScoped<TemporalFileRepository>();
+
+builder.Services.AddScoped<ISauceDatabase, BotDb>(); // Bot data class
 
 // Ensure start ngrok tunnel
 string appUrl;
@@ -41,7 +43,8 @@ string appUrl;
 
         var tunnelConfig = new TunnelConfiguration(tunnelName, "http", address)
         {
-            HostHeader = hostheader
+            HostHeader = hostheader,
+            BindTls = "true"
         };
         tunnel = agent.StartTunnel(tunnelConfig);
     }
@@ -67,7 +70,7 @@ builder.Services.AddSingleton<SnaoBotProperties>(services =>
     var webhook = $"{appUrl}/bot/{accessToken}";
 
     botConfiguration.SetBotCommands();
-    botConfiguration.SetWebhook(webhook);
+    botConfiguration.Initialize(webhook);
 
     return botConfiguration;
 });
@@ -83,14 +86,19 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     using var context = scope.ServiceProvider.GetRequiredService<SauceNaoContext>();
-    // context.Database.Migrate(); // Create database using migrations
+#if DEBUG
+    context.Database.EnsureDeleted(); // Delete database
     context.Database.EnsureCreated(); // Create database without migrations
+#else
+    context.Database.EnsureCreated(); // Create database without migrations
+    // context.Database.Migrate(); // Create database using migrations
+#endif
 }
 
 // Create cache file
 using (var scope = app.Services.CreateScope())
 {
-    using var context = scope.ServiceProvider.GetRequiredService<CacheContext>();
+    using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
     context.Database.EnsureCreated();
 }
 

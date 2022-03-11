@@ -107,7 +107,6 @@ namespace SauceNAO.Core.API
             }
         }
 
-
         /// <summary>Start a new search using the url provided.</summary>
         /// <param name="url">Image url.</param>
         /// <returns><see cref="SearchResponse"/></returns>

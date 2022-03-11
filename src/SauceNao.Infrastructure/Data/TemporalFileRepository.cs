@@ -4,9 +4,9 @@ using SauceNAO.Core.Entities;
 
 namespace SauceNAO.Infrastructure.Data
 {
-    public sealed class TemporalFileRepository : RepositoryBase<CacheContext, CachedTelegramFile>, ITemporalFileRepository
+    public sealed class TemporalFileRepository : RepositoryBase<CacheDbContext, CachedTelegramFile>, ITemporalFileRepository
     {
-        public TemporalFileRepository(CacheContext context) : base(context)
+        public TemporalFileRepository(CacheDbContext context) : base(context)
         {
         }
 

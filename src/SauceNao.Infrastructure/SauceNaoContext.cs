@@ -40,12 +40,12 @@ namespace SauceNAO.Infrastructure
                 entity.HasOne(d => d.AddedByUser)
                     .WithMany(p => p.AntiCheats)
                     .HasForeignKey(d => d.AddedByUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientCascade);
 
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.AntiCheats)
                     .HasForeignKey(d => d.ChatKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientCascade);
             });
 
             modelBuilder.Entity<UserData>(entity =>
@@ -58,12 +58,12 @@ namespace SauceNAO.Infrastructure
                 entity.HasOne(d => d.Sauce)
                     .WithMany(p => p.UserSauces)
                     .HasForeignKey(d => d.SauceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientCascade);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserSauces)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientCascade);
             });
 
             modelBuilder.Entity<SuccessfulSauce>(entity =>

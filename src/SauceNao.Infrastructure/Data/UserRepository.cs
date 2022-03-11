@@ -4,6 +4,7 @@
 using Microsoft.EntityFrameworkCore;
 using SauceNAO.Core.Data;
 using SauceNAO.Core.Entities;
+using SauceNAO.Core.Extensions;
 using System.Runtime.InteropServices;
 using Telegram.BotAPI.AvailableTypes;
 
@@ -33,8 +34,9 @@ namespace SauceNAO.Infrastructure.Data
             }
             else
             {
-                if (user.Update(telegramUser))
+                if (user.HasChanges(telegramUser))
                 {
+                    user.Merge(telegramUser);
                     Update(user);
                 }
             }
@@ -54,8 +56,9 @@ namespace SauceNAO.Infrastructure.Data
             }
             else
             {
-                if (user.Update(telegramUser))
+                if (user.HasChanges(telegramUser))
                 {
+                    user.Merge(telegramUser);
                     await UpdateAsync(user, cancellationToken).ConfigureAwait(false);
                 }
             }

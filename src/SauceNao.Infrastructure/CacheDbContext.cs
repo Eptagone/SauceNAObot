@@ -9,15 +9,15 @@ using SauceNAO.Core.Entities;
 namespace SauceNAO.Infrastructure
 {
     /// <summary>Cache DB Context</summary>
-    public partial class CacheContext : DbContext
+    public partial class CacheDbContext : DbContext
     {
         /// <summary>Initialize a new instance of SauceNaoContext.</summary>
-        public CacheContext()
+        public CacheDbContext()
         {
         }
 
         /// <summary>Initialize a new instance of SauceNaoContext.</summary>
-        public CacheContext(DbContextOptions<CacheContext> options)
+        public CacheDbContext(DbContextOptions<CacheDbContext> options)
             : base(options)
         {
         }
