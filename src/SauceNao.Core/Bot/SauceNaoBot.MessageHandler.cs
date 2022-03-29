@@ -1,7 +1,9 @@
 ﻿// Copyright (c) 2022 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using Microsoft.Extensions.Logging;
 using System.Globalization;
+using SauceNAO.Core.Extensions;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableTypes;
 
@@ -16,6 +18,11 @@ namespace SauceNAO.Core
             {
                 return;
             }
+
+#if DEBUG
+            _logger.LogInformation("A new message was received from user: {user_fullname} [{user_id}]. Chat: {chat_title} [{chat_id}]", message.From.GetFullname(), message.From.Id, message.Chat.Title ?? "Private chat", message.Chat.Id);
+#endif
+
             // Save message instance
             base.Message = message ?? throw new ArgumentNullException(nameof(message));
             // Message has text
@@ -29,7 +36,7 @@ namespace SauceNAO.Core
             async Task LoadDataAsync()
             {
                 // Load user data
-                User = await db.Users.GetUserAsync(message.From, cancellationToken).ConfigureAwait(false);
+                User = await _db.Users.GetUserAsync(message.From, cancellationToken).ConfigureAwait(false);
                 Date = DateTimeOffset.FromUnixTimeSeconds(message.Date).DateTime;
                 if (isPrivate)
                 {
@@ -39,7 +46,7 @@ namespace SauceNAO.Core
                 else
                 {
                     // Load group data
-                    Group = await db.Groups.GetGroupAsync(message.Chat, cancellationToken).ConfigureAwait(false);
+                    Group = await _db.Groups.GetGroupAsync(message.Chat, cancellationToken).ConfigureAwait(false);
                     // Set lang
                     Language = new CultureInfo(User.LangForce ? User.LanguageCode ?? "en" : Group.LanguageCode ?? "en");
                 }

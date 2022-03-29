@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2022 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using Microsoft.Extensions.Logging;
 using SauceNAO.Core.Entities;
 using SauceNAO.Core.Enums;
 using SauceNAO.Core.Extensions;
@@ -29,6 +30,10 @@ namespace SauceNAO.Core
         }
         private async Task OnCommandAsync(string cmd, string[] args, CancellationToken cancellationToken)
         {
+#if DEBUG
+            _logger.LogInformation("New command: {cmd}. Args: {args_count}", cmd, args.Count());
+#endif
+
             switch (cmd)
             {
                 case "start":
@@ -162,7 +167,7 @@ namespace SauceNAO.Core
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
                                 User.ApiKey = args[1];
-                                await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                             }
                             break;
                         case "del":
@@ -190,7 +195,7 @@ namespace SauceNAO.Core
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
                                 User.ApiKey = null;
-                                await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                             }
                             break;
                         default:
@@ -269,7 +274,7 @@ namespace SauceNAO.Core
 
                                     var item = new AntiCheat(bot, User.Id);
                                     Group.AntiCheats.Add(item);
-                                    await db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
+                                    await _db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
                                 }
                             }
                             else
@@ -317,7 +322,7 @@ namespace SauceNAO.Core
                                         cancellationToken: cancellationToken).ConfigureAwait(false);
 
                                     Group.AntiCheats.Remove(item);
-                                    await db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
+                                    await _db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
                                 }
                             }
                             else
@@ -447,7 +452,7 @@ namespace SauceNAO.Core
                                 cancellationToken: cancellationToken).ConfigureAwait(false);
 
                             User.UserSauces.Clear();
-                            await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                            await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                         }
                         break;
                     default:
@@ -531,7 +536,7 @@ namespace SauceNAO.Core
                         User.LangForce = false;
                     }
                     await SetlangSaved().ConfigureAwait(false);
-                    await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                    await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                 }
                 else if (args.Length == 1)
                 {
@@ -540,7 +545,7 @@ namespace SauceNAO.Core
                     {
                         Group.LanguageCode = setLang;
                         await SetlangSaved().ConfigureAwait(false);
-                        await db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
+                        await _db.Groups.UpdateAsync(Group, cancellationToken).ConfigureAwait(false);
                     }
                     else
                     {
@@ -584,7 +589,7 @@ namespace SauceNAO.Core
             }
             else
             {
-                var sauce = db.Sauces.GetAllSauces().FirstOrDefault(s => s.FileUniqueId == targetMedia.FileUniqueId);
+                var sauce = _db.Sauces.GetAllSauces().FirstOrDefault(s => s.FileUniqueId == targetMedia.FileUniqueId);
                 if (sauce == default)
                 {
                     var output = await Api.SendMessageAsync(message.Chat.Id, MSG.Searching(Language), replyToMessageId: message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -616,9 +621,9 @@ namespace SauceNAO.Core
                                 await UpdateSearchMessageAsync(output, sauceResult.Sauce.GetInfo(Language), sauceResult.Urls.ToInlineKeyboardMarkup()).ConfigureAwait(false);
                                 // save sauce to db and update user's search history
                                 sauce = new SuccessfulSauce(sauceResult, targetMedia, Date);
-                                await db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
+                                await _db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
                                 User.UserSauces.Add(new UserSauce(sauce.Key, Date));
-                                await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                                 break;
                             case SauceStatus.NotFound:
                                 if (!Properties.WebhookMode) // Local Mode
@@ -654,12 +659,12 @@ namespace SauceNAO.Core
                     {
                         userSauce = new UserSauce(sauce.Key, Date);
                         User.UserSauces.Add(userSauce);
-                        await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                        await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                     }
                     else
                     {
                         userSauce.Date = Date;
-                        await db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                        await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
                     }
                 }
             }
@@ -721,9 +726,9 @@ namespace SauceNAO.Core
         private async Task StatisticsAsync(CancellationToken cancellationToken)
         {
             await Api.SendChatActionAsync(Message.Chat.Id, ChatAction.Typing, cancellationToken).ConfigureAwait(false);
-            var sucefullSearchCount = db.Sauces.GetAllSauces().Count();
-            var usersCount = db.Users.GetAllUsers().Count();
-            var groupCount = db.Groups.GetAllGroups().Count();
+            var sucefullSearchCount = _db.Sauces.GetAllSauces().Count();
+            var usersCount = _db.Users.GetAllUsers().Count();
+            var groupCount = _db.Groups.GetAllGroups().Count();
             var stats = MSG.Statistics(Language, sucefullSearchCount, usersCount, groupCount);
             await Api.SendMessageAsync(Message.Chat.Id, stats, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
         }

@@ -28,11 +28,11 @@ namespace SauceNAO.Core
             var jsonUpdate = JsonSerializer.Serialize(Update, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault });
             if (expData == default)
             {
-                logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}.\nUpdate: {rawUpdate}", Update.UpdateId, jsonUpdate);
+                _logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}.\nUpdate: {rawUpdate}", Update.UpdateId, jsonUpdate);
             }
             else
             {
-                logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}. File name: {filename}, Line number: {lineNumber}.\nUpdate: {rawUpdate}", Update.UpdateId, expData.FileName, expData.LineNumber, jsonUpdate);
+                _logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}. File name: {filename}, Line number: {lineNumber}.\nUpdate: {rawUpdate}", Update.UpdateId, expData.FileName, expData.LineNumber, jsonUpdate);
             }
 
             await Task.CompletedTask;
@@ -54,11 +54,11 @@ namespace SauceNAO.Core
             var jsonUpdate = JsonSerializer.Serialize(Update, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault });
             if (expData == default)
             {
-                logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}.\nUpdate: {rawUpdate}", Update.UpdateId, jsonUpdate);
+                _logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}.\nUpdate: {rawUpdate}", Update.UpdateId, jsonUpdate);
             }
             else
             {
-                logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}. File name: {filename}, Line number: {lineNumber}.\nUpdate: {rawUpdate}", Update.UpdateId, expData.FileName, expData.LineNumber, jsonUpdate);
+                _logger.LogError(exp, "An exception was generated while the update was being processed with id: {updateId}. File name: {filename}, Line number: {lineNumber}.\nUpdate: {rawUpdate}", Update.UpdateId, expData.FileName, expData.LineNumber, jsonUpdate);
             }
 
             await Task.CompletedTask;
@@ -68,7 +68,7 @@ namespace SauceNAO.Core
         {
             if (!(messageText.Contains("Daily Search Limit Exceeded") || messageText.Contains("Too many failed search attempts") || messageText.Contains("Search Rate Too High")))
             {
-                logger.LogCritical("Sauce Error! Message: {message}", messageText);
+                _logger.LogCritical("Sauce Error! Message: {message}", messageText);
             }
         }
     }

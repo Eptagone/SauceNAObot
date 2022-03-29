@@ -77,20 +77,20 @@ namespace SauceNAO.Core
             if (TryGetFilePath(target, out string ext))
             {
                 var fileName = target.FileUniqueId + ext;
-                var tempFile = db.Files.GetFile(target.FileUniqueId);
+                var tempFile = _db.Files.GetFile(target.FileUniqueId);
                 if (tempFile == default)
                 {
                     var fileBytes = await httpClient.GetByteArrayAsync(target.FilePath, cancellationToken).ConfigureAwait(false);
                     try
                     {
                         var item = new CachedTelegramFile(target.FileUniqueId, fileName, target.ContentType, fileBytes);
-                        await db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
+                        await _db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
                         target.TemporalFilePath = string.Format(Properties.TempFilesUrl!, target.FileUniqueId);
                     }
                     catch (Exception e)
                     {
                         okey = false;
-                        logger.LogError("Can't insert new temporal file. Error message. {0}", e.InnerException?.Message ?? e.Message);
+                        _logger.LogError("Can't insert new temporal file. Error message. {0}", e.InnerException?.Message ?? e.Message);
                     }
                 }
                 else
@@ -115,7 +115,7 @@ namespace SauceNAO.Core
             }
             var fileName = $"{targetMedia.FileUniqueId}.jpg";
             string outputPath = $"{Path.GetTempPath()}{fileName}";
-            var tempFile = db.Files.GetFile(targetMedia.FileUniqueId);
+            var tempFile = _db.Files.GetFile(targetMedia.FileUniqueId);
 
             if (tempFile == default)
             {
@@ -127,7 +127,7 @@ namespace SauceNAO.Core
                         targetMedia.TemporalFilePath = string.Format(Properties.TempFilesUrl!, targetMedia.FileUniqueId);
                         var fileBytes = await File.ReadAllBytesAsync(outputPath, cancellationToken).ConfigureAwait(false);
                         var item = new CachedTelegramFile(targetMedia.FileUniqueId, fileName, targetMedia.ContentType, fileBytes);
-                        await db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
+                        await _db.Files.InsertAsync(item, cancellationToken).ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
@@ -165,7 +165,7 @@ namespace SauceNAO.Core
             }
             catch (SearchResponseException exp)
             {
-                logger.LogError("Cooking Error: {0}", exp.InnerException?.Message ?? exp.Message);
+                _logger.LogError("Cooking Error: {0}", exp.InnerException?.Message ?? exp.Message);
                 // Cook sauce
                 sauce = new SauceBowl(exp);
             }

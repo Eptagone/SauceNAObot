@@ -15,16 +15,16 @@ namespace SauceNAO.Core
     {
         private static readonly HttpClient httpClient = new();
 
-        private readonly ISauceDatabase db;
-        private readonly ILogger<SauceNaoBot> logger;
+        private readonly ISauceDatabase _db;
+        private readonly ILogger<SauceNaoBot> _logger;
 
         /// <summary>New SauceNAOBot instance.</summary>
         /// <param name="logger">The Logger</param>
         /// <param name="context">SauceNAO Context.</param>
         public SauceNaoBot(ISauceDatabase db, SnaoBotProperties botConfiguration, ILogger<SauceNaoBot> logger) : base(botConfiguration)
         {
-            this.db = db;
-            this.logger = logger;
+            this._db = db;
+            this._logger = logger;
         }
 
         /// <summary>Current user data instance.</summary>

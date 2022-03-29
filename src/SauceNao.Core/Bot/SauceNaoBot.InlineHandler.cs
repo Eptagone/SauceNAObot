@@ -1,8 +1,10 @@
 ﻿// Copyright (c) 2022 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using Microsoft.Extensions.Logging;
 using SauceNAO.Core.Entities;
 using SauceNAO.Core.Enums;
+using SauceNAO.Core.Extensions;
 using SauceNAO.Core.Models;
 using SauceNAO.Core.Resources;
 using System.Globalization;
@@ -17,12 +19,16 @@ namespace SauceNAO.Core
     {
         protected override async Task OnInlineQueryAsync(InlineQuery inlineQuery, CancellationToken cancellationToken)
         {
-            User = await db.Users.GetUserAsync(inlineQuery.From, cancellationToken: cancellationToken).ConfigureAwait(false);
+            User = await _db.Users.GetUserAsync(inlineQuery.From, cancellationToken: cancellationToken).ConfigureAwait(false);
             Language = new CultureInfo(User.LanguageCode ?? "en");
 
             var offset = string.IsNullOrEmpty(inlineQuery.Offset) ? 0 : int.Parse(inlineQuery.Offset);
             var myHistory = User.UserSauces.Where(h => h.UserId == User.Id).OrderByDescending(h => h.Date).Select(s => s.Sauce);
             var results = new List<InlineQueryResult>();
+
+#if DEBUG
+            _logger.LogInformation("New inline query from user: {user_fullname} [{user_id}]. Query: \"{query}\", sauces: {sauce_count}.", User.GetFullname(), User.Id, inlineQuery.Query, myHistory.Count());
+#endif
 
             if (myHistory.Any())
             {

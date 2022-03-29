@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SauceNao.Core\SauceNAO.Core.csproj" />
+    <ProjectReference Include="..\SauceNAO.Core\SauceNAO.Core.csproj" />
   </ItemGroup>
 
 </Project>
