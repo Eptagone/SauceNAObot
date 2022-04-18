@@ -92,11 +92,7 @@ namespace SauceNAO.Core
                                 {
                                     Id = offset.ToString(),
                                     StickerFileId = sauce.FileId,
-                                    InputMessageContent = new InputTextMessageContent
-                                    {
-                                        MessageText = sauceText,
-                                        ParseMode = ParseMode.HTML,
-                                    },
+                                    InputMessageContent = new InputTextMessageContent(sauceText, ParseMode.HTML),
                                     ReplyMarkup = keyboard
                                 });
                                 break;
@@ -136,20 +132,15 @@ namespace SauceNAO.Core
                 {
                     Id = "None",
                     Title = text,
-                    InputMessageContent = new InputTextMessageContent
-                    {
-                        MessageText = text
-                    }
+                    InputMessageContent = new InputTextMessageContent(text)
                 });
             }
 
-            var answeriquery = new AnswerInlineQueryArgs
+            var answeriquery = new AnswerInlineQueryArgs(inlineQuery.Id, results.ToArray())
             {
-                InlineQueryId = inlineQuery.Id,
                 NextOffset = results.Count < 10 ? string.Empty : offset.ToString(),
                 IsPersonal = true,
-                CacheTime = 480,
-                Results = results.ToArray()
+                CacheTime = 480
             };
             await Api.AnswerInlineQueryAsync(answeriquery, cancellationToken: cancellationToken).ConfigureAwait(false);
         }

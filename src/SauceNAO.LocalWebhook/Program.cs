@@ -30,8 +30,10 @@ builder.Services.AddScoped<ISauceDatabase, BotDb>(); // Bot data class
 // Ensure start ngrok tunnel
 string appUrl;
 {
-    var agent = new NgrokAgentClient();
     var ngrok = builder.Configuration.GetSection("Ngrok");
+    var agentapiurl = ngrok["ApiUrl"];
+
+    var agent = string.IsNullOrEmpty(agentapiurl) ? new NgrokAgentClient() : new NgrokAgentClient(agentapiurl);
     var tunnelName = ngrok["TunnelName"] ?? "SnaoTunnel";
     var tunnel = agent.ListTunnels().Tunnels.FirstOrDefault(t => t.Name == tunnelName);
 
@@ -104,7 +106,7 @@ using (var scope = app.Services.CreateScope())
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

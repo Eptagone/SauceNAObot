@@ -27,6 +27,7 @@ In order to run anyone of webhook projects, you need to set the following applic
 | Certificate                | Certificate                   | SauceNAO.Webhook      | Optional. Certificate path                            |
 | Ngrok:Port                 | Ngrok\_\_Port                 | SauceNAO.LocalWebhook | Port where your app is running. (7161)                |
 | Ngrok:TunnelName           | Ngrok\_\_TunnelName           | SauceNAO.LocalWebhook | Optional. The tunnel name. (SnaoTunnel)               |
+| Ngrok:ApiUrl           | Ngrok\_\_ApiUrl           | SauceNAO.LocalWebhook | Optional. Api url. (localhost:4040/api)               |
 
 > Before running the **SauceNAO.LocalWebhook** project, you have to start **ngrok** in the background. Otherwise, your application will not be able to start. You can use the following command: `ngrok start --none`.
 
