@@ -199,6 +199,10 @@ Los resultados de la búsqueda Inline pueden tardar unos minutos en desaparecer 
   <data name="InvalidPhoto" xml:space="preserve">
     <value>Eso no parece un archivo de imagen.</value>
   </data>
+  <data name="LanguageCodes" xml:space="preserve">
+    <value>&lt;b&gt;Códigos de languaje:&lt;/b&gt;
+{0}</value>
+  </data>
   <data name="LocalMode" xml:space="preserve">
     <value>El bot se está ejecutando actualmente en modo local, por lo que esta función está deshabilitada.</value>
   </data>

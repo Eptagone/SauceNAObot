@@ -730,5 +730,20 @@ namespace SauceNAO.Core
             var stats = MSG.Statistics(Language, sucefullSearchCount, usersCount, groupCount);
             await Api.SendMessageAsync(Message.Chat.Id, stats, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
+        private async Task LanguagesAsync(CancellationToken cancellationToken)
+        {
+            await Api.SendChatActionAsync(Message.Chat.Id, ChatAction.Typing, cancellationToken).ConfigureAwait(false);
+
+            var langs = _db.Users.GetAllUsers().GroupBy(u => u.LanguageCode).OrderByDescending(g => g.Count());
+
+            var values = string.Empty;
+            foreach (var l in langs)
+            {
+                values += string.Format("\n- <b>{0}</b> [{1}]", l.Key ?? "default", l.Count());
+            }
+
+            var text = string.Format(MSG.LanguageCodes(Language), values);
+            await Api.SendMessageAsync(Message.Chat.Id, text, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
     }
 }

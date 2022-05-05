@@ -219,6 +219,10 @@ The history will be erased periodically. If you want to delete your history righ
   <data name="InvalidPhoto" xml:space="preserve">
     <value>那看起来不像图像文件。</value>
   </data>
+  <data name="LanguageCodes" xml:space="preserve">
+    <value>&lt;b&gt;Language Codes:&lt;/b&gt;
+{0}</value>
+  </data>
   <data name="LocalMode" xml:space="preserve">
     <value>Bot is currently running in local mode, so this feature is disabled.</value>
   </data>

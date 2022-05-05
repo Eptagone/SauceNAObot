@@ -324,6 +324,16 @@ namespace SauceNAO.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Language Codes:&lt;/b&gt;
+        ///{0}.
+        /// </summary>
+        internal static string LanguageCodes {
+            get {
+                return ResourceManager.GetString("LanguageCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bot is currently running in local mode, so this feature is disabled..
         /// </summary>
         internal static string LocalMode {

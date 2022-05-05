@@ -199,6 +199,10 @@ Inline search results can take a few minutes to disappear because they are cache
   <data name="InvalidPhoto" xml:space="preserve">
     <value>That doesn't look like a photo file.</value>
   </data>
+  <data name="LanguageCodes" xml:space="preserve">
+    <value>&lt;b&gt;Language Codes:&lt;/b&gt;
+{0}</value>
+  </data>
   <data name="LocalMode" xml:space="preserve">
     <value>Bot is currently running in local mode, so this feature is disabled.</value>
   </data>
