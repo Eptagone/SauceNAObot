@@ -18,7 +18,9 @@ namespace SauceNAO.Infrastructure.Data
 
         public IQueryable<UserData> GetAllUsers()
         {
-            return Context.Users.AsNoTracking().Include(u => u.UserSauces).ThenInclude(u => u.Sauce).AsQueryable();
+            return Context.Users.AsNoTracking()
+                .Include(u => u.UserSauces)
+                .ThenInclude(u => u.Sauce).AsQueryable();
         }
 
         public UserData GetUser(ITelegramUser telegramUser)
@@ -63,6 +65,23 @@ namespace SauceNAO.Infrastructure.Data
                 }
             }
             return user;
+        }
+
+        public UserSauce InsertSauce(long userId, UserSauce userSauce)
+        {
+            userSauce.UserId = userId;
+            Context.Add(userSauce);
+            Context.SaveChanges();
+
+            return userSauce;
+        }
+
+        public async Task<UserSauce> InsertSauceAsync(long userId, UserSauce userSauce, [Optional] CancellationToken cancellationToken)
+        {
+            userSauce.UserId = userId;
+            Context.Add(userSauce);
+            await Context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            return userSauce;
         }
     }
 }

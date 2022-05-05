@@ -24,7 +24,7 @@ namespace SauceNAO.Core
                 _logger.LogInformation("A new message was received from user: {user_fullname} [{user_id}]. Chat: {chat_title} [{chat_id}]", message.From.GetFullname(), message.From.Id, message.Chat.Title ?? "Private chat", message.Chat.Id);
 #endif
                 // Save message instance
-                base.Message = message ?? throw new ArgumentNullException(nameof(message));
+                this.Message = message ?? throw new ArgumentNullException(nameof(message));
                 // Message has text
                 var hasText = !string.IsNullOrEmpty(message.Text);
                 // Message has caption

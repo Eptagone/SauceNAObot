@@ -22,5 +22,21 @@ namespace SauceNAO.Core.Data
         /// <param name="isPrivate">Is private.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         Task<UserData> GetUserAsync(ITelegramUser telegramUser, [Optional] CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Insert a new sauce in the user's sauce history.
+        /// </summary>
+        /// <param name="userId">Unique identifier for the user.</param>
+        /// <param name="userSauce">User sauce.</param>
+        /// <returns><see cref="UserSauce"/></returns>
+        UserSauce InsertSauce(long userId, UserSauce userSauce);
+        /// <summary>
+        /// Insert a new sauce in the user's sauce history.
+        /// </summary>
+        /// <param name="userId">Unique identifier for the user.</param>
+        /// <param name="userSauce">User sauce.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns><see cref="UserSauce"/></returns>
+        Task<UserSauce> InsertSauceAsync(long userId, UserSauce userSauce, [Optional] CancellationToken cancellationToken);
     }
 }

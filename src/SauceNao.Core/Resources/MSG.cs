@@ -158,6 +158,11 @@ namespace SauceNAO.Core.Resources
             return Res.GetString(nameof(InvalidPhoto), lang);
         }
 
+        public static string LanguageCodes(CultureInfo lang)
+        {
+            return Res.GetString(nameof(LanguageCodes), lang);
+        }
+        
         public static string LocalMode(CultureInfo lang)
         {
             return Res.GetString(nameof(LocalMode), lang);

@@ -61,7 +61,7 @@ namespace SauceNAO.Core.API
         [JsonPropertyName("konachan_id")]
         public uint KonachanId { get; set; }
         [JsonPropertyName("md_id")]
-        public uint MdId { get; set; }
+        public string MdId { get; set; }
         [JsonPropertyName("mu_id")]
         public uint MuId { get; set; }
         [JsonPropertyName("mal_id")]

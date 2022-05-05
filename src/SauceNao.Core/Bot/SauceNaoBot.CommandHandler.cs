@@ -97,8 +97,12 @@ namespace SauceNAO.Core
                 case "temporal":
                     await TempAsync(Message.ReplyToMessage, cancellationToken).ConfigureAwait(false);
                     break;
+                case "langs":
+                    await LanguagesAsync(cancellationToken).ConfigureAwait(false);
+                    break;
             }
         }
+
         private async Task StartAsync(string[] args, CancellationToken cancellationToken)
         {
             await Api.SendMessageAsync(
@@ -622,8 +626,7 @@ namespace SauceNAO.Core
                                 // save sauce to db and update user's search history
                                 sauce = new SuccessfulSauce(sauceResult, targetMedia, Date);
                                 await _db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
-                                User.UserSauces.Add(new UserSauce(sauce.Key, Date));
-                                await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                await _db.Users.InsertSauceAsync(User.Id, new UserSauce(sauce.Key, Date), cancellationToken).ConfigureAwait(false);
                                 break;
                             case SauceStatus.NotFound:
                                 if (!Properties.WebhookMode) // Local Mode
@@ -658,8 +661,7 @@ namespace SauceNAO.Core
                     if (userSauce == default)
                     {
                         userSauce = new UserSauce(sauce.Key, Date);
-                        User.UserSauces.Add(userSauce);
-                        await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                        await _db.Users.InsertSauceAsync(User.Id, userSauce, cancellationToken).ConfigureAwait(false);
                     }
                     else
                     {
@@ -731,6 +733,21 @@ namespace SauceNAO.Core
             var groupCount = _db.Groups.GetAllGroups().Count();
             var stats = MSG.Statistics(Language, sucefullSearchCount, usersCount, groupCount);
             await Api.SendMessageAsync(Message.Chat.Id, stats, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+        private async Task LanguagesAsync(CancellationToken cancellationToken)
+        {
+            await Api.SendChatActionAsync(Message.Chat.Id, ChatAction.Typing, cancellationToken).ConfigureAwait(false);
+
+            var langs = _db.Users.GetAllUsers().GroupBy(u => u.LanguageCode).OrderByDescending(g => g.Count());
+
+            var values = string.Empty;
+            foreach (var l in langs)
+            {
+                values += string.Format("\n- <b>{0}</b> [{1}]", l.Key ?? "default", l.Count());
+            }
+
+            var text = string.Format(MSG.LanguageCodes(Language), values);
+            await Api.SendMessageAsync(Message.Chat.Id, text, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using SauceNAO.Core.Entities;
 using System.Globalization;
 using Telegram.BotAPI;
+using Telegram.BotAPI.AvailableTypes;
 
 #nullable disable
 
@@ -29,6 +30,8 @@ namespace SauceNAO.Core
 
         /// <summary>Current user data instance.</summary>
         private UserData User;
+        /// <summary>Current message instance.</summary>
+        private Message Message;
         /// <summary>Current chat data instance.</summary>
         private TelegramGroup Group;
         /// <summary>Current date instance.</summary>

@@ -34,7 +34,7 @@ namespace SauceNAO.Webhook.Services
 #endif
             await db.Sauces.DeleteRangeAsync(oldSauces, stoppingToken).ConfigureAwait(false);
 
-            var groups = db.Groups.GetAllGroups();
+            var groups = db.Groups.GetAllGroups().ToList();
 #if DEBUG
             _logger.LogInformation("Missing groups will be cleaned.");
 #endif
