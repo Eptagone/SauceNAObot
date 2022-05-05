@@ -622,8 +622,7 @@ namespace SauceNAO.Core
                                 // save sauce to db and update user's search history
                                 sauce = new SuccessfulSauce(sauceResult, targetMedia, Date);
                                 await _db.Sauces.InsertAsync(sauce, cancellationToken).ConfigureAwait(false);
-                                User.UserSauces.Add(new UserSauce(sauce.Key, Date));
-                                await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                                await _db.Users.InsertSauceAsync(User.Id, new UserSauce(sauce.Key, Date), cancellationToken).ConfigureAwait(false);
                                 break;
                             case SauceStatus.NotFound:
                                 if (!Properties.WebhookMode) // Local Mode
@@ -658,8 +657,7 @@ namespace SauceNAO.Core
                     if (userSauce == default)
                     {
                         userSauce = new UserSauce(sauce.Key, Date);
-                        User.UserSauces.Add(userSauce);
-                        await _db.Users.UpdateAsync(User, cancellationToken).ConfigureAwait(false);
+                        await _db.Users.InsertSauceAsync(User.Id, userSauce, cancellationToken).ConfigureAwait(false);
                     }
                     else
                     {

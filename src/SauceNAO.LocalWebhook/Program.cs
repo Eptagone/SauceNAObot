@@ -14,9 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configure database context
-var connectionString = builder.Configuration.GetConnectionString("SauceNAO");
-builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("SNAO");
+// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 
 // Configure cache context
 var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
@@ -37,19 +37,22 @@ string appUrl;
     var tunnelName = ngrok["TunnelName"] ?? "SnaoTunnel";
     var tunnel = agent.ListTunnels().Tunnels.FirstOrDefault(t => t.Name == tunnelName);
 
-    if (tunnel == null)
+    if (tunnel != null)
     {
-        var port = ngrok["Port"];
-        var hostheader = string.Format("localhost:{0}", port);
-        var address = string.Format("http://{0}", hostheader);
-
-        var tunnelConfig = new TunnelConfiguration(tunnelName, "http", address)
-        {
-            HostHeader = hostheader,
-            BindTls = "true"
-        };
-        tunnel = agent.StartTunnel(tunnelConfig);
+        agent.StopTunnel(tunnelName);
     }
+
+    var port = ngrok["Port"];
+    var hostheader = string.Format("localhost:{0}", port);
+    var address = string.Format("https://{0}", hostheader);
+
+    var tunnelConfig = new HttpTunnelConfiguration(tunnelName, address)
+    {
+        HostHeader = hostheader,
+        Schemes = new string[] { "https" }
+    };
+    tunnel = agent.StartTunnel(tunnelConfig);
+
     appUrl = tunnel.PublicUrl;
 }
 
@@ -97,16 +100,18 @@ using (var scope = app.Services.CreateScope())
 #endif
 }
 
-// Create cache file
 using (var scope = app.Services.CreateScope())
 {
+    // Create cache file
     using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
     context.Database.EnsureCreated();
+    // Initialize bot
+    _ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();
 }
 
 // Configure the HTTP request pipeline.
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

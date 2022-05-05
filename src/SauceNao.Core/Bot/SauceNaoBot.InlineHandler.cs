@@ -140,7 +140,11 @@ namespace SauceNAO.Core
             {
                 NextOffset = results.Count < 10 ? string.Empty : offset.ToString(),
                 IsPersonal = true,
+#if DEBUG
+                CacheTime = 16
+#else
                 CacheTime = 480
+#endif
             };
             await Api.AnswerInlineQueryAsync(answeriquery, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
