@@ -13,9 +13,9 @@ IHost host = Host.CreateDefaultBuilder(args)
         var configuration = context.Configuration;
 
         // Configure database context
-        var connectionString = configuration.GetConnectionString("SauceNAO");
-        services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-        // services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+        var connectionString = configuration.GetConnectionString("Default");
+        // services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+        services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 
         // Configure cache context
         var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache

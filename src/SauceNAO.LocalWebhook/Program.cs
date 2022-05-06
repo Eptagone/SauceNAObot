@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configure database context
-var connectionString = builder.Configuration.GetConnectionString("SNAO");
+var connectionString = builder.Configuration.GetConnectionString("Default");
 // builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 

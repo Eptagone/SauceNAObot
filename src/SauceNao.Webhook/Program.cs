@@ -13,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configure database context
-var connectionString = builder.Configuration.GetConnectionString("SauceNAO");
-builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("Default");
+// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
 
 // Configure cache context
 var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
