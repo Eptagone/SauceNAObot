@@ -15,19 +15,18 @@ Esta solución esta compuesta por **6** proyectos:
 
 Para ejecutar cualquiera de los proyectos, usted necesita establecer la siguiente configuración de la aplicación meidiante un **archivo json** (`secrets.json`, `application.json`) o usando **variables de entorno**.
 
-| Nombre de la propiedad JSON | Variable de entorno           | Aplica a              | Descripción                                               |
-| :-------------------------- | :---------------------------- | :-------------------- | :-------------------------------------------------------- |
-| AccessToken                 | AccessToken                   | Webhooks              | El token secreto del webhook especificado por usted.      |
-| FFmpegExec                  | FFmpegExec                    | Webhooks              | La ruta al ejecutable de **ffmpeg**.                      |
-| SauceNAO:ApiKey             | SauceNAO\_\_ApiKey            | Todos los proyectos   | La clave de api para usar la SauceNAO API.                |
-| Telegram:BotToken           | Telegram\_\_BotToken          | Todos los proyectos   | El token del bot.                                         |
-| Telegram:SupportChatLink    | Telegram\_\_SupportChatLink   | Todos los proyectos   | Link al chat de ayuda. (<https://t.me/+8NJMCbRmiTk2Yjkx>) |
-| ConnectionStrings:SauceNAO  | ConnectionStrings\_\_SauceNAO | Todos los proyectos   | La cadena de conexión a la base de datos.                 |
-| ApplicationUrl              | ApplicationUrl                | SauceNAO.Webhook      | La dirección base del webhook. (<https://example.com>)    |
-| Certificate                 | Certificate                   | SauceNAO.Webhook      | Opcional. Ruta del certificado.                           |
-| Ngrok:Port                  | Ngrok\_\_Port                 | SauceNAO.LocalWebhook | Puerto donde se ejecuta la aplicación. (7161)             |
-| Ngrok:TunnelName            | Ngrok\_\_TunnelName           | SauceNAO.LocalWebhook | Opcional. Nombre del tunnel. (SnaoTunnel)                 |
+| Nombre de la propiedad JSON | Variable de entorno          | Aplica a              | Descripción                                                                    |
+| :-------------------------- | :--------------------------- | :-------------------- | :----------------------------------------------------------------------------- |
+| AccessToken                 | AccessToken                  | Webhooks              | El token secreto del webhook especificado por usted.                           |
+| FFmpegExec                  | FFmpegExec                   | Webhooks              | La ruta al ejecutable de **ffmpeg**.                                           |
+| SauceNAO:ApiKey             | SauceNAO\_\_ApiKey           | Todos los proyectos   | La clave de api para usar la SauceNAO API.                                     |
+| Telegram:BotToken           | Telegram\_\_BotToken         | Todos los proyectos   | El token del bot.                                                              |
+| Telegram:SupportChatLink    | Telegram\_\_SupportChatLink  | Todos los proyectos   | Link al chat de ayuda. (<https://t.me/+8NJMCbRmiTk2Yjkx>)                      |
+| ConnectionStrings:Default   | ConnectionStrings\_\_Default | Todos los proyectos   | La cadena de conexión a la base de datos.                                      |
+| DbProvider                  | DbProvider                   | All                   | Proveedor de la base de datos. Puede ser 'sqlite' (por defecto) o 'sqlserver'. |
+| ApplicationUrl              | ApplicationUrl               | SauceNAO.Webhook      | La dirección base del webhook. (<https://example.com>)                         |
+| Certificate                 | Certificate                  | SauceNAO.Webhook      | Opcional. Ruta del certificado.                                                |
+| Ngrok:Port                  | Ngrok\_\_Port                | SauceNAO.LocalWebhook | Puerto donde se ejecuta la aplicación. (7161)                                  |
+| Ngrok:TunnelName            | Ngrok\_\_TunnelName          | SauceNAO.LocalWebhook | Opcional. Nombre del tunnel. (SnaoTunnel)                                      |
 
 > Antes de ejecutar el proyecto **SauceNAO.LocalWebhook**, usted necesita iniciar **ngrok** en segundo plano. De lo contrario, la aplicación no podrá iniciar. Puede usar el siguiente comando: `ngrok start --none`.
-
-> Actualmente, el bot usa **SQLite** para el almacenamiento de datos y también para almacenar información en caché. Si desea cambiarlo a otro proveedor modifique el archivo `Program.cs` de los proyectos de Webhooks para usar otro proveedor compatible con **Entity Framework**. Si no desea utilizar **Entity Framework**, debe implementar una clase basada en la interfaz `IBotDb` y registrar la clase en `Program.cs` desde sus proyectos Webhook. Puede tomar la clase `Data/BotDb.cs` ubicada en el proyecto `SauceNAO.Infrastructure` como ejemplo.

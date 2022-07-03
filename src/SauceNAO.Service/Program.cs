@@ -14,15 +14,33 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         // Configure database context
         var connectionString = configuration.GetConnectionString("Default");
-        // services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-        services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+
+        switch (configuration["DbProvider"])
+        {
+            case "SQLite":
+            case "sqlite":
+            case "lite":
+            case "Lite":
+            default:
+                // Use SQLite Server. Default.
+                services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+                break;
+            case "SqlServer":
+            case "sqlserver":
+            case "mssql":
+            case "sql":
+                // Use SQL Server.
+                services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+                break;
+        }
+
 
         // Configure cache context
         var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
         services.AddDbContext<CacheDbContext>(options => options.UseSqlite(cacheConnection));
 
         // Add bot service.
-        services.AddSauceBot<BotDb>(configuration);
+        services.AddSauceBot<BotDb>();
 
         // Add Data Cleaner service
         services.AddHostedService<CleanerService>();

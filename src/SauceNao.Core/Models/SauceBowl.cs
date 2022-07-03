@@ -35,13 +35,13 @@ namespace SauceNAO.Core.Models
                         {
                             if (data.Title != null)
                             {
-                                Sauce.Title = $"<b>{StyleFixer.Default.FixToHTML(data.Title)}</b>\n\n";
+                                Sauce.Title = $"{data.Title.AsHtmlBoldText()}\n\n";
                             }
                             else if (data.Source != null)
                             {
                                 if (!data.Source.StartsWith("http"))
                                 {
-                                    Sauce.Title = $"<b>{StyleFixer.Default.FixToHTML(data.Source)}</b>\n\n";
+                                    Sauce.Title = $"{data.Source.AsHtmlBoldText()}\n\n";
                                 }
                             }
                         }
@@ -54,15 +54,15 @@ namespace SauceNAO.Core.Models
                         }
                         if (!string.IsNullOrEmpty(data.Characters) && string.IsNullOrEmpty(Sauce.Characters))
                         {
-                            Sauce.Characters = $"<b>{{0}}:</b> {StyleFixer.Default.FixToHTML(data.Characters)}\n";
+                            Sauce.Characters = $"<b>{{0}}:</b> {data.Characters.AsHtmlNormalText()}\n";
                         }
                         if (!string.IsNullOrEmpty(data.Material) && string.IsNullOrEmpty(Sauce.Material))
                         {
-                            Sauce.Material = $"<b>{{0}}:</b> {StyleFixer.Default.FixToHTML(data.Material)}\n";
+                            Sauce.Material = $"<b>{{0}}:</b> {data.Material.AsHtmlNormalText()}\n";
                         }
                         if (!string.IsNullOrEmpty(data.Part) && string.IsNullOrEmpty(Sauce.Part))
                         {
-                            Sauce.Part = $"<b>{{0}}:</b> {StyleFixer.Default.FixToHTML(data.Part)}\n";
+                            Sauce.Part = $"<b>{{0}}:</b> {data.Part.AsHtmlNormalText()}\n";
                         }
                         if (data.Creator != null && string.IsNullOrEmpty(Sauce.By))
                         {
@@ -70,7 +70,7 @@ namespace SauceNAO.Core.Models
                             {
                                 if (!string.IsNullOrEmpty(data.Creator as string))
                                 {
-                                    Sauce.By = $"<b>{{0}}:</b> {StyleFixer.Default.FixToHTML(data.Creator as string)}\n";
+                                    Sauce.By = $"<b>{{0}}:</b> {(data.Creator as string)!.AsHtmlNormalText()}\n";
                                 }
                             }
                         }

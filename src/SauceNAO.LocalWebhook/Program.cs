@@ -57,29 +57,9 @@ string appUrl;
 }
 
 // Add Telegram Bot Configurtaion
-builder.Services.AddSingleton<SnaoBotProperties>(services =>
-{
-    var telegram = builder.Configuration.GetSection("Telegram");
-    var snao = builder.Configuration.GetSection("SauceNAO");
+builder.Services.AddSingleton<SnaoBotProperties>();
 
-    var botToken = telegram["BotToken"];
-    var apikey = snao["ApiKey"];
-    var ffmpegExec = builder.Configuration["FFmpegExec"];
-    var supportChatLink = telegram["SupportChatLink"];
-
-    var filesUrl = $"{appUrl}/temp/{{0}}";
-
-    var botConfiguration = new SnaoBotProperties(botToken, apikey, filesUrl, ffmpegExec, supportChatLink);
-
-    var accessToken = builder.Configuration["AccessToken"];
-    var webhook = $"{appUrl}/bot/{accessToken}";
-
-    botConfiguration.SetBotCommands();
-    botConfiguration.Initialize(webhook);
-
-    return botConfiguration;
-});
-
+// Add Telegram Bot
 builder.Services.AddScoped<SauceNaoBot>();
 
 // Add Data Cleaner service

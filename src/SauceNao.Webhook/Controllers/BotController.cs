@@ -22,21 +22,25 @@ namespace SauceNAO.Webhook.Controllers
             _bot = bot;
         }
 
-        [HttpGet("{accessToken}")]
-        public IActionResult Get(string accessToken)
+        [HttpGet]
+        public IActionResult Get([FromHeader(Name = "X-Telegram-Bot-Api-Secret-Token")] string secretToken)
         {
-            if (_configuration["AccessToken"] != accessToken)
+            if (_configuration["AccessToken"] != secretToken)
             {
+#if DEBUG
                 _logger.LogWarning("Failed access!");
+#endif
                 Unauthorized();
             }
             return Ok();
         }
 
-        [HttpPost("{accessToken}")]
-        public async Task<IActionResult> PostAsync(string accessToken, [FromBody] Update update, CancellationToken cancellationToken)
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(
+            [FromHeader(Name = "X-Telegram-Bot-Api-Secret-Token")] string secretToken,
+            [FromBody] Update update, CancellationToken cancellationToken)
         {
-            if (_configuration["AccessToken"] != accessToken)
+            if (_configuration["AccessToken"] != secretToken)
             {
 #if DEBUG
                 _logger.LogWarning("Failed access");

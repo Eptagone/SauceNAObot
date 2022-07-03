@@ -7,8 +7,8 @@ namespace SauceNAO.Core.Extensions
 {
     public static class StringExtensions
     {
-        private static readonly IStyleParser _parser = StyleFixer.Default;
-        private static readonly FormattingHelper<StyleFixer> _formattingHelper = new FormattingBuilder();
+        private static readonly IStyleParser _parser = StyleParser.Default;
+        private static readonly FormattingHelper _formattingHelper = new();
 
         /// <summary>
         /// Remove a substring from the end of a <see cref="string"/>.
@@ -39,6 +39,16 @@ namespace SauceNAO.Core.Extensions
             return _parser.ToHTML(text);
         }
 
+        /// <summary>
+        /// Format text using HTML.
+        /// </summary>
+        /// <param name="input">Input text.</param>
+        /// <returns>Stylized <see cref="string"/>.</returns>
+        public static string AsHtmlNormalText(this string input)
+        {
+            return _parser.ToHTML(input);
+        }
+        
         /// <summary>
         /// Format text using HTML. Bold.
         /// </summary>

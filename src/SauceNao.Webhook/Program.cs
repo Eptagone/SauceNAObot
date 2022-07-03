@@ -2,6 +2,7 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SauceNAO.Core.Extensions;
 using SauceNAO.Infrastructure;
 using SauceNAO.Infrastructure.Data;
@@ -14,18 +15,32 @@ builder.Services.AddControllers();
 
 // Configure database context
 var connectionString = builder.Configuration.GetConnectionString("Default");
-// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+
+switch (builder.Configuration["DbProvider"])
+{
+    case "SQLite":
+    case "sqlite":
+    case "lite":
+    case "Lite":
+    default:
+        // Use SQLite Server. Default.
+        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+        break;
+    case "SqlServer":
+    case "sqlserver":
+    case "mssql":
+    case "sql":
+        // Use SQL Server.
+        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+        break;
+}
 
 // Configure cache context
 var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
 builder.Services.AddDbContext<CacheDbContext>(options => options.UseSqlite(cacheConnection));
 
-// Add temp repository
-builder.Services.AddScoped<TemporalFileRepository>();
-
 // Add bot service.
-builder.Services.AddSauceBot<BotDb>(builder.Configuration);
+builder.Services.AddSauceBot<BotDb>();
 
 // Add Data Cleaner service
 builder.Services.AddHostedService<CleanerService>();
