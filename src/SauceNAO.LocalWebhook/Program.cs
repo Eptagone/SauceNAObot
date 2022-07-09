@@ -15,8 +15,25 @@ builder.Services.AddControllers();
 
 // Configure database context
 var connectionString = builder.Configuration.GetConnectionString("Default");
-// builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+
+switch (builder.Configuration["DbProvider"])
+{
+    case "SQLite":
+    case "sqlite":
+    case "lite":
+    case "Lite":
+    default:
+        // Use SQLite Server. Default.
+        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+        break;
+    case "SqlServer":
+    case "sqlserver":
+    case "mssql":
+    case "sql":
+        // Use SQL Server.
+        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+        break;
+}
 
 // Configure cache context
 var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
@@ -82,8 +99,8 @@ using (var scope = app.Services.CreateScope())
 
 using (var scope = app.Services.CreateScope())
 {
-    // Create cache file
     using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
+    // Create cache file
     context.Database.EnsureCreated();
     // Initialize bot
     _ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();

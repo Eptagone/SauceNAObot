@@ -2,6 +2,7 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
+using SauceNAO.Core;
 using SauceNAO.Core.Extensions;
 using SauceNAO.Infrastructure;
 using SauceNAO.Infrastructure.Data;
@@ -63,11 +64,13 @@ using (var scope = host.Services.CreateScope())
 #endif
 }
 
-// Create cache file
 using (var scope = host.Services.CreateScope())
 {
     using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
+    // Create cache file
     context.Database.EnsureCreated();
+    // Initialize bot
+    _ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();
 }
 
 await host.RunAsync();

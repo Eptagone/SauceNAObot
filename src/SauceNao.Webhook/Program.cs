@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using SauceNAO.Core;
 using SauceNAO.Core.Extensions;
 using SauceNAO.Infrastructure;
 using SauceNAO.Infrastructure.Data;
@@ -39,6 +40,9 @@ switch (builder.Configuration["DbProvider"])
 var cacheConnection = $"Data Source={Path.GetTempFileName()}"; // Get connection string for cache
 builder.Services.AddDbContext<CacheDbContext>(options => options.UseSqlite(cacheConnection));
 
+// Add temp repository
+builder.Services.AddScoped<TemporalFileRepository>();
+
 // Add bot service.
 builder.Services.AddSauceBot<BotDb>();
 
@@ -61,11 +65,13 @@ using (var scope = app.Services.CreateScope())
 #endif
 }
 
-// Create cache file
 using (var scope = app.Services.CreateScope())
 {
     using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
+    // Create cache file
     context.Database.EnsureCreated();
+    // Initialize bot
+    _ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();
 }
 
 // Configure the HTTP request pipeline.
