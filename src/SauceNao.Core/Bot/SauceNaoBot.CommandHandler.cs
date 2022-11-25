@@ -108,7 +108,7 @@ namespace SauceNAO.Core
             await Api.SendMessageAsync(
                 Message.Chat.Id,
                 MSG.About(Language),
-                ParseMode.HTML,
+                parseMode: ParseMode.HTML,
                 disableWebPagePreview: true,
                 replyToMessageId: Message.MessageId,
                 allowSendingWithoutReply: true,
@@ -123,7 +123,7 @@ namespace SauceNAO.Core
 
             void ApiKeyDefault()
             {
-                Api.SendMessage(Message.Chat.Id, MSG.ApiKey(Language), ParseMode.HTML, disableWebPagePreview: true, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true);
+                Api.SendMessage(Message.Chat.Id, MSG.ApiKey(Language), parseMode: ParseMode.HTML, disableWebPagePreview: true, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true);
             }
 
             if (isPrivate)
@@ -149,7 +149,7 @@ namespace SauceNAO.Core
                                 await Api.SendMessageAsync(
                                     Message.Chat.Id,
                                     MSG.ApiKeyStatus(Language, User.ApiKey),
-                                    ParseMode.HTML,
+                                    parseMode: ParseMode.HTML,
                                     replyToMessageId: Message.MessageId,
                                     allowSendingWithoutReply: true,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -165,7 +165,7 @@ namespace SauceNAO.Core
                                 await Api.SendMessageAsync(
                                     Message.Chat.Id,
                                     MSG.ApiKeyNew(Language),
-                                    ParseMode.HTML,
+                                    parseMode: ParseMode.HTML,
                                     replyToMessageId: Message.MessageId,
                                     allowSendingWithoutReply: true,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -226,7 +226,7 @@ namespace SauceNAO.Core
 
             void AntiCheatsDefault()
             {
-                Api.SendMessage(Message.Chat.Id, MSG.Anticheats(Language), ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true);
+                Api.SendMessage(Message.Chat.Id, MSG.Anticheats(Language), parseMode: ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true);
             }
 
             if (isPrivate)
@@ -352,16 +352,16 @@ namespace SauceNAO.Core
             await Api.SendChatActionAsync(Message.Chat.Id, ChatAction.Typing, cancellationToken: cancellationToken).ConfigureAwait(false);
             if (Message.ReplyToMessage == default)
             {
-                await Api.SendMessageAsync(Message.Chat.Id, MSG.Creator(Language), ParseMode.HTML, replyToMessageId: Message.MessageId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await Api.SendMessageAsync(Message.Chat.Id, MSG.Creator(Language), parseMode: ParseMode.HTML, replyToMessageId: Message.MessageId, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             else
             {
-                await Api.SendMessageAsync(Message.Chat.Id, MSG.Creator(Language), ParseMode.HTML, replyToMessageId: Message.ReplyToMessage.MessageId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await Api.SendMessageAsync(Message.Chat.Id, MSG.Creator(Language), parseMode: ParseMode.HTML, replyToMessageId: Message.ReplyToMessage.MessageId, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
         }
         private async Task BuyMeACookie(CancellationToken cancellationToken)
         {
-            await Api.SendMessageAsync(Message.Chat.Id, MSG.BuyMeACookie(Language), ParseMode.HTML, disableWebPagePreview: true, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, replyMarkup: new IKM(new IKB[] { IKB.SetUrl(MSG.SupportChat(Language), Properties.SupportChatLink) }), cancellationToken: cancellationToken).ConfigureAwait(false);
+            await Api.SendMessageAsync(Message.Chat.Id, MSG.BuyMeACookie(Language), parseMode: ParseMode.HTML, disableWebPagePreview: true, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, replyMarkup: new IKM(new IKB[] { IKB.SetUrl(MSG.SupportChat(Language), Properties.SupportChatLink) }), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         private async Task HelpAsync(string[] args, CancellationToken cancellationToken)
         {
@@ -372,7 +372,7 @@ namespace SauceNAO.Core
                 Api.SendMessage(
                     Message.Chat.Id,
                     MSG.Help(Language),
-                    ParseMode.HTML,
+                    parseMode: ParseMode.HTML,
                     replyToMessageId: Message.MessageId,
                     allowSendingWithoutReply: true,
                     replyMarkup: new IKM(new IKB[] { IKB.SetUrl(MSG.SupportChat(Language), Properties.SupportChatLink) }));
@@ -490,7 +490,7 @@ namespace SauceNAO.Core
                 await Api.SendMessageAsync(
                     Message.Chat.Id,
                     text,
-                    ParseMode.HTML,
+                    parseMode: ParseMode.HTML,
                     replyToMessageId: Message.MessageId,
                     allowSendingWithoutReply: true,
                     cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -655,7 +655,7 @@ namespace SauceNAO.Core
                 }
                 else
                 {
-                    await Api.SendMessageAsync(message.Chat.Id, sauce.GetInfo(Language), ParseMode.HTML, replyToMessageId: message.MessageId, allowSendingWithoutReply: true, replyMarkup: sauce.GetKeyboard(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                    await Api.SendMessageAsync(message.Chat.Id, sauce.GetInfo(Language), parseMode: ParseMode.HTML, replyToMessageId: message.MessageId, allowSendingWithoutReply: true, replyMarkup: sauce.GetKeyboard(), cancellationToken: cancellationToken).ConfigureAwait(false);
 
                     var userSauce = User.UserSauces.FirstOrDefault(s => s.UserId == User.Id && s.SauceId == sauce.Key);
                     if (userSauce == default)
@@ -732,7 +732,7 @@ namespace SauceNAO.Core
             var usersCount = _db.Users.GetAllUsers().Count();
             var groupCount = _db.Groups.GetAllGroups().Count();
             var stats = MSG.Statistics(Language, sucefullSearchCount, usersCount, groupCount);
-            await Api.SendMessageAsync(Message.Chat.Id, stats, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+            await Api.SendMessageAsync(Message.Chat.Id, stats, parseMode: ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         private async Task LanguagesAsync(CancellationToken cancellationToken)
         {
@@ -747,7 +747,7 @@ namespace SauceNAO.Core
             }
 
             var text = string.Format(MSG.LanguageCodes(Language), values);
-            await Api.SendMessageAsync(Message.Chat.Id, text, ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+            await Api.SendMessageAsync(Message.Chat.Id, text, parseMode: ParseMode.HTML, replyToMessageId: Message.MessageId, allowSendingWithoutReply: true, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

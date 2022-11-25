@@ -45,7 +45,7 @@ namespace SauceNAO.Core
                 default,
                 Dedupe.AllImplementedDedupeMethodsSuchAsBySeriesName);
 
-            SupportChatLink = telegram["SupportChatLink"];
+            SupportChatLink = telegram["SupportChatLink"]!;
 
             // ---------------- WEBHOOK ----------------
             var webhookInfo = Api.GetWebhookInfo();
@@ -59,7 +59,7 @@ namespace SauceNAO.Core
             if (!string.IsNullOrEmpty(applicationUrl))
             {
                 var secretToken = configuration["AccessToken"];
-                var ffmpegExec = configuration["FFmpegExec"];
+                var ffmpegExec = configuration["FFmpegExec"]!;
                 var webhook = string.Format("{0}/bot", applicationUrl);
 
                 TempFilesUrl = string.Format("{0}/temp/{{0}}", applicationUrl);
