@@ -142,7 +142,7 @@
     <value>https://gelbooru.com/index.php?page=post&amp;s=view&amp;id={0}</value>
   </data>
   <data name="GoogleImageSearch" xml:space="preserve">
-    <value>https://www.google.com/searchbyimage?image_url={0}</value>
+    <value>https://www.google.com/searchbyimage?image_url={0}&amp;client=app</value>
   </data>
   <data name="ImdbId" xml:space="preserve">
     <value>https://www.imdb.com/title/</value>

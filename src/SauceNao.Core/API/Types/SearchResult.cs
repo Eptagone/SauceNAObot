@@ -5,13 +5,12 @@ using System.Text.Json.Serialization;
 
 #nullable disable
 
-namespace SauceNAO.Core.API
+namespace SauceNAO.Core.API;
+
+public sealed class SearchResult
 {
-    public sealed class SearchResult
-    {
-        [JsonPropertyName("header")]
-        public ResultHeader Header { get; set; }
-        [JsonPropertyName("data")]
-        public ResultData Data { get; set; }
-    }
+	[JsonPropertyName("header")]
+	public ResultHeader Header { get; set; }
+	[JsonPropertyName("data")]
+	public ResultData Data { get; set; }
 }

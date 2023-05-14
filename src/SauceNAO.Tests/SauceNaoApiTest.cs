@@ -4,18 +4,17 @@
 using SauceNAO.Core.API;
 using Xunit;
 
-namespace SauceNAO.Tests
-{
-    public class SauceNaoApiTest
-    {
-        private const string sampleUrl = "http://saucenao.com/images/static/banner.gif";
+namespace SauceNAO.Tests;
 
-        [Fact]
-        public void AnonymousRequest()
-        {
-            var snao = new SauceNaoApiService(OutputType.JsonApi, db: 999);
-            var result = snao.Search(sampleUrl);
-            Assert.NotNull(result);
-        }
-    }
+public class SauceNaoApiTest
+{
+	private const string sampleUrl = "http://saucenao.com/images/static/banner.gif";
+
+	[Fact]
+	public void AnonymousRequest()
+	{
+		var snao = new SauceNaoApiService(OutputType.JsonApi, db: 999);
+		var result = snao.Search(sampleUrl);
+		Assert.NotNull(result);
+	}
 }

@@ -2,7 +2,6 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using SauceNAO.Core;
 using SauceNAO.Core.Extensions;
 using SauceNAO.Infrastructure;
@@ -15,25 +14,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configure database context
-var connectionString = builder.Configuration.GetConnectionString("Default");
+var connectionString = builder.Configuration.GetConnectionString("Default")!;
 
 switch (builder.Configuration["DbProvider"])
 {
-    case "SQLite":
-    case "sqlite":
-    case "lite":
-    case "Lite":
-    default:
-        // Use SQLite Server. Default.
-        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
-        break;
-    case "SqlServer":
-    case "sqlserver":
-    case "mssql":
-    case "sql":
-        // Use SQL Server.
-        builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
-        break;
+	case "SQLite":
+	case "sqlite":
+	case "lite":
+	case "Lite":
+	default:
+		// Use SQLite Server. Default.
+		builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlite(connectionString));
+		break;
+	case "SqlServer":
+	case "sqlserver":
+	case "mssql":
+	case "sql":
+		// Use SQL Server.
+		builder.Services.AddDbContext<SauceNaoContext>(options => options.UseSqlServer(connectionString));
+		break;
 }
 
 // Configure cache context
@@ -55,23 +54,23 @@ var app = builder.Build();
 // Create database if not exists
 using (var scope = app.Services.CreateScope())
 {
-    using var context = scope.ServiceProvider.GetRequiredService<SauceNaoContext>();
+	using var context = scope.ServiceProvider.GetRequiredService<SauceNaoContext>();
 #if DEBUG
-    context.Database.EnsureDeleted(); // Delete database
-    context.Database.EnsureCreated(); // Create database without migrations
+	// context.Database.EnsureDeleted(); // Delete database
+	context.Database.EnsureCreated(); // Create database without migrations
 #else
-    context.Database.EnsureCreated(); // Create database without migrations
-    // context.Database.Migrate(); // Create database using migrations
+    // context.Database.EnsureCreated(); // Create database without migrations
+    context.Database.Migrate(); // Create database using migrations
 #endif
 }
 
 using (var scope = app.Services.CreateScope())
 {
-    using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
-    // Create cache file
-    context.Database.EnsureCreated();
-    // Initialize bot
-    _ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();
+	using var context = scope.ServiceProvider.GetRequiredService<CacheDbContext>();
+	// Create cache file
+	context.Database.EnsureCreated();
+	// Initialize bot
+	_ = scope.ServiceProvider.GetRequiredService<SnaoBotProperties>();
 }
 
 // Configure the HTTP request pipeline.

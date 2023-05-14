@@ -6,107 +6,106 @@ using SDIR = SauceNAO.Core.Resources.SauceDirectory;
 
 #nullable disable
 
-namespace SauceNAO.Core.Models
-{
-    public sealed class SauceUrl
-    {
-        public SauceUrl() { }
-        public SauceUrl(string url, float similitary)
-        {
-            Url = url;
-            if (url.Contains("i.pximg.net"))
-            {
-                string pid = Path.GetFileNameWithoutExtension(url);
-                Url = string.Format(SDIR.PixivId, pid.Split('_')[0]);
-            }
-            Similarity = similitary;
-            if (Url.Contains("pixiv"))
-            {
-                Text = "Pixiv";
-            }
-            else if (Url.Contains("danbooru"))
-            {
-                Text = "Danbooru";
-            }
-            else if (Url.Contains("gelbooru"))
-            {
-                Text = "Gelbooru";
-            }
-            else if (Url.Contains("sankaku"))
-            {
-                Text = "Sankaku";
-            }
-            else if (Url.Contains("anime-pictures.net"))
-            {
-                Text = "Anime Pictures";
-            }
-            else if (Url.Contains("yande.re"))
-            {
-                Text = "Yandere";
-            }
-            else if (Url.Contains("imdb"))
-            {
-                Text = "IMDB";
-            }
-            else if (Url.Contains("deviantart"))
-            {
-                Text = "Deviantart";
-            }
-            else if (Url.Contains("twitter"))
-            {
-                Text = "Twitter";
-            }
-            else if (Url.Contains("nijie.info"))
-            {
-                Text = "Nijie";
-            }
-            else if (Url.Contains("pawoo.net"))
-            {
-                Text = "Pawoo";
-            }
-            else if (Url.Contains("seiga.nicovideo.jp"))
-            {
-                Text = "Seiga Nicovideo";
-            }
-            else if (Url.Contains("tumblr.com"))
-            {
-                Text = "Tumblr";
-            }
-            else if (Url.Contains("anidb.net"))
-            {
-                Text = "Anidb";
-            }
-            else if (Url.Contains("sankakucomplex.com"))
-            {
-                Text = "Sankaku";
-            }
-            else if (Url.Contains("mangadex.org"))
-            {
-                Text = "MangaDex";
-            }
-            else if (Url.Contains("mangaupdates.com"))
-            {
-                Text = "MangaUpdates";
-            }
-            else if (Url.Contains("myanimelist.net"))
-            {
-                Text = "MyAnimeList";
-            }
-            else if (Url.Contains("furaffinity.net"))
-            {
-                Text = "FurAffinity";
-            }
-            else
-            {
-                Text = "URL";
-            }
-        }
+namespace SauceNAO.Core.Models;
 
-        [JsonPropertyName("Text")]
-        public string Text { get; set; }
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
-        [JsonPropertyName("similarity")]
-        public float Similarity { get; set; }
-    }
+public sealed class SauceUrl
+{
+	public SauceUrl() { }
+	public SauceUrl(string url, float similitary)
+	{
+		this.Url = url;
+		if (url.Contains("i.pximg.net"))
+		{
+			string pid = Path.GetFileNameWithoutExtension(url);
+			this.Url = string.Format(SDIR.PixivId, pid.Split('_')[0]);
+		}
+		this.Similarity = similitary;
+		if (this.Url.Contains("pixiv"))
+		{
+			this.Text = "Pixiv";
+		}
+		else if (this.Url.Contains("danbooru"))
+		{
+			this.Text = "Danbooru";
+		}
+		else if (this.Url.Contains("gelbooru"))
+		{
+			this.Text = "Gelbooru";
+		}
+		else if (this.Url.Contains("sankaku"))
+		{
+			this.Text = "Sankaku";
+		}
+		else if (this.Url.Contains("anime-pictures.net"))
+		{
+			this.Text = "Anime Pictures";
+		}
+		else if (this.Url.Contains("yande.re"))
+		{
+			this.Text = "Yandere";
+		}
+		else if (this.Url.Contains("imdb"))
+		{
+			this.Text = "IMDB";
+		}
+		else if (this.Url.Contains("deviantart"))
+		{
+			this.Text = "Deviantart";
+		}
+		else if (this.Url.Contains("twitter"))
+		{
+			this.Text = "Twitter";
+		}
+		else if (this.Url.Contains("nijie.info"))
+		{
+			this.Text = "Nijie";
+		}
+		else if (this.Url.Contains("pawoo.net"))
+		{
+			this.Text = "Pawoo";
+		}
+		else if (this.Url.Contains("seiga.nicovideo.jp"))
+		{
+			this.Text = "Seiga Nicovideo";
+		}
+		else if (this.Url.Contains("tumblr.com"))
+		{
+			this.Text = "Tumblr";
+		}
+		else if (this.Url.Contains("anidb.net"))
+		{
+			this.Text = "Anidb";
+		}
+		else if (this.Url.Contains("sankakucomplex.com"))
+		{
+			this.Text = "Sankaku";
+		}
+		else if (this.Url.Contains("mangadex.org"))
+		{
+			this.Text = "MangaDex";
+		}
+		else if (this.Url.Contains("mangaupdates.com"))
+		{
+			this.Text = "MangaUpdates";
+		}
+		else if (this.Url.Contains("myanimelist.net"))
+		{
+			this.Text = "MyAnimeList";
+		}
+		else if (this.Url.Contains("furaffinity.net"))
+		{
+			this.Text = "FurAffinity";
+		}
+		else
+		{
+			this.Text = "URL";
+		}
+	}
+
+	[JsonPropertyName("Text")]
+	public string Text { get; set; }
+	[JsonPropertyName("url")]
+	public string Url { get; set; }
+	[JsonPropertyName("similarity")]
+	public float Similarity { get; set; }
 }

@@ -6,30 +6,29 @@ using SauceNAO.Core.Entities;
 
 #nullable disable
 
-namespace SauceNAO.Infrastructure
+namespace SauceNAO.Infrastructure;
+
+/// <summary>Cache DB Context</summary>
+public partial class CacheDbContext : DbContext
 {
-    /// <summary>Cache DB Context</summary>
-    public partial class CacheDbContext : DbContext
-    {
-        /// <summary>Initialize a new instance of SauceNaoContext.</summary>
-        public CacheDbContext()
-        {
-        }
+	/// <summary>Initialize a new instance of SauceNaoContext.</summary>
+	public CacheDbContext()
+	{
+	}
 
-        /// <summary>Initialize a new instance of SauceNaoContext.</summary>
-        public CacheDbContext(DbContextOptions<CacheDbContext> options)
-            : base(options)
-        {
-        }
+	/// <summary>Initialize a new instance of SauceNaoContext.</summary>
+	public CacheDbContext(DbContextOptions<CacheDbContext> options)
+		: base(options)
+	{
+	}
 
-        /// <summary>Temporal Files</summary>
-        public virtual DbSet<CachedTelegramFile> Files { get; set; }
+	/// <summary>Temporal Files</summary>
+	public virtual DbSet<CachedTelegramFile> Files { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            OnModelCreatingPartial(modelBuilder);
-        }
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		this.OnModelCreatingPartial(modelBuilder);
+	}
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-    }
+	partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -5,25 +5,24 @@ using SauceNAO.Core.Extensions;
 using Telegram.BotAPI.AvailableTypes;
 using Xunit;
 
-namespace SauceNAO.Tests
+namespace SauceNAO.Tests;
+
+public sealed class ChatMemberTest
 {
-    public sealed class ChatMemberTest
-    {
-        [Fact]
-        public void IsNotMemberOrAdministrator()
-        {
-            ChatMember member1 = new ChatMemberAdministrator();
-            ChatMember member2 = new ChatMemberMember();
-            ChatMember member3 = new ChatMemberRestricted();
+	[Fact]
+	public void IsNotMemberOrAdministrator()
+	{
+		ChatMember member1 = new ChatMemberAdministrator();
+		ChatMember member2 = new ChatMemberMember();
+		ChatMember member3 = new ChatMemberRestricted();
 
-            bool Test(ChatMember member)
-            {
-                return !member.IsMemberOrAdmin();
-            }
+		bool Test(ChatMember member)
+		{
+			return !member.IsMemberOrAdmin();
+		}
 
-            Assert.False(Test(member1));
-            Assert.False(Test(member2));
-            Assert.True(Test(member3));
-        }
-    }
+		Assert.False(Test(member1));
+		Assert.False(Test(member2));
+		Assert.True(Test(member3));
+	}
 }

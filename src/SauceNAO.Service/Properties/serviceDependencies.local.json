@@ -7,7 +7,7 @@
       "secretStore": "LocalSecretsFile",
       "resourceId": null,
       "type": "mssql.local",
-      "connectionId": "ConnectionStrings:SauceNAO"
+      "connectionId": "ConnectionStrings:Default"
     }
   }
 }

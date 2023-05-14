@@ -4,18 +4,17 @@
 using SauceNAO.Core.Entities;
 using System.Runtime.InteropServices;
 
-namespace SauceNAO.Core.Data
+namespace SauceNAO.Core.Data;
+
+public interface ITemporalFileRepository : IRepository<CachedTelegramFile>
 {
-    public interface ITemporalFileRepository : IRepository<CachedTelegramFile>
-    {
-        /// <summary>Get cached Telegram file.</summary>
-        /// <param name="fileUniqueId">File unique Id.</param>
-        /// <returns>The file.</returns>
-        CachedTelegramFile? GetFile(string fileUniqueId);
-        /// <summary>Get cached Telegram file.</summary>
-        /// <param name="fileUniqueId">File unique Id.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The file.</returns>
-        Task<CachedTelegramFile?> GetFileAsync(string fileUniqueId, [Optional] CancellationToken cancellationToken);
-    }
+	/// <summary>Get cached Telegram file.</summary>
+	/// <param name="fileUniqueId">File unique Id.</param>
+	/// <returns>The file.</returns>
+	CachedTelegramFile? GetFile(string fileUniqueId);
+	/// <summary>Get cached Telegram file.</summary>
+	/// <param name="fileUniqueId">File unique Id.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	/// <returns>The file.</returns>
+	Task<CachedTelegramFile?> GetFileAsync(string fileUniqueId, [Optional] CancellationToken cancellationToken);
 }

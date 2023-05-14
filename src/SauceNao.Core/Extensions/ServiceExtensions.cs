@@ -3,19 +3,18 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SauceNAO.Core.Extensions
-{
-    public static class ServiceExtensions
-    {
-        public static IServiceCollection AddSauceBot<TSauceDatabase>(this IServiceCollection services)
-            where TSauceDatabase : ISauceDatabase
-        {
-            // Register bot properties
-            services.AddSingleton<SnaoBotProperties>();
-            services.AddScoped(typeof(ISauceDatabase), typeof(TSauceDatabase));
-            services.AddScoped<SauceNaoBot>();
+namespace SauceNAO.Core.Extensions;
 
-            return services;
-        }
-    }
+public static class ServiceExtensions
+{
+	public static IServiceCollection AddSauceBot<TSauceDatabase>(this IServiceCollection services)
+		where TSauceDatabase : ISauceDatabase
+	{
+		// Register bot properties
+		services.AddSingleton<SnaoBotProperties>();
+		services.AddScoped(typeof(ISauceDatabase), typeof(TSauceDatabase));
+		services.AddScoped<SauceNaoBot>();
+
+		return services;
+	}
 }

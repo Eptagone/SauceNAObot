@@ -4,24 +4,23 @@
 using SauceNAO.Core;
 using SauceNAO.Core.Data;
 
-namespace SauceNAO.Infrastructure.Data
+namespace SauceNAO.Infrastructure.Data;
+
+public sealed class BotDb : ISauceDatabase
 {
-    public sealed class BotDb : ISauceDatabase
-    {
-        public BotDb(SauceNaoContext context, CacheDbContext cacheContext)
-        {
-            Users = new UserRepository(context);
-            Groups = new GroupRepository(context);
-            Sauces = new SauceRepository(context);
+	public BotDb(SauceNaoContext context, CacheDbContext cacheContext)
+	{
+		this.Users = new UserRepository(context);
+		this.Groups = new GroupRepository(context);
+		this.Sauces = new SauceRepository(context);
 
-            Files = new TemporalFileRepository(cacheContext);
+		this.Files = new TemporalFileRepository(cacheContext);
 
-        }
+	}
 
-        public IUserRepository Users { get; }
-        public IGroupRepository Groups { get; }
-        public ISauceRepository Sauces { get; }
+	public IUserRepository Users { get; }
+	public IGroupRepository Groups { get; }
+	public ISauceRepository Sauces { get; }
 
-        public ITemporalFileRepository Files { get; }
-    }
+	public ITemporalFileRepository Files { get; }
 }

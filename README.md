@@ -6,7 +6,7 @@ Try it! [@SauceNAObot](https://t.me/SauceNAObot)
 
 This bot was created by a third party to use SauceNAO on Telegram. The project has not any affiliation with Xamayon (the creator of SauceNAO).
 
-# Features
+## Features
 
 - Send an image to [@SauceNAObot](https://t.me/SauceNAObot) for saucenao search. You can also reply to a image with: /sauce, /source/, /snao ,/saucenao, /sourcenow, /search, Sauce, sauce or a mention \([@SauceNAObot](https://t.me/SauceNAObot)\).
 
@@ -16,7 +16,7 @@ This bot was created by a third party to use SauceNAO on Telegram. The project h
 
 - Anti-Cheats. If your group has "guess the character" bots or similar bots, you can use SauceNAO's AntiCheats feature. This will prevent [@SauceNAObot](https://t.me/SauceNAObot) from performing reverse media searches sent by specific bots you specified.
 
-# Command List
+## Command List
 
 | Name       | Description                         | How to Use                       |
 | :--------- | :---------------------------------- | :------------------------------- |
@@ -28,7 +28,7 @@ This bot was created by a third party to use SauceNAO on Telegram. The project h
 | stats      | Global usage statistics             | **/stats**                       |
 | temp       | Create a temporary link to an image | Reply to a image with **/temp**  |
 
-# Support me
+## Support me
 
 Your contributions are used to pay for the bot's hosting and the shared account that we use to search for your sauces.
 

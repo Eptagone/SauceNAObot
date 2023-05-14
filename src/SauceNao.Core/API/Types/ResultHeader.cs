@@ -5,17 +5,16 @@ using System.Text.Json.Serialization;
 
 #nullable disable
 
-namespace SauceNAO.Core.API
+namespace SauceNAO.Core.API;
+
+public sealed class ResultHeader
 {
-    public sealed class ResultHeader
-    {
-        [JsonPropertyName("similarity")]
-        public string Similarity { get; set; }
-        [JsonPropertyName("thumbnail")]
-        public string Thumbnail { get; set; }
-        [JsonPropertyName("index_id")]
-        public int IndexId { get; set; }
-        [JsonPropertyName("index_name")]
-        public string IndexName { get; set; }
-    }
+	[JsonPropertyName("similarity")]
+	public string Similarity { get; set; }
+	[JsonPropertyName("thumbnail")]
+	public string Thumbnail { get; set; }
+	[JsonPropertyName("index_id")]
+	public int IndexId { get; set; }
+	[JsonPropertyName("index_name")]
+	public string IndexName { get; set; }
 }

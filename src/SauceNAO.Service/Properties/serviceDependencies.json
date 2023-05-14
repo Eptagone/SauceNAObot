@@ -5,7 +5,7 @@
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:SauceNAO"
+      "connectionId": "ConnectionStrings:Default"
     }
   }
 }

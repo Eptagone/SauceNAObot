@@ -1,13 +1,12 @@
-﻿namespace SauceNAO.Core
+﻿namespace SauceNAO.Core;
+
+public interface ISauce
 {
-    public interface ISauce
-    {
-        string? Title { get; }
-        string? Characters { get; }
-        string? Material { get; }
-        string? Part { get; }
-        string? Year { get; }
-        string? EstTime { get; }
-        string? By { get; }
-    }
+	string? Title { get; }
+	string? Characters { get; }
+	string? Material { get; }
+	string? Part { get; }
+	string? Year { get; }
+	string? EstTime { get; }
+	string? By { get; }
 }

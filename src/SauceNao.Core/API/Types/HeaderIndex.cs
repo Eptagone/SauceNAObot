@@ -3,17 +3,16 @@
 
 using System.Text.Json.Serialization;
 
-namespace SauceNAO.Core.API
+namespace SauceNAO.Core.API;
+
+public sealed class HeaderIndex
 {
-    public sealed class HeaderIndex
-    {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-        [JsonPropertyName("parent_id")]
-        public int ParentId { get; set; }
-        [JsonPropertyName("results")]
-        public int Results { get; set; }
-        [JsonPropertyName("status")]
-        public int Status { get; set; }
-    }
+	[JsonPropertyName("id")]
+	public int Id { get; set; }
+	[JsonPropertyName("parent_id")]
+	public int ParentId { get; set; }
+	[JsonPropertyName("results")]
+	public int Results { get; set; }
+	[JsonPropertyName("status")]
+	public int Status { get; set; }
 }

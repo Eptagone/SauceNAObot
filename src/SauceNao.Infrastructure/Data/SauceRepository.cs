@@ -6,29 +6,28 @@ using SauceNAO.Core.Data;
 using SauceNAO.Core.Entities;
 using System.Runtime.InteropServices;
 
-namespace SauceNAO.Infrastructure.Data
+namespace SauceNAO.Infrastructure.Data;
+
+public sealed class SauceRepository : RepositoryBase<SauceNaoContext, SuccessfulSauce>, ISauceRepository
 {
-    public sealed class SauceRepository : RepositoryBase<SauceNaoContext, SuccessfulSauce>, ISauceRepository
-    {
-        public SauceRepository(SauceNaoContext context) : base(context)
-        {
-        }
+	public SauceRepository(SauceNaoContext context) : base(context)
+	{
+	}
 
-        public IQueryable<SuccessfulSauce> GetAllSauces()
-        {
-            return Context.SuccessfulSauces.AsNoTracking().Include(s => s.UserSauces);
-        }
+	public IQueryable<SuccessfulSauce> GetAllSauces()
+	{
+		return this.Context.SuccessfulSauces.AsNoTracking().Include(s => s.UserSauces);
+	}
 
-        public void DeleteRange(IEnumerable<SuccessfulSauce> sauces)
-        {
-            Context.RemoveRange(sauces);
-            Context.SaveChanges();
-        }
+	public void DeleteRange(IEnumerable<SuccessfulSauce> sauces)
+	{
+		this.Context.RemoveRange(sauces);
+		this.Context.SaveChanges();
+	}
 
-        public async Task DeleteRangeAsync(IEnumerable<SuccessfulSauce> sauces, [Optional] CancellationToken cancellationToken)
-        {
-            Context.RemoveRange(sauces);
-            await Context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
-    }
+	public async Task DeleteRangeAsync(IEnumerable<SuccessfulSauce> sauces, [Optional] CancellationToken cancellationToken)
+	{
+		this.Context.RemoveRange(sauces);
+		await this.Context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+	}
 }
