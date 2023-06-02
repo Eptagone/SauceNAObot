@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Quetzal Rivera.
+﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Core.Abstractions;
@@ -8,11 +8,15 @@ using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Core.Entities;
 
-/// <summary>Telegram Group</summary>
+/// <summary>
+/// Telegram Group
+/// </summary>
 [Table("Group", Schema = "tg")]
 public partial class TelegramGroup : TelegramChat
 {
-	/// <summary>Initialize a new instance of AppChat</summary>
+	/// <summary>
+	/// Initialize a new instance of AppChat
+	/// </summary>
 	public TelegramGroup()
 	{
 		this.Title = string.Empty;
@@ -36,14 +40,22 @@ public partial class TelegramGroup : TelegramChat
 		this.AntiCheats = new HashSet<AntiCheat>();
 	}
 
-	/// <summary>The AppChat Id.</summary>
+	/// <summary>
+	/// The AppChat Id.
+	/// </summary>
 	[Key]
 	public int Key { get; set; }
-	/// <summary>Chat Language Code.</summary>
+
+	/// <summary>
+	/// Chat Language Code.
+	/// </summary>
 	[StringLength(8)]
 	public string? LanguageCode { get; set; }
 
-	/// <summary>Anticheats of chat.</summary>
+	/// <summary>
+	/// Anticheats of chat.
+	/// </summary>
 	[InverseProperty(nameof(AntiCheat.Group))]
 	public virtual ICollection<AntiCheat> AntiCheats { get; set; }
 }
+

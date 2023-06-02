@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Quetzal Rivera.
+﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
@@ -40,12 +40,12 @@ public partial class SauceNaoContext : DbContext
 			entity.HasOne(d => d.AddedByUser)
 				.WithMany(p => p.AntiCheats)
 				.HasForeignKey(d => d.AddedByUserId)
-				.OnDelete(DeleteBehavior.ClientCascade);
+				.OnDelete(DeleteBehavior.Cascade);
 
 			entity.HasOne(d => d.Group)
 				.WithMany(p => p.AntiCheats)
 				.HasForeignKey(d => d.ChatKey)
-				.OnDelete(DeleteBehavior.ClientCascade);
+				.OnDelete(DeleteBehavior.Cascade);
 		});
 
 		modelBuilder.Entity<UserData>(entity =>
@@ -58,12 +58,12 @@ public partial class SauceNaoContext : DbContext
 			entity.HasOne(d => d.Sauce)
 				.WithMany(p => p.UserSauces)
 				.HasForeignKey(d => d.SauceId)
-				.OnDelete(DeleteBehavior.ClientCascade);
+				.OnDelete(DeleteBehavior.Cascade);
 
 			entity.HasOne(d => d.User)
 				.WithMany(p => p.UserSauces)
 				.HasForeignKey(d => d.UserId)
-				.OnDelete(DeleteBehavior.ClientCascade);
+				.OnDelete(DeleteBehavior.Cascade);
 		});
 
 		modelBuilder.Entity<SuccessfulSauce>(entity =>

@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿// Copyright (c) 2023 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 

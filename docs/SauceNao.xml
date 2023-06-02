@@ -517,7 +517,7 @@
              <summary>
                Looks up a localized string similar to &lt;b&gt;Usage statistics&lt;/b&gt;
             {0} successful searches in the last week.
-            Used by {1} users.
+            Used by {1} active users.
             Used by {2} groups..
              </summary>
         </member>

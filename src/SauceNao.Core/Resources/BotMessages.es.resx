@@ -262,8 +262,8 @@ Especifique el parámetro opcional [-Force] para mantener su idioma en cualquier
   </data>
   <data name="Statistics" xml:space="preserve">
     <value>&lt;b&gt;Estadísticas de uso&lt;/b&gt;
-{0} búsquedas exitosas en los últimos 20 días.
-Utilizado por {1} usuarios.
+{0} búsquedas exitosas en los últimos 40 días.
+Utilizado por {1} usuarios activos.
 Utilizado por {2} grupos.</value>
   </data>
   <data name="SupportChat" xml:space="preserve">

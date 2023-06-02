@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Quetzal Rivera.
+﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Core.Resources;
@@ -6,14 +6,41 @@ using System.Globalization;
 
 namespace SauceNAO.Core.Models;
 
-public sealed class Sauce : ISauce
+public record Sauce
 {
+	/// <summary>
+	/// Title
+	/// </summary>
 	public string? Title { get; set; }
+
+	/// <summary>
+	/// Characters
+	/// </summary>
 	public string? Characters { get; set; }
+
+	/// <summary>
+	/// Material
+	/// </summary>
 	public string? Material { get; set; }
+
+	/// <summary>
+	/// Part
+	/// </summary>
 	public string? Part { get; set; }
+
+	/// <summary>
+	/// Year
+	/// </summary>
 	public string? Year { get; set; }
+
+	/// <summary>
+	/// EstTime
+	/// </summary>
 	public string? EstTime { get; set; }
+
+	/// <summary>
+	/// By
+	/// </summary>
 	public string? By { get; set; }
 
 	internal string GetInfo(CultureInfo lang)

@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// Copyright (c) 2023 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using Microsoft.EntityFrameworkCore;
 using SauceNAO.Core.Data;
 using SauceNAO.Core.Entities;
 

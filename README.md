@@ -14,7 +14,7 @@ This bot was created by a third party to use SauceNAO on Telegram. The project h
 
 - Personal search history using inline. Forward the multimedia you've searched along with the sauce to your groups or channels.
 
-- Anti-Cheats. If your group has "guess the character" bots or similar bots, you can use SauceNAO's AntiCheats feature. This will prevent [@SauceNAObot](https://t.me/SauceNAObot) from performing reverse media searches sent by specific bots you specified.
+- Anti-Cheats. If your group has "guess the character" bots or similar bots, you can use SauceNAO's AntiCheats feature. This will prevent [@SauceNAObot](https://t.me/SauceNAObot) from performing reverse media searches sent by those bots.
 
 ## Command List
 
@@ -35,7 +35,6 @@ Your contributions are used to pay for the bot's hosting and the shared account 
 You can support this project through the following options:
 
 - [Buy me a cookie](https://www.buymeacoffee.com/eptagone)
-- **Bitcoin:** [bc1q0w43tprjn80zn248k7xlztu7lvhkzgy6dak8mt](bitcoin:BC1Q0W43TPRJN80ZN248K7XLZTU7LVHKZGY6DAK8MT?label=MyCoffe&message=Invite%20me%20for%20a%20coffee)
 - **Toncoin:** [EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY](ton://transfer/EQC3SWZxs_4ive2aD-njns1KnB4S2RUgaxDKJ7X44VA52SsY)
 
 Note: Please be sure to confirm the amount you will donate. We don't make refunds.

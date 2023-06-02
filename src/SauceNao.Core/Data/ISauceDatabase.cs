@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Quetzal Rivera.
+﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Core.Data;

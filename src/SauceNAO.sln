@@ -16,13 +16,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Core", "SauceNAO.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Infrastructure", "SauceNAO.Infrastructure\SauceNAO.Infrastructure.csproj", "{CCFCE368-5846-4C4B-9E90-D380FA68834B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Webhook", "SauceNAO.Webhook\SauceNAO.Webhook.csproj", "{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.WebApp", "SauceNAO.WebApp\SauceNAO.WebApp.csproj", "{37656CA5-0FA4-402D-9DC8-516A41A8E3EF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Tests", "SauceNAO.Tests\SauceNAO.Tests.csproj", "{E08FB965-CC4B-45A4-8612-C032F5D5C309}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.Service", "SauceNAO.Service\SauceNAO.Service.csproj", "{1DE2196F-437E-46E6-BC6B-77D9C5E13C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SauceNAO.AppService", "SauceNAO.AppService\SauceNAO.AppService.csproj", "{1DE2196F-437E-46E6-BC6B-77D9C5E13C64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{FF949F7E-502F-428D-82C6-FFA1057A99B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SauceNAO.CleanerService", "SauceNAO.CleanerService\SauceNAO.CleanerService.csproj", "{4D686568-0365-4096-8D06-2B75627BB4F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{1DE2196F-437E-46E6-BC6B-77D9C5E13C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DE2196F-437E-46E6-BC6B-77D9C5E13C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DE2196F-437E-46E6-BC6B-77D9C5E13C64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D686568-0365-4096-8D06-2B75627BB4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D686568-0365-4096-8D06-2B75627BB4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D686568-0365-4096-8D06-2B75627BB4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D686568-0365-4096-8D06-2B75627BB4F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,13 +67,14 @@ Global
 		{E08FB965-CC4B-45A4-8612-C032F5D5C309} = {6F61C138-5F01-4139-BCF1-D7C93A996281}
 		{1DE2196F-437E-46E6-BC6B-77D9C5E13C64} = {FF949F7E-502F-428D-82C6-FFA1057A99B8}
 		{FF949F7E-502F-428D-82C6-FFA1057A99B8} = {C5669B0F-5CF0-400B-8CBD-60D4AA87E794}
+		{4D686568-0365-4096-8D06-2B75627BB4F7} = {C5669B0F-5CF0-400B-8CBD-60D4AA87E794}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_ExcelExportMode = MultipleSheets
-		RESX_AutoCreateNewLanguageFiles = True
-		RESX_SortFileContentOnSave = True
-		RESX_PrefixTranslations = False
-		SolutionGuid = {54B9126E-BE59-4E15-8D9D-ACAFE8937A17}
 		RESX_ShowErrorsInErrorList = False
+		SolutionGuid = {54B9126E-BE59-4E15-8D9D-ACAFE8937A17}
+		RESX_PrefixTranslations = False
+		RESX_SortFileContentOnSave = True
+		RESX_AutoCreateNewLanguageFiles = True
+		RESX_ExcelExportMode = MultipleSheets
 	EndGlobalSection
 EndGlobal

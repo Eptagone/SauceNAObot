@@ -1,11 +1,10 @@
-﻿// Copyright (c) 2022 Quetzal Rivera.
+﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Core.Models;
-
+using IBB = Telegram.BotAPI.InlineButtonBuilder;
 using IKB = Telegram.BotAPI.AvailableTypes.InlineKeyboardButton;
 using IKM = Telegram.BotAPI.AvailableTypes.InlineKeyboardMarkup;
-using IBB = Telegram.BotAPI.InlineButtonBuilder;
 
 namespace SauceNAO.Core.Extensions;
 

@@ -494,8 +494,8 @@ namespace SauceNAO.Core.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;b&gt;Usage Statistics&lt;/b&gt;
-        ///{0} successful searches in the last 20 days.
-        ///Used by {1} users.
+        ///{0} successful searches in the last 40 days.
+        ///Used by {1} active users.
         ///Used by {2} groups..
         /// </summary>
         internal static string Statistics {

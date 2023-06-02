@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "appInsights1": {
+      "type": "appInsights.sdk"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": null,
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:Default"
+    }
+  }
+}
