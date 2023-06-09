@@ -16,7 +16,9 @@ public sealed class SauceRepository : RepositoryBase<SauceNaoContext, Successful
 
 	public IQueryable<SuccessfulSauce> GetAllSauces()
 	{
-		return this.Context.SuccessfulSauces.AsNoTracking().Include(s => s.UserSauces);
+		return this.Context.SuccessfulSauces.AsNoTracking()
+			.Include(s => s.UserSauces)
+			.Include(s => s.Urls);
 	}
 
 	public void DeleteRange(IEnumerable<SuccessfulSauce> sauces)

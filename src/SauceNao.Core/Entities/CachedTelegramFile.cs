@@ -9,7 +9,7 @@ namespace SauceNAO.Core.Entities;
 /// <summary>
 /// Represents a cached telegram file.
 /// </summary>
-[Table("CachedFile", Schema = "tg")]
+[Table("CachedFile")]
 public partial class CachedTelegramFile
 {
 	/// <summary>

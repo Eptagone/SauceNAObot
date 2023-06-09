@@ -2,6 +2,7 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Core.API;
+using SauceNAO.Core.Entities;
 using SauceNAO.Core.Enums;
 using SauceNAO.Core.Extensions;
 
@@ -28,7 +29,10 @@ public sealed class SauceBowl
 					var resultSimilarity = float.Parse(r.Header.Similarity);
 					if (data.ExtUrls != null)
 					{
-						this.Urls.AddRange(r.Data.ExtUrls, resultSimilarity);
+						foreach (var url in r.Data.ExtUrls)
+						{
+							this.Urls.Add(new SauceUrl(url));
+						}
 					}
 					if (string.IsNullOrEmpty(this.Sauce.Title))
 					{
@@ -48,7 +52,12 @@ public sealed class SauceBowl
 					{
 						if (data.Source.StartsWith("http"))
 						{
-							this.Urls.Add(data.Source, resultSimilarity);
+							var sauceUrl = new SauceUrl(data.Source);
+							// Ignore duplicate
+							if (!this.Urls.Any(s => s.Url == sauceUrl.Url))
+							{
+								this.Urls.Add(sauceUrl);
+							}
 						}
 					}
 					if (!string.IsNullOrEmpty(data.Characters) && string.IsNullOrEmpty(this.Sauce.Characters))

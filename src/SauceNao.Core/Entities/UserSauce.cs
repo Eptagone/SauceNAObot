@@ -51,12 +51,12 @@ public partial class UserSauce
 	/// </summary>
 	[ForeignKey(nameof(SauceId))]
 	[InverseProperty(nameof(SuccessfulSauce.UserSauces))]
-	public virtual SuccessfulSauce Sauce { get; set; }
+	public virtual SuccessfulSauce Sauce { get; set; } = null!;
 
 	/// <summary>
 	/// The user.
 	/// </summary>
 	[ForeignKey(nameof(UserId))]
 	[InverseProperty(nameof(UserData.UserSauces))]
-	public virtual UserData User { get; set; }
+	public virtual UserData User { get; set; } = null!;
 }

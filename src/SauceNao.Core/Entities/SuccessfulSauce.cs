@@ -23,16 +23,17 @@ public partial class SuccessfulSauce
 	public SuccessfulSauce()
 	{
 		this.UserSauces = new HashSet<UserSauce>();
+		this.Urls = new HashSet<SauceUrl>();
 	}
 
-	internal SuccessfulSauce(SauceBowl sauce, TargetMedia targetMedia, DateTime dateTime)
+	internal SuccessfulSauce(SauceBowl sauce, TargetMedia targetMedia, DateTime dateTime) : this()
 	{
 		this.Info = JsonSerializer.Serialize(sauce.Sauce);
-		if (sauce.Urls != default)
+		if (sauce.Urls != null)
 		{
-			this.Urls = JsonSerializer.Serialize(sauce.Urls);
+			this.Urls = sauce.Urls;
 		}
-		this.Similarity = (float)sauce.Similarity;
+		this.Similarity = (float)sauce.Similarity!;
 		this.Date = dateTime;
 		this.FileId = targetMedia.FileId;
 		this.FileUniqueId = targetMedia.FileUniqueId;
@@ -50,32 +51,26 @@ public partial class SuccessfulSauce
 	/// </summary>
 	[Required]
 	[StringLength(64)]
-	public string FileUniqueId { get; set; }
+	public string FileUniqueId { get; set; } = null!;
 
 	/// <summary>
 	/// Sauce Type.
 	/// </summary>
 	[Required]
 	[StringLength(10)]
-	public string Type { get; set; }
+	public string Type { get; set; } = null!;
 
 	/// <summary>
 	/// File Id of this Sauce Media
 	/// </summary>
 	[Required]
-	public string FileId { get; set; }
+	public string FileId { get; set; } = null!;
 
 	/// <summary>
 	/// Sauce Info Data
 	/// </summary>
 	[Required]
-	public string Info { get; set; }
-
-	/// <summary>
-	/// Sauce Urls
-	/// </summary>
-	[Required]
-	public string Urls { get; set; }
+	public string Info { get; set; } = null!;
 
 	/// <summary>
 	/// Sauce Similarity.
@@ -88,11 +83,22 @@ public partial class SuccessfulSauce
 	public DateTime Date { get; set; }
 
 	/// <summary>
+	/// Sauce Urls
+	/// </summary>
+	[InverseProperty(nameof(SauceUrl.Sauce))]
+	public ICollection<SauceUrl> Urls { get; set; }
+
+	/// <summary>
 	/// User sauces.
 	/// </summary>
 	[InverseProperty(nameof(UserSauce.Sauce))]
 	public virtual ICollection<UserSauce> UserSauces { get; set; }
 
+	/// <summary>
+	/// Generate a the Sauce summary.
+	/// </summary>
+	/// <param name="lang"></param>
+	/// <returns></returns>
 	internal string GetInfo(CultureInfo lang)
 	{
 		if (string.IsNullOrEmpty(this.Info))
@@ -102,20 +108,15 @@ public partial class SuccessfulSauce
 		else
 		{
 			var info = JsonSerializer.Deserialize<Sauce>(this.Info);
-			return info.GetInfo(lang);
+			return info == null ? "unknown name" : info.GetInfo(lang);
 		}
 	}
 
-	internal IKM GetKeyboard()
+	/// <summary>
+	/// Try to get the keyboard.
+	/// </summary>
+	internal IKM? GetKeyboard()
 	{
-		if (string.IsNullOrEmpty(this.Urls))
-		{
-			return default;
-		}
-		else
-		{
-			var urlList = JsonSerializer.Deserialize<IEnumerable<SauceUrl>>(this.Urls);
-			return urlList.ToInlineKeyboardMarkup();
-		}
+		return this.Urls.Any() ? this.Urls.ToInlineKeyboardMarkup() : null;
 	}
 }

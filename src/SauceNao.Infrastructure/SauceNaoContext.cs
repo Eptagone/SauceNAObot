@@ -30,6 +30,8 @@ public partial class SauceNaoContext : DbContext
 	public virtual DbSet<UserData> Users { get; set; }
 	/// <summary>Successful Sauces</summary>
 	public virtual DbSet<SuccessfulSauce> SuccessfulSauces { get; set; }
+	/// <summary>Urls</summary>
+	public virtual DbSet<SauceUrl> Urls { get; set; }
 	/// <summary>User Sauces</summary>
 	public virtual DbSet<UserSauce> UserSauces { get; set; }
 
@@ -71,6 +73,13 @@ public partial class SauceNaoContext : DbContext
 			entity.HasIndex(s => s.FileUniqueId)
 				.HasDatabaseName("UQ_FileUniqueId")
 				.IsUnique();
+		});
+
+		modelBuilder.Entity<SauceUrl>(entity =>
+		{
+			entity.HasOne(e => e.Sauce)
+				.WithMany(s => s.Urls)
+				.OnDelete(DeleteBehavior.Cascade);
 		});
 
 		this.OnModelCreatingPartial(modelBuilder);

@@ -1,17 +1,20 @@
 ﻿// Copyright (c) 2023 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using SDIR = SauceNAO.Core.Resources.SauceDirectory;
 
+namespace SauceNAO.Core.Entities;
 
-
-namespace SauceNAO.Core.Models;
-
-public sealed class SauceUrl
+/// <summary>
+/// Represents an URL to the source.
+/// </summary>
+[Table("SauceUrl", Schema = "tg")]
+public class SauceUrl
 {
 	public SauceUrl() { }
-	public SauceUrl(string url, float similitary)
+	public SauceUrl(string url)
 	{
 		this.Url = url;
 		if (url.Contains("i.pximg.net"))
@@ -19,7 +22,6 @@ public sealed class SauceUrl
 			string pid = Path.GetFileNameWithoutExtension(url);
 			this.Url = string.Format(SDIR.PixivId, pid.Split('_')[0]);
 		}
-		this.Similarity = similitary;
 		if (this.Url.Contains("pixiv"))
 		{
 			this.Text = "Pixiv";
@@ -96,16 +98,44 @@ public sealed class SauceUrl
 		{
 			this.Text = "FurAffinity";
 		}
+		else if (this.Url.Contains("fakku.net"))
+		{
+			this.Text = "FAKKU!";
+		}
+		else if (this.Url.Contains("nhentai.net"))
+		{
+			this.Text = "nhentai";
+		}
+		else if (this.Url.Contains("e-hentai.org"))
+		{
+			this.Text = "E-Hentai";
+		}
 		else
 		{
 			this.Text = "URL";
 		}
 	}
 
+	/// <summary>
+	/// The unique identifier for this URL
+	/// </summary>
+	public int Id { get; set; }
+
+	/// <summary>
+	/// The text for this URL
+	/// </summary>
 	[JsonPropertyName("Text")]
-	public string Text { get; set; }
+	public string Text { get; set; } = null!;
+
+	/// <summary>
+	/// The URL to the source.
+	/// </summary>
 	[JsonPropertyName("url")]
-	public string Url { get; set; }
-	[JsonPropertyName("similarity")]
-	public float Similarity { get; set; }
+	public string Url { get; set; } = null!;
+
+	/// <summary>
+	/// The Sauce
+	/// </summary>
+	[InverseProperty(nameof(SuccessfulSauce.Urls))]
+	public SuccessfulSauce Sauce { get; set; } = null!;
 }

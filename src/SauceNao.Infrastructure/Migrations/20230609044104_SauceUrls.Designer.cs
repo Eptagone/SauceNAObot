@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SauceNAO.Infrastructure;
 
@@ -11,9 +12,10 @@ using SauceNAO.Infrastructure;
 namespace SauceNAO.Infrastructure.Migrations
 {
     [DbContext(typeof(SauceNaoContext))]
-    partial class SauceNaoContextModelSnapshot : ModelSnapshot
+    [Migration("20230609044104_SauceUrls")]
+    partial class SauceUrls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

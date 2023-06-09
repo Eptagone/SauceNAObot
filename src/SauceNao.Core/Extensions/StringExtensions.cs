@@ -56,7 +56,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlBoldText(this string input)
 	{
-		return _formattingHelper.Bold(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Bold(input, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -66,7 +66,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlCodeText(this string input)
 	{
-		return _formattingHelper.Code(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Code(input, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -76,7 +76,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlItalicText(this string input)
 	{
-		return _formattingHelper.Code(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Code(input, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -86,7 +86,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlPreText(this string input)
 	{
-		return _formattingHelper.Pre(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Pre(input, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -97,7 +97,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlPreText(this string input, string language)
 	{
-		return _formattingHelper.Pre(input, language, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Pre(input, language, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -107,7 +107,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlSpoiler(this string input)
 	{
-		return _formattingHelper.Spoiler(input);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Spoiler(input);
 	}
 
 	/// <summary>
@@ -117,7 +117,7 @@ public static class StringExtensions
 	/// <returns></returns>
 	public static string AsHtmlStrikethrough(this string input)
 	{
-		return _formattingHelper.Strikethrough(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Strikethrough(input, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -128,7 +128,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlTextLink(this string input, string url)
 	{
-		return _formattingHelper.TextLink(input, url, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.TextLink(input, url, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -139,7 +139,7 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlTextMention(this string input, long userId)
 	{
-		return _formattingHelper.TextMention(input, userId, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.TextMention(input, userId, ParseModeKind.HTML);
 	}
 
 	/// <summary>
@@ -149,6 +149,6 @@ public static class StringExtensions
 	/// <returns>Stylized <see cref="string"/>.</returns>
 	public static string AsHtmlUnderline(this string input)
 	{
-		return _formattingHelper.Underline(input, ParseModeKind.HTML);
+		return string.IsNullOrEmpty(input) ? string.Empty : _formattingHelper.Underline(input, ParseModeKind.HTML);
 	}
 }
