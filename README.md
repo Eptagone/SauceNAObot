@@ -8,7 +8,7 @@ This bot was created by a third party to use SauceNAO on Telegram. The project h
 
 ## Features
 
-- Send an image to [@SauceNAObot](https://t.me/SauceNAObot) for saucenao search. You can also reply to a image with: /sauce, /source/, /snao ,/saucenao, /sourcenow, /search, Sauce, sauce or a mention \([@SauceNAObot](https://t.me/SauceNAObot)\).
+- Send an image to [@SauceNAObot](https://t.me/SauceNAObot) for saucenao search. You can also reply to a image with: /sauce, /source, /snao ,/saucenao, /sourcenow, /search, Sauce, sauce or a mention \([@SauceNAObot](https://t.me/SauceNAObot)\).
 
 - Offers alternative search options when sauce is not found or when you use the /temp command.
 

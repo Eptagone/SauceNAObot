@@ -1,0 +1,86 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+Ya=Ya
+Tidak=Tidak
+CancelMessage=Operasi dibatalkan.
+
+# ---------------- SHARED ERRORS ----------------
+GroupsOnly=Perintah ini hanya berfungsi dalam obrolan grup.
+InvalidPhoto=Itu tidak terlihat seperti file foto.
+FileUnreadable=File tidak dapat dibaca. Silakan coba lagi dengan file lain.
+TooBigFile=File terlalu besar. Silakan coba lagi dengan file yang lebih kecil.
+UnsupportedFormat=Format file tidak didukung. Silakan coba lagi dengan file lain.
+NotAllowed=Anda tidak memiliki izin yang cukup untuk melakukan operasi ini.
+
+# ---------------- Commands ----------------
+
+# -------- About --------
+About=Bot ini memberi Anda antarmuka untuk menggunakan mesin pencari gambar terbalik <a href="https://saucenao.com/">SauceNAO</a>.\nKirimkan saya gambar (gambar, GIF, atau stiker ) dan saya akan mencoba melakukan pencarian terbalik menggunakan SauceNAO API.\n\nBot ini dibuat oleh pihak ketiga untuk menggunakan SauceNAO di Telegram. Proyek ini tidak memiliki afiliasi apa pun dengan Xamayon (pencipta SauceNAO).
+SupportChat=Obrolan Dukungan
+
+# -------- Help --------
+Help=Kirimkan saya gambar (gambar, GIF atau stiker) dan saya akan mencoba membalikkan pencarian menggunakan SauceNAO API. <i>Jika saya berada dalam grup, balas gambar dengan /saus</i>.
+HelpSauce=Balas foto dengan /sauce untuk mencarinya menggunakan SauceNAO API.\nSintaks: <code>/sauce <similarity></code>\ndi mana <code><similarity></code> adalah persentase kemiripan minimum untuk hasil pencarian. Harus berupa bilangan bulat antara 10 dan 90. Nilai defaultnya adalah 55.\n\nContoh: <code>/sauce</code> (nilai default)\nContoh: <code>/sauce 70</code>
+
+# -------- Creator --------
+Creator=Pencipta saya adalah <a href="tg://user?id=418909573">Derek Nieves</a>.
+
+# -------- Sauce --------
+Mencari=Mencari...
+Label Karakter=Karakter
+CharactersLabel=Karakter
+Label Bahan=Bahan
+PartLabel=Bagian
+CreatorLabel=Pencipta
+Label Tahun=Tahun
+EstimationTimeLabel=Waktu
+NotFound=Tidak ditemukan saus. Mungkin mencoba <a href="{0}">Google Reverse Search</a> atau <a href="{1}">Yandex</a> saja? atau lihat di <a href="{2}">situs web SauceNAO</a> untuk melihat semua hasilnya.
+NotFoundWithoutLinks=Tidak ditemukan saus.\nLink alternatif tidak tersedia.
+Busy=SauceNao sangat sibuk saat ini. Silakan coba lagi nanti atau coba gunakan perintah /temp.\nJika pesan ini sering muncul, silakan periksa <a href="{0}">obrolan dukungan</a>.
+
+# ---- Errors ----
+# Error message when there are no public API keys available to perform a search
+NoPublicKeys=Tidak ada kunci API publik yang ditemukan untuk melakukan pencarian. Silakan coba lagi nanti atau tanyakan di chat dukungan.
+
+# -------- Temp --------
+GeneratingTmpUrl=Membuat tautan sementara...
+TemporalUrlDone=Selesai! Periksa <a href="{0}">url sementara</a> Anda.
+
+# -------- ApiKey --------
+ApiKeyHelp=Jika Anda sudah mendukung <a href="https://www.patreon.com/saucenao">Xamayon</a> (pembuat asli Saunao.com), maka Anda dapat menggunakan apikey Anda sendiri dengan bot.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Menambahkan daftar apikey\n/apikey baru - Mencantumkan apikey yang Anda simpan\n/apikey delete &lt;apikey_name&gt; - Menghapus apikey\n /apikey show &lt;apikey_name&gt; - Menampilkan apikey</pre>
+ApiKeyList=Apikey yang Anda simpan:\n{0}\n\nTambahkan yang baru menggunakan <code>/apikey add</code>.\nHapus apikey menggunakan <code>/apikey delete &lt;apikey_name&gt;</code>.\nApakah kamu lupa apikeymu? Gunakan <code>/apikey show &lt;apikey_name&gt;</code> untuk mendapatkannya lagi.
+ApiKeyListEmpty=Anda belum menambahkan apikey apa pun. Gunakan <code>/apikey add</code> untuk menambahkannya.
+ApiKeyAskForName=Silakan masukkan nama untuk apikey Anda:\nKetik <code>/cancel</code> untuk membatalkan.
+ApiKeyAskForKey=Kirimkan saya apikey baru Anda. Hanya apikey Premium yang dapat ditambahkan.
+ApiKeyAskForShare=Apakah Anda ingin membagikan apikey Anda untuk pencarian publik? Jika Anda melakukannya, bot akan menggunakannya untuk memasak saus bagi semua orang yang menggunakan bot tersebut.
+ApiKeyAddSuccess=Apikey Anda telah berhasil disimpan.
+ApiKeyDetail=Apikey Anda adalah: <code>{0}</code>\n
+ApiKeyDeleted=Apikey Anda telah dihapus.
+ApiKeyConfirmDelete=Apakah Anda yakin ingin menghapus apikey Anda?
+
+# ---- Errors ----
+ApiKeyAddNotPremium=Apikey Anda harus premium untuk menambahkannya.
+ApiKeyCouldNotBeFound=Apikey tidak dapat ditemukan.
+ApiKeyCouldNotBeAdded=Terjadi kesalahan saat menambahkan apikey Anda. Silakan coba lagi nanti.
+ApiKeyNameNotAvailable=Anda sudah memiliki apikey dengan nama tersebut.
+ApiKeyAlreadyExists=Anda sudah menyimpan apikey tersebut. Coba lagi dengan yang lain.
+
+# -------- History --------
+HistoryMessage=Bot menyimpan pencarian Anda sehingga Anda dapat mengirim gambar yang sama dengan saus melalui bot. Saus dihapus secara berkala.\nJika Anda ingin menghapus riwayat Anda sekarang, ketik <code>/history clear</code>.
+HistoryButtonLabel=Lihat riwayat pencarian Anda
+HistoryErased=Riwayat pencarian Anda telah dihapus.
+HistoryEmpty=Anda belum mencari apa pun.
+
+# -------- Language Preferences --------
+SetLangHelp=Gunakan perintah ini untuk mengubah bahasa bot pada obrolan saat ini.\nTidak semua bahasa tersedia.<b>Sintaks:</b>\n<code>/setlang &lt;kode bahasa&gt; [-Force]</code>\nTentukan parameter opsional [-Force] untuk mempertahankan bahasa Anda di grup mana pun, apa pun bahasa grupnya.
+SetLangSaved=Preferensi bahasa Anda telah disimpan.
+
+# -------- Anti cheats --------
+AnticheatsHelp=Gunakan fitur ini untuk memblokir pencarian terbalik gambar yang dikirim oleh bot tertentu di obrolan grup Anda.\nUntuk menambahkan bot ke daftar AntiCheat, cukup balas pesan yang dikirim oleh bot dengan <code>/anticheats add</code> .\nUntuk menghapus bot, balas pesan dengan <code>/anticheats hapus </code>.
+AnticheatsAdded=Bot @{0} telah ditambahkan ke daftar AntiCheats.
+AnticheatsRemoved=Bot @{0} telah dihapus dari daftar AntiCheats.
+AnticheatsNoCheats=Ups, jangan curang kawan.
+
+# ---- Errors ----
+AnticheatsAlreadyExists=Bot @{0} sudah ada di daftar AntiCheats.
+AnticheatsAlreadyRemoved=Bot @{0} tidak ada atau sudah dihapus dari daftar AntiCheats.
+AntiCheatsNotABot=Pengguna target bukan bot.

@@ -1,0 +1,86 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+Yes=是的
+No=否
+CancelMessage=操作已取消。
+
+# ---------------- SHARED ERRORS ----------------
+GroupsOnly=此命令仅在群聊中有效。
+InvalidPhoto=这看起来不像照片文件。
+FileUnreadable=该文件不可读。请使用其他文件重试。
+TooBigFile=该文件太大。请使用较小的文件重试。
+UnsupportedFormat=不支持该文件格式。请使用其他文件重试。
+NotAllowed=您没有足够的权限执行此操作。
+
+# ---------------- Commands ----------------
+
+# -------- About --------
+About=此机器人为您提供了一个使用 <a href="https://saucenao.com/">SauceNAO</a> 反向图像搜索引擎的界面。\n向我发送一张图片（图片、GIF 或贴纸），我将尝试使用 SauceNAO API 进行反向搜索。\n\n此机器人由第三方创建，用于在 Telegram 上使用 SauceNAO。该项目与 Xamayon（SauceNAO 的创建者）没有任何关联。
+SupportChat=支持聊天
+
+# -------- Help --------
+Help=向我发送一张图片（图片、GIF 或贴纸），我将尝试使用 SauceNAO API 进行反向搜索。<i>如果我在群组中，请使用 /sauce 回复图片</i>。
+HelpSauce=使用 /sauce 回复照片，以使用 SauceNAO API 搜索它。\n语法：<code>/sauce <similarity></code>\n其中 <code><similarity></code> 是搜索结果的最小相似度百分比。它必须是 10 到 90 之间的整数。默认值为 55。\n\n示例：<code>/sauce</code>（默认值）\n示例：<code>/sauce 70</code>
+
+# -------- Creator --------
+Creator=我的创建者是<a href="tg://user?id=418909573">Derek Nieves</a>。
+
+# -------- Sauce --------
+Searching=正在搜索...
+CharacterLabel=字符
+CharactersLabel=字符
+MaterialLabel=材料
+PartLabel=零件
+CreatorLabel=创作者
+YearLabel=年份
+EstimationTimeLabel=时间
+NotFound=未找到调味料。或许可以尝试<a href="{0}">Google 反向搜索</a>或<a href="{1}">Yandex</a>？或者访问<a href="{2}">SauceNAO 网站</a>查看所有结果。
+NotFoundWithoutLinks=未找到调味料。\n替代链接不可用。
+Busy=SauceNao 现在非常繁忙。请稍后重试或尝试使用 /temp 命令。\n如果此消息频繁出现，请查看<a href="{0}">支持聊天</a>。
+
+# ---- Errors ----
+# Error message when there are no public API keys available to perform a search
+NoPublicKeys=未找到用于执行搜索的公共 API 密钥。请稍后重试或在支持聊天中询问。
+
+# -------- Temp --------
+GeneratingTmpUrl=正在生成临时链接...
+TemporalUrlDone=完成！检查您的<a href="{0}">临时网址</a>。
+
+# -------- ApiKey --------
+ApiKeyHelp=如果您已经支持 <a href="https://www.patreon.com/saucenao">Xamayon</a>（saucenao.com 的原始创建者），那么您可以在机器人中使用自己的 apikey。\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - 添加新的 apikey\n/apikey list - 列出您保存的 apikey\n/apikey delete &lt;apikey_name&gt; - 删除 apikey\n/apikey show &lt;apikey_name&gt; - 显示 apikey</pre>
+ApiKeyList=您保存的 apikey：\n{0}\n\n使用 <code>/apikey add</code> 添加新的 apikey。\n使用 <code>/apikey delete &lt;apikey_name&gt;</code> 删除 apikey。\n您忘记了 apikey 吗？使用 <code>/apikey show &lt;apikey_name&gt;</code> 重新获取。
+ApiKeyListEmpty=您尚未添加任何 apikey。使用 <code>/apikey add</code> 添加一个。
+ApiKeyAskForName=请输入您的 apikey 的名称：\n输入 <code>/cancel</code> 取消。
+ApiKeyAskForKey=请将您的新 apikey 发送给我。只能添加高级 apikey。
+ApiKeyAskForShare=您是否要共享您的 apikey 以供公共搜索？如果共享，机器人将使用它为使用机器人的每个人烹饪酱汁。
+ApiKeyAddSuccess=您的 apikey 已成功保存。
+ApiKeyDetail=您的 apikey 是：<code>{0}</code>\n
+ApiKeyDeleted=您的 apikey 已被删除。
+ApiKeyConfirmDelete=您确定要删除您的 apikey 吗？
+
+# ---- Errors ----
+ApiKeyAddNotPremium=您的 apikey 必须是高级版才能添加。
+ApiKeyCouldNotBeFound=无法找到 apikey。
+ApiKeyCouldNotBeAdded=添加 apikey 时出错。请稍后重试。
+ApiKeyNameNotAvailable=您已有一个同名的 apikey。
+ApiKeyAlreadyExists=您已保存该 apikey。请使用另一个重试。
+
+# -------- History --------
+HistoryMessage=机器人会存储您的搜索记录，以便您可以通过机器人发送带有酱汁的相同图像。酱汁会定期删除。\n如果您想立即删除历史记录，请输入 <code>/history clear</code>。
+HistoryButtonLabel=查看您的搜索历史记录
+HistoryErased=您的搜索历史记录已被删除。
+HistoryEmpty=您尚未搜索任何内容。
+
+# -------- Language Preferences --------
+SetLangHelp=使用此命令更改当前聊天的机器人语言。\n并非所有语言都可用。<b>语法：</b>\n<code>/setlang &lt;language code&gt; [-Force]</code>\n指定可选的 [-Force] 参数，可将您的语言保留在任何组中，无论该组的语言是什么。
+SetLangSaved=您的语言首选项已保存。
+
+# -------- Anti cheats --------
+AnticheatsHelp=使用此功能可阻止对群聊中特定机器人发送的图像进行反向搜索。\n要将机器人添加到反作弊列表，只需使用 <code>/anticheats add</code> 回复机器人发送的消息。\n要删除机器人，请用 <code>/anticheats remove </code> 回复消息。
+AnticheatsAdded=Bot @{0} 已添加到反作弊列表。
+AnticheatsRemoved=Bot @{0} 已从反作弊列表中删除。
+AnticheatsNoCheats=好啦，不要作弊了，我的朋友。
+
+# ---- Errors ----
+AnticheatsAlreadyExists=Bot @{0} 已存在于 AntiCheats 列表中。
+AnticheatsAlreadyRemoved=Bot @{0} 不存在或已从 AntiCheats 列表中删除。
+AntiCheatsNotABot=目标用户不是机器人。

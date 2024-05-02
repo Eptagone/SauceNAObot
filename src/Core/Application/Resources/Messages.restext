@@ -1,0 +1,97 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+Yes=Yes
+No=No
+CancelMessage=The operation was cancelled.
+
+# ---------------- SHARED ERRORS ----------------
+# Error message when a user tries to use the command in a private chat
+GroupsOnly=This command only works in group chats.
+
+# Error Message when the user sends a non-photo file or reply to a non-photo file with the command
+InvalidPhoto=That doesn't look like a photo file.
+
+# Error Message when the user sends a photo file that can't be downloaded from Telegram servers
+FileUnreadable=The file is unreadable. Please try again with another file.
+
+# Error Message when the user sends a photo file that is too big to be processed
+TooBigFile=The file is too big. Please try again with a smaller file.
+
+# Error Message when the user sends a photo file with an unsupported format
+UnsupportedFormat=The file format is not supported. Please try again with another file.
+
+# Error Message when the user doesn't have enough permissions to use a command
+NotAllowed=You don't have enough permissions to perform this operation.
+
+# ---------------- Commands ----------------
+
+# -------- About --------
+About=This bot provides you with an interface to use <a href="https://saucenao.com/">SauceNAO</a>'s reverse image search engine.\nSend me an image (image, GIF or a sticker) and I'll try to reverse search using the SauceNAO API.\n\nThis bot was created by a third party to use SauceNAO on Telegram. The project has not any affiliation with Xamayon (the creator of SauceNAO).
+SupportChat=Support Chat
+
+# -------- Help --------
+Help=Send me an image (image, GIF or a sticker) and I'll try to reverse search using the SauceNAO API. <i>If I'm in a group, reply to an image with /sauce</i>.
+HelpSauce=Reply to a photo with /sauce to search for it using the SauceNAO API.\nSyntax: <code>/sauce <similarity></code>\nwhere <code><similarity></code> is the minimum similarity percentage for the search results. It must be an integer between 10 and 90. The default value is 55.\n\nExample: <code>/sauce</code> (default value)\nExample: <code>/sauce 70</code>
+
+# -------- Creator --------
+Creator=My creator is <a href="tg://user?id=418909573">Derek Nieves</a>.
+
+# -------- Sauce --------
+Searching=Searching...
+CharacterLabel=Character
+CharactersLabel=Characters
+MaterialLabel=Material
+PartLabel=Part
+CreatorLabel=Creator
+YearLabel=Year
+EstimationTimeLabel=Time
+NotFound=No sauce found. Maybe try <a href="{0}">Google Reverse Search</a> or <a href="{1}">Yandex</a> instead? or see on <a href="{2}">SauceNAO website</a> to see all the results.
+NotFoundWithoutLinks=No sauce found.\nAlternate links are not available.
+Busy=SauceNao is very busy right now. Please try again later or try using /temp command.\nIf this message appears frequently, please check the <a href="{0}">support chat</a>.
+
+# ---- Errors ----
+# Error message when there are no public API keys available to perform a search
+NoPublicKeys=No public API keys were found to perform the search. Please try again later or ask in the support chat.
+
+# -------- Temp --------
+GeneratingTmpUrl=Generating temporary link...
+TemporalUrlDone=Done! Check your <a href="{0}">temp url</a>.
+
+# -------- ApiKey --------
+ApiKeyHelp=If you're already supporting <a href="https://www.patreon.com/saucenao">Xamayon</a> (the original creator of saucenao.com), then you can use your own apikey with the bot.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Adds a new apikey\n/apikey list - Lists your saved apikeys\n/apikey delete &lt;apikey_name&gt; - Deletes an apikey\n/apikey show &lt;apikey_name&gt; - Shows an apikey</pre>
+ApiKeyList=Your saved apikeys:\n{0}\n\nAdd a new one using <code>/apikey add</code>.\nRemove an apikey using <code>/apikey delete &lt;apikey_name&gt;</code>.\nDid you forget your apikey? Use <code>/apikey show &lt;apikey_name&gt;</code> to get it again.
+ApiKeyListEmpty=You haven't added any apikeys yet. Use <code>/apikey add</code> to add one.
+ApiKeyAskForName=Please enter a name for your apikey:\nType <code>/cancel</code> to cancel.
+ApiKeyAskForKey=Send me your new apikey. Only Premium apikeys can be added.
+ApiKeyAskForShare=Do you want to share your apikey for public searches? If you do, the bot will use it to cook sauces for everyone who uses the bot.
+ApiKeyAddSuccess=Your apikey has been saved successfully.
+ApiKeyDetail=Your apikey is: <code>{0}</code>\n
+ApiKeyDeleted=Your apikey has been deleted.
+ApiKeyConfirmDelete=Are you sure you want to delete your apikey?
+
+# ---- Errors ----
+ApiKeyAddNotPremium=Your apikey must be premium to add it.
+ApiKeyCouldNotBeFound=The apikey could not be found.
+ApiKeyCouldNotBeAdded=An error occurred while adding your apikey. Please try again later.
+ApiKeyNameNotAvailable=You already have an apikey with that name.
+ApiKeyAlreadyExists=You already have that apikey saved. Try again with another one.
+
+# -------- History --------
+HistoryMessage=The bot stores yours searches so you can send the same images with sauce via bot. Sauces are erased periodically.\nIf you want to delete your history right now, type <code>/history clear</code>.
+HistoryButtonLabel=View your search history
+HistoryErased=Your search history has been erased.
+HistoryEmpty=You haven't searched anything yet.
+
+# -------- Language Preferences --------
+SetLangHelp=Use this command to change the bot language for the current chat.\nNot all languages are available.<b>Syntax:</b>\n<code>/setlang &lt;language code&gt; [-Force]</code>\nSpecify the optional [-Force] parameter to keep your language in any group regardless of the group's language.
+SetLangSaved=Your language preferences have been saved.
+
+# -------- Anti cheats --------
+AnticheatsHelp=Use this feature to block the reverse search of images sent by specific bots in your group chats.\nTo add a bot to AntiCheat list, just reply to a message sent by the bot with <code>/anticheats add</code>.\nTo remove the bot, reply to the message with <code>/anticheats remove </code>.
+AnticheatsAdded=Bot @{0} was added to the AntiCheats list.
+AnticheatsRemoved=Bot @{0} was removed from the AntiCheats list.
+AnticheatsNoCheats=Ups, no cheating, my friend.
+
+# ---- Errors ----
+AnticheatsAlreadyExists=Bot @{0} already exists in AntiCheats list.
+AnticheatsAlreadyRemoved=Bot @{0} doesn't exist or was already removed from AntiCheats list.
+AntiCheatsNotABot=The target user isn't a bot.

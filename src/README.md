@@ -1,35 +1,23 @@
-# Setup
+# How to run the bot
 
-This bot works using a webhook. You can run the webhook locally using [NGROK](https://ngrok.com/).
+The bot use a webhook to receive messages by default and also for generating temporal files. If you decide to not use a webhook, the bot can still work using long polling but with some limitations. See the [Settings](#settings) section to see the required settings for the bot.
 
-This solution is composed by **6** projects:
+## Settings
 
-| Name                    | Description                                                      |
-| :---------------------- | :--------------------------------------------------------------- |
-| SauceNAO.Core           | Contains the main functionality of the bot                       |
-| SauceNAO.Infrastructure | Implements clases for data access                                |
-| SauceNAO.WebApp         | The web application. Allows you to configure a webhook.          |
-| SauceNAO.AppService     | Runs the bot using Long Polling. Some features will be disabled. |
-| SauceNAO.Tests          | Unit Tests                                                       |
+This bot can work using long polling or a webhook. If you want to run the bot at it's full capacity, it's recommended to run it as a webhook. It can also work with the [Local Bot API Server](https://core.telegram.org/bots/api#using-a-local-bot-api-server) (LBAS)
 
-In order to run anyone of webhook projects, you need to set the following application settings via **json file** (`secrets.json`, `application.json`) or using **enviroment variables**. See the table below that shows the available settings.
+In order to configure the bot, you must set the following application settings.
 
-| JSON property name        | Enviroment variable          | Apply to | Description                                                  |
-| :------------------------ | :--------------------------- | :------- | :----------------------------------------------------------- |
-| ConnectionStrings:Default | ConnectionStrings\_\_Default | All      | The connection string to database.                           |
-| DbProvider                | DbProvider                   | All      | Database provider. Can be 'sqlite' (default) or 'sqlserver'  |
-| SNAO:ApiKey               | SNAO\_\_ApiKey               | All      | You apikey for SauceNAO API.                                 |
-| SNAO:BotToken             | SNAO\_\_BotToken             | All      | You bot token.                                               |
-| SNAO:SupportChatLink      | SNAO\_\_SupportChatLink      | All      | Support chat link. (<https://t.me/+8NJMCbRmiTk2Yjkx>)        |
-| SNAO:ApplicationUrl       | SNAO\_\_ApplicationUrl       | WebApp   | Optional. Your application base url. (<https://example.com>) |
-| SNAO:FFmpegExec           | SNAO\_\_FFmpegExec           | WebApp   | Optional. The ffmpeg path executable.                        |
-| SNAO:SecretToken          | SNAO\_\_SecretToken          | WebApp   | Optional. Your secret token to enable webhook.               |
-| SNAO:CertificatePath      | SNAO\_\_CertificatePath      | WebApp   | Optional. Certificate path                                   |
-| SNAO:DropPendingUpdates   | SNAO\_\_DropPendingUpdates   | WebApp   | Optional. Drop pending updates.                              |
+> Replace `:` with `__` when using enviroment variables.
 
-## Local Mode
-
-Local mode is a special mode that allows you to run the bot without a web server. This mode is useful for testing purposes.
-
-> The AppService project will always run in local mode.
-> The WebApp will run in local mode if the `ApplicationUrl`, `SecretToken` or `FFmpegExec` settings are not set.
+| Property name                     | Required           | Description                                          |
+| :-------------------------------- | :----------------- | :--------------------------------------------------- |
+| ConnectionStrings:Default         | Yes                | The connection string to the SQL database.           |
+| TelegramBot:BotToken              | Yes                | Your bot token.                                      |
+| TelegramBot:ServerAddress         | When using LBAS    | The local server URL for bot requests.               |
+| TelegramBot:WebhookUrl            | When using webhook | Your webhook url accessible by the bot api server.   |
+| TelegramBot:SecretToken           | When using webhook | Secret token for the webhook.                        |
+| General:ApplicationUrl            | When using webhook | Your application url. (<https://example.com>)        |
+| General:SupportChatInvitationLink | Yes                | Support chat invite link.                            |
+| General:FilesPath                 | No                 | The path where the files are stored when using LBAS. |
+| General:FFmpegPath                | No                 | The ffmpeg path executable.                          |

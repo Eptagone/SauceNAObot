@@ -1,0 +1,57 @@
+# compose.yaml
+# Defines a full environment for the SauceNAO bot.
+
+services:
+  app:
+    build:
+      context: src
+      dockerfile: WebApp/Dockerfile
+    environment:
+      PORT:
+      LOGGING__LOGLEVEL__DEFAULT: Information
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 80
+      CONNECTIONSTRINGS__DEFAULT: "Data Source=db;Initial Catalog=snao;User ID=sa;Password=${MSSQL_SA_PASSWORD};Trust Server Certificate=True"
+      TELEGRAMBOT__BOTTOKEN:
+      TELEGRAMBOT__SERVERADDRESS: http://local-bot-api-server:8081
+      TELEGRAMBOT__WEBHOOKURL: http://app
+      TELEGRAMBOT__SECRETTOKEN:
+      GENERAL__APPLICATIONURL:
+      GENERAL__SUPPORTCHATINVITATIONLINK:
+      GENERAL__FILESPATH: /files:/opt/tba/${TELEGRAMBOT__BOTTOKEN}
+      GENERAL__FFMPEGPATH:
+    ports:
+      - ${PORT:-80}:80
+    volumes:
+      - "files:/files"
+    depends_on:
+      - db
+      - local-bot-api-server
+
+  db:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_PID: Premium
+      MSSQL_SA_PASSWORD:
+    volumes:
+      - data:/var/opt/mssql
+    ports:
+      - "1433:1433"
+
+  local-bot-api-server:
+    build: local-server
+    environment:
+      TELEGRAM_API_ID:
+      TELEGRAM_API_HASH:
+      TELEGRAMBOT__BOTTOKEN:
+    volumes:
+      - type: volume
+        source: files
+        target: /opt/tba/${TELEGRAMBOT__BOTTOKEN}
+    ports:
+      - "8081:8081"
+
+volumes:
+  files:
+  data:

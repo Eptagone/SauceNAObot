@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Domain\SauceNAO.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SauceNAO.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>41b1a12f-bfe2-471f-9956-7ecf1c0d9a8e</UserSecretsId>
+  </PropertyGroup>
+
+</Project>
