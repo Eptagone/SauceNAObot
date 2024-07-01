@@ -8,7 +8,6 @@ services:
       dockerfile: WebApp/Dockerfile
     environment:
       PORT:
-      LOGGING__LOGLEVEL__DEFAULT: Information
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_HTTP_PORTS: 80
       CONNECTIONSTRINGS__DEFAULT: "Data Source=db;Initial Catalog=snao;User ID=sa;Password=${MSSQL_SA_PASSWORD};Trust Server Certificate=True"
@@ -36,8 +35,6 @@ services:
       MSSQL_SA_PASSWORD:
     volumes:
       - data:/var/opt/mssql
-    ports:
-      - "1433:1433"
 
   local-bot-api-server:
     build: local-server
@@ -49,8 +46,6 @@ services:
       - type: volume
         source: files
         target: /opt/tba/${TELEGRAMBOT__BOTTOKEN}
-    ports:
-      - "8081:8081"
 
 volumes:
   files:

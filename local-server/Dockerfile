@@ -1,4 +1,3 @@
-# TBAS.Dockerfile
 # Telegram Bot API Server
 FROM alpine:latest AS base
 

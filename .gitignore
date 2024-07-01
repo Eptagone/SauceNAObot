@@ -1,2 +1,5 @@
 # Environment variables file
 .env
+
+# Docker compose override
+compose.override.yaml
