@@ -20,7 +20,7 @@ public class TelegramChat(long chatId, string title) : LocalizableEntityBase
     /// <summary>
     /// Title of the group or channel.
     /// </summary>
-    [StringLength(128)]
+    [StringLength(256)]
     public string Title { get; set; } = title;
 
     /// <summary>

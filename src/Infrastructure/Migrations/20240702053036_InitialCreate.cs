@@ -18,7 +18,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ChatId = table.Column<long>(type: "bigint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Username = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
                     LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true)
                 },
@@ -71,8 +71,8 @@ namespace SauceNAO.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     Username = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
                     AlwaysUseOwnLanguage = table.Column<bool>(type: "bit", nullable: false),
                     PrivateChatStarted = table.Column<bool>(type: "bit", nullable: false),
@@ -190,6 +190,12 @@ namespace SauceNAO.Infrastructure.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Chats_ChatId",
+                table: "Chats",
+                column: "ChatId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SauceSauceMedia_SaucesId",
                 table: "SauceSauceMedia",
                 column: "SaucesId");
@@ -203,6 +209,12 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "IX_SearchRecords_UserId",
                 table: "SearchRecords",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserId",
+                table: "Users",
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />

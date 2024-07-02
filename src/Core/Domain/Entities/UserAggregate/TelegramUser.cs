@@ -19,13 +19,13 @@ public class TelegramUser : LocalizableEntityBase
     /// <summary>
     /// User's first name.
     /// </summary>
-    [MaxLength(64)]
+    [MaxLength(128)]
     public required string FirstName { get; set; }
 
     /// <summary>
     /// User's last name.
     /// </summary>
-    [MaxLength(64)]
+    [MaxLength(128)]
     public string? LastName { get; set; }
 
     /// <summary>

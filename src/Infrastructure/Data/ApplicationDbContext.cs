@@ -61,4 +61,10 @@ public sealed class ApplicationDbContext : DbContext
     /// Represents a search result from SauceNAO, including image information and similarity score.
     /// </summary>
     public DbSet<SauceApiKey> ApiKeys { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<TelegramUser>().HasIndex(u => u.UserId).IsUnique();
+        modelBuilder.Entity<TelegramChat>().HasIndex(c => c.ChatId).IsUnique();
+    }
 }
