@@ -84,3 +84,6 @@ AnticheatsNoCheats=好啦，不要作弊了，我的朋友。
 AnticheatsAlreadyExists=Bot @{0} 已存在于 AntiCheats 列表中。
 AnticheatsAlreadyRemoved=Bot @{0} 不存在或已从 AntiCheats 列表中删除。
 AntiCheatsNotABot=目标用户不是机器人。
+
+# -------- Statistics --------
+Stats=<b>使用情况统计信息</b>\n{0} 次成功搜索。\n由 {1} 个活跃用户使用。\n由 {2} 个组使用。

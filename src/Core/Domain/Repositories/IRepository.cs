@@ -53,4 +53,17 @@ public interface IRepository<TEntity>
     /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets the number of entities in the repository.
+    /// </summary>
+    /// <returns>The number of entities in the repository.</returns>
+    int Count();
+
+    /// <summary>
+    /// Asynchronously gets the number of entities in the repository.
+    /// </summary>
+    /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the number of entities in the repository.</returns>
+    Task<int> CountAsync(CancellationToken cancellationToken = default);
 }

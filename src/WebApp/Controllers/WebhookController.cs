@@ -22,7 +22,6 @@ public class WebhookController(
 ) : ControllerBase
 {
     private readonly string? secretToken = botOptions.Value.SecretToken;
-    private readonly IUpdateReceiver updateReceiver = updateReceiver;
 
     [HttpPost("~/")]
     public IActionResult Index(
@@ -36,7 +35,7 @@ public class WebhookController(
         }
 
         // Pass the update to the update receiver.
-        this.updateReceiver.ReceiveUpdate(update);
+        updateReceiver.ReceiveUpdate(update);
 
         return this.Accepted();
     }

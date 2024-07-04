@@ -18,9 +18,6 @@ namespace SauceNAO.Application.Commands;
 [BotCommandVisibility(BotCommandVisibility.GroupAdmin)]
 class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepository) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
-    private readonly IChatRepository chatRepository = chatRepository;
-
     private string HelpMsg => this.Context.Localizer["AnticheatsHelp"];
     private string BotAddedMsg => this.Context.Localizer["AnticheatsAdded"];
     private string BotRemovedMsg => this.Context.Localizer["AnticheatsRemoved"];
@@ -38,7 +35,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
     {
         if (this.Context.Group != null)
         {
-            var admins = await this.client.GetChatAdministratorsAsync(
+            var admins = await client.GetChatAdministratorsAsync(
                 this.Context.Group.Id,
                 cancellationToken
             );
@@ -46,7 +43,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
             // If the user is not an admin, send an error message.
             if (!admins.Any(a => a.User.Id == message.From!.Id))
             {
-                await this.client.SendMessageAsync(
+                await client.SendMessageAsync(
                     message.Chat.Id,
                     this.NotAllowedMsg,
                     replyParameters: new ReplyParameters
@@ -70,7 +67,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                     }
                     else if (!message.ReplyToMessage.From.IsBot == false)
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             message.Chat.Id,
                             this.TargetUserIsNotABotMsg,
                             replyParameters: new ReplyParameters
@@ -90,7 +87,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                         )
                     )
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             message.Chat.Id,
                             this.BotAlreadyAddedMsg,
                             replyParameters: new ReplyParameters
@@ -107,9 +104,9 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                     this.Context.Group.Restrictions.Add(
                         new AntiCheatRestriction(message.ReplyToMessage.From.Id)
                     );
-                    await this.chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
+                    await chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
 
-                    await this.client.SendMessageAsync(
+                    await client.SendMessageAsync(
                         message.Chat.Id,
                         this.BotAddedMsg,
                         replyParameters: new ReplyParameters
@@ -132,7 +129,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                     }
                     else if (!message.ReplyToMessage.From.IsBot == false)
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             message.Chat.Id,
                             this.TargetUserIsNotABotMsg,
                             replyParameters: new ReplyParameters
@@ -153,7 +150,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                     // If the bot is not found, send an error message.
                     if (restriction is null)
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             message.Chat.Id,
                             this.BotAlreadyRemovedMsg,
                             replyParameters: new ReplyParameters
@@ -168,9 +165,9 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
 
                     // Remove the bot from the group.
                     this.Context.Group.Restrictions.Remove(restriction);
-                    await this.chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
+                    await chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
 
-                    await this.client.SendMessageAsync(
+                    await client.SendMessageAsync(
                         message.Chat.Id,
                         this.BotRemovedMsg,
                         replyParameters: new ReplyParameters
@@ -183,7 +180,7 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                     break;
 
                 default:
-                    await this.client.SendMessageAsync(
+                    await client.SendMessageAsync(
                         message.Chat.Id,
                         this.HelpMsg,
                         parseMode: FormatStyles.HTML,

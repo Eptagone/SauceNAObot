@@ -16,9 +16,6 @@ namespace SauceNAO.Application.Services;
 class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository chatRepository)
     : ISauceNaoContextFactory
 {
-    private readonly IUserRepository userRepository = userRepository;
-    private readonly IChatRepository groupRepository = chatRepository;
-
     /// <inheritdoc/>
     public ISauceNaoContext Create(Update update)
     {
@@ -34,7 +31,7 @@ class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository cha
         // If the user is not null, retrieve or update the user information in the database.
         if (user is not null)
         {
-            userEntity = this.userRepository.GetByUserId(user.Id);
+            userEntity = userRepository.GetByUserId(user.Id);
             // Update the user information if it has changed.
             if (userEntity is null)
             {
@@ -46,7 +43,7 @@ class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository cha
                     LastName = user.LastName,
                     LanguageCode = user.LanguageCode,
                 };
-                this.userRepository.Insert(userEntity);
+                userRepository.Insert(userEntity);
             }
             else
             {
@@ -54,7 +51,7 @@ class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository cha
                 userEntity.FirstName = user.FirstName;
                 userEntity.LastName = user.LastName;
                 userEntity.LanguageCode ??= user.LanguageCode;
-                this.userRepository.Update(userEntity);
+                userRepository.Update(userEntity);
             }
         }
 
@@ -65,20 +62,20 @@ class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository cha
         // If the chat is not null and it is a group or supergroup, retrieve or update the group information in the database.
         if (chat?.Type == ChatTypes.Group || chat?.Type == ChatTypes.Supergroup)
         {
-            groupEntity = this.groupRepository.GetByChatId(
+            groupEntity = chatRepository.GetByChatId(
                 update.Message?.MigrateFromChatId ?? chat.Id
             );
             if (groupEntity is null)
             {
                 groupEntity = new TelegramChat(chat.Id, chat.Title!) { Username = chat.Username, };
-                this.groupRepository.Insert(groupEntity);
+                chatRepository.Insert(groupEntity);
             }
             else
             {
                 groupEntity.ChatId = update.Message?.MigrateToChatId ?? chat.Id;
                 groupEntity.Title = chat.Title!;
                 groupEntity.Username = chat.Username;
-                this.groupRepository.Update(groupEntity);
+                chatRepository.Update(groupEntity);
             }
         }
 

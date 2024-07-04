@@ -19,8 +19,7 @@ class ChatRepository(ApplicationDbContext context)
     /// <inheritdoc/>
     public TelegramChat? GetByChatId(long chatId)
     {
-        var chats = this.Context.Chats.Include(chat => chat.Restrictions);
         var spec = new ChatSpecification(chatId);
-        return spec.Evaluate(chats).SingleOrDefault();
+        return spec.Evaluate(this.Context.Chats).SingleOrDefault();
     }
 }

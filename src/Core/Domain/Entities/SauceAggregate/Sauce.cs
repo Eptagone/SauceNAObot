@@ -56,5 +56,5 @@ public class Sauce : EntityBase
     /// <summary>
     /// A list of all media that were associated with this sauce.
     /// </summary>
-    public ICollection<SauceMedia> AssociatedMedias { get; } = [];
+    public virtual ICollection<SauceMedia> AssociatedMedias { get; set; } = [];
 }

@@ -18,7 +18,8 @@ partial class SauceNaoBot : SimpleTelegramBotBase, ISauceNaoBot
     )
     {
         var offset = string.IsNullOrEmpty(inlineQuery.Offset) ? 0 : int.Parse(inlineQuery.Offset);
-        var myHistory = this.Context.User!.SearchHistory.OrderByDescending(h => h.SearchedAt);
+        var myHistory = this.Context.User!.SearchHistory
+            .OrderByDescending(h => h.SearchedAt);
         var keywords = inlineQuery.Query.Split(' ');
 
         var mySauces = keywords.Any()

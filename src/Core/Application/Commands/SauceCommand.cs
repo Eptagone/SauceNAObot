@@ -31,14 +31,6 @@ class SauceCommand(
     IOptions<GeneralOptions> options
 ) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
-    private readonly ITelegramFileService fileService = fileService;
-    private readonly IFrameExtractor frameExtractor = frameExtractor;
-    private readonly IApiKeyRespository apiKeyRespository = apiKeyRespository;
-    private readonly ISauceMediaRepository seachedMediaRepository = seachedMediaRepository;
-    private readonly IUserRepository userRepository = userRepository;
-    private readonly ISauceNaoService sauceNao = sauceNao;
-
     private readonly string? SupportChatLink = options.Value.SupportChatInvitationLink;
     private readonly string? ApplicationUrl = options.Value.ApplicationURL;
     private string SupportChatText => this.Context.Localizer["SupportChat"];
@@ -49,8 +41,9 @@ class SauceCommand(
     private string NoPublicKeysMsg => this.Context.Localizer["NoPublicKeys"];
     private string NotFoundMsg => this.Context.Localizer["NotFound"];
     private string NotFoundWithoutLinksMsg => this.Context.Localizer["NotFoundWithoutLinks"];
-    private string BusyMsg => this.Context.Localizer["Busy"];
     private string NotCheatingMsg => this.Context.Localizer["AnticheatsNoCheats"];
+    private string BusyMsg =>
+        this.Context.Localizer["Busy", options.Value.SupportChatInvitationLink];
 
     /// <inheritdoc />
     protected override async Task InvokeAsync(
@@ -75,7 +68,7 @@ class SauceCommand(
         // If no media was found, send an error message and return.
         if (media is null)
         {
-            await this.client.SendMessageAsync(
+            await client.SendMessageAsync(
                 message.Chat.Id,
                 this.InvalidPhotoMsg,
                 replyParameters: new ReplyParameters()
@@ -94,7 +87,7 @@ class SauceCommand(
             == true
         )
         {
-            await this.client.SendMessageAsync(
+            await client.SendMessageAsync(
                 message.Chat.Id,
                 this.NotCheatingMsg,
                 replyParameters: new ReplyParameters()
@@ -108,7 +101,7 @@ class SauceCommand(
         }
 
         // Send a message indicating that the bot is searching for the image source.
-        var responseMessage = await this.client.SendMessageAsync(
+        var responseMessage = await client.SendMessageAsync(
             message.Chat.Id,
             this.SearchingMsg,
             replyParameters: new ReplyParameters()
@@ -127,7 +120,7 @@ class SauceCommand(
             s.Media.FileUniqueId == media.FileUniqueId && s.Similarity == similarity
         );
         var sauceMedia =
-            userRecord?.Media ?? this.seachedMediaRepository.GetByFileUniqueId(media.FileUniqueId);
+            userRecord?.Media ?? seachedMediaRepository.GetByFileUniqueId(media.FileUniqueId);
         bool busy = false;
 
         string? imageUrl = null;
@@ -139,7 +132,7 @@ class SauceCommand(
             // If a thumbnail is available, try to get the image url from the thumbnail.
             if (!string.IsNullOrEmpty(media.ThumbnailFileId))
             {
-                imageUrl = await this.fileService.GetFileUrlAsync(
+                imageUrl = await fileService.GetFileUrlAsync(
                     media.ThumbnailFileId,
                     cancellationToken
                 );
@@ -157,7 +150,7 @@ class SauceCommand(
                 // If an error occurred, send the error message.
                 if (!string.IsNullOrEmpty(error))
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         message.Chat.Id,
                         responseMessage.MessageId,
                         error,
@@ -175,13 +168,13 @@ class SauceCommand(
                 // If the user share any public api key, then also get the public api keys in case the user's api keys are not enough.
                 if (this.User.ApiKeys.Any(key => key.IsPublic))
                 {
-                    apiKeyEntities = apiKeyEntities.Concat(this.apiKeyRespository.GetPublicKeys());
+                    apiKeyEntities = apiKeyEntities.Concat(apiKeyRespository.GetPublicKeys());
                 }
             }
             // If the user doesn't have any api keys, then get the public api keys.
             else
             {
-                apiKeyEntities = this.apiKeyRespository.GetPublicKeys();
+                apiKeyEntities = apiKeyRespository.GetPublicKeys();
             }
 
             if (!apiKeyEntities.Any())
@@ -194,7 +187,7 @@ class SauceCommand(
                             this.SupportChatLink
                         )
                     );
-                await this.client.EditMessageTextAsync(
+                await client.EditMessageTextAsync(
                     responseMessage.Chat.Id,
                     responseMessage.MessageId,
                     this.NoPublicKeysMsg,
@@ -210,28 +203,31 @@ class SauceCommand(
             // Try to search for the image source using the api keys.
             foreach (var keyEntity in apiKeyEntities)
             {
-                var result = await this.sauceNao.SearchByUrlAsync(
+                var result = await sauceNao.SearchByUrlAsync(
                     (publicImageUrl ?? imageUrl)!,
                     keyEntity.Value,
                     cancellationToken
                 );
-                keyEntity.UpdatedAt = DateTime.UtcNow;
-                // Update the API KEY last usage date
-                await this.apiKeyRespository.UpdateAsync(keyEntity, cancellationToken);
+
+                // If the search was successful, break the loop
                 if (result is not null)
                 {
-                    // If the account is not longer valid, remove the api key from the user's api keys.
-                    if (!result.IsChefAvailable)
+                    // If the response is not ok, try to get the next api key.
+                    if (!result.Ok)
                     {
-                        await this.apiKeyRespository.DeleteAsync(keyEntity, cancellationToken);
-                        continue;
-                    }
-                    // If the search limit is reached, try to get the next api key.
-                    if (result.IsKitchenBusy)
-                    {
+                        // If the last api key usage date is older than 1 week, then remove it.
+                        if (keyEntity.UpdatedAt < DateTime.UtcNow.AddDays(-7))
+                        {
+                            await apiKeyRespository.DeleteAsync(keyEntity, cancellationToken);
+                        }
+
                         busy = true;
                         continue;
                     }
+
+                    keyEntity.UpdatedAt = DateTime.UtcNow;
+                    // Update the API KEY last usage date
+                    await apiKeyRespository.UpdateAsync(keyEntity, cancellationToken);
 
                     // Save the sauces for future searches
                     sauces = result.Recipes.Select(r =>
@@ -267,7 +263,7 @@ class SauceCommand(
                     }
 
                     // Save the sauce media.
-                    await this.seachedMediaRepository.InsertAsync(sauceMedia, cancellationToken);
+                    await seachedMediaRepository.InsertAsync(sauceMedia, cancellationToken);
 
                     // Stop the iteration
                     break;
@@ -280,10 +276,11 @@ class SauceCommand(
             // if the traffic was reached, return.
             if (busy)
             {
-                await this.client.EditMessageTextAsync(
+                await client.EditMessageTextAsync(
                     responseMessage.Chat.Id,
                     responseMessage.MessageId,
                     this.BusyMsg,
+                    parseMode: FormatStyles.HTML,
                     cancellationToken: cancellationToken
                 );
 
@@ -300,7 +297,7 @@ class SauceCommand(
                 );
                 if (!string.IsNullOrEmpty(error))
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         responseMessage.Chat.Id,
                         responseMessage.MessageId,
                         error,
@@ -313,7 +310,7 @@ class SauceCommand(
             // If the media URL is not available, print the not found message without alternative links.
             if (string.IsNullOrEmpty(publicImageUrl))
             {
-                await this.client.EditMessageTextAsync(
+                await client.EditMessageTextAsync(
                     responseMessage.Chat.Id,
                     responseMessage.MessageId,
                     this.NotFoundWithoutLinksMsg,
@@ -326,7 +323,7 @@ class SauceCommand(
                 var googleUrl = string.Format(ImageSearchLinks.GoogleImageSearch, publicImageUrl);
                 var yandexUrl = string.Format(ImageSearchLinks.YandexImageSearch, publicImageUrl);
                 var sauceNaoUrl = string.Format(ImageSearchLinks.SauceNAOsearch, publicImageUrl);
-                await this.client.EditMessageTextAsync(
+                await client.EditMessageTextAsync(
                     responseMessage.Chat.Id,
                     responseMessage.MessageId,
                     string.Format(this.NotFoundMsg, googleUrl, yandexUrl, sauceNaoUrl),
@@ -345,25 +342,25 @@ class SauceCommand(
                 {
                     Media = sauceMedia,
                     Similarity = similarity,
-                    SearchedAt = new DateTime(message.Date)
+                    SearchedAt = DateTime.UnixEpoch.AddSeconds(message.Date)
                 };
                 this.User.SearchHistory.Add(userRecord);
             }
             // Otherwise, update the date
             else
             {
-                userRecord.SearchedAt = new DateTime(message.Date);
+                userRecord.SearchedAt = DateTime.UnixEpoch.AddSeconds(message.Date);
             }
 
             // Save the user history.
-            await this.userRepository.UpdateAsync(this.User, cancellationToken);
+            await userRepository.UpdateAsync(this.User, cancellationToken);
 
             var kitchen = new Kitchen(this.Context.Localizer);
 
             // Cook the sauce
             var (sauceMsg, keyboard) = kitchen.CookSauce(sauceMedia.Sauces, similarity);
 
-            await this.client.EditMessageTextAsync(
+            await client.EditMessageTextAsync(
                 responseMessage.Chat.Id,
                 responseMessage.MessageId,
                 sauceMsg,
@@ -404,10 +401,7 @@ class SauceCommand(
                 return (null, null, this.TooBigFileMsg);
             }
 
-            var videoPath = await this.fileService.GetFilePathAsync(
-                media.FileId,
-                cancellationToken
-            );
+            var videoPath = await fileService.GetFilePathAsync(media.FileId, cancellationToken);
             if (string.IsNullOrEmpty(videoPath))
             {
                 return (null, null, this.TooBigFileMsg);
@@ -415,7 +409,7 @@ class SauceCommand(
 
             var frameFilename = $"{media.FileUniqueId}.jpg";
             var framePath = Path.Join(Path.GetTempPath(), frameFilename);
-            await this.frameExtractor.ExtractAsync(videoPath, framePath, cancellationToken);
+            await frameExtractor.ExtractAsync(videoPath, framePath, cancellationToken);
             publicImageUrl = $"{this.ApplicationUrl.TrimEnd('/')}/file/{frameFilename}";
         }
         else if (media.Size is null || media.Size <= SauceNaoUtilities.MAX_PHOTO_SIZE)
@@ -429,11 +423,7 @@ class SauceCommand(
                 return (null, null, this.UnsupportedFormatMsg);
             }
 
-            var url = await this.fileService.GetFileUrlAsync(
-                media.FileId,
-                isPublic,
-                cancellationToken
-            );
+            var url = await fileService.GetFileUrlAsync(media.FileId, isPublic, cancellationToken);
 
             if (isPublic)
             {

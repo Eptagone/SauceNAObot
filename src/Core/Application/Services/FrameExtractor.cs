@@ -17,7 +17,6 @@ namespace SauceNAO.Application.Services;
 class FrameExtractor(ILogger<FrameExtractor> logger, IOptions<GeneralOptions> options)
     : IFrameExtractor
 {
-    private readonly ILogger<FrameExtractor> logger = logger;
     private readonly string ffmpegPath = options.Value.FFmpegPath ?? "ffmpeg";
 
     /// <inheritdoc/>
@@ -31,7 +30,7 @@ class FrameExtractor(ILogger<FrameExtractor> logger, IOptions<GeneralOptions> op
 
         var command = $"-i \"{input}\" -vf \"select=eq(n\\,0)\" -frames:v 1 \"{output}\" -y";
 
-        this.logger.LogInformation(command);
+        logger.LogInformation(command);
         return this.RunFFmpeg(command, cancellationToken);
     }
 
@@ -57,7 +56,7 @@ class FrameExtractor(ILogger<FrameExtractor> logger, IOptions<GeneralOptions> op
         catch
         {
             var log = convtask.StandardError.ReadToEnd();
-            this.logger.LogFFmpegError(log);
+            logger.LogFFmpegError(log);
             return false; // return false if an exception occurred
         }
         return true; // return true if the command executed successfully

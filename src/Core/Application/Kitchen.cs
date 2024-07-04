@@ -51,15 +51,13 @@ class Kitchen(IStringLocalizer localizer)
         { "kemono.su", "Kemono" },
     };
 
-    private readonly IStringLocalizer localizer = localizer;
-
-    private string CharacterLabel => this.localizer["CharacterLabel"];
-    private string CharactersLabel => this.localizer["CharactersLabel"];
-    private string MaterialLabel => this.localizer["MaterialLabel"];
-    private string PartLabel => this.localizer["PartLabel"];
-    private string CreatorLabel => this.localizer["CreatorLabel"];
-    private string YearLabel => this.localizer["YearLabel"];
-    private string EstimationTimeLabel => this.localizer["EstimationTimeLabel"];
+    private string CharacterLabel => localizer["CharacterLabel"];
+    private string CharactersLabel => localizer["CharactersLabel"];
+    private string MaterialLabel => localizer["MaterialLabel"];
+    private string PartLabel => localizer["PartLabel"];
+    private string CreatorLabel => localizer["CreatorLabel"];
+    private string YearLabel => localizer["YearLabel"];
+    private string EstimationTimeLabel => localizer["EstimationTimeLabel"];
 
     /// <summary>
     /// Build the sauce message and the buttons.
@@ -94,7 +92,7 @@ class Kitchen(IStringLocalizer localizer)
         if (!string.IsNullOrEmpty(characters))
         {
             var label = characters.Contains(',') ? this.CharactersLabel : this.CharacterLabel;
-            builder.Append(HtmlTextFormatter.Bold($"{this.localizer[label]}: "));
+            builder.Append(HtmlTextFormatter.Bold($"{localizer[label]}: "));
             builder.AppendLine(HtmlTextFormatter.EncodeHtmlCharacters(characters));
         }
         // Material

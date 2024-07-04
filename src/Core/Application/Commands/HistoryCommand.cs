@@ -13,8 +13,6 @@ namespace SauceNAO.Application.Commands;
 [BotCommandVisibility(BotCommandVisibility.PrivateChat)]
 class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
-    private readonly IUserRepository userRepository = userRepository;
     private string HistoryMessage => this.Context.Localizer["HistoryMessage"];
     private string HistoryButtonLabel => this.Context.Localizer["HistoryButtonLabel"];
     private string HistoryErasedMessage => this.Context.Localizer["HistoryErased"];
@@ -35,17 +33,17 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
             case "limpiar":
             case "borrar":
             case "vaciar":
-                var actionTask = this.client.SendChatActionAsync(
+                var actionTask = client.SendChatActionAsync(
                     message.Chat.Id,
                     ChatActions.Typing,
                     cancellationToken: cancellationToken
                 );
 
                 this.User!.SearchHistory.Clear();
-                this.userRepository.Update(this.User);
+                userRepository.Update(this.User);
 
                 actionTask.Wait(cancellationToken);
-                return this.client.SendMessageAsync(
+                return client.SendMessageAsync(
                     message.Chat.Id,
                     this.HistoryErasedMessage,
                     parseMode: FormatStyles.HTML,
@@ -58,7 +56,7 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
                 );
 
             default:
-                return this.client.SendMessageAsync(
+                return client.SendMessageAsync(
                     message.Chat.Id,
                     this.HistoryMessage,
                     parseMode: FormatStyles.HTML,

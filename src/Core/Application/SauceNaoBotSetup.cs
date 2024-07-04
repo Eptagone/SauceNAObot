@@ -27,27 +27,22 @@ class SauceNaoBotSetup(
     IOptions<TelegramBotOptions> botOptions
 ) : IHostedService
 {
-    private readonly ILogger<SauceNaoBotSetup> logger = logger;
-    private readonly ITelegramBotClient client = client;
-    private readonly IOptions<GeneralOptions> options = options;
-    private readonly IOptions<TelegramBotOptions> botOptions = botOptions;
-
     /// <inheritdoc />
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        this.logger.LogSettingUpBotCommands();
+        logger.LogSettingUpBotCommands();
 
         // Delete all commands.
-        await this.client.DeleteMyCommandsAsync(cancellationToken: cancellationToken);
-        await this.client.DeleteMyCommandsAsync(
+        await client.DeleteMyCommandsAsync(cancellationToken: cancellationToken);
+        await client.DeleteMyCommandsAsync(
             scope: new BotCommandScopeAllPrivateChats(),
             cancellationToken: cancellationToken
         );
-        await this.client.DeleteMyCommandsAsync(
+        await client.DeleteMyCommandsAsync(
             scope: new BotCommandScopeAllGroupChats(),
             cancellationToken: cancellationToken
         );
-        await this.client.DeleteMyCommandsAsync(
+        await client.DeleteMyCommandsAsync(
             scope: new BotCommandScopeAllChatAdministrators(),
             cancellationToken: cancellationToken
         );
@@ -93,27 +88,27 @@ class SauceNaoBotSetup(
             );
         }
 
-        this.logger.LogCommandsRegistered();
+        logger.LogCommandsRegistered();
 
         // Delete the previous webhook if it is configured.
-        await this.client.DeleteWebhookAsync(cancellationToken: cancellationToken);
+        await client.DeleteWebhookAsync(cancellationToken: cancellationToken);
 
-        var webhookUrl = this.botOptions.Value.WebhookUrl ?? this.options.Value.ApplicationURL;
-        var secretToken = this.botOptions.Value.SecretToken;
+        var webhookUrl = botOptions.Value.WebhookUrl ?? options.Value.ApplicationURL;
+        var secretToken = botOptions.Value.SecretToken;
 
         // Setup the webhook if it is configured.
         if (!string.IsNullOrEmpty(webhookUrl) && !string.IsNullOrEmpty(secretToken))
         {
-            this.logger.LogWebhookSetUp();
-            await this.client.SetWebhookAsync(
+            logger.LogWebhookSetUp();
+            await client.SetWebhookAsync(
                 webhookUrl,
                 secretToken: secretToken,
                 cancellationToken: cancellationToken
             );
-            this.logger.LogWebhookSetUpSuccessful(webhookUrl);
+            logger.LogWebhookSetUpSuccessful(webhookUrl);
         }
 
-        this.logger.LogSetupCompleted();
+        logger.LogSetupCompleted();
     }
 
     // Register the given extended bot commands.
@@ -134,7 +129,7 @@ class SauceNaoBotSetup(
                     cmd.GetTranslatedDescription(languageCode) ?? cmd.Description
                 ));
 
-                await this.client.SetMyCommandsAsync(
+                await client.SetMyCommandsAsync(
                     botCommands,
                     scope,
                     languageCode,
@@ -146,7 +141,7 @@ class SauceNaoBotSetup(
         {
             var botCommands = commands.Select(cmd => new BotCommand(cmd.Command, cmd.Description));
 
-            await this.client.SetMyCommandsAsync(
+            await client.SetMyCommandsAsync(
                 botCommands,
                 scope,
                 cancellationToken: cancellationToken

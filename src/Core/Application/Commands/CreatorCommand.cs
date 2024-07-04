@@ -12,7 +12,6 @@ namespace SauceNAO.Application.Commands;
 [BotCommandVisibility(BotCommandVisibility.Hidden)]
 class CreatorCommand(ITelegramBotClient client) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
     private string CreatorMessage => this.Context.Localizer["Creator"];
 
     /// <inheritdoc />
@@ -21,7 +20,7 @@ class CreatorCommand(ITelegramBotClient client) : BotCommandBase
         CancellationToken cancellationToken = default
     )
     {
-        return this.client.SendMessageAsync(
+        return client.SendMessageAsync(
             message.Chat.Id,
             this.CreatorMessage,
             parseMode: FormatStyles.HTML,

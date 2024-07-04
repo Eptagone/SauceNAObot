@@ -84,3 +84,6 @@ AnticheatsNoCheats=Ups, jangan curang kawan.
 AnticheatsAlreadyExists=Bot @{0} sudah ada di daftar AntiCheats.
 AnticheatsAlreadyRemoved=Bot @{0} tidak ada atau sudah dihapus dari daftar AntiCheats.
 AntiCheatsNotABot=Pengguna target bukan bot.
+
+# -------- Statistics --------
+Stats=<b>Statistik Penggunaan</b>\n{0} penelusuran berhasil.\nDigunakan oleh {1} pengguna aktif.\nDigunakan oleh {2} grup.

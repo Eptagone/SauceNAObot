@@ -17,20 +17,17 @@ namespace SauceNAO.Infrastructure.Services;
 /// <summary>
 /// Represents a service for working with Telegram files.
 /// </summary>
-/// <param name="botClient">The Telegram bot client.</param>
-/// <param name="memoryCache">The memory cache.</param>
+/// <param name="client">The Telegram bot client.</param>
+/// <param name="cache">The memory cache.</param>
 partial class TelegramFileService(
     ILogger<TelegramFileService> logger,
-    ITelegramBotClient botClient,
-    IMemoryCache memoryCache,
+    ITelegramBotClient client,
+    IMemoryCache cache,
     IHttpClientFactory httpClientFactory,
     IOptions<GeneralOptions> options,
     IOptions<TelegramBotOptions> botOptions
 ) : ITelegramFileService
 {
-    private readonly ILogger<TelegramFileService> logger = logger;
-    private readonly ITelegramBotClient client = botClient;
-    private readonly IMemoryCache cache = memoryCache;
     private readonly HttpClient httpClient = httpClientFactory.CreateClient(
         nameof(TelegramFileService)
     );
@@ -66,14 +63,14 @@ partial class TelegramFileService(
         }
 
         // Get the file from the cache or download it.
-        return await this.cache.GetOrCreateAsync(
+        return await cache.GetOrCreateAsync(
             $"FilePath:{fileId}",
             async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(12);
 
                 // Download the file and save it to the temporary directory.
-                var downloadUrl = this.client.BuildFileDownloadLink(telegramFile);
+                var downloadUrl = client.BuildFileDownloadLink(telegramFile);
                 if (string.IsNullOrWhiteSpace(downloadUrl))
                 {
                     return null;
@@ -122,7 +119,7 @@ partial class TelegramFileService(
             // If a public url is requested but there is no application URL then return null because the file is not accessible for public.
             if (publicAccess)
             {
-                this.logger.LogTelegramFileUrlError();
+                logger.LogTelegramFileUrlError();
                 return null;
             }
         }
@@ -157,7 +154,7 @@ partial class TelegramFileService(
                     return null;
                 }
                 // Ensure the token is not included in the URL.
-                if (localPath.Contains(this.client.Options.BotToken))
+                if (localPath.Contains(client.Options.BotToken))
                 {
                     // This should be impossible because it can only happen when a local server is used and that case is already handled above.
                     throw new InvalidOperationException("The file path contains the bot token.");
@@ -175,7 +172,7 @@ partial class TelegramFileService(
         }
         else
         {
-            return this.client.BuildFileDownloadLink(telegramFile);
+            return client.BuildFileDownloadLink(telegramFile);
         }
     }
 
@@ -188,17 +185,17 @@ partial class TelegramFileService(
         TelegramFile? file = null;
         try
         {
-            file = await this.cache.GetOrCreateAsync(
+            file = await cache.GetOrCreateAsync(
                 $"TelegramFile:{fileId}",
                 entry =>
                 {
                     // It's guaranteed that the file will be available for at least 1 hour according to the Telegram Bot API documentation.
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
-                    return this.client.GetFileAsync(fileId, cancellationToken);
+                    return client.GetFileAsync(fileId, cancellationToken);
                 }
             );
 
-            file ??= await this.client.GetFileAsync(fileId, cancellationToken);
+            file ??= await client.GetFileAsync(fileId, cancellationToken);
         }
         catch (BotRequestException exp)
         {

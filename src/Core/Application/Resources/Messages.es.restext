@@ -95,3 +95,6 @@ AnticheatsNoCheats=Vaya, no estás haciendo trampa, amigo.
 AnticheatsAlreadyExists=El bot @{0} ya existe en la lista de AntiCheats.
 AnticheatsAlreadyRemoved=El bot @{0} no existe o ya se eliminó de la lista de AntiCheats.
 AntiCheatsNotABot=El usuario de destino no es un bot.
+
+# -------- Statistics --------
+Stats=<b>Estadísticas de uso</b>\n{0} búsquedas exitosas.\nUtilizado por {1} usuarios activos.\nUtilizado por {2} grupos.

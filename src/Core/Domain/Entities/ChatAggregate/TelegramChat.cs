@@ -32,5 +32,5 @@ public class TelegramChat(long chatId, string title) : LocalizableEntityBase
     /// <summary>
     /// Anticheats of chat.
     /// </summary>
-    public ICollection<AntiCheatRestriction> Restrictions { get; } = [];
+    public virtual ICollection<AntiCheatRestriction> Restrictions { get; set; } = [];
 }

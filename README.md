@@ -1,6 +1,6 @@
 # SauceNAObot
 
-SauceNAO bot is a telegram bot written with CSharp.NET. This bot allows you to reverse search for images using the [saucenao](https://saucenao.com/) API.
+SauceNAO bot is a telegram bot that allows you to perform reverse image searches using the [saucenao](https://saucenao.com/) API.
 
 Try it! [@SauceNAObot](https://t.me/SauceNAObot)
 

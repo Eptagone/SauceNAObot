@@ -23,10 +23,10 @@ public class SearchRecord : EntityBase
     /// <summary>
     /// The user who made the search.
     /// </summary>
-    public TelegramUser User { get; set; } = null!;
+    public virtual TelegramUser User { get; set; } = null!;
 
     /// <summary>
     /// The media that was searched for.
     /// </summary>
-    public required SauceMedia Media { get; set; }
+    public virtual required SauceMedia Media { get; set; }
 }

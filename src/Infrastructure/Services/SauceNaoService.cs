@@ -1,6 +1,7 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using SauceNAO.Domain;
 using SauceNAO.Domain.Services;
@@ -12,9 +13,9 @@ namespace SauceNAO.Infrastructure.Services;
 /// <summary>
 /// Provides functionality to retrieve media information from the SauceNAO API.
 /// </summary>
-class SauceNaoService(ILogger<SauceNaoService> logger) : ISauceNaoService
+class SauceNaoService(ILogger<SauceNaoService> logger, IMemoryCache cache) : ISauceNaoService
 {
-    private readonly ILogger<SauceNaoService> logger = logger;
+    private const string SAUCENAO_BANNER_URL = "https://saucenao.com/images/static/banner.gif";
 
     /// <inheritdoc/>
     public async Task<Pantry?> SearchByUrlAsync(
@@ -29,7 +30,7 @@ class SauceNaoService(ILogger<SauceNaoService> logger) : ISauceNaoService
             var response = await client.SearchAsync(url, cancellationToken);
             if (response is null)
             {
-                this.logger.LogSnaoEmptyResponse();
+                logger.LogSnaoEmptyResponse();
                 return null;
             }
 
@@ -69,33 +70,87 @@ class SauceNaoService(ILogger<SauceNaoService> logger) : ISauceNaoService
                         r.Data.EstTime
                     );
                 });
-                return new Pantry(
-                    results,
-                    success.Header.AccountType == 2,
-                    success.Header.LongRemaining,
-                    false
-                );
+                return new Pantry(results, true, false);
             }
             else if (response is SnaoErrorResponse error)
             {
-                var limitReached = error.Header.Message.Contains("Search Rate Too High");
-                return new Pantry(
-                    [],
-                    error.Header.Message.Contains("404") || !limitReached,
-                    0,
-                    limitReached
-                );
+                var searchLimitReached = error.Header.Message.Contains("Search Rate Too High");
+                // If the error message is not search limit reached, log it.
+                if (!searchLimitReached)
+                {
+                    logger.LogSnaoError(error.Header.Message);
+                }
+                return new Pantry([], false, searchLimitReached);
             }
             else
             {
-                this.logger.LogSnaoUnknownResponse();
+                logger.LogSnaoUnknownResponse();
                 return null;
             }
         }
         catch (Exception e)
         {
-            this.logger.LogSnaoRequestFailed(e, e.Message);
+            logger.LogSnaoRequestFailed(e, e.Message);
             return null;
         }
+    }
+
+    /// <inheritdoc/>
+    public Task<bool?> IsPremiumUserAsync(
+        string apikey,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var cacheKey = $"saucenao-apikey-is-premium-{apikey}";
+
+        return cache.GetOrCreateAsync<bool?>(
+            cacheKey,
+            async entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
+
+                var client = new SauceNaoClient(OutputType.JsonApi, apikey);
+                try
+                {
+                    var response = await client.SearchAsync(SAUCENAO_BANNER_URL, cancellationToken);
+                    if (response is null)
+                    {
+                        logger.LogSnaoEmptyResponse();
+                        return null;
+                    }
+
+                    if (response is SnaoSuccessfulResponse success)
+                    {
+                        var isPremium = success.Header.AccountType == 2;
+                        if (isPremium)
+                        {
+                            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+                        }
+                        return isPremium;
+                    }
+                    else if (response is SnaoErrorResponse error)
+                    {
+                        var searchLimitReached = error.Header.Message.Contains(
+                            "Search Rate Too High"
+                        );
+                        // If the error message is not search limit reached, log it.
+                        if (!searchLimitReached)
+                        {
+                            logger.LogSnaoError(error.Header.Message);
+                        }
+                    }
+                    else
+                    {
+                        logger.LogSnaoUnknownResponse();
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.LogSnaoRequestFailed(e, e.Message);
+                }
+
+                return null;
+            }
+        );
     }
 }

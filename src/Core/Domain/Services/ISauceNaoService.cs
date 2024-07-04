@@ -19,4 +19,15 @@ public interface ISauceNaoService
         string apiKey,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Check if the given api key belongs to a premium user.
+    /// </summary>
+    /// <param name="apikey">The api key to check.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>True if the api key belongs to a premium user, false otherwise. If an error occurs, null is returned.</returns>
+    Task<bool?> IsPremiumUserAsync(
+        string apikey,
+        CancellationToken cancellationToken = default
+    );
 }

@@ -67,4 +67,9 @@ public sealed class ApplicationDbContext : DbContext
         modelBuilder.Entity<TelegramUser>().HasIndex(u => u.UserId).IsUnique();
         modelBuilder.Entity<TelegramChat>().HasIndex(c => c.ChatId).IsUnique();
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseLazyLoadingProxies();
+    }
 }

@@ -19,8 +19,6 @@ class UpdateReceiver(ILogger<UpdateReceiver> logger, IServiceProvider servicePro
     : BackgroundService,
         IUpdateReceiver
 {
-    private readonly ILogger<UpdateReceiver> logger = logger;
-    private readonly IServiceProvider serviceProvider = serviceProvider;
     private readonly Channel<Update> updates = Channel.CreateUnbounded<Update>();
 
     /// <inheritdoc />
@@ -28,7 +26,7 @@ class UpdateReceiver(ILogger<UpdateReceiver> logger, IServiceProvider servicePro
     {
         if (!this.updates.Writer.TryWrite(update))
         {
-            this.logger.LogFailedToAddUpdateToPool(update.UpdateId);
+            logger.LogFailedToAddUpdateToPool(update.UpdateId);
         }
     }
 
@@ -59,7 +57,7 @@ class UpdateReceiver(ILogger<UpdateReceiver> logger, IServiceProvider servicePro
     // Process the update.
     private async Task ProcessUpdateAsync(Update update)
     {
-        using var scope = this.serviceProvider.CreateScope();
+        using var scope = serviceProvider.CreateScope();
         try
         {
             var bot = scope.ServiceProvider.GetRequiredService<ISauceNaoBot>();
@@ -67,7 +65,7 @@ class UpdateReceiver(ILogger<UpdateReceiver> logger, IServiceProvider servicePro
         }
         catch (Exception e)
         {
-            this.logger.LogFailedToProcessUpdate(e, update.UpdateId);
+            logger.LogFailedToProcessUpdate(e, update.UpdateId);
         }
     }
 }

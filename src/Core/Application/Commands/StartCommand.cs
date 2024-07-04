@@ -14,7 +14,6 @@ namespace SauceNAO.Application.Commands;
 [TelegramBotCommand("start", "Starts the bot.")]
 sealed class StartCommand(ITelegramBotClient client) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
     private string AboutMessage => this.Context.Localizer["About"];
 
     /// <inheritdoc />
@@ -23,7 +22,7 @@ sealed class StartCommand(ITelegramBotClient client) : BotCommandBase
         CancellationToken cancellationToken = default
     )
     {
-        return this.client.SendMessageAsync(
+        return client.SendMessageAsync(
             message.Chat.Id,
             this.AboutMessage,
             parseMode: FormatStyles.HTML,

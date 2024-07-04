@@ -95,3 +95,9 @@ AnticheatsNoCheats=Ups, no cheating, my friend.
 AnticheatsAlreadyExists=Bot @{0} already exists in AntiCheats list.
 AnticheatsAlreadyRemoved=Bot @{0} doesn't exist or was already removed from AntiCheats list.
 AntiCheatsNotABot=The target user isn't a bot.
+
+# -------- Statistics --------
+Stats=<b>Usage Statistics</b>\n{0} successful searches.\nUsed by {1} active users.\nUsed by {2} groups.
+
+# -------- Languages --------
+Languages=<b>Detected Languages:</b>\n\n{0}

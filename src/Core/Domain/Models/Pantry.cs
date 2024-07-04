@@ -7,12 +7,10 @@ namespace SauceNAO.Domain;
 /// Represents a pantry.
 /// </summary>
 /// <param name="Recipes">A list of recipes to prepare sauces</param>
-/// <param name="IsChefAvailable">Indicates if a chef is available to cook sauces. (Only premium accounts can cook)</param>
-/// <param name="RemainingSauces">The number of sauces that can be prepared.</param>
-/// <param name="IsKitchenBusy">Indicates if the kitchen is busy. (Search limit reached)</param>
+/// <param name="Ok">Indicates if the operation was successful.</param>
+/// <param name="IsSearchLimitReached">Indicates if the search limit is reached.</param>
 public record Pantry(
     IEnumerable<Recipe> Recipes,
-    bool IsChefAvailable,
-    int RemainingSauces,
-    bool IsKitchenBusy
+    bool Ok,
+    bool IsSearchLimitReached
 );

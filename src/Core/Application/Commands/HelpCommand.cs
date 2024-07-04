@@ -17,7 +17,6 @@ namespace SauceNAO.Application.Commands;
 [TelegramBotCommand("help", "How to use the bot.", ["ayuda"])]
 class HelpCommand(ITelegramBotClient client, IOptions<GeneralOptions> options) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
     private readonly string? SupportChatLink = options.Value.SupportChatInvitationLink;
     private string SupportChatText => this.Context.Localizer["SupportChat"];
     private string HelpMessage => this.Context.Localizer["About"];
@@ -34,7 +33,7 @@ class HelpCommand(ITelegramBotClient client, IOptions<GeneralOptions> options) :
                 new InlineKeyboardBuilder().AppendUrl(this.SupportChatText, this.SupportChatLink)
             );
 
-        return this.client.SendMessageAsync(
+        return client.SendMessageAsync(
             message.Chat.Id,
             this.HelpMessage,
             parseMode: FormatStyles.HTML,

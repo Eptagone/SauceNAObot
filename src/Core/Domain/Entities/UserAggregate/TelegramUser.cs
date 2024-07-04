@@ -52,10 +52,10 @@ public class TelegramUser : LocalizableEntityBase
     /// <summary>
     /// List of API keys associated with this user.
     /// </summary>
-    public ICollection<SauceApiKey> ApiKeys { get; } = [];
+    public virtual ICollection<SauceApiKey> ApiKeys { get; set; } = [];
 
     /// <summary>
     /// List of search history entries associated with this user.
     /// </summary>
-    public ICollection<SearchRecord> SearchHistory { get; } = [];
+    public virtual ICollection<SearchRecord> SearchHistory { get; set; } = [];
 }

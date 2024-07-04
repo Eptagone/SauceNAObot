@@ -14,14 +14,12 @@ namespace SauceNAO.Tests;
 public class TelegramFileManagerTests(WebApplicationFactory<Program> applicationFactory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> applicationFactory = applicationFactory;
-
     [Fact]
     public async Task TestGetImagePath()
     {
         var fileId = this.GetTestFileId("Image");
 
-        using var scope = this.applicationFactory.Services.CreateScope();
+        using var scope = applicationFactory.Services.CreateScope();
         var fileService = scope.ServiceProvider.GetRequiredService<ITelegramFileService>();
         var path = await fileService.GetFilePathAsync(fileId, default);
         Assert.NotNull(path);
@@ -34,7 +32,7 @@ public class TelegramFileManagerTests(WebApplicationFactory<Program> application
     {
         var fileId = this.GetTestFileId("Image");
 
-        using var scope = this.applicationFactory.Services.CreateScope();
+        using var scope = applicationFactory.Services.CreateScope();
         var fileService = scope.ServiceProvider.GetRequiredService<ITelegramFileService>();
         var url = await fileService.GetFileUrlAsync(fileId, default);
         Assert.NotNull(url);
@@ -43,7 +41,7 @@ public class TelegramFileManagerTests(WebApplicationFactory<Program> application
     // Helper method to get a file ID from the configuration.
     private string GetTestFileId(string key)
     {
-        var configuration = this.applicationFactory.Services.GetRequiredService<IConfiguration>();
+        var configuration = applicationFactory.Services.GetRequiredService<IConfiguration>();
         var fileId = configuration[$"TestFileIds:{key}"];
         if (string.IsNullOrEmpty(fileId))
         {

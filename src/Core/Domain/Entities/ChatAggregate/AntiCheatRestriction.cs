@@ -20,5 +20,5 @@ public class AntiCheatRestriction(long restrictedBotId) : EntityBase
     /// <summary>
     /// The group that the restriction is applied to.
     /// </summary>
-    public TelegramChat Group { get; set; } = default!;
+    public virtual TelegramChat Group { get; set; } = default!;
 }

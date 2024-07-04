@@ -23,10 +23,6 @@ class SetLangCommand(
     IChatRepository chatRepository
 ) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
-    private readonly IUserRepository userRepository = userRepository;
-    private readonly IChatRepository chatRepository = chatRepository;
-
     private IStringLocalizer? currentLocalizer;
     private IStringLocalizer Localizer => this.currentLocalizer ??= this.Context.Localizer;
     private string HelpMsg => this.Localizer["SetLangHelp"];
@@ -51,7 +47,7 @@ class SetLangCommand(
         // If the language code was not passed or if it's not valid, send the default message.
         if (string.IsNullOrEmpty(languageCode) || !IsLanguageCodeValid(languageCode))
         {
-            await this.client.SendMessageAsync(
+            await client.SendMessageAsync(
                 message.Chat.Id,
                 this.HelpMsg,
                 parseMode: FormatStyles.HTML,
@@ -71,12 +67,12 @@ class SetLangCommand(
             this.User.LanguageCode = languageCode;
             this.User.AlwaysUseOwnLanguage = force;
             this.currentLocalizer = new BotMessagesLocalizer(languageCode);
-            await this.userRepository.UpdateAsync(this.User, cancellationToken);
+            await userRepository.UpdateAsync(this.User, cancellationToken);
         }
         else
         {
             // Check if the user is admin before setting the language.
-            var admins = await this.client.GetChatAdministratorsAsync(
+            var admins = await client.GetChatAdministratorsAsync(
                 message.Chat.Id,
                 cancellationToken: cancellationToken
             );
@@ -84,7 +80,7 @@ class SetLangCommand(
             // If the user is not an admin, send an error message.
             if (!admins.Any(admin => admin.User.Id == message.From!.Id))
             {
-                await this.client.SendMessageAsync(
+                await client.SendMessageAsync(
                     message.Chat.Id,
                     this.NotAllowedMsg,
                     replyParameters: new ReplyParameters
@@ -99,11 +95,11 @@ class SetLangCommand(
 
             this.Context.Group!.LanguageCode = languageCode;
             this.currentLocalizer = new BotMessagesLocalizer(languageCode);
-            await this.chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
+            await chatRepository.UpdateAsync(this.Context.Group, cancellationToken);
         }
 
         // Send the success message.
-        await this.client.SendMessageAsync(
+        await client.SendMessageAsync(
             message.Chat.Id,
             this.SavedPreferencesMsg,
             parseMode: FormatStyles.HTML,

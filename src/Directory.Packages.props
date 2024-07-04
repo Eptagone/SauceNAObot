@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.6" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />

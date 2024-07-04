@@ -23,4 +23,21 @@ class UserRepository(ApplicationDbContext context)
         var spec = new UserSpecification(userId);
         return spec.Evaluate(users).SingleOrDefault();
     }
+
+    /// <inheritdoc/>
+    public int CountActiveUsers()
+    {
+        var spec = new ActiveUserSpecification();
+        return spec.Evaluate(this.Context.Users).Count();
+    }
+
+    /// <inheritdoc/>
+    public IReadOnlyDictionary<string, int> GetLanguageCodes()
+    {
+        var languages = this
+            .Context.Users.GroupBy(u => u.LanguageCode)
+            .Select(u => new { LanguageCode = u.Key, Count = u.Count() });
+
+        return languages.ToDictionary(lc => lc.LanguageCode ?? "Unknown", lc => lc.Count);
+    }
 }

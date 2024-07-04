@@ -101,4 +101,10 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
             throw new ArgumentNullException(nameof(entity));
         }
     }
+
+    /// <inheritdoc/>
+    public int Count() => this.Context.Set<TEntity>().Count();
+
+    /// <inheritdoc/>
+    public Task<int> CountAsync(CancellationToken cancellationToken = default) => this.Context.Set<TEntity>().CountAsync(cancellationToken);
 }

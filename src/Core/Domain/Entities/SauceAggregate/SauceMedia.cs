@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using SauceNAO.Domain.Entities.UserAggregate;
+
 namespace SauceNAO.Domain.Entities.SauceAggregate;
 
 /// <summary>
@@ -27,10 +29,10 @@ public class SauceMedia : EntityBase
     /// The file's media type (photo, video, etc.).
     /// Used to send a message to the user with the media if needed.
     /// </summary>
-    public TelegramMediaType MediaType { get; set; }
+    public virtual TelegramMediaType MediaType { get; set; }
 
     /// <summary>
     /// List of sauces that were found for this media.
     /// </summary>
-    public ICollection<Sauce> Sauces { get; } = [];
+    public virtual ICollection<Sauce> Sauces { get; set; } = [];
 }

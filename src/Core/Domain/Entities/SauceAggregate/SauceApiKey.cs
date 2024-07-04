@@ -35,5 +35,5 @@ public class SauceApiKey(string name, string value) : EntityBase
     /// <summary>
     /// The user who owns this API key.
     /// </summary>
-    public TelegramUser Owner { get; set; } = default!;
+    public virtual TelegramUser Owner { get; set; } = default!;
 }

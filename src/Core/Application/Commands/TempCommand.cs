@@ -20,10 +20,6 @@ class TempCommand(
     IOptions<GeneralOptions> options
 ) : BotCommandBase
 {
-    private readonly ITelegramBotClient client = client;
-    private readonly ITelegramFileService fileService = fileService;
-    private readonly IFrameExtractor frameExtractor = frameExtractor;
-
     private readonly string? ApplicationUrl = options.Value.ApplicationURL;
 
     private string InvalidPhotoMessage => this.Context.Localizer["InvalidPhoto"];
@@ -46,7 +42,7 @@ class TempCommand(
         // If no media was found, send an error message and return.
         if (media is null)
         {
-            await this.client.SendMessageAsync(
+            await client.SendMessageAsync(
                 message.Chat.Id,
                 this.InvalidPhotoMessage,
                 replyParameters: new ReplyParameters()
@@ -60,7 +56,7 @@ class TempCommand(
         }
 
         // Send a message indicating that the bot is generating the link.
-        var responseMessage = await this.client.SendMessageAsync(
+        var responseMessage = await client.SendMessageAsync(
             message.Chat.Id,
             this.GeneratingTmpUrlMessage,
             replyParameters: new ReplyParameters()
@@ -87,7 +83,7 @@ class TempCommand(
                 // Videos are not supported in any way if the webhook is not available.
                 if (string.IsNullOrEmpty(this.ApplicationUrl))
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         responseMessage.Chat.Id,
                         responseMessage.MessageId,
                         this.UnsupportedFormatMessage,
@@ -98,7 +94,7 @@ class TempCommand(
 
                 if (media.Size is null || media.Size > SauceNaoUtilities.MAX_VIDEO_SIZE)
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         responseMessage.Chat.Id,
                         responseMessage.MessageId,
                         this.TooBigFileMessage,
@@ -107,13 +103,13 @@ class TempCommand(
                     return;
                 }
 
-                var videoPath = await this.fileService.GetFilePathAsync(
+                var videoPath = await fileService.GetFilePathAsync(
                     media.FileId,
                     cancellationToken
                 );
                 if (string.IsNullOrEmpty(videoPath))
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         responseMessage.Chat.Id,
                         responseMessage.MessageId,
                         this.TooBigFileMessage,
@@ -124,7 +120,7 @@ class TempCommand(
 
                 var frameFilename = $"{media.FileUniqueId}.jpg";
                 var framePath = Path.Join(Path.GetTempPath(), frameFilename);
-                await this.frameExtractor.ExtractAsync(videoPath, framePath, cancellationToken);
+                await frameExtractor.ExtractAsync(videoPath, framePath, cancellationToken);
                 imageUrl = $"{this.ApplicationUrl.TrimEnd('/')}/file/{frameFilename}";
             }
             else if (media.Size is null || media.Size <= SauceNaoUtilities.MAX_PHOTO_SIZE)
@@ -135,7 +131,7 @@ class TempCommand(
                     && !SauceNaoUtilities.SUPPORTED_IMAGE_FORMATS.Contains(mimeType)
                 )
                 {
-                    await this.client.EditMessageTextAsync(
+                    await client.EditMessageTextAsync(
                         responseMessage.Chat.Id,
                         responseMessage.MessageId,
                         this.UnsupportedFormatMessage,
@@ -144,7 +140,7 @@ class TempCommand(
                     return;
                 }
 
-                imageUrl = await this.fileService.GetFileUrlAsync(
+                imageUrl = await fileService.GetFileUrlAsync(
                     media.FileId,
                     true,
                     cancellationToken
@@ -155,7 +151,7 @@ class TempCommand(
         // If the imageUrl is null but a thumbnail is available, try to get the image url from the thumbnail.
         if (string.IsNullOrEmpty(imageUrl) && !string.IsNullOrEmpty(media.ThumbnailFileId))
         {
-            imageUrl = await this.fileService.GetFileUrlAsync(
+            imageUrl = await fileService.GetFileUrlAsync(
                 media.ThumbnailFileId,
                 true,
                 cancellationToken
@@ -165,7 +161,7 @@ class TempCommand(
         // If the image url is still null, then it's too big to download from Telegram servers.
         if (string.IsNullOrEmpty(imageUrl))
         {
-            await this.client.EditMessageTextAsync(
+            await client.EditMessageTextAsync(
                 responseMessage.Chat.Id,
                 responseMessage.MessageId,
                 this.TooBigFileMessage,
@@ -184,7 +180,7 @@ class TempCommand(
             .AppendUrl("SauceNAO", sauceNaoUrl);
 
         // Send the image url to the user.
-        await this.client.EditMessageTextAsync(
+        await client.EditMessageTextAsync(
             responseMessage.Chat.Id,
             responseMessage.MessageId,
             string.Format(this.TemporalUrlDoneMessage, imageUrl),

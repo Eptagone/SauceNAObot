@@ -23,14 +23,11 @@ namespace SauceNAO.Application.Commands;
 class ApiKeyCommand(
     ITelegramBotClient client,
     IUserStateManager stateManager,
-    IMemoryCache cache,
     ISauceNaoService sauceNao,
     IUserRepository userRepository
 ) : BotCommandStateHandlerBase
 {
     internal const string COMMAND_NAME = "apikey";
-    private const string SAUCENAO_BANNER_URL = "https://saucenao.com/images/static/banner.gif";
-
     private const string ACTION_PARAM_NAME = "action";
     private const string ADD_VALUE = "add";
     private const string DELETE_VALUE = "delete";
@@ -38,11 +35,6 @@ class ApiKeyCommand(
     private const string IS_PUBLIC_PARAM_NAME = "isPublic";
     private const string NAME_PARAM_NAME = "name";
 
-    private readonly ITelegramBotClient client = client;
-    private readonly IUserStateManager stateManager = stateManager;
-    private readonly IMemoryCache cache = cache;
-    private readonly ISauceNaoService sauceNao = sauceNao;
-    private readonly IUserRepository userRepository = userRepository;
     private string HelpMessage => this.Context.Localizer["ApiKeyHelp"];
     private string ListMessage => this.Context.Localizer["ApiKeyList"];
     private string ListEmptyMessage => this.Context.Localizer["ApiKeyListEmpty"];
@@ -128,7 +120,7 @@ class ApiKeyCommand(
                                     this.User.ApiKeys.Select(a => $"<code>{a.Name}</code>")
                                 )
                             );
-                    return this.client.SendMessageAsync(
+                    return client.SendMessageAsync(
                         message.Chat.Id,
                         text,
                         parseMode: FormatStyles.HTML,
@@ -149,7 +141,7 @@ class ApiKeyCommand(
                     var apikey = this.User.ApiKeys.FirstOrDefault(a => a.Name == args[1]);
                     if (apikey is null)
                     {
-                        return this.client.SendMessageAsync(
+                        return client.SendMessageAsync(
                             message.Chat.Id,
                             this.CouldNotBeFoundMessage,
                             replyParameters: new ReplyParameters
@@ -162,7 +154,7 @@ class ApiKeyCommand(
                         );
                     }
 
-                    return this.client.SendMessageAsync(
+                    return client.SendMessageAsync(
                         message.Chat.Id,
                         string.Format(this.DetailMessage, apikey.Value),
                         parseMode: FormatStyles.HTML,
@@ -175,7 +167,7 @@ class ApiKeyCommand(
                         cancellationToken: cancellationToken
                     );
                 default:
-                    return this.client.SendMessageAsync(
+                    return client.SendMessageAsync(
                         message.Chat.Id,
                         this.HelpMessage,
                         parseMode: FormatStyles.HTML,
@@ -205,7 +197,7 @@ class ApiKeyCommand(
         message.Text = null;
 
         // Save the user state.
-        this.stateManager.CreateOrUpdateState(state);
+        stateManager.CreateOrUpdateState(state);
 
         // Continue resolving the state.
         await this.ResolveStateAsync(state, message, cancellationToken);
@@ -234,7 +226,7 @@ class ApiKeyCommand(
                         // If the user did not respond, ask again.
                         if (string.IsNullOrEmpty(userResponse))
                         {
-                            await this.client.SendMessageAsync(
+                            await client.SendMessageAsync(
                                 userState.ChatId,
                                 this.AskForKeyNameMessage,
                                 parseMode: FormatStyles.HTML,
@@ -259,7 +251,7 @@ class ApiKeyCommand(
                     // If the name is already defined, ask again.
                     if (this.User.ApiKeys.Any(x => x.Name == name))
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.NameNotAvailableMessage,
                             replyParameters: new ReplyParameters
@@ -273,7 +265,7 @@ class ApiKeyCommand(
                         if (userState.Data.ContainsKey(NAME_PARAM_NAME))
                         {
                             userState.Data[NAME_PARAM_NAME] = null;
-                            this.stateManager.CreateOrUpdateState(userState);
+                            stateManager.CreateOrUpdateState(userState);
                         }
                         return;
                     }
@@ -281,7 +273,7 @@ class ApiKeyCommand(
                     // Back up the name.
                     userState.Data[NAME_PARAM_NAME] = name;
                     // Back up the user state.
-                    this.stateManager.CreateOrUpdateState(userState);
+                    stateManager.CreateOrUpdateState(userState);
 
                     // If the apikey is not defined, try to get it from the message.
                     if (string.IsNullOrEmpty(apikey))
@@ -294,7 +286,7 @@ class ApiKeyCommand(
                     // If the message does not contain an apikey, ask for one again.
                     if (string.IsNullOrEmpty(apikey))
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.AskForKeyMessage,
                             replyParameters: new ReplyParameters
@@ -309,7 +301,7 @@ class ApiKeyCommand(
                     // If the apikey already exists, inform the user and wait for a new one.
                     else if (this.User.ApiKeys.Any(x => x.Value == apikey))
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.ApiKeyAlreadyExistsMessage,
                             replyParameters: new ReplyParameters
@@ -323,16 +315,16 @@ class ApiKeyCommand(
                         if (userState.Data.ContainsKey(API_KEY_PARAM_NAME))
                         {
                             userState.Data[API_KEY_PARAM_NAME] = null;
-                            this.stateManager.CreateOrUpdateState(userState);
+                            stateManager.CreateOrUpdateState(userState);
                         }
                         return;
                     }
 
-                    var isValid = await this.ValidateApiKeyAsync(apikey, cancellationToken);
+                    var isValid = await sauceNao.IsPremiumUserAsync(apikey, cancellationToken);
                     // If the apikey could not be validated, cancel the operation.
                     if (isValid is null)
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.CouldNotBeAddedMessage,
                             replyParameters: new ReplyParameters
@@ -343,14 +335,14 @@ class ApiKeyCommand(
                             cancellationToken: cancellationToken
                         );
                         // Remove the user state.
-                        this.stateManager.RemoveState(userState);
+                        stateManager.RemoveState(userState);
                         return;
                     }
 
                     // If the apikey is not premium, cancel the operation.
                     if (isValid == false)
                     {
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.AddNotPremiumMessage,
                             replyParameters: new ReplyParameters
@@ -361,7 +353,7 @@ class ApiKeyCommand(
                             cancellationToken: cancellationToken
                         );
                         // Remove the user state.
-                        this.stateManager.RemoveState(userState);
+                        stateManager.RemoveState(userState);
                         return;
                     }
 
@@ -378,7 +370,7 @@ class ApiKeyCommand(
                             var keyboard = new ReplyKeyboardBuilder()
                                 .AppendText(this.YesLabel)
                                 .AppendText(this.NoLabel);
-                            await this.client.SendMessageAsync(
+                            await client.SendMessageAsync(
                                 userState.ChatId,
                                 this.AskForShareMessage,
                                 replyParameters: new ReplyParameters
@@ -412,10 +404,10 @@ class ApiKeyCommand(
                     }
 
                     // Remove the user state.
-                    this.stateManager.RemoveState(userState);
+                    stateManager.RemoveState(userState);
 
                     // Tell the user that the apikey has been added.
-                    await this.client.SendMessageAsync(
+                    await client.SendMessageAsync(
                         userState.ChatId,
                         this.AddSuccessMessage,
                         replyParameters: new ReplyParameters
@@ -430,7 +422,7 @@ class ApiKeyCommand(
                     this.User.ApiKeys.Add(
                         new SauceApiKey(name, apikey) { IsPublic = isPublic == true }
                     );
-                    await this.userRepository.UpdateAsync(this.User, cancellationToken);
+                    await userRepository.UpdateAsync(this.User, cancellationToken);
                 }
                 break;
             case DELETE_VALUE:
@@ -443,7 +435,7 @@ class ApiKeyCommand(
                             .AppendText(this.YesLabel)
                             .AppendText(this.NoLabel);
                         // Ask for confirmation.
-                        await this.client.SendMessageAsync(
+                        await client.SendMessageAsync(
                             message.Chat.Id,
                             this.ConfirmDeleteMessage,
                             replyParameters: new ReplyParameters
@@ -468,8 +460,8 @@ class ApiKeyCommand(
                         if (apikey is not null)
                         {
                             this.User.ApiKeys.Remove(apikey);
-                            await this.userRepository.UpdateAsync(this.User, cancellationToken);
-                            await this.client.SendMessageAsync(
+                            await userRepository.UpdateAsync(this.User, cancellationToken);
+                            await client.SendMessageAsync(
                                 userState.ChatId,
                                 this.ApiKeyDeletedMessage,
                                 replyParameters: new ReplyParameters
@@ -483,12 +475,12 @@ class ApiKeyCommand(
                         }
 
                         // Remove the user state.
-                        this.stateManager.RemoveState(userState);
+                        stateManager.RemoveState(userState);
                     }
                     else if (message.Text == this.NoLabel)
                     {
-                        await this.userRepository.UpdateAsync(this.User, cancellationToken);
-                        await this.client.SendMessageAsync(
+                        await userRepository.UpdateAsync(this.User, cancellationToken);
+                        await client.SendMessageAsync(
                             userState.ChatId,
                             this.CancelMessage,
                             replyParameters: new ReplyParameters
@@ -501,44 +493,11 @@ class ApiKeyCommand(
                         );
 
                         // Remove the user state.
-                        this.stateManager.RemoveState(userState);
+                        stateManager.RemoveState(userState);
                     }
                 }
 
                 break;
         }
-    }
-
-    // Validate if the user has a valid API key.
-    private Task<bool?> ValidateApiKeyAsync(string apikey, CancellationToken cancellationToken)
-    {
-        var cacheKey = $"saucenao-apikey-is-premium-{apikey}";
-
-        return this.cache.GetOrCreateAsync<bool?>(
-            cacheKey,
-            async entry =>
-            {
-                var pantry = await this.sauceNao.SearchByUrlAsync(
-                    SAUCENAO_BANNER_URL,
-                    apikey,
-                    cancellationToken
-                );
-
-                if (pantry is null)
-                {
-                    // Don't cache.
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
-                    return null;
-                }
-
-                // Only cache if the user is premium.
-                if (pantry.IsChefAvailable)
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
-                }
-
-                return pantry.IsChefAvailable;
-            }
-        );
     }
 }
