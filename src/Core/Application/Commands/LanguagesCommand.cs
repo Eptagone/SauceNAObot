@@ -55,6 +55,7 @@ class LanguagesCommand(
     private string GetLanguageCodesMsg()
     {
         var languageCodesText = userRepository.GetLanguageCodes()
+            .OrderByDescending(lc => lc.Value)
             .Select(lc => $"<b>{lc.Key}:</b> [{lc.Value}]");
 
         return this.Context.Localizer["Languages", string.Join("\n", languageCodesText)];
