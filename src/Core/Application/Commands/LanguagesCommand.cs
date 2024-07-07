@@ -28,20 +28,21 @@ class LanguagesCommand(
     /// <inheritdoc />
     protected override async Task InvokeAsync(Message message, CancellationToken cancellationToken)
     {
-        await client.SendChatActionAsync(
-            message.Chat.Id,
-            ChatActions.Typing,
-            cancellationToken: cancellationToken
-        );
-
-        var statsMessage = cache.GetOrCreate(
-            "snao-languages-msg",
-            entry =>
-            {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
-                return this.GetLanguageCodesMsg();
-            }
-        ) ?? this.GetLanguageCodesMsg();
+        var statsMessage =
+            await cache.GetOrCreateAsync(
+                "snao-languages-msg",
+                async entry =>
+                {
+                    // Send a message indicating that the bot is processing the command.
+                    await client.SendChatActionAsync(
+                        message.Chat.Id,
+                        ChatActions.Typing,
+                        cancellationToken: cancellationToken
+                    );
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                    return this.GetLanguageCodesMsg();
+                }
+            ) ?? this.GetLanguageCodesMsg();
 
         await client.SendMessageAsync(
             message.Chat.Id,
@@ -54,7 +55,8 @@ class LanguagesCommand(
     // Generates the message with the statistics.
     private string GetLanguageCodesMsg()
     {
-        var languageCodesText = userRepository.GetLanguageCodes()
+        var languageCodesText = userRepository
+            .GetLanguageCodes()
             .OrderByDescending(lc => lc.Value)
             .Select(lc => $"<b>{lc.Key}:</b> [{lc.Value}]");
 

@@ -4,7 +4,7 @@
 using Microsoft.Extensions.Hosting;
 using Telegram.BotAPI.GettingUpdates;
 
-namespace SauceNAO.Application;
+namespace SauceNAO.Application.Services;
 
 /// <summary>
 /// Defines a method to receive updates to be processed by the Telegram bot.

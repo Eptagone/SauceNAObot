@@ -99,9 +99,11 @@ class SauceNaoBotSetup(
         // Setup the webhook if it is configured.
         if (!string.IsNullOrEmpty(webhookUrl) && !string.IsNullOrEmpty(secretToken))
         {
+            var url = new Uri(new Uri(webhookUrl), "/webhook");
+
             logger.LogWebhookSetUp();
             await client.SetWebhookAsync(
-                webhookUrl,
+                url.ToString(),
                 secretToken: secretToken,
                 cancellationToken: cancellationToken
             );

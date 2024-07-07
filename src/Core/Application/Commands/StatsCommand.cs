@@ -13,11 +13,7 @@ namespace SauceNAO.Application.Commands;
 /// <summary>
 /// Represents a command that shows the bot usage statistics.
 /// </summary>
-[TelegramBotCommand(
-    "stats",
-    "Shows the bot usage statistics.",
-    ["statistics", "estadisticas"]
-)]
+[TelegramBotCommand("stats", "Shows the bot usage statistics.", ["statistics", "estadisticas"])]
 [BotCommandVisibility(BotCommandVisibility.Default)]
 class StatsCommand(
     ITelegramBotClient client,
@@ -30,20 +26,21 @@ class StatsCommand(
     /// <inheritdoc />
     protected override async Task InvokeAsync(Message message, CancellationToken cancellationToken)
     {
-        await client.SendChatActionAsync(
-            message.Chat.Id,
-            ChatActions.Typing,
-            cancellationToken: cancellationToken
-        );
-
-        var statsMessage = cache.GetOrCreate(
-            "snao-stats-msg",
-            entry =>
-            {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
-                return this.GetStatsMessage();
-            }
-        ) ?? this.GetStatsMessage();
+        var statsMessage =
+            await cache.GetOrCreateAsync(
+                "snao-stats-msg",
+                async entry =>
+                {
+                    // Send a message indicating that the bot is processing the command.
+                    await client.SendChatActionAsync(
+                        message.Chat.Id,
+                        ChatActions.Typing,
+                        cancellationToken: cancellationToken
+                    );
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                    return this.GetStatsMessage();
+                }
+            ) ?? this.GetStatsMessage();
 
         await client.SendMessageAsync(
             message.Chat.Id,

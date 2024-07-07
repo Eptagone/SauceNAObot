@@ -3,7 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using SauceNAO.Application;
+using SauceNAO.Application.Services;
 using SauceNAO.Domain;
 using Telegram.BotAPI;
 using Telegram.BotAPI.GettingUpdates;
@@ -23,7 +23,7 @@ public class WebhookController(
 {
     private readonly string? secretToken = botOptions.Value.SecretToken;
 
-    [HttpPost("~/")]
+    [HttpPost("~/webhook")]
     public IActionResult Index(
         [FromHeader(Name = TelegramConstants.XTelegramBotApiSecretToken)] string secretToken,
         [FromBody] Update update

@@ -61,6 +61,13 @@ class SetLangCommand(
             return;
         }
 
+        // Send a message indicating that the bot is processing the command.
+        await client.SendChatActionAsync(
+            message.Chat.Id,
+            ChatActions.Typing,
+            cancellationToken: cancellationToken
+        );
+
         // Set the language.
         if (isPrivate)
         {

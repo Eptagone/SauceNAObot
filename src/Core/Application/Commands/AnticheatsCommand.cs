@@ -55,6 +55,13 @@ class AnticheatsCommand(ITelegramBotClient client, IChatRepository chatRepositor
                 );
             }
 
+            // Send a message indicating that the bot is processing the command.
+            await client.SendChatActionAsync(
+                message.Chat.Id,
+                ChatActions.Typing,
+                cancellationToken: cancellationToken
+            );
+
             var operation = args.ElementAtOrDefault(0);
             switch (operation)
             {

@@ -65,6 +65,12 @@ class ApiKeyCommand(
         // Process the command only in private chats.
         if (message.Chat.Type == ChatTypes.Private)
         {
+            // Send a message indicating that the bot is processing the command.
+            client.SendChatAction(
+                message.Chat.Id,
+                ChatActions.Typing
+            );
+
             var action = args.FirstOrDefault() ?? "help";
             switch (action)
             {

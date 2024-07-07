@@ -24,6 +24,12 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
         CancellationToken cancellationToken = default
     )
     {
+        // Send a message indicating that the bot is processing the command.
+        client.SendChatAction(
+            message.Chat.Id,
+            ChatActions.Typing
+        );
+
         var action = args.FirstOrDefault();
 
         switch (action)

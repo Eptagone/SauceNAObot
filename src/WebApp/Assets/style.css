@@ -1,0 +1,14 @@
+/**
+ * Name: style.css
+ * Description: Global styles for the SauceNAO bot web app.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: black;
+    color: white;
+    height: 100vh;
+}

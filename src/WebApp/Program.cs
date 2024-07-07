@@ -5,6 +5,8 @@ using SauceNAO.Application;
 using SauceNAO.Domain;
 using SauceNAO.Infrastructure;
 using SauceNAO.WebApp;
+using SauceNAO.WebApp.Components;
+using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,8 +31,24 @@ if (useLongPolling)
     builder.Services.AddHostedService<LongPollingWorker>();
 }
 
+builder.Services.AddRazorComponents();
+builder.Services.AddViteServices(options =>
+{
+    options.Server.AutoRun = true;
+});
+
 var app = builder.Build();
 
+app.UseStaticFiles();
+
+app.UseAntiforgery();
 app.MapControllers();
+app.MapRazorComponents<App>();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseWebSockets();
+    app.UseViteDevelopmentServer(true);
+}
 
 app.Run();
