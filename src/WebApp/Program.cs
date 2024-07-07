@@ -34,6 +34,7 @@ if (useLongPolling)
 builder.Services.AddRazorComponents();
 builder.Services.AddViteServices(options =>
 {
+    options.Base = "/dist/";
     options.Server.AutoRun = true;
 });
 

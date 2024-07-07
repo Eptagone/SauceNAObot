@@ -9,6 +9,7 @@ import tailwindcss from "tailwindcss";
 export default {
     appType: 'custom',
     publicDir: false,
+    base: "/dist/",
     build: {
         manifest: true,
         assetsDir: ".",

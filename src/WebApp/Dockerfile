@@ -24,6 +24,7 @@ COPY --from=install-runtime /opt/microsoft/dotnet /opt/microsoft/dotnet
 RUN ln -s /opt/microsoft/dotnet/dotnet /usr/bin/dotnet
 
 FROM dotnet-sdk AS build
+RUN apk add nodejs npm
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["WebApp/SauceNAO.WebApp.csproj", "WebApp/"]
