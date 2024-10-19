@@ -25,7 +25,7 @@ public class SauceApiKey(string name, string value) : EntityBase
     /// <summary>
     /// Date and time of last update.
     /// </summary>
-    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.Now;
 
     /// <summary>
     /// True if the user granted authorization to the bot to use this API key for public searches.

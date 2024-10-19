@@ -1,9 +1,11 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using SauceNAO.Domain;
+using SauceNAO.Domain.Extensions;
 using SauceNAO.Domain.Services;
 using SauceNAO.Infrastructure.API;
 using SauceNAO.Infrastructure.API.Types;
@@ -13,7 +15,7 @@ namespace SauceNAO.Infrastructure.Services;
 /// <summary>
 /// Provides functionality to retrieve media information from the SauceNAO API.
 /// </summary>
-class SauceNaoService(ILogger<SauceNaoService> logger, IMemoryCache cache) : ISauceNaoService
+class SauceNaoService(ILogger<SauceNaoService> logger, IDistributedCache cache) : ISauceNaoService
 {
     private const string SAUCENAO_BANNER_URL = "https://saucenao.com/images/static/banner.gif";
 
@@ -101,11 +103,11 @@ class SauceNaoService(ILogger<SauceNaoService> logger, IMemoryCache cache) : ISa
         CancellationToken cancellationToken = default
     )
     {
-        var cacheKey = $"saucenao-apikey-is-premium-{apikey}";
+        var cacheKey = $"snao:apikey-is-premium:{apikey}";
 
-        return cache.GetOrCreateAsync<bool?>(
+        return cache.GetOrCreateAsync(
             cacheKey,
-            async entry =>
+            async (entry) =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
 
@@ -150,7 +152,8 @@ class SauceNaoService(ILogger<SauceNaoService> logger, IMemoryCache cache) : ISa
                 }
 
                 return null;
-            }
+            },
+            cancellationToken
         );
     }
 }

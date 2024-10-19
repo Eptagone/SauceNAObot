@@ -10,4 +10,4 @@ namespace SauceNAO.Application.Models;
 /// <param name="ChatId">Unique identifier for the chat where the bot is waiting for the user's response.</param>
 /// <param name="UserId">Unique identifier for the user that is currently interacting with the bot.</param>
 /// <param name="Data">Additional data associated with the user state.</param>
-public record UserState(string Scope, long ChatId, long UserId, IDictionary<string, object?> Data);
+public record UserState(string Scope, long ChatId, long UserId, IDictionary<string, string?> Data);

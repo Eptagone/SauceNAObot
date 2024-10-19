@@ -13,7 +13,7 @@ public class SearchRecord : EntityBase
     /// <summary>
     /// The date the search was made.
     /// </summary>
-    public DateTime SearchedAt { get; set; }
+    public DateTimeOffset SearchedAt { get; set; }
 
     /// <summary>
     /// The similarity of the search.

@@ -1,7 +1,8 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using SauceNAO.Domain.Extensions;
 using SauceNAO.Domain.Repositories;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
@@ -17,7 +18,7 @@ namespace SauceNAO.Application.Commands;
 [BotCommandVisibility(BotCommandVisibility.Default)]
 class StatsCommand(
     ITelegramBotClient client,
-    IMemoryCache cache,
+    IDistributedCache cache,
     ISauceMediaRepository mediaRepository,
     IUserRepository userRepository,
     IChatRepository chatRepository
@@ -28,7 +29,7 @@ class StatsCommand(
     {
         var statsMessage =
             await cache.GetOrCreateAsync(
-                "snao-stats-msg",
+                "snao:stats-msg",
                 async entry =>
                 {
                     // Send a message indicating that the bot is processing the command.
@@ -37,9 +38,10 @@ class StatsCommand(
                         ChatActions.Typing,
                         cancellationToken: cancellationToken
                     );
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(10);
                     return this.GetStatsMessage();
-                }
+                },
+                cancellationToken
             ) ?? this.GetStatsMessage();
 
         await client.SendMessageAsync(

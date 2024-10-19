@@ -2,10 +2,12 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using System.Security;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SauceNAO.Domain;
+using SauceNAO.Domain.Extensions;
 using SauceNAO.Domain.Services;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
@@ -22,7 +24,7 @@ namespace SauceNAO.Infrastructure.Services;
 partial class TelegramFileService(
     ILogger<TelegramFileService> logger,
     ITelegramBotClient client,
-    IMemoryCache cache,
+    IDistributedCache cache,
     IHttpClientFactory httpClientFactory,
     IOptions<GeneralOptions> options,
     IOptions<TelegramBotOptions> botOptions
@@ -64,10 +66,10 @@ partial class TelegramFileService(
 
         // Get the file from the cache or download it.
         return await cache.GetOrCreateAsync(
-            $"FilePath:{fileId}",
+            $"snao:file-path:{fileId}",
             async entry =>
             {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(12);
+                entry.SlidingExpiration = TimeSpan.FromHours(12);
 
                 // Download the file and save it to the temporary directory.
                 var downloadUrl = client.BuildFileDownloadLink(telegramFile);
@@ -93,7 +95,8 @@ partial class TelegramFileService(
                 stream.CopyTo(fileStream);
 
                 return tmpPath;
-            }
+            },
+            cancellationToken
         );
     }
 
@@ -186,13 +189,14 @@ partial class TelegramFileService(
         try
         {
             file = await cache.GetOrCreateAsync(
-                $"TelegramFile:{fileId}",
+                $"snao:telegram-file:{fileId}",
                 entry =>
                 {
                     // It's guaranteed that the file will be available for at least 1 hour according to the Telegram Bot API documentation.
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
                     return client.GetFileAsync(fileId, cancellationToken);
-                }
+                },
+                cancellationToken
             );
 
             file ??= await client.GetFileAsync(fileId, cancellationToken);

@@ -1,7 +1,8 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using SauceNAO.Domain.Extensions;
 using SauceNAO.Domain.Repositories;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
@@ -21,7 +22,7 @@ namespace SauceNAO.Application.Commands;
 [BotCommandVisibility(BotCommandVisibility.Hidden)]
 class LanguagesCommand(
     ITelegramBotClient client,
-    IMemoryCache cache,
+    IDistributedCache cache,
     IUserRepository userRepository
 ) : BotCommandBase
 {
@@ -30,7 +31,7 @@ class LanguagesCommand(
     {
         var statsMessage =
             await cache.GetOrCreateAsync(
-                "snao-languages-msg",
+                "snao:languages-msg",
                 async entry =>
                 {
                     // Send a message indicating that the bot is processing the command.
@@ -39,9 +40,10 @@ class LanguagesCommand(
                         ChatActions.Typing,
                         cancellationToken: cancellationToken
                     );
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(10);
                     return this.GetLanguageCodesMsg();
-                }
+                },
+                cancellationToken
             ) ?? this.GetLanguageCodesMsg();
 
         await client.SendMessageAsync(

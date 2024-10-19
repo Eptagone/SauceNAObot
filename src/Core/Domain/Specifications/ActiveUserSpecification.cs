@@ -13,5 +13,5 @@ public class ActiveUserSpecification : SpecificationBase<TelegramUser>
 {
     /// <inheritdoc/>
     protected override Expression<Func<TelegramUser, bool>> Expression =>
-        user => user.SearchHistory.Where(s => s.SearchedAt > DateTime.Now.AddDays(-7)).Any();
+        user => user.SearchHistory.Where(s => s.SearchedAt > DateTimeOffset.Now.AddDays(-7)).Any();
 }

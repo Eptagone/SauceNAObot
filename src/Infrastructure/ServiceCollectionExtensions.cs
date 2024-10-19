@@ -45,7 +45,7 @@ public static class ServiceCollectionExtensions
         // Register the application database context and repositories.
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("Default"));
+            options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IChatRepository, ChatRepository>();
@@ -77,9 +77,7 @@ public static class ServiceCollectionExtensions
         services.Configure<TelegramBotOptions>(
             configuration.GetSection(TelegramBotOptions.SectionName)
         );
-        services.Configure<GeneralOptions>(
-            configuration.GetSection(GeneralOptions.SectionName)
-        );
+        services.Configure<GeneralOptions>(configuration.GetSection(GeneralOptions.SectionName));
 
         // Add HTTP client services.
         services.AddHttpClient();
@@ -101,7 +99,18 @@ public static class ServiceCollectionExtensions
         services.AddHttpClient(nameof(TelegramFileService));
 
         // Add caching services.
-        services.AddMemoryCache();
+        var redisConnectionString = configuration.GetConnectionString("Redis");
+        if (string.IsNullOrWhiteSpace(redisConnectionString))
+        {
+            services.AddDistributedMemoryCache();
+        }
+        else
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnectionString;
+            });
+        }
         // Register the Telegram file service.
         services.AddSingleton<ITelegramFileService, TelegramFileService>();
 

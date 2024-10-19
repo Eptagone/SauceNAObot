@@ -10,43 +10,53 @@ services:
       PORT:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_HTTP_PORTS: 80
-      CONNECTIONSTRINGS__DEFAULT: "Data Source=db;Initial Catalog=snao;User ID=sa;Password=${MSSQL_SA_PASSWORD};Trust Server Certificate=True"
+      CONNECTIONSTRINGS__DEFAULT: # "Server=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
+      # CONNECTIONSTRINGS__REDIS: "redis:6379"
       TELEGRAMBOT__BOTTOKEN:
-      TELEGRAMBOT__SERVERADDRESS: http://local-bot-api-server:8081
-      TELEGRAMBOT__WEBHOOKURL: http://app
+      # TELEGRAMBOT__SERVERADDRESS: http://local-bot-api-server:8081
+      # TELEGRAMBOT__WEBHOOKURL: http://app
       TELEGRAMBOT__SECRETTOKEN:
       GENERAL__APPLICATIONURL:
       GENERAL__SUPPORTCHATINVITATIONLINK:
-      GENERAL__FILESPATH: /files:/opt/tba/${TELEGRAMBOT__BOTTOKEN}
+      # GENERAL__FILESPATH: /files:/opt/tba/${TELEGRAMBOT__BOTTOKEN}
       GENERAL__FFMPEGPATH:
     ports:
       - ${PORT:-80}:80
-    volumes:
-      - "files:/files"
-    depends_on:
-      - db
-      - local-bot-api-server
+    # volumes:
+    #   - "files:/files"
+    # depends_on:
+    #   - db
+    #   - redis
+    #   - local-bot-api-server
 
-  db:
-    image: mcr.microsoft.com/azure-sql-edge:latest
-    environment:
-      ACCEPT_EULA: Y
-      MSSQL_PID: Premium
-      MSSQL_SA_PASSWORD:
-    volumes:
-      - data:/var/opt/mssql
+  # db:
+  #   image: postgres:alpine
+  #   environment:
+  #     POSTGRES_USER: snao_user
+  #     POSTGRES_DB: snao
+  #     POSTGRES_PASSWORD:
+  #     POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+  #   volumes:
+  #     - data:/var/lib/postgresql/data
 
-  local-bot-api-server:
-    build: local-server
-    environment:
-      TELEGRAM_API_ID:
-      TELEGRAM_API_HASH:
-      TELEGRAMBOT__BOTTOKEN:
-    volumes:
-      - type: volume
-        source: files
-        target: /opt/tba/${TELEGRAMBOT__BOTTOKEN}
+  # local-bot-api-server:
+  #   build: local-server
+  #   environment:
+  #     TELEGRAM_API_ID:
+  #     TELEGRAM_API_HASH:
+  #     TELEGRAMBOT__BOTTOKEN:
+  #   volumes:
+  #     - type: volume
+  #       source: files
+  #       target: /opt/tba/${TELEGRAMBOT__BOTTOKEN}
 
-volumes:
-  files:
-  data:
+  # redis:
+  #   image: redis:alpine
+  #   environment:
+  #     REDIS_ARGS: "--maxmemory 512mb --maxmemory-policy allkeys-lru"
+  #   ports:
+  #     - ${REDIS_PORT:-6379}:6379
+
+# volumes:
+#   data:
+#   files:

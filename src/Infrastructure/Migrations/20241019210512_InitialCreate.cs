@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -15,12 +16,12 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "Chats",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ChatId = table.Column<long>(type: "bigint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
-                    LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true)
+                    Title = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    Username = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
+                    LanguageCode = table.Column<string>(type: "character varying(8)", maxLength: 8, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,17 +32,17 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "Sauces",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Similarity = table.Column<float>(type: "real", nullable: false),
-                    Links = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Characters = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Part = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EstimationTime = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Links = table.Column<string[]>(type: "text[]", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Author = table.Column<string>(type: "text", nullable: true),
+                    Characters = table.Column<string>(type: "text", nullable: true),
+                    Material = table.Column<string>(type: "text", nullable: true),
+                    Part = table.Column<string>(type: "text", nullable: true),
+                    Year = table.Column<string>(type: "text", nullable: true),
+                    EstimationTime = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,12 +53,12 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "SearchedMedias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FileUniqueId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FileId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThumbnailFileId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MediaType = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FileUniqueId = table.Column<string>(type: "text", nullable: false),
+                    FileId = table.Column<string>(type: "text", nullable: false),
+                    ThumbnailFileId = table.Column<string>(type: "text", nullable: true),
+                    MediaType = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,16 +69,16 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Username = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
-                    AlwaysUseOwnLanguage = table.Column<bool>(type: "bit", nullable: false),
-                    PrivateChatStarted = table.Column<bool>(type: "bit", nullable: false),
-                    SaveRecentSauces = table.Column<bool>(type: "bit", nullable: false),
-                    LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true)
+                    FirstName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    Username = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
+                    AlwaysUseOwnLanguage = table.Column<bool>(type: "boolean", nullable: false),
+                    PrivateChatStarted = table.Column<bool>(type: "boolean", nullable: false),
+                    SaveRecentSauces = table.Column<bool>(type: "boolean", nullable: false),
+                    LanguageCode = table.Column<string>(type: "character varying(8)", maxLength: 8, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,10 +89,10 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "AntiCheatRestrictions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RestrictedBotId = table.Column<long>(type: "bigint", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false)
+                    GroupId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,8 +109,8 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "SauceSauceMedia",
                 columns: table => new
                 {
-                    AssociatedMediasId = table.Column<int>(type: "int", nullable: false),
-                    SaucesId = table.Column<int>(type: "int", nullable: false)
+                    AssociatedMediasId = table.Column<int>(type: "integer", nullable: false),
+                    SaucesId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -132,13 +133,13 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "ApiKeys",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    IsPublic = table.Column<bool>(type: "boolean", nullable: false),
+                    OwnerId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,12 +156,12 @@ namespace SauceNAO.Infrastructure.Migrations
                 name: "SearchRecords",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SearchedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SearchedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Similarity = table.Column<float>(type: "real", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    MediaId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    MediaId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

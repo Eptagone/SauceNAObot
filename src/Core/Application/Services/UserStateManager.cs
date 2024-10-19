@@ -1,10 +1,11 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SauceNAO.Application.Models;
+using SauceNAO.Domain.Extensions;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
 using Telegram.BotAPI.AvailableTypes;
@@ -16,12 +17,12 @@ namespace SauceNAO.Application.Services;
 /// </summary>
 /// <param name="logger">The logger.</param>
 /// <param name="serviceProvider">The service provider.</param>
-/// <param name="cache">The memory cache instance.</param>
+/// <param name="cache">The cache instance.</param>
 class UserStateManager(
     ILogger<UserStateManager> logger,
     IServiceProvider serviceProvider,
     ITelegramBotClient client,
-    IMemoryCache cache
+    IDistributedCache cache
 ) : IUserStateManager
 {
     /// <inheritdoc />
@@ -31,7 +32,7 @@ class UserStateManager(
         CancellationToken cancellationToken
     )
     {
-        var key = $"UserState:{message.Chat.Id}:{message.From?.Id}";
+        var key = $"snao:user-state:{message.Chat.Id}:{message.From?.Id}";
         // Try to get the state. If it doesn't exist, return null.
         if (!cache.TryGetValue(key, out UserState? state) || state is null)
         {
@@ -72,14 +73,18 @@ class UserStateManager(
     /// <inheritdoc />
     public void CreateOrUpdateState(UserState state)
     {
-        var key = $"UserState:{state.ChatId}:{state.UserId}";
-        cache.Set(key, state, TimeSpan.FromMinutes(30));
+        var key = $"snao:user-state:{state.ChatId}:{state.UserId}";
+        var options = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = TimeSpan.FromMinutes(30)
+        };
+        cache.Set(key, state, options);
     }
 
     /// <inheritdoc />
     public void RemoveState(UserState state)
     {
-        var key = $"UserState:{state.ChatId}:{state.UserId}";
+        var key = $"snao:user-state:{state.ChatId}:{state.UserId}";
         cache.Remove(key);
     }
 }

@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using Microsoft.Extensions.Caching.Memory;
 using SauceNAO.Application.Models;
 using SauceNAO.Application.Services;
 using SauceNAO.Domain.Entities.SauceAggregate;
@@ -66,10 +65,7 @@ class ApiKeyCommand(
         if (message.Chat.Type == ChatTypes.Private)
         {
             // Send a message indicating that the bot is processing the command.
-            client.SendChatAction(
-                message.Chat.Id,
-                ChatActions.Typing
-            );
+            client.SendChatAction(message.Chat.Id, ChatActions.Typing);
 
             var action = args.FirstOrDefault() ?? "help";
             switch (action)
@@ -77,7 +73,7 @@ class ApiKeyCommand(
                 case ADD_VALUE:
 
                     // Initialize the user state.
-                    var initialData = new Dictionary<string, object?>()
+                    var initialData = new Dictionary<string, string?>()
                     {
                         { ACTION_PARAM_NAME, ADD_VALUE },
                         { NAME_PARAM_NAME, args.ElementAtOrDefault(1) },
@@ -88,8 +84,11 @@ class ApiKeyCommand(
                     // If the third argument is provided, change it to a boolean.
                     if (initialData[IS_PUBLIC_PARAM_NAME] is string isPublic)
                     {
-                        initialData[IS_PUBLIC_PARAM_NAME] =
-                            isPublic == "true" || isPublic == "--public";
+                        initialData[IS_PUBLIC_PARAM_NAME] = (
+                            isPublic == "true" || isPublic == "--public"
+                        )
+                            .ToString()
+                            .ToLowerInvariant();
                     }
 
                     return this.InitializeStateAsync(initialData, message, cancellationToken);
@@ -105,10 +104,10 @@ class ApiKeyCommand(
                     }
 
                     return this.InitializeStateAsync(
-                        new Dictionary<string, object?>
+                        new Dictionary<string, string?>
                         {
                             { ACTION_PARAM_NAME, DELETE_VALUE },
-                            { NAME_PARAM_NAME, args[1] }
+                            { NAME_PARAM_NAME, args[1] },
                         },
                         message,
                         cancellationToken
@@ -133,9 +132,9 @@ class ApiKeyCommand(
                         replyParameters: new ReplyParameters
                         {
                             MessageId = message.MessageId,
-                            AllowSendingWithoutReply = true
+                            AllowSendingWithoutReply = true,
                         },
-                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true, },
+                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true },
                         cancellationToken: cancellationToken
                     );
 
@@ -153,9 +152,9 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
-                            linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true, },
+                            linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true },
                             cancellationToken: cancellationToken
                         );
                     }
@@ -167,9 +166,9 @@ class ApiKeyCommand(
                         replyParameters: new ReplyParameters
                         {
                             MessageId = message.MessageId,
-                            AllowSendingWithoutReply = true
+                            AllowSendingWithoutReply = true,
                         },
-                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true, },
+                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true },
                         cancellationToken: cancellationToken
                     );
                 default:
@@ -180,9 +179,9 @@ class ApiKeyCommand(
                         replyParameters: new ReplyParameters
                         {
                             MessageId = message.MessageId,
-                            AllowSendingWithoutReply = true
+                            AllowSendingWithoutReply = true,
                         },
-                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true, },
+                        linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true },
                         cancellationToken: cancellationToken
                     );
             }
@@ -192,7 +191,7 @@ class ApiKeyCommand(
     }
 
     protected async Task InitializeStateAsync(
-        IDictionary<string, object?> initialData,
+        IDictionary<string, string?> initialData,
         Message message,
         CancellationToken cancellationToken
     )
@@ -222,9 +221,9 @@ class ApiKeyCommand(
         {
             case ADD_VALUE:
                 {
-                    var name = (string?)userState.Data[NAME_PARAM_NAME];
-                    var apikey = (string?)userState.Data[API_KEY_PARAM_NAME];
-                    var isPublic = (bool?)userState.Data[IS_PUBLIC_PARAM_NAME];
+                    var name = userState.Data[NAME_PARAM_NAME];
+                    var apikey = userState.Data[API_KEY_PARAM_NAME];
+                    var isPublic = userState.Data[IS_PUBLIC_PARAM_NAME];
 
                     // If the name for the apikey is not defined, try to get it from the message.
                     if (string.IsNullOrEmpty(name))
@@ -239,7 +238,7 @@ class ApiKeyCommand(
                                 replyParameters: new ReplyParameters
                                 {
                                     MessageId = message.MessageId,
-                                    AllowSendingWithoutReply = true
+                                    AllowSendingWithoutReply = true,
                                 },
                                 cancellationToken: cancellationToken
                             );
@@ -263,7 +262,7 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             cancellationToken: cancellationToken
                         );
@@ -298,7 +297,7 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             cancellationToken: cancellationToken
                         );
@@ -313,7 +312,7 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             cancellationToken: cancellationToken
                         );
@@ -336,8 +335,9 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
+                            replyMarkup: new ReplyKeyboardRemove(),
                             cancellationToken: cancellationToken
                         );
                         // Remove the user state.
@@ -354,7 +354,7 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             cancellationToken: cancellationToken
                         );
@@ -365,6 +365,8 @@ class ApiKeyCommand(
 
                     // Back up the apikey in the user state if it was not defined before.
                     userState.Data[API_KEY_PARAM_NAME] ??= apikey;
+                    // Back up the user state.
+                    stateManager.CreateOrUpdateState(userState);
 
                     // If the user has not decided if share the apikey, check it their response or ask again.
                     if (isPublic is null)
@@ -382,11 +384,11 @@ class ApiKeyCommand(
                                 replyParameters: new ReplyParameters
                                 {
                                     MessageId = message.MessageId,
-                                    AllowSendingWithoutReply = true
+                                    AllowSendingWithoutReply = true,
                                 },
                                 replyMarkup: new ReplyKeyboardMarkup(keyboard)
                                 {
-                                    ResizeKeyboard = true
+                                    ResizeKeyboard = true,
                                 },
                                 cancellationToken: cancellationToken
                             );
@@ -395,8 +397,10 @@ class ApiKeyCommand(
                         // Otherwise, try to parse the user response.
                         else
                         {
-                            isPublic = userResponse == this.YesLabel;
-                            if (isPublic == false && userResponse != this.NoLabel)
+                            isPublic = (userResponse == this.YesLabel)
+                                .ToString()
+                                .ToLowerInvariant();
+                            if (isPublic == "false" && userResponse != this.NoLabel)
                             {
                                 userResponse = null;
                                 goto noResponse;
@@ -419,21 +423,21 @@ class ApiKeyCommand(
                         replyParameters: new ReplyParameters
                         {
                             MessageId = message.MessageId,
-                            AllowSendingWithoutReply = true
+                            AllowSendingWithoutReply = true,
                         },
                         replyMarkup: new ReplyKeyboardRemove(),
                         cancellationToken: cancellationToken
                     );
                     // Save the apikey in the database.
                     this.User.ApiKeys.Add(
-                        new SauceApiKey(name, apikey) { IsPublic = isPublic == true }
+                        new SauceApiKey(name, apikey) { IsPublic = isPublic == "true" }
                     );
                     await userRepository.UpdateAsync(this.User, cancellationToken);
                 }
                 break;
             case DELETE_VALUE:
                 {
-                    var name = (string)userState.Data[NAME_PARAM_NAME]!;
+                    var name = userState.Data[NAME_PARAM_NAME]!;
                     // If the user has not responded, ask.
                     if (string.IsNullOrEmpty(message.Text))
                     {
@@ -447,11 +451,11 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             replyMarkup: new ReplyKeyboardMarkup(keyboard)
                             {
-                                ResizeKeyboard = true
+                                ResizeKeyboard = true,
                             },
                             cancellationToken: cancellationToken
                         );
@@ -473,7 +477,7 @@ class ApiKeyCommand(
                                 replyParameters: new ReplyParameters
                                 {
                                     MessageId = message.MessageId,
-                                    AllowSendingWithoutReply = true
+                                    AllowSendingWithoutReply = true,
                                 },
                                 replyMarkup: new ReplyKeyboardRemove(),
                                 cancellationToken: cancellationToken
@@ -492,7 +496,7 @@ class ApiKeyCommand(
                             replyParameters: new ReplyParameters
                             {
                                 MessageId = message.MessageId,
-                                AllowSendingWithoutReply = true
+                                AllowSendingWithoutReply = true,
                             },
                             replyMarkup: new ReplyKeyboardRemove(),
                             cancellationToken: cancellationToken
