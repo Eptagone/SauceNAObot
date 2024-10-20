@@ -1,8 +1,8 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using System.ComponentModel.DataAnnotations;
 using SauceNAO.Domain.Entities.SauceAggregate;
+using System.ComponentModel.DataAnnotations;
 
 namespace SauceNAO.Domain.Entities.UserAggregate;
 

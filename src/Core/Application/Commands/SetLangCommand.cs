@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using System.Globalization;
 using Microsoft.Extensions.Localization;
 using SauceNAO.Domain.Repositories;
+using System.Globalization;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
 using Telegram.BotAPI.AvailableTypes;

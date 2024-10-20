@@ -14,4 +14,5 @@ namespace SauceNAO.Application.Models;
 /// <param name="Group">The Group chat where the bot is being used.</param>
 /// <param name="Localizer">Provides access to the available messages for the current culture.</param>
 record SauceNaoContext(TelegramUser? User, TelegramChat? Group, IStringLocalizer Localizer)
-    : ISauceNaoContext { }
+    : ISauceNaoContext
+{ }

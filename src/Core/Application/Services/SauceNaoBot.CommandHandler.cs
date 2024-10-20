@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using SauceNAO.Application.Commands;
+using System.Text.RegularExpressions;
 using Telegram.BotAPI.AvailableTypes;
 using Telegram.BotAPI.Extensions;
 

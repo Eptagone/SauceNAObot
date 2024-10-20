@@ -22,9 +22,10 @@ public class TemporalFileController(
         var tempPath = Path.GetTempPath();
         var filePath = Path.Join(tempPath, fileName);
 
-        if (!Path.Exists(filePath)) {
+        if (!Path.Exists(filePath))
+        {
             return this.NotFound();
-        }        
+        }
 
         // Try to get the content type of the file.
         new FileExtensionContentTypeProvider().TryGetContentType(filePath, out var contentType);

@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using SauceNAO.Domain.Repositories;
+using System.Runtime.InteropServices;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 

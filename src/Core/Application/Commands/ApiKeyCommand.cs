@@ -371,7 +371,7 @@ class ApiKeyCommand(
                     // If the user has not decided if share the apikey, check it their response or ask again.
                     if (isPublic is null)
                     {
-                        noResponse:
+                    noResponse:
                         // If the user did not respond, ask again.
                         if (string.IsNullOrEmpty(userResponse))
                         {

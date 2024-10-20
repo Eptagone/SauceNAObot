@@ -1,12 +1,12 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using System.Data;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using SauceNAO.Application.Commands;
 using SauceNAO.Application.Services;
 using SauceNAO.Domain.Services;
+using System.Data;
+using System.Reflection;
 
 namespace SauceNAO.Application;
 
