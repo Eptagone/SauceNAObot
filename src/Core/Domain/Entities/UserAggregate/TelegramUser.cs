@@ -1,8 +1,8 @@
 // Copyright (c) 2024 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using SauceNAO.Domain.Entities.SauceAggregate;
 using System.ComponentModel.DataAnnotations;
+using SauceNAO.Domain.Entities.SauceAggregate;
 
 namespace SauceNAO.Domain.Entities.UserAggregate;
 
@@ -43,11 +43,6 @@ public class TelegramUser : LocalizableEntityBase
     /// Indicates if the user has initiated a private chat with the bot.
     /// </summary>
     public bool PrivateChatStarted { get; set; }
-
-    /// <summary>
-    /// Indicates if the search history should be saved.
-    /// </summary>
-    public bool SaveRecentSauces { get; set; }
 
     /// <summary>
     /// List of API keys associated with this user.

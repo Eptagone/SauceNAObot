@@ -51,10 +51,17 @@ partial class SauceNaoBot : SimpleTelegramBotBase, ISauceNaoBot
         }
 
         // If chat is private and message was not sent via this bot, try to search.
-        if (message.Chat.Type == ChatTypes.Private && message.ViaBot?.Id != this.Id)
+        if (message.Chat.Type == ChatTypes.Private)
         {
-            // Start a new search
-            return this.SearchInMessageAsync(message, cancellationToken);
+            if (this.Context.User?.PrivateChatStarted == false)
+            {
+                this.Context.User.PrivateChatStarted = true;
+            }
+            if (message.ViaBot?.Id != this.Id)
+            {
+                // Start a new search
+                return this.SearchInMessageAsync(message, cancellationToken);
+            }
         }
 
         if (!string.IsNullOrEmpty(text))
