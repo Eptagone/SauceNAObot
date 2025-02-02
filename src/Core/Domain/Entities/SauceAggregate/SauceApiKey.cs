@@ -33,6 +33,11 @@ public class SauceApiKey(string name, string value) : EntityBase
     public bool IsPublic { get; set; }
 
     /// <summary>
+    /// Optional. A message defined by the user who owns this API key. This message will be displayed after a successful search. It may contain text entities.
+    /// </summary>
+    public string? SponsorMessage { get; set; }
+
+    /// <summary>
     /// The user who owns this API key.
     /// </summary>
     public virtual TelegramUser Owner { get; set; } = default!;

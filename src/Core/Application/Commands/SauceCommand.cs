@@ -74,7 +74,7 @@ class SauceCommand(
                 replyParameters: new ReplyParameters()
                 {
                     MessageId = message.MessageId,
-                    AllowSendingWithoutReply = true
+                    AllowSendingWithoutReply = true,
                 },
                 cancellationToken: cancellationToken
             );
@@ -93,7 +93,7 @@ class SauceCommand(
                 replyParameters: new ReplyParameters()
                 {
                     MessageId = media.Message.MessageId,
-                    AllowSendingWithoutReply = true
+                    AllowSendingWithoutReply = true,
                 },
                 cancellationToken: cancellationToken
             );
@@ -107,7 +107,7 @@ class SauceCommand(
             replyParameters: new ReplyParameters()
             {
                 MessageId = media.Message.MessageId,
-                AllowSendingWithoutReply = true
+                AllowSendingWithoutReply = true,
             },
             cancellationToken: cancellationToken
         );
@@ -216,7 +216,7 @@ class SauceCommand(
                     if (!result.Ok)
                     {
                         // If the last api key usage date is older than 1 week, then remove it.
-                        if (keyEntity.UpdatedAt < DateTime.UtcNow.AddDays(-7))
+                        if (keyEntity.UpdatedAt < DateTimeOffset.UtcNow.AddDays(-7))
                         {
                             await apiKeyRespository.DeleteAsync(keyEntity, cancellationToken);
                         }
@@ -225,7 +225,7 @@ class SauceCommand(
                         continue;
                     }
 
-                    keyEntity.UpdatedAt = DateTime.UtcNow;
+                    keyEntity.UpdatedAt = DateTimeOffset.UtcNow;
                     // Update the API KEY last usage date
                     await apiKeyRespository.UpdateAsync(keyEntity, cancellationToken);
 
@@ -241,7 +241,7 @@ class SauceCommand(
                             EstimationTime = r.EstimationTime,
                             Material = r.Material,
                             Part = r.Part,
-                            Year = r.Year
+                            Year = r.Year,
                         };
                         foreach (var link in r.Urls)
                         {
@@ -342,7 +342,7 @@ class SauceCommand(
                 {
                     Media = sauceMedia,
                     Similarity = similarity,
-                    SearchedAt = DateTime.UnixEpoch.AddSeconds(message.Date)
+                    SearchedAt = DateTime.UnixEpoch.AddSeconds(message.Date),
                 };
                 this.User.SearchHistory.Add(userRecord);
             }

@@ -12,11 +12,11 @@
         @if (Environment.IsDevelopment())
         {
             <script type="module" src="@Vite.ServerUrlWithBasePath/@@vite/client"></script>
-            <link rel="stylesheet" href="@Vite.ServerUrlWithBasePath/Assets/style.css" />
+            <link rel="stylesheet" href="@Vite.ServerUrlWithBasePath/tailwind.config.css" />
         }
         else
         {
-            <link rel="stylesheet" href="dist/@ViteManifest["Assets/style.css"]!.File" />
+            <link rel="stylesheet" href="dist/@ViteManifest["tailwind.config.css"]!.File" />
         }
         <link rel="stylesheet" href="SauceNao.Webhook.styles.css" />
         <HeadOutlet />

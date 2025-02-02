@@ -1,29 +1,19 @@
-/**
- * Name: vite.config.ts
- * Description: Vite configuration file.
- */
-
 import type { UserConfig } from "vite";
-import tailwindcss from "tailwindcss";
+import tailwindcss from "@tailwindcss/vite";
 
 export default {
-    appType: 'custom',
+    appType: "custom",
     publicDir: false,
     base: "/dist/",
     build: {
         manifest: true,
-        assetsDir: ".",
         outDir: "wwwroot/dist",
         rollupOptions: {
-            input: "Assets/style.css",
-        }
+            input: "tailwind.config.css",
+        },
     },
-    css: {
-        postcss: {
-            plugins: [tailwindcss()]
-        }
-    },
+    plugins: [tailwindcss()],
     optimizeDeps: {
-        include: []
-    }
+        include: [],
+    },
 } satisfies UserConfig;

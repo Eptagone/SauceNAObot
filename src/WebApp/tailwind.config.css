@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@source "./Components/**/*.razor";
+
+body {
+    background-color: black;
+    color: white;
+    height: 100vh;
+}
