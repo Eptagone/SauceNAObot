@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 Quetzal Rivera.
+﻿// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 namespace SauceNAO.Infrastructure.API;
@@ -21,5 +21,5 @@ internal enum Dedupe
     /// <summary>
     /// All implemented dedupe methods such as by series name.
     /// </summary>
-    AllImplementedDedupeMethodsSuchAsBySeriesName = 2
+    AllImplementedDedupeMethodsSuchAsBySeriesName = 2,
 }

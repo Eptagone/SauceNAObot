@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 namespace SauceNAO.Domain;
@@ -45,5 +45,5 @@ public enum SauceIndex
     FurryNetwork = 42,
     Kemono = 43,
     Skeb = 44,
-    All = 999
+    All = 999,
 }

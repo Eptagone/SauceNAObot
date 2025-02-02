@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 Quetzal Rivera.
+﻿// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Domain;
@@ -18,8 +18,7 @@ partial class SauceNaoBot : SimpleTelegramBotBase, ISauceNaoBot
     )
     {
         var offset = string.IsNullOrEmpty(inlineQuery.Offset) ? 0 : int.Parse(inlineQuery.Offset);
-        var myHistory = this.Context.User!.SearchHistory
-            .OrderByDescending(h => h.SearchedAt);
+        var myHistory = this.Context.User!.SearchHistory.OrderByDescending(h => h.SearchedAt);
         var keywords = inlineQuery.Query.Split(' ');
 
         var mySauces = keywords.Any()
@@ -63,60 +62,55 @@ partial class SauceNaoBot : SimpleTelegramBotBase, ISauceNaoBot
 
                 return record.Media.MediaType switch
                 {
-                    TelegramMediaType.Animation
-                        => new InlineQueryResultCachedGif
+                    TelegramMediaType.Animation => new InlineQueryResultCachedGif
+                    {
+                        Id = offset.ToString(),
+                        GifFileId = record.Media.FileId,
+                        Title = title,
+                        Caption = sauceText,
+                        ParseMode = FormatStyles.HTML,
+                        ReplyMarkup = keyboard,
+                    },
+                    TelegramMediaType.Photo => new InlineQueryResultCachedPhoto
+                    {
+                        Id = offset.ToString(),
+                        PhotoFileId = record.Media.FileId,
+                        Title = title,
+                        Description = record.Media.MediaType.ToString(),
+                        Caption = sauceText,
+                        ParseMode = FormatStyles.HTML,
+                        ReplyMarkup = keyboard,
+                    },
+                    TelegramMediaType.Sticker => new InlineQueryResultCachedSticker
+                    {
+                        Id = offset.ToString(),
+                        StickerFileId = record.Media.FileId,
+                        InputMessageContent = new InputTextMessageContent(sauceText)
                         {
-                            Id = offset.ToString(),
-                            GifFileId = record.Media.FileId,
-                            Title = title,
-                            Caption = sauceText,
                             ParseMode = FormatStyles.HTML,
-                            ReplyMarkup = keyboard
                         },
-                    TelegramMediaType.Photo
-                        => new InlineQueryResultCachedPhoto
-                        {
-                            Id = offset.ToString(),
-                            PhotoFileId = record.Media.FileId,
-                            Title = title,
-                            Description = record.Media.MediaType.ToString(),
-                            Caption = sauceText,
-                            ParseMode = FormatStyles.HTML,
-                            ReplyMarkup = keyboard
-                        },
-                    TelegramMediaType.Sticker
-                        => new InlineQueryResultCachedSticker
-                        {
-                            Id = offset.ToString(),
-                            StickerFileId = record.Media.FileId,
-                            InputMessageContent = new InputTextMessageContent(sauceText)
-                            {
-                                ParseMode = FormatStyles.HTML
-                            },
-                            ReplyMarkup = keyboard
-                        },
-                    TelegramMediaType.Video
-                        => new InlineQueryResultCachedVideo
-                        {
-                            Id = offset.ToString(),
-                            VideoFileId = record.Media.FileId,
-                            Title = title,
-                            Description = record.Media.MediaType.ToString(),
-                            Caption = sauceText,
-                            ParseMode = FormatStyles.HTML,
-                            ReplyMarkup = keyboard
-                        },
-                    _
-                        => new InlineQueryResultCachedDocument
-                        {
-                            Id = offset.ToString(),
-                            DocumentFileId = record.Media.FileId,
-                            Title = title,
-                            Description = record.Media.MediaType.ToString(),
-                            Caption = sauceText,
-                            ParseMode = FormatStyles.HTML,
-                            ReplyMarkup = keyboard
-                        },
+                        ReplyMarkup = keyboard,
+                    },
+                    TelegramMediaType.Video => new InlineQueryResultCachedVideo
+                    {
+                        Id = offset.ToString(),
+                        VideoFileId = record.Media.FileId,
+                        Title = title,
+                        Description = record.Media.MediaType.ToString(),
+                        Caption = sauceText,
+                        ParseMode = FormatStyles.HTML,
+                        ReplyMarkup = keyboard,
+                    },
+                    _ => new InlineQueryResultCachedDocument
+                    {
+                        Id = offset.ToString(),
+                        DocumentFileId = record.Media.FileId,
+                        Title = title,
+                        Description = record.Media.MediaType.ToString(),
+                        Caption = sauceText,
+                        ParseMode = FormatStyles.HTML,
+                        ReplyMarkup = keyboard,
+                    },
                 };
             })
             .ToList();
@@ -129,7 +123,7 @@ partial class SauceNaoBot : SimpleTelegramBotBase, ISauceNaoBot
                 {
                     Id = "None",
                     Title = text,
-                    InputMessageContent = new InputTextMessageContent(text)
+                    InputMessageContent = new InputTextMessageContent(text),
                 }
             );
         }

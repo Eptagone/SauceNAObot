@@ -1,6 +1,7 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using System.Security;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,6 @@ using Microsoft.Extensions.Options;
 using SauceNAO.Domain;
 using SauceNAO.Domain.Extensions;
 using SauceNAO.Domain.Services;
-using System.Security;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;
 using Telegram.BotAPI.Extensions;

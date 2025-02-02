@@ -239,4 +239,4 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
 dotnet_diagnostic.CA1707.severity = silent
 
 # Header
-file_header_template = Copyright (c) 2024 Quetzal Rivera.\nLicensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+file_header_template = Copyright (c) 2025 Quetzal Rivera.\nLicensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.

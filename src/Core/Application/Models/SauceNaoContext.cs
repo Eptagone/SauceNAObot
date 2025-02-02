@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.Extensions.Localization;
@@ -14,5 +14,4 @@ namespace SauceNAO.Application.Models;
 /// <param name="Group">The Group chat where the bot is being used.</param>
 /// <param name="Localizer">Provides access to the available messages for the current culture.</param>
 record SauceNaoContext(TelegramUser? User, TelegramChat? Group, IStringLocalizer Localizer)
-    : ISauceNaoContext
-{ }
+    : ISauceNaoContext { }

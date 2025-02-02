@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.Extensions.Options;
@@ -40,9 +40,9 @@ class HelpCommand(ITelegramBotClient client, IOptions<GeneralOptions> options) :
             replyParameters: new ReplyParameters
             {
                 MessageId = message.MessageId,
-                AllowSendingWithoutReply = true
+                AllowSendingWithoutReply = true,
             },
-            linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true, },
+            linkPreviewOptions: new LinkPreviewOptions { IsDisabled = true },
             replyMarkup: keyboard,
             cancellationToken: cancellationToken
         );

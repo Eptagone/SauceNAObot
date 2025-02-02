@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.Extensions.Caching.Distributed;
@@ -76,7 +76,7 @@ class UserStateManager(
         var key = $"snao:user-state:{state.ChatId}:{state.UserId}";
         var options = new DistributedCacheEntryOptions
         {
-            SlidingExpiration = TimeSpan.FromMinutes(30)
+            SlidingExpiration = TimeSpan.FromMinutes(30),
         };
         cache.Set(key, state, options);
     }

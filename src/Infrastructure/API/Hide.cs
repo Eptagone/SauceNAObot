@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 Quetzal Rivera.
+﻿// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using System.Diagnostics.CodeAnalysis;
@@ -27,5 +27,5 @@ internal enum Hide
     HideExpectedAndSuspectedExplicit = 2,
 
     /// <summary>Hide all but expected safe.</summary>
-    HideAllButExpectedSafe = 3
+    HideAllButExpectedSafe = 3,
 }

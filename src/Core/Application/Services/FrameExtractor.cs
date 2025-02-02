@@ -1,11 +1,11 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SauceNAO.Domain;
 using SauceNAO.Domain.Services;
-using System.Diagnostics;
 
 namespace SauceNAO.Application.Services;
 

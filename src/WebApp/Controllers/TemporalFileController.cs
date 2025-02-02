@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +59,7 @@ public class TemporalFileController(
             "passport",
             "wallpapers",
             "notification_sounds",
-            "stories"
+            "stories",
         };
 
         if (!allowedFolders.Contains(folderName))
@@ -67,7 +67,8 @@ public class TemporalFileController(
             return this.NotFound();
         }
 
-        var filesPath = this.filesPath.Replace(this.botToken, "{BotToken}")
+        var filesPath = this
+            .filesPath.Replace(this.botToken, "{BotToken}")
             .Replace("C:\\", "{WindowsDrive}");
         var appFilesPath = Path.TrimEndingDirectorySeparator(filesPath.Split(":").First())
             .Replace("{BotToken}", this.botToken)

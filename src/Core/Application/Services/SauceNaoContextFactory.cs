@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Application.Models;
@@ -62,12 +62,10 @@ class SauceNaoContextFactory(IUserRepository userRepository, IChatRepository cha
         // If the chat is not null and it is a group or supergroup, retrieve or update the group information in the database.
         if (chat?.Type == ChatTypes.Group || chat?.Type == ChatTypes.Supergroup)
         {
-            groupEntity = chatRepository.GetByChatId(
-                update.Message?.MigrateFromChatId ?? chat.Id
-            );
+            groupEntity = chatRepository.GetByChatId(update.Message?.MigrateFromChatId ?? chat.Id);
             if (groupEntity is null)
             {
-                groupEntity = new TelegramChat(chat.Id, chat.Title!) { Username = chat.Username, };
+                groupEntity = new TelegramChat(chat.Id, chat.Title!) { Username = chat.Username };
                 chatRepository.Insert(groupEntity);
             }
             else

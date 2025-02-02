@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.Extensions.Options;
@@ -48,7 +48,7 @@ class TempCommand(
                 replyParameters: new ReplyParameters()
                 {
                     MessageId = message.MessageId,
-                    AllowSendingWithoutReply = true
+                    AllowSendingWithoutReply = true,
                 },
                 cancellationToken: cancellationToken
             );
@@ -62,7 +62,7 @@ class TempCommand(
             replyParameters: new ReplyParameters()
             {
                 MessageId = media.Message.MessageId,
-                AllowSendingWithoutReply = true
+                AllowSendingWithoutReply = true,
             },
             cancellationToken: cancellationToken
         );
@@ -103,10 +103,7 @@ class TempCommand(
                     return;
                 }
 
-                var videoPath = await fileService.GetFilePathAsync(
-                    media.FileId,
-                    cancellationToken
-                );
+                var videoPath = await fileService.GetFilePathAsync(media.FileId, cancellationToken);
                 if (string.IsNullOrEmpty(videoPath))
                 {
                     await client.EditMessageTextAsync(
@@ -140,11 +137,7 @@ class TempCommand(
                     return;
                 }
 
-                imageUrl = await fileService.GetFileUrlAsync(
-                    media.FileId,
-                    true,
-                    cancellationToken
-                );
+                imageUrl = await fileService.GetFileUrlAsync(media.FileId, true, cancellationToken);
             }
         }
 

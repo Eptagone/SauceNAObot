@@ -1,11 +1,11 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using System.Threading.Channels;
+using System.Threading.Tasks.Dataflow;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Threading.Channels;
-using System.Threading.Tasks.Dataflow;
 using Telegram.BotAPI.GettingUpdates;
 
 namespace SauceNAO.Application.Services;
@@ -38,7 +38,7 @@ class UpdateReceiver(ILogger<UpdateReceiver> logger, IServiceProvider servicePro
             new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = 20,
-                CancellationToken = stoppingToken
+                CancellationToken = stoppingToken,
             }
         );
 

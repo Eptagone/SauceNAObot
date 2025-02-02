@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 namespace SauceNAO.Domain.Services;
@@ -26,8 +26,5 @@ public interface ISauceNaoService
     /// <param name="apikey">The api key to check.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>True if the api key belongs to a premium user, false otherwise. If an error occurs, null is returned.</returns>
-    Task<bool?> IsPremiumUserAsync(
-        string apikey,
-        CancellationToken cancellationToken = default
-    );
+    Task<bool?> IsPremiumUserAsync(string apikey, CancellationToken cancellationToken = default);
 }

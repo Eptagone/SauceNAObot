@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 Quetzal Rivera.
+﻿// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
@@ -75,8 +75,6 @@ public sealed class ApplicationDbContext : DbContext
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configurationBuilder
-            .Properties<DateTimeOffset>()
-            .HaveConversion<DateTimeOffsetConverter>();
+        configurationBuilder.Properties<DateTimeOffset>().HaveConversion<DateTimeOffsetConverter>();
     }
 }

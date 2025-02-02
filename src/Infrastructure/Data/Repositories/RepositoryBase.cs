@@ -1,9 +1,9 @@
-﻿// Copyright (c) 2024 Quetzal Rivera.
+﻿// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using SauceNAO.Domain.Repositories;
-using System.Runtime.InteropServices;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 
@@ -106,5 +106,6 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
     public int Count() => this.Context.Set<TEntity>().Count();
 
     /// <inheritdoc/>
-    public Task<int> CountAsync(CancellationToken cancellationToken = default) => this.Context.Set<TEntity>().CountAsync(cancellationToken);
+    public Task<int> CountAsync(CancellationToken cancellationToken = default) =>
+        this.Context.Set<TEntity>().CountAsync(cancellationToken);
 }

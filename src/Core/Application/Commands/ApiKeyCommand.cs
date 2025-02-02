@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Application.Models;
@@ -371,7 +371,7 @@ class ApiKeyCommand(
                     // If the user has not decided if share the apikey, check it their response or ask again.
                     if (isPublic is null)
                     {
-                    noResponse:
+                        noResponse:
                         // If the user did not respond, ask again.
                         if (string.IsNullOrEmpty(userResponse))
                         {

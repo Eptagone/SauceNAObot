@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Quetzal Rivera.
+// Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using SauceNAO.Domain.Repositories;
@@ -25,10 +25,7 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
     )
     {
         // Send a message indicating that the bot is processing the command.
-        client.SendChatAction(
-            message.Chat.Id,
-            ChatActions.Typing
-        );
+        client.SendChatAction(message.Chat.Id, ChatActions.Typing);
 
         var action = args.FirstOrDefault();
 
@@ -56,7 +53,7 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
                     replyParameters: new ReplyParameters
                     {
                         MessageId = message.MessageId,
-                        AllowSendingWithoutReply = true
+                        AllowSendingWithoutReply = true,
                     },
                     cancellationToken: cancellationToken
                 );
@@ -69,7 +66,7 @@ class HistoryCommand(ITelegramBotClient client, IUserRepository userRepository) 
                     replyParameters: new ReplyParameters
                     {
                         MessageId = message.MessageId,
-                        AllowSendingWithoutReply = true
+                        AllowSendingWithoutReply = true,
                     },
                     replyMarkup: new InlineKeyboardMarkup(
                         new InlineKeyboardBuilder().AppendSwitchInlineQueryCurrentChat(
