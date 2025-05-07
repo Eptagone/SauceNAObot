@@ -1,5 +1,5 @@
-import type { UserConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
+import type { UserConfig } from "vite";
 
 export default {
     appType: "custom",

@@ -1,51 +1,53 @@
 // Copyright (c) 2025 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
-using Microsoft.AspNetCore.Mvc.Testing;
 using SauceNAO.Domain.Services;
-using Xunit.Sdk;
+using TUnit.Core.Exceptions;
 
 namespace SauceNAO.Tests;
 
 /// <summary>
 /// Tests for the TelegramFileManager class.
 /// </summary>
-/// <param name="applicationFactory">The application factory.</param>
-public class TelegramFileManagerTests(WebApplicationFactory<Program> applicationFactory)
-    : IClassFixture<WebApplicationFactory<Program>>
+public class TelegramFileManagerTests()
 {
-    [Fact]
+    [ClassDataSource<WebAppFactory>(Shared = SharedType.PerTestSession)]
+    public required WebAppFactory WebAppFactory { get; init; }
+
+    [Test]
     public async Task TestGetImagePath()
     {
         var fileId = this.GetTestFileId("Image");
 
-        using var scope = applicationFactory.Services.CreateScope();
+        using var scope = this.WebAppFactory.Services.CreateScope();
         var fileService = scope.ServiceProvider.GetRequiredService<ITelegramFileService>();
         var path = await fileService.GetFilePathAsync(fileId, default);
-        Assert.NotNull(path);
+        await Assert.That(path).IsNotNull();
         // Verify that the file exists
-        Assert.True(File.Exists(path));
+        await Assert.That(File.Exists(path)).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task TestGetImageUrl()
     {
         var fileId = this.GetTestFileId("Image");
 
-        using var scope = applicationFactory.Services.CreateScope();
+        using var scope = this.WebAppFactory.Services.CreateScope();
         var fileService = scope.ServiceProvider.GetRequiredService<ITelegramFileService>();
         var url = await fileService.GetFileUrlAsync(fileId, default);
-        Assert.NotNull(url);
+        await Assert.That(url).IsNotNull();
     }
 
     // Helper method to get a file ID from the configuration.
     private string GetTestFileId(string key)
     {
-        var configuration = applicationFactory.Services.GetRequiredService<IConfiguration>();
+        var configuration = this
+            .WebAppFactory.Services.CreateScope()
+            .ServiceProvider.GetRequiredService<IConfiguration>();
         var fileId = configuration[$"TestFileIds:{key}"];
         if (string.IsNullOrEmpty(fileId))
         {
-            throw new XunitException("A test file ID is required to run this test.");
+            throw new TUnitException("A test file ID is required to run this test.");
         }
 
         return fileId;

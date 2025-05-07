@@ -35,7 +35,9 @@ internal sealed class SnaoResultData
     public uint? YandereId { get; set; }
     public int? GelbooruId { get; set; }
     public int? KonachanId { get; set; }
-    public string? MdId { get; set; }
+
+    [JsonConverter(typeof(StringToIntConverter))]
+    public int? MdId { get; set; }
     public int? MuId { get; set; }
     public uint? MalId { get; set; }
 

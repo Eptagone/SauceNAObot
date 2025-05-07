@@ -25,6 +25,8 @@ RUN ln -s /opt/microsoft/dotnet/dotnet /usr/bin/dotnet
 
 FROM dotnet-sdk AS build
 RUN apk add nodejs
+# Remove this line after the version of corepack is updated in the Node image. See https://github.com/nodejs/corepack/issues/627
+RUN npm install -g corepack@latest
 RUN corepack enable pnpm
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
