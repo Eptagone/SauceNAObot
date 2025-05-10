@@ -32,33 +32,4 @@
         <None Include="package.json" />
         <None Include="tsconfig.json" />
     </ItemGroup>
-
-    <!-- Ensure Node environment on Build -->
-    <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build;PublishBuildAssets"
-        Condition=" !Exists('node_modules') ">
-        <!-- Ensure Node.js is installed -->
-        <Exec Command="node --version" ContinueOnError="true">
-            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-        </Exec>
-        <Error Condition="'$(ErrorCode)' != '0'"
-            Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-        <!-- Ensure PNPM is installed -->
-        <Exec Command="pnpm --version" ContinueOnError="true">
-            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-        </Exec>
-        <Error Condition="'$(ErrorCode)' != '0'"
-            Text="PNPM is required to build and run this project. To continue, please enable by running 'corepack enable pnpm'" />
-        <!-- Install Node packages -->
-        <Message Importance="high"
-            Text="Restoring dependencies using 'npm'. This may take several minutes..." />
-        <!-- Install Node packages -->
-        <Exec Command="pnpm install" />
-    </Target>
-
-    <!-- Build the final assets -->
-    <Target Name="PublishBuildAssets" BeforeTargets="Build"
-        Condition=" '$(Configuration)' == 'Release' ">
-        <!-- Build the final assets -->
-        <Exec Command="pnpm run build" />
-    </Target>
 </Project>

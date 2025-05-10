@@ -52,4 +52,5 @@ if (app.Environment.IsDevelopment())
     app.UseViteDevelopmentServer(true);
 }
 
+app.ApplyDatabaseMigrations();
 app.Run();

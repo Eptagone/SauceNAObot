@@ -52,9 +52,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IApiKeyRespository, ApiKeyRepository>();
         services.AddScoped<ISauceMediaRepository, SauceMediaRepository>();
 
-        // Register the setup service.
-        services.AddHostedService<DatabaseSetup>();
-
         return services;
     }
 
@@ -109,6 +106,7 @@ public static class ServiceCollectionExtensions
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = redisConnectionString;
+                options.InstanceName = "snao";
             });
         }
         // Register the Telegram file service.
