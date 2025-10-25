@@ -100,7 +100,9 @@ public static class ServiceCollectionExtensions
         var redisConnectionString = configuration.GetConnectionString("Redis");
         if (string.IsNullOrWhiteSpace(redisConnectionString))
         {
-            services.AddSqliteCache(Path.Combine(Path.GetTempPath(), Path.GetTempFileName()));
+            services.AddSqliteCache(
+                Path.Combine(Path.GetTempPath(), Path.GetTempFileName()).Replace(".tmp", ".db")
+            );
         }
         else
         {
