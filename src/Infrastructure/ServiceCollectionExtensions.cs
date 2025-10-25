@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using NeoSmart.Caching.Sqlite;
 using SauceNAO.Domain;
 using SauceNAO.Domain.Repositories;
 using SauceNAO.Domain.Services;
@@ -99,7 +100,7 @@ public static class ServiceCollectionExtensions
         var redisConnectionString = configuration.GetConnectionString("Redis");
         if (string.IsNullOrWhiteSpace(redisConnectionString))
         {
-            services.AddDistributedMemoryCache();
+            services.AddSqliteCache(Path.Combine(Path.GetTempPath(), Path.GetTempFileName()));
         }
         else
         {
