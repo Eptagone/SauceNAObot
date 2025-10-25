@@ -1,0 +1,2 @@
+SetLangHelp=Gunakan perintah ini untuk mengubah bahasa bot pada obrolan saat ini.\nTidak semua bahasa tersedia.<b>Sintaks:</b>\n<code>/setlang &lt;kode bahasa&gt; [-Force]</code>\nTentukan parameter opsional [-Force] untuk mempertahankan bahasa Anda di grup mana pun, apa pun bahasa grupnya.
+SetLangSaved=Preferensi bahasa Anda telah disimpan.

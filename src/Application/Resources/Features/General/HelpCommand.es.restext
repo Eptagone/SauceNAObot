@@ -1,0 +1,2 @@
+Help=Envíame una imagen (imagen, GIF o sticker) e intentaré buscarla utilizando el API de SauceNAO. <i>Si estoy en un grupo, responde a una imagen con /sauce</i>.
+HelpSauce=Responde a una foto con /sauce para buscarla utilizando la API de SauceNAO.\nSintaxis: <code>/sauce <similaridad></code>\ndonde <code><similaridad></code> es el porcentaje mínimo de similitud para los resultados de búsqueda. Debe ser un número entero entre 10 y 90. El valor predeterminado es 55.\n\nEjemplo: <code>/sauce</code> (valor predeterminado)\nEjemplo: <code>/sauce 70</code>

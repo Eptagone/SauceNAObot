@@ -1,0 +1,5 @@
+InvalidPhoto=Itu tidak terlihat seperti file foto.
+FileUnreadable=File tidak dapat dibaca. Silakan coba lagi dengan file lain.
+TooBigFile=File terlalu besar. Silakan coba lagi dengan file yang lebih kecil.
+UnsupportedFormat=Format file tidak didukung. Silakan coba lagi dengan file lain.
+NoPublicKeys=Tidak ada kunci API publik yang ditemukan untuk melakukan pencarian. Silakan coba lagi nanti atau tanyakan di chat dukungan.

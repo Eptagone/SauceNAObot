@@ -1,0 +1,5 @@
+InvalidPhoto=Ese no parece una imagen.
+FileUnreadable=El archivo no es accesible. Por favor, intente de nuevo con otro archivo.
+TooBigFile=El archivo es demasiado grande. Por favor, intente de nuevo con un archivo más pequeño.
+UnsupportedFormat=El archivo no tiene un formato compatible. Por favor, intente de nuevo con otro archivo.
+NoPublicKeys=No se encontro ninguna clave API pública para realizar la búsqueda. Por favor, inténtalo de nuevo más tarde o pregunte en el chat de soporte.

@@ -1,0 +1,6 @@
+# ---- Errors ----
+ApiKeyAddNotPremium=您的 apikey 必须是高级版才能添加。
+ApiKeyCouldNotBeFound=无法找到 apikey。
+ApiKeyCouldNotBeAdded=添加 apikey 时出错。请稍后重试。
+ApiKeyNameNotAvailable=您已有一个同名的 apikey。
+ApiKeyAlreadyExists=您已保存该 apikey。请使用另一个重试。

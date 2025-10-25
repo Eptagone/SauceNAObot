@@ -1,0 +1,4 @@
+# ---- Errors ----
+AnticheatsAlreadyExists=Bot @{0} sudah ada di daftar AntiCheats.
+AnticheatsAlreadyRemoved=Bot @{0} tidak ada atau sudah dihapus dari daftar AntiCheats.
+AntiCheatsNotABot=Pengguna target bukan bot.

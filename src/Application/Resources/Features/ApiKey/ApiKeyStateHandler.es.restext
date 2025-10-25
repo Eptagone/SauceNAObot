@@ -1,0 +1,9 @@
+# -------- ApiKey --------
+ApiKeyAskForName=Por favor, ingresa un nombre para tu apikey:\nIngresa <code>/cancel</code> para cancelar.
+ApiKeyAskForKey=Envía tu nueva apikey. Solo las apikeys premium pueden ser agregadas.
+ApiKeyAskForShare=¿Deseas compartir tu apikey para búsquedas públicas? Si lo haces, el bot la utilizará para preparar salsas para todos los usuarios que usan el bot.
+ApiKeyAddSuccess=Tu apikey se guardó correctamente.
+ApiKeyDeleted=Tu apikey ha sido eliminada.
+ApiKeyConfirmDelete=¿Está seguro de que desea eliminar tu apikey?
+Yes=Sí
+No=No

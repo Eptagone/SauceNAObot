@@ -4,9 +4,9 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using SauceNAO.Domain;
-using SauceNAO.Domain.Extensions;
-using SauceNAO.Domain.Services;
+using SauceNAO.Core;
+using SauceNAO.Core.Extensions;
+using SauceNAO.Core.Services;
 using SauceNAO.Infrastructure.API;
 using SauceNAO.Infrastructure.API.Types;
 

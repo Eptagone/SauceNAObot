@@ -1,24 +1,38 @@
-// Copyright (c) 2025 Quetzal Rivera.
-// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
-
-using SauceNAO.Domain.Entities.ChatAggregate;
-using SauceNAO.Domain.Repositories;
-using SauceNAO.Domain.Specifications;
+using SauceNAO.Core.Entities.ChatAggregate;
+using SauceNAO.Core.Repositories;
+using SauceNAO.Core.Specifications;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 
-/// <summary>
-/// Represents a repository for the chat entity.
-/// </summary>
-/// <param name="context">The database context.</param>
 class ChatRepository(ApplicationDbContext context)
-    : RepositoryBase<ApplicationDbContext, TelegramChat>(context),
-        IChatRepository
+    : AsyncRepositoryBase<TelegramChat>(context),
+        IChatRepostory
 {
     /// <inheritdoc/>
-    public TelegramChat? GetByChatId(long chatId)
+    public Task<TelegramChat> UpsertFromMessageAsync(
+        Message message,
+        CancellationToken cancellationToken
+    )
     {
-        var spec = new ChatSpecification(chatId);
-        return spec.Evaluate(this.Context.Chats).SingleOrDefault();
+        var spec = new ChatSpecification(message.Chat.Id);
+        var groupEntity = spec.Evaluate(context.Chats).SingleOrDefault();
+
+        if (groupEntity is null)
+        {
+            groupEntity = new TelegramChat(message.Chat.Id, message.Chat.Title!)
+            {
+                Username = message.Chat.Username,
+            };
+            return this.InsertAsync(groupEntity, cancellationToken);
+        }
+
+        if (message.MigrateToChatId is not null && message.MigrateFromChatId == message.Chat.Id)
+        {
+            groupEntity.ChatId = (long)message.MigrateToChatId;
+        }
+        groupEntity.Title = message.Chat.Title!;
+        groupEntity.Username = message.Chat.Username;
+        return this.UpdateAsync(groupEntity, cancellationToken);
     }
 }

@@ -19,8 +19,8 @@
     <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Localization" Version="8.0.15" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
-    <PackageVersion Include="Telegram.BotAPI" Version="9.0.0" />
-    <PackageVersion Include="Telegram.BotAPI.Extensions" Version="0.4.1" />
+    <PackageVersion Include="Telegram.BotAPI" Version="9.2.0" />
+    <PackageVersion Include="Telegram.BotAPI.Extensions" Version="0.6.2" />
     <PackageVersion Include="TUnit" Version="0.19.116" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Vite.AspNetCore" Version="2.4.0" />

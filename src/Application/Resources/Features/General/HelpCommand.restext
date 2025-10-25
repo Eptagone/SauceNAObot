@@ -1,0 +1,2 @@
+Help=Send me an image (image, GIF or a sticker) and I'll try to reverse search using the SauceNAO API. <i>If I'm in a group, reply to an image with /sauce</i>.
+HelpSauce=Reply to a photo with /sauce to search for it using the SauceNAO API.\nSyntax: <code>/sauce <similarity></code>\nwhere <code><similarity></code> is the minimum similarity percentage for the search results. It must be an integer between 10 and 90. The default value is 55.\n\nExample: <code>/sauce</code> (default value)\nExample: <code>/sauce 70</code>

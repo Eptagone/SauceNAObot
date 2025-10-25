@@ -1,0 +1,18 @@
+// Copyright (c) 2025 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using System.Linq.Expressions;
+using SauceNAO.Core.Entities.UserAggregate;
+
+namespace SauceNAO.Core.Specifications;
+
+/// <summary>
+/// Represents a specification to filter active users.
+/// </summary>
+public class ActiveUserSpecification : SpecificationBase<TelegramUser>
+{
+    /// <inheritdoc/>
+    protected override Expression<Func<TelegramUser, bool>> Expression =>
+        user =>
+            user.SearchHistory.Where(s => s.SearchedAt > DateTimeOffset.UtcNow.AddDays(-7)).Any();
+}

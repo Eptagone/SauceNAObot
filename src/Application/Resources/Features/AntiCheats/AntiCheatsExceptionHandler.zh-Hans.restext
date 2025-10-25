@@ -1,0 +1,5 @@
+
+# ---- Errors ----
+AnticheatsAlreadyExists=Bot @{0} 已存在于 AntiCheats 列表中。
+AnticheatsAlreadyRemoved=Bot @{0} 不存在或已从 AntiCheats 列表中删除。
+AntiCheatsNotABot=目标用户不是机器人。

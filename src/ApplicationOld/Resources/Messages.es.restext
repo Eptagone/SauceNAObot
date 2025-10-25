@@ -1,0 +1,27 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+
+
+# ---------------- SHARED ERRORS ----------------
+# Error message when a user tries to use the command in a private chat
+GroupsOnly=Este comando solo funciona en grupos.
+
+# ---------------- Commands ----------------
+
+# -------- Acerca de --------
+About=Este bot le proporciona una interfaz para utilizar el motor de búsqueda de imágenes inversas de <a href="https://saucenao.com/">SauceNAO</a>.\nEnvíame una imagen (imagen, GIF o sticker) e intenteré buscarla con el API de SauceNAO.\n\nEste bot fue creado por terceros para utilizar SauceNAO en Telegram. El proyecto no tiene ninguna afiliación con Xamayon (el creador de SauceNAO).
+SupportChat=Soporte
+
+# -------- Sauce --------
+Searching=Buscando...
+NotFound=No se encontró ninguna salsa. ¿Quieres probar con <a href="{0}">una búsqueda inversa de Google</a> o <a href="{1}">Yandex</a>? También puedes ver todos los resultados en <a href="{2}">la página de SauceNAO</a>.
+NotFoundWithoutLinks=No se encontró ninguna salsa.\nLos enlaces alternativos no están disponibles.
+Busy=SauceNao está muy ocupado en este momento. Por favor, inténtalo de nuevo más tarde o usa el comando /temp.\nSi este mensaje aparece frecuentemente, revisa el <a href="{0}">chat de soporte</a>.
+
+# -------- Historial --------
+HistoryMessage=El bot almacena tus búsquedas para que puedas enviar las mismas imágenes con salsa a través del bot. Las salsas se eliminan periódicamente.\nSi deseas eliminar tu historial ahora, escribe <code>/history clear</code>.
+HistoryButtonLabel=Ver tu historial de búsquedas
+HistoryErased=Tu historial de búsquedas ha sido eliminado.
+HistoryEmpty=Aún no has realizado ninguna búsqueda.
+
+# -------- Statistics --------
+Stats=<b>Estadísticas de uso</b>\n{0} búsquedas exitosas.\nUtilizado por {1} usuarios activos.\nUtilizado por {2} grupos.

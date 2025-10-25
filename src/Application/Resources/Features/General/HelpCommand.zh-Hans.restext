@@ -1,0 +1,2 @@
+Help=向我发送一张图片（图片、GIF 或贴纸），我将尝试使用 SauceNAO API 进行反向搜索。<i>如果我在群组中，请使用 /sauce 回复图片</i>。
+HelpSauce=使用 /sauce 回复照片，以使用 SauceNAO API 搜索它。\n语法：<code>/sauce <similarity></code>\n其中 <code><similarity></code> 是搜索结果的最小相似度百分比。它必须是 10 到 90 之间的整数。默认值为 55。\n\n示例：<code>/sauce</code>（默认值）\n示例：<code>/sauce 70</code>

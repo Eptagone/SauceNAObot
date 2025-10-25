@@ -1,0 +1,2 @@
+SetLangHelp=使用此命令更改当前聊天的机器人语言。\n并非所有语言都可用。<b>语法：</b>\n<code>/setlang &lt;language code&gt; [-Force]</code>\n指定可选的 [-Force] 参数，可将您的语言保留在任何组中，无论该组的语言是什么。
+SetLangSaved=您的语言首选项已保存。

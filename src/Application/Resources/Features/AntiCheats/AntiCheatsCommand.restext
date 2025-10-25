@@ -1,0 +1,5 @@
+
+# -------- Anti cheats --------
+AnticheatsHelp=Use this feature to block the reverse search of images sent by specific bots in your group chats.\nTo add a bot to AntiCheat list, just reply to a message sent by the bot with <code>/anticheats add</code>.\nTo remove the bot, reply to the message with <code>/anticheats remove </code>.
+AnticheatsAdded=Bot @{0} was added to the AntiCheats list.
+AnticheatsRemoved=Bot @{0} was removed from the AntiCheats list.

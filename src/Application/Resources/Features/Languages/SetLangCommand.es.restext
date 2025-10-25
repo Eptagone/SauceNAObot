@@ -1,0 +1,2 @@
+SetLangHelp=Usa este comando para cambiar el idioma del bot para el chat actual.\nNo todos los idiomas están disponibles. <b>Sintaxis:</b>\n<code>/setlang &lt;código de idioma&gt; [-Force]</code>\nEspecifica el parámetro opcional [-Force] para mantener tu idioma en cualquier grupo a pesar del idioma del grupo.
+SetLangSaved=Tus preferencias de idioma han sido guardadas.

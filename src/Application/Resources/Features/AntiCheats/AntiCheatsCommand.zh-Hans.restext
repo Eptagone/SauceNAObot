@@ -1,0 +1,4 @@
+# -------- Anti cheats --------
+AnticheatsHelp=使用此功能可阻止对群聊中特定机器人发送的图像进行反向搜索。\n要将机器人添加到反作弊列表，只需使用 <code>/anticheats add</code> 回复机器人发送的消息。\n要删除机器人，请用 <code>/anticheats remove </code> 回复消息。
+AnticheatsAdded=Bot @{0} 已添加到反作弊列表。
+AnticheatsRemoved=Bot @{0} 已从反作弊列表中删除。

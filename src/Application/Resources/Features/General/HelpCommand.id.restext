@@ -1,0 +1,2 @@
+Help=Kirimkan saya gambar (gambar, GIF atau stiker) dan saya akan mencoba membalikkan pencarian menggunakan SauceNAO API. <i>Jika saya berada dalam grup, balas gambar dengan /saus</i>.
+HelpSauce=Balas foto dengan /sauce untuk mencarinya menggunakan SauceNAO API.\nSintaks: <code>/sauce <similarity></code>\ndi mana <code><similarity></code> adalah persentase kemiripan minimum untuk hasil pencarian. Harus berupa bilangan bulat antara 10 dan 90. Nilai defaultnya adalah 55.\n\nContoh: <code>/sauce</code> (nilai default)\nContoh: <code>/sauce 70</code>

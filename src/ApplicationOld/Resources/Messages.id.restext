@@ -1,0 +1,25 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+
+# ---------------- SHARED ERRORS ----------------
+GroupsOnly=Perintah ini hanya berfungsi dalam obrolan grup.
+
+# ---------------- Commands ----------------
+
+# -------- About --------
+About=Bot ini memberi Anda antarmuka untuk menggunakan mesin pencari gambar terbalik <a href="https://saucenao.com/">SauceNAO</a>.\nKirimkan saya gambar (gambar, GIF, atau stiker ) dan saya akan mencoba melakukan pencarian terbalik menggunakan SauceNAO API.\n\nBot ini dibuat oleh pihak ketiga untuk menggunakan SauceNAO di Telegram. Proyek ini tidak memiliki afiliasi apa pun dengan Xamayon (pencipta SauceNAO).
+SupportChat=Obrolan Dukungan
+
+# -------- Sauce --------
+Mencari=Mencari...
+NotFound=Tidak ditemukan saus. Mungkin mencoba <a href="{0}">Google Reverse Search</a> atau <a href="{1}">Yandex</a> saja? atau lihat di <a href="{2}">situs web SauceNAO</a> untuk melihat semua hasilnya.
+NotFoundWithoutLinks=Tidak ditemukan saus.\nLink alternatif tidak tersedia.
+Busy=SauceNao sangat sibuk saat ini. Silakan coba lagi nanti atau coba gunakan perintah /temp.\nJika pesan ini sering muncul, silakan periksa <a href="{0}">obrolan dukungan</a>.
+
+# -------- History --------
+HistoryMessage=Bot menyimpan pencarian Anda sehingga Anda dapat mengirim gambar yang sama dengan saus melalui bot. Saus dihapus secara berkala.\nJika Anda ingin menghapus riwayat Anda sekarang, ketik <code>/history clear</code>.
+HistoryButtonLabel=Lihat riwayat pencarian Anda
+HistoryErased=Riwayat pencarian Anda telah dihapus.
+HistoryEmpty=Anda belum mencari apa pun.
+
+# -------- Statistics --------
+Stats=<b>Statistik Penggunaan</b>\n{0} penelusuran berhasil.\nDigunakan oleh {1} pengguna aktif.\nDigunakan oleh {2} grup.

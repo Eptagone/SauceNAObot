@@ -1,0 +1,4 @@
+# ---- Errors ----
+AnticheatsAlreadyExists=El bot @{0} ya existe en la lista de AntiCheats.
+AnticheatsAlreadyRemoved=El bot @{0} no existe o ya se eliminó de la lista de AntiCheats.
+AntiCheatsNotABot=El usuario de destino no es un bot.

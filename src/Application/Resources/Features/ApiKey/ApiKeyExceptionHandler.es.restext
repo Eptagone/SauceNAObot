@@ -1,0 +1,6 @@
+# ---- Errors ----
+ApiKeyAddNotPremium=Tu apikey debe ser premium para agregarla.
+ApiKeyCouldNotBeFound=No se pudo encontrar la apikey.
+ApiKeyCouldNotBeAdded=Ocurrió un error al agregar tu apikey. Inténtalo de nuevo más tarde.
+ApiKeyNameNotAvailable=Ya tiene una apikey con ese nombre.
+ApiKeyAlreadyExists=Ya tiene esa apikey guardada. intente con otra.

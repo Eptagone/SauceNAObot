@@ -1,0 +1,5 @@
+InvalidPhoto=That doesn't look like a photo file.
+FileUnreadable=The file is unreadable. Please try again with another file.
+TooBigFile=The file is too big. Please try again with a smaller file.
+UnsupportedFormat=The file format is not supported. Please try again with another file.
+NoPublicKeys=No public API keys were found to perform the search. Please try again later or ask in the support chat.

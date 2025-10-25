@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <UserSecretsId>5a1101a9-e5fa-4a82-8658-a1f893d1b701</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+        <PackageReference Include="Vite.AspNetCore" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="**\*.restext" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Core\SauceNAO.Core.csproj" />
+        <ProjectReference Include="..\Infrastructure\SauceNAO.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="pnpm-lock.yaml" />
+        <Content Remove="package.json" />
+        <Content Remove="tsconfig.json" />
+        <!-- Don't remove this line or your manifest.json won't be copied on publish -->
+        <Content Include="wwwroot\dist\.vite\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="package-lock.json" />
+        <None Include="package.json" />
+        <None Include="tsconfig.json" />
+    </ItemGroup>
+</Project>

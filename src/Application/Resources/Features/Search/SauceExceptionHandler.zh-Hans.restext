@@ -1,0 +1,5 @@
+InvalidPhoto=这看起来不像照片文件。
+FileUnreadable=该文件不可读。请使用其他文件重试。
+TooBigFile=该文件太大。请使用较小的文件重试。
+UnsupportedFormat=不支持该文件格式。请使用其他文件重试。
+NoPublicKeys=未找到用于执行搜索的公共 API 密钥。请稍后重试或在支持聊天中询问。

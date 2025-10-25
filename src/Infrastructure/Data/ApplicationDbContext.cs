@@ -2,9 +2,9 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
-using SauceNAO.Domain.Entities.ChatAggregate;
-using SauceNAO.Domain.Entities.SauceAggregate;
-using SauceNAO.Domain.Entities.UserAggregate;
+using SauceNAO.Core.Entities.ChatAggregate;
+using SauceNAO.Core.Entities.SauceAggregate;
+using SauceNAO.Core.Entities.UserAggregate;
 
 #nullable disable
 

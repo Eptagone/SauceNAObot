@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using SauceNAO.Domain;
-using SauceNAO.Domain.Repositories;
-using SauceNAO.Domain.Services;
+using SauceNAO.Core;
+using SauceNAO.Core.Repositories;
+using SauceNAO.Core.Services;
 using SauceNAO.Infrastructure.Data;
 using SauceNAO.Infrastructure.Data.Repositories;
 using SauceNAO.Infrastructure.Services;
@@ -48,7 +48,7 @@ public static class ServiceCollectionExtensions
             options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IChatRepository, ChatRepository>();
+        services.AddScoped<IChatRepostory, ChatRepository>();
         services.AddScoped<IApiKeyRespository, ApiKeyRepository>();
         services.AddScoped<ISauceMediaRepository, SauceMediaRepository>();
 

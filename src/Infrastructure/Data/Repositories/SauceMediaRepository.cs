@@ -2,9 +2,9 @@
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
-using SauceNAO.Domain.Entities.SauceAggregate;
-using SauceNAO.Domain.Repositories;
-using SauceNAO.Domain.Specifications;
+using SauceNAO.Core.Entities.SauceAggregate;
+using SauceNAO.Core.Repositories;
+using SauceNAO.Core.Specifications;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 
@@ -13,7 +13,7 @@ namespace SauceNAO.Infrastructure.Data.Repositories;
 /// </summary>
 /// <param name="context">The database context.</param>
 class SauceMediaRepository(ApplicationDbContext context)
-    : RepositoryBase<ApplicationDbContext, SauceMedia>(context),
+    : AsyncRepositoryBase<ApplicationDbContext, SauceMedia>(context),
         ISauceMediaRepository
 {
     /// <inheritdoc/>

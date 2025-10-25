@@ -1,0 +1,6 @@
+# ---- Errors ----
+ApiKeyAddNotPremium=Apikey Anda harus premium untuk menambahkannya.
+ApiKeyCouldNotBeFound=Apikey tidak dapat ditemukan.
+ApiKeyCouldNotBeAdded=Terjadi kesalahan saat menambahkan apikey Anda. Silakan coba lagi nanti.
+ApiKeyNameNotAvailable=Anda sudah memiliki apikey dengan nama tersebut.
+ApiKeyAlreadyExists=Anda sudah menyimpan apikey tersebut. Coba lagi dengan yang lain.

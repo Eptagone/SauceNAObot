@@ -1,0 +1,4 @@
+# -------- Anti cheats --------
+AnticheatsHelp=Gunakan fitur ini untuk memblokir pencarian terbalik gambar yang dikirim oleh bot tertentu di obrolan grup Anda.\nUntuk menambahkan bot ke daftar AntiCheat, cukup balas pesan yang dikirim oleh bot dengan <code>/anticheats add</code> .\nUntuk menghapus bot, balas pesan dengan <code>/anticheats hapus </code>.
+AnticheatsAdded=Bot @{0} telah ditambahkan ke daftar AntiCheats.
+AnticheatsRemoved=Bot @{0} telah dihapus dari daftar AntiCheats.

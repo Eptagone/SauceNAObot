@@ -1,0 +1,27 @@
+﻿# ---------------- SHARED MESSAGES ----------------
+
+
+# ---------------- SHARED ERRORS ----------------
+# Error message when a user tries to use the command in a private chat
+GroupsOnly=This command only works in group chats.
+
+# ---------------- Commands ----------------
+
+# -------- About --------
+About=This bot provides you with an interface to use <a href="https://saucenao.com/">SauceNAO</a>'s reverse image search engine.\nSend me an image (image, GIF or a sticker) and I'll try to reverse search using the SauceNAO API.\n\nThis bot was created by a third party to use SauceNAO on Telegram. The project has not any affiliation with Xamayon (the creator of SauceNAO).
+SupportChat=Support Chat
+
+# -------- Sauce --------
+Searching=Searching...
+NotFound=No sauce found. Maybe try <a href="{0}">Google Reverse Search</a> or <a href="{1}">Yandex</a> instead? or see on <a href="{2}">SauceNAO website</a> to see all the results.
+NotFoundWithoutLinks=No sauce found.\nAlternate links are not available.
+Busy=SauceNao is very busy right now. Please try again later or try using /temp command.\nIf this message appears frequently, please check the <a href="{0}">support chat</a>.
+
+# -------- History --------
+HistoryMessage=The bot stores yours searches so you can send the same images with sauce via bot. Sauces are erased periodically.\nIf you want to delete your history right now, type <code>/history clear</code>.
+HistoryButtonLabel=View your search history
+HistoryErased=Your search history has been erased.
+HistoryEmpty=You haven't searched anything yet.
+
+# -------- Statistics --------
+Stats=<b>Usage Statistics</b>\n{0} successful searches.\nUsed by {1} active users.\nUsed by {2} groups.

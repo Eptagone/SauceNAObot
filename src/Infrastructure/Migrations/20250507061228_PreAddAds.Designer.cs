@@ -28,7 +28,7 @@ namespace SauceNAO.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.ChatAggregate.AntiCheatRestriction", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.ChatAggregate.AntiCheatRestriction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("AntiCheatRestrictions");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.ChatAggregate.TelegramChat", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.ChatAggregate.TelegramChat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.SauceAggregate.Sauce", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.SauceAggregate.Sauce", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,7 +122,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("Sauces");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.SauceAggregate.SauceApiKey", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.SauceAggregate.SauceApiKey", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,7 +157,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("ApiKeys");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.SauceAggregate.SauceMedia", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.SauceAggregate.SauceMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("SearchedMedias");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.UserAggregate.SearchRecord", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.UserAggregate.SearchRecord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,7 +213,7 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("SearchRecords");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.UserAggregate.TelegramUser", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.UserAggregate.TelegramUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,9 +270,9 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.ToTable("SauceSauceMedia");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.ChatAggregate.AntiCheatRestriction", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.ChatAggregate.AntiCheatRestriction", b =>
                 {
-                    b.HasOne("SauceNAO.Domain.Entities.ChatAggregate.TelegramChat", "Group")
+                    b.HasOne("SauceNAO.Core.Entities.ChatAggregate.TelegramChat", "Group")
                         .WithMany("Restrictions")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -281,9 +281,9 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.SauceAggregate.SauceApiKey", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.SauceAggregate.SauceApiKey", b =>
                 {
-                    b.HasOne("SauceNAO.Domain.Entities.UserAggregate.TelegramUser", "Owner")
+                    b.HasOne("SauceNAO.Core.Entities.UserAggregate.TelegramUser", "Owner")
                         .WithMany("ApiKeys")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -292,15 +292,15 @@ namespace SauceNAO.Infrastructure.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.UserAggregate.SearchRecord", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.UserAggregate.SearchRecord", b =>
                 {
-                    b.HasOne("SauceNAO.Domain.Entities.SauceAggregate.SauceMedia", "Media")
+                    b.HasOne("SauceNAO.Core.Entities.SauceAggregate.SauceMedia", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SauceNAO.Domain.Entities.UserAggregate.TelegramUser", "User")
+                    b.HasOne("SauceNAO.Core.Entities.UserAggregate.TelegramUser", "User")
                         .WithMany("SearchHistory")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -313,25 +313,25 @@ namespace SauceNAO.Infrastructure.Migrations
 
             modelBuilder.Entity("SauceSauceMedia", b =>
                 {
-                    b.HasOne("SauceNAO.Domain.Entities.SauceAggregate.SauceMedia", null)
+                    b.HasOne("SauceNAO.Core.Entities.SauceAggregate.SauceMedia", null)
                         .WithMany()
                         .HasForeignKey("AssociatedMediasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SauceNAO.Domain.Entities.SauceAggregate.Sauce", null)
+                    b.HasOne("SauceNAO.Core.Entities.SauceAggregate.Sauce", null)
                         .WithMany()
                         .HasForeignKey("SaucesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.ChatAggregate.TelegramChat", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.ChatAggregate.TelegramChat", b =>
                 {
                     b.Navigation("Restrictions");
                 });
 
-            modelBuilder.Entity("SauceNAO.Domain.Entities.UserAggregate.TelegramUser", b =>
+            modelBuilder.Entity("SauceNAO.Core.Entities.UserAggregate.TelegramUser", b =>
                 {
                     b.Navigation("ApiKeys");
 
