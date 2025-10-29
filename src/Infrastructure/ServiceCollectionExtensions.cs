@@ -101,7 +101,7 @@ public static class ServiceCollectionExtensions
         if (string.IsNullOrWhiteSpace(redisConnectionString))
         {
             services.AddSqliteCache(
-                Path.Combine(Path.GetTempPath(), Path.GetTempFileName()).Replace(".tmp", ".db")
+                Path.Combine(Path.GetTempPath(), "snao-cache.db")
             );
         }
         else
