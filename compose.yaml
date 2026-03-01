@@ -5,25 +5,22 @@ services:
   app:
     build:
       context: src
-      dockerfile: WebApp/Dockerfile
+      dockerfile: Dockerfile
     environment:
-      PORT:
+      # PORT:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_HTTP_PORTS: 80
+      APP__APPLICATIONURL:
+      APP__SUPPORTCHATINVITATIONLINK:
       CONNECTIONSTRINGS__DEFAULT: # "Server=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
-      # CONNECTIONSTRINGS__REDIS: "redis:6379"
+      # CONNECTIONSTRINGS__CACHE: "redis:6379"
       TELEGRAMBOT__BOTTOKEN:
+      # TELEGRAMBOT__WEBHOOKURL: ${APP__APPLICATIONURL}
+      # TELEGRAMBOT__SECRETTOKEN:
       # TELEGRAMBOT__SERVERADDRESS: http://local-bot-api-server:8081
-      # TELEGRAMBOT__WEBHOOKURL: http://app
-      TELEGRAMBOT__SECRETTOKEN:
-      GENERAL__APPLICATIONURL:
-      GENERAL__SUPPORTCHATINVITATIONLINK:
-      # GENERAL__FILESPATH: /files:/opt/tba/${TELEGRAMBOT__BOTTOKEN}
-      GENERAL__FFMPEGPATH:
+      FILES__FFMPEGPATH:
     ports:
       - ${PORT:-80}:80
-    # volumes:
-    #   - "files:/files"
     # depends_on:
     #   - db
     #   - redis
@@ -44,11 +41,6 @@ services:
   #   environment:
   #     TELEGRAM_API_ID:
   #     TELEGRAM_API_HASH:
-  #     TELEGRAMBOT__BOTTOKEN:
-  #   volumes:
-  #     - type: volume
-  #       source: files
-  #       target: /opt/tba/${TELEGRAMBOT__BOTTOKEN}
 
   # redis:
   #   image: redis:alpine
@@ -56,7 +48,5 @@ services:
   #     REDIS_ARGS: "--maxmemory 512mb --maxmemory-policy allkeys-lru"
   #   ports:
   #     - ${REDIS_PORT:-6379}:6379
-
 # volumes:
 #   data:
-#   files:

@@ -1,0 +1,2 @@
+CancelMessage=La operación fue cancelada.
+CommandsDisabled=Las operaciones de bot están desactivadas hasta que finalices la operación actual. Si deseas cancelar la operación, utiliza /cancel.

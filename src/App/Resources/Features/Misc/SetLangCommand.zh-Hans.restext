@@ -1,0 +1,2 @@
+SetLangHelp=使用此命令设置您在使用机器人时的首选语言。\n如果您在群组中，则所有未设置语言的成员将默认使用指定的语言。\n注意：并非所有语言都可用。\n<b>语法：</b>\n<code>/setlang &lt;language code&gt;</code>
+LanguageSet=您的语言首选项已保存。

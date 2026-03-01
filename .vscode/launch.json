@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "C#: Launch and Debug",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "C#: Build",
+      "program": "${workspaceFolder}/src/App/bin/Debug/net10.0/SauceNAO.App.dll",
+      "cwd": "${workspaceFolder}/src/App",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# compose.yaml
+# Defines a full environment for the SauceNAO bot.
+
+services:
+  server:
+    build: .
+    environment:
+      TELEGRAM_API_ID:
+      TELEGRAM_API_HASH:
+    ports:
+      - ${PORT:-8081}:80

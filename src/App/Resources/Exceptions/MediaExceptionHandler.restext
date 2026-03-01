@@ -1,0 +1,4 @@
+InvalidPhoto=That doesn't look like a photo file.
+TooBigFile=The file is too big. Please try again with a smaller file.
+UnsupportedFormat=The file format is not supported. Please try again with another file.
+MissingApplicationUrl=The requested action is not available right now because no application URL is set. Try again later.

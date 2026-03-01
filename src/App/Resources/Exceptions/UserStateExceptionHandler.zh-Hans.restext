@@ -1,0 +1,2 @@
+CancelMessage=操作已取消。
+CommandsDisabled=机器人操作已禁用,直到完成当前操作。如果您想取消操作,请使用 /cancel。

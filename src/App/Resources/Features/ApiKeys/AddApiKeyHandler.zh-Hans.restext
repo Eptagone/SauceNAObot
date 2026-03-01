@@ -1,0 +1,7 @@
+# -------- ApiKey --------
+AskForName=请输入您的 apikey 的名称：\n输入 /cancel 取消。
+AskForKey=请将您的新 apikey 发送给我。只能添加高级 apikey。
+AskForShare=您是否要共享您的 apikey 以供公共搜索？如果共享，机器人将使用它为使用机器人的每个人烹饪酱汁。
+AddSuccess=您的 apikey 已成功保存。
+Yes=是的
+No=否

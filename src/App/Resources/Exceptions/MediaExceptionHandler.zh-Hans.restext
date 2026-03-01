@@ -1,0 +1,4 @@
+InvalidPhoto=这看起来不像照片文件。
+TooBigFile=该文件太大。请使用较小的文件重试。
+UnsupportedFormat=不支持该文件格式。请使用其他文件重试。
+MissingApplicationUrl=由于未设置应用程序 URL，因此当前无法执行请求的操作。请稍后重试。

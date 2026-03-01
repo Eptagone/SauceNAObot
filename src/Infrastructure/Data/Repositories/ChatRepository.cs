@@ -1,24 +1,40 @@
-// Copyright (c) 2025 Quetzal Rivera.
-// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
-
-using SauceNAO.Domain.Entities.ChatAggregate;
-using SauceNAO.Domain.Repositories;
-using SauceNAO.Domain.Specifications;
+using Microsoft.EntityFrameworkCore;
+using SauceNAO.Core.Data;
+using SauceNAO.Core.Entities;
+using Telegram.BotAPI.AvailableTypes;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 
-/// <summary>
-/// Represents a repository for the chat entity.
-/// </summary>
-/// <param name="context">The database context.</param>
-class ChatRepository(ApplicationDbContext context)
-    : RepositoryBase<ApplicationDbContext, TelegramChat>(context),
-        IChatRepository
+sealed class ChatRepository(SnaoDbContext context)
+    : RepositoryBase<ChatEntity>(context),
+        IChatRepostory
 {
     /// <inheritdoc/>
-    public TelegramChat? GetByChatId(long chatId)
+    public Task<ChatEntity> UpsertFromMessageAsync(
+        Message message,
+        CancellationToken cancellationToken
+    )
     {
-        var spec = new ChatSpecification(chatId);
-        return spec.Evaluate(this.Context.Chats).SingleOrDefault();
+        var chatId = message.MigrateFromChatId ?? message.Chat.Id;
+        var groupEntity = context
+            .Groups.AsNoTrackingWithIdentityResolution()
+            .SingleOrDefault(g => g.ChatId == chatId);
+
+        if (groupEntity is null)
+        {
+            groupEntity = new ChatEntity(message.Chat.Id, message.Chat.Title!)
+            {
+                Username = message.Chat.Username,
+            };
+            return this.InsertAsync(groupEntity, cancellationToken);
+        }
+
+        if (message.MigrateToChatId is not null)
+        {
+            groupEntity.ChatId = (long)message.MigrateToChatId;
+        }
+        groupEntity.Title = message.Chat.Title!;
+        groupEntity.Username = message.Chat.Username;
+        return this.UpdateAsync(groupEntity, cancellationToken);
     }
 }

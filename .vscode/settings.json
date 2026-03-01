@@ -1,40 +1,20 @@
 {
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/node_modules": true,
-        "**/bin": true,
-        "**/obj": true,
-        "**/.vs": true,
-    },
-    "[csharp]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[tailwindcss]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
-    },
-    "editor.formatOnSave": true,
-    "dotnet.testWindow.useTestingPlatformProtocol": true,
-    "npm.packageManager": "pnpm",
-    "eslint.useFlatConfig": true,
-    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "typescript.inlayHints.variableTypes.enabled": true,
-    "typescript.referencesCodeLens.enabled": true,
-    "typescript.preferences.preferTypeOnlyAutoImports": true,
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "diffEditor.ignoreTrimWhitespace": false,
-    "files.eol": "\n",
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/bin": true,
+    "**/obj": true,
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
 }

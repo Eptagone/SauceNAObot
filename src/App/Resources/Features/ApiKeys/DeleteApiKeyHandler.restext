@@ -1,0 +1,6 @@
+ApiKeyConfirmDelete=Are you sure you want to delete your apikey?
+ApiKeyDeleted=Your apikey has been deleted.
+ApiKeyNotFound=You don't have any apikey with that name.
+DeletionCancelled=Deletion cancelled.
+Yes=Yes
+No=No

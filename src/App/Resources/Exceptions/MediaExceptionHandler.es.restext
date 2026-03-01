@@ -1,0 +1,4 @@
+InvalidPhoto=Ese no parece una imagen.
+TooBigFile=El archivo es demasiado grande. Por favor, intente de nuevo con un archivo más pequeño.
+UnsupportedFormat=El archivo no tiene un formato compatible. Por favor, intente de nuevo con otro archivo.
+MissingApplicationUrl=No se puede procesar la solicitud actual porque no se ha establecido ninguna URL de la aplicación. Intente de nuevo más tarde.

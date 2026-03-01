@@ -4,7 +4,7 @@
 using System.Text.Json.Serialization;
 using SauceNAO.Infrastructure.API.Converters;
 
-namespace SauceNAO.Infrastructure.API;
+namespace SauceNAO.Infrastructure.API.Types;
 
 internal sealed class SnaoResultData
 {

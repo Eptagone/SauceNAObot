@@ -1,0 +1,38 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# local server files
+local-server
+
+# dependencies
+node_modules
+
+# macOS-specific files
+.DS_Store
+
+# dotenv environment variables file
+.env
+
+# Git
+.git
+.gitignore
+
+# VS Code
+.vscode
+
+# Docker compose
+*compose.yml
+*compose.override.yml

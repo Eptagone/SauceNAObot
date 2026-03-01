@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <UserSecretsId>f9230e03-09d7-4344-9115-7c9eab4df45a</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
+    <PackageReference Include="NeoSmart.Caching.Sqlite.AspNetCore" />
+    <PackageReference Include="Telegram.BotAPI" />
+    <PackageReference Include="Telegram.BotAPI.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.restext" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SauceNAO.Core.csproj" />
+    <ProjectReference Include="..\Infrastructure\SauceNAO.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

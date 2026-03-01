@@ -1,0 +1,2 @@
+SetLangHelp=Gunakan perintah ini untuk mengatur bahasa pilihan Anda saat menggunakan bot.\nJika Anda berada dalam grup, bahasa yang ditentukan akan digunakan secara default untuk semua anggota yang tidak memiliki bahasa yang ditetapkan.\nCatatan: Tidak semua bahasa tersedia.\n<b>Sintaks:</b>\n<code>/setlang &lt;language code&gt;</code>
+LanguageSet=Preferensi bahasa Anda telah disimpan.

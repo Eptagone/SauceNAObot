@@ -1,0 +1,6 @@
+ApiKeyConfirmDelete=Apakah Anda yakin ingin menghapus apikey Anda?
+ApiKeyDeleted=Apikey Anda telah dihapus.
+ApiKeyNotFound=Anda tidak memiliki apikey dengan nama tersebut.
+DeletionCancelled=Penghapusan dibatalkan.
+Yes=Ya
+No=Tidak

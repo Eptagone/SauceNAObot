@@ -3,7 +3,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace SauceNAO.Infrastructure.API;
+namespace SauceNAO.Infrastructure.API.Types;
 
 internal sealed class HeaderIndex
 {

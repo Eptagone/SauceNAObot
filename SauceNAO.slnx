@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="src/App/SauceNAO.App.csproj" />
+    <Project Path="src/Core/SauceNAO.Core.csproj" />
+    <Project Path="src/Infrastructure/SauceNAO.Infrastructure.csproj" />
+  </Folder>
+</Solution>

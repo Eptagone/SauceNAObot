@@ -1,0 +1,6 @@
+# -------- ApiKey --------
+ApiKeyHelp=Jika Anda sudah mendukung <a href="https://www.patreon.com/saucenao">Xamayon</a> (pembuat asli Saunao.com), maka Anda dapat menggunakan apikey Anda sendiri dengan bot.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Menambahkan daftar apikey\n/apikey baru - Mencantumkan apikey yang Anda simpan\n/apikey delete &lt;apikey_name&gt; - Menghapus apikey\n /apikey show &lt;apikey_name&gt; - Menampilkan apikey</pre>
+ApiKeyList=Apikey yang Anda simpan:\n{0}\n\nTambahkan yang baru menggunakan <code>/apikey add</code>.\nHapus apikey menggunakan <code>/apikey delete &lt;apikey_name&gt;</code>.\nApakah kamu lupa apikeymu? Gunakan <code>/apikey show &lt;apikey_name&gt;</code> untuk mendapatkannya lagi.
+ApiKeyListEmpty=Anda belum menambahkan apikey apa pun. Gunakan <code>/apikey add</code> untuk menambahkannya.
+ApiKeyDetail=Apikey Anda adalah: <code>{0}</code>\n
+NotFound=Apikey tidak ditemukan.

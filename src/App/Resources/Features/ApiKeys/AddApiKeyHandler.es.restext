@@ -1,0 +1,7 @@
+# -------- ApiKey --------
+AskForName=Por favor, ingresa un nombre para tu apikey:\nIngresa /cancel para cancelar.
+AskForKey=Envía tu nueva apikey. Solo las apikeys premium pueden ser agregadas.
+AskForShare=¿Deseas compartir tu apikey para búsquedas públicas? Si lo haces, el bot la utilizará para preparar salsas para todos los usuarios que usan el bot.
+AddSuccess=Tu apikey se guardó correctamente.
+Yes=Sí
+No=No

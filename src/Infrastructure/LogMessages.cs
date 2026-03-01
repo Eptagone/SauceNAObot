@@ -39,11 +39,4 @@ internal static partial class LogMessages
         Exception e,
         string message
     );
-
-    [LoggerMessage(
-        Message = "Could not create a proper URL to access telegram files from the local server. The application URL was not configured.",
-        Level = LogLevel.Critical,
-        SkipEnabledCheck = true
-    )]
-    internal static partial void LogTelegramFileUrlError(this ILogger logger);
 }

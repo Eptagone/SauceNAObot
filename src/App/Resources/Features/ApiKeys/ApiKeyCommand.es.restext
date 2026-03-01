@@ -1,0 +1,6 @@
+# -------- ApiKey --------
+ApiKeyHelp=Si ya estás patrocinando a <a href="https://www.patreon.com/saucenao">Xamayon</a> (el creador original de saucenao.com), puedes utilizar tu propia apikey con el bot.\n<pre>/apikey add <nombre> <apikey> [--public] - Agrega una nueva apikey\n/apikey list - Enumera tus apikeys guardadas\n/apikey delete <nombre_apikey> - Elimina una apikey\n/apikey show <nombre_apikey> - Muestra una apikey</pre>
+ApiKeyList=Tus apikeys guardadas:\n{0}\n\nAgrega una nueva usando <code>/apikey add</code>.\nElimina una apikey usando <code>/apikey delete <nombre_apikey></code>.\n¿Olvidaste tu apikey? Utiliza <code>/apikey show <nombre_apikey></code> para obtenerla de nuevo.
+ApiKeyListEmpty=Aún no has agregado ninguna apikey. Usa <code>/apikey add</code> para agregar una.
+ApiKeyDetail=Tu apikey es: <code>{0}</code>\n
+NotFound=La apikey no fue encontrada.

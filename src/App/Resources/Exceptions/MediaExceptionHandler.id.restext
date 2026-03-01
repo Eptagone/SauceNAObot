@@ -1,0 +1,4 @@
+InvalidPhoto=Itu tidak terlihat seperti file foto.
+TooBigFile=File terlalu besar. Silakan coba lagi dengan file yang lebih kecil.
+UnsupportedFormat=Format file tidak didukung. Silakan coba lagi dengan file lain.
+MissingApplicationUrl=Tindakan yang diminta saat ini tidak tersedia karena belum ada URL aplikasi yang ditetapkan. Coba lagi nanti.

@@ -3,58 +3,17 @@
 
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
-using SauceNAO.Domain.Repositories;
+using SauceNAO.Core.Data;
 
 namespace SauceNAO.Infrastructure.Data.Repositories;
 
 /// <summary>
 /// Represents a base class for repositories.
 /// </summary>
-/// <typeparam name="TContext">The type of the context.</typeparam>
-public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRepository<TEntity>
-    where TContext : DbContext
+/// <typeparam name="TEntity">The type of the entity.</typeparam>
+abstract class RepositoryBase<TEntity>(DbContext context) : IRepository<TEntity>
     where TEntity : class
 {
-    /// <summary>
-    /// The context instance.
-    /// </summary>
-    protected TContext Context { get; } = context;
-
-    /// <inheritdoc/>
-    public virtual TEntity Insert(TEntity entity)
-    {
-        if (entity != null)
-        {
-            this.Context.Add(entity);
-            this.Context.SaveChanges();
-            return entity;
-        }
-        throw new ArgumentNullException(nameof(entity));
-    }
-
-    /// <inheritdoc/>
-    public virtual TEntity Update(TEntity entity)
-    {
-        if (entity != null)
-        {
-            this.Context.Entry(entity).State = EntityState.Modified;
-            this.Context.SaveChanges();
-            return entity;
-        }
-        throw new ArgumentNullException(nameof(entity));
-    }
-
-    /// <inheritdoc/>
-    public virtual void Delete(TEntity entity)
-    {
-        if (entity != null)
-        {
-            this.Context.Entry(entity).State = EntityState.Deleted;
-            this.Context.SaveChanges();
-        }
-        throw new ArgumentNullException(nameof(entity));
-    }
-
     /// <inheritdoc/>
     public virtual async Task<TEntity> InsertAsync(
         TEntity entity,
@@ -63,8 +22,9 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
     {
         if (entity != null)
         {
-            await this.Context.AddAsync(entity, cancellationToken);
-            await this.Context.SaveChangesAsync(cancellationToken);
+            await context.AddAsync(entity, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+            context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
         throw new ArgumentNullException(nameof(entity));
@@ -78,8 +38,9 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
     {
         if (entity != null)
         {
-            this.Context.Entry(entity).State = EntityState.Modified;
-            await this.Context.SaveChangesAsync(cancellationToken);
+            context.Entry(entity).State = EntityState.Modified;
+            await context.SaveChangesAsync(cancellationToken);
+            context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
         throw new ArgumentNullException(nameof(entity));
@@ -93,8 +54,9 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
     {
         if (entity != null)
         {
-            this.Context.Entry(entity).State = EntityState.Deleted;
-            await this.Context.SaveChangesAsync(cancellationToken);
+            context.Entry(entity).State = EntityState.Deleted;
+            await context.SaveChangesAsync(cancellationToken);
+            context.Entry(entity).State = EntityState.Detached;
         }
         else
         {
@@ -103,9 +65,6 @@ public abstract class RepositoryBase<TContext, TEntity>(TContext context) : IRep
     }
 
     /// <inheritdoc/>
-    public int Count() => this.Context.Set<TEntity>().Count();
-
-    /// <inheritdoc/>
     public Task<int> CountAsync(CancellationToken cancellationToken = default) =>
-        this.Context.Set<TEntity>().CountAsync(cancellationToken);
+        context.Set<TEntity>().CountAsync(cancellationToken);
 }

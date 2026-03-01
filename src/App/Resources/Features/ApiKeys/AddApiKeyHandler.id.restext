@@ -1,0 +1,7 @@
+# -------- ApiKey --------
+AskForName=Silakan masukkan nama untuk apikey Anda:\nKetik /cancel untuk membatalkan.
+AskForKey=Kirimkan saya apikey baru Anda. Hanya apikey Premium yang dapat ditambahkan.
+AskForShare=Apakah Anda ingin membagikan apikey Anda untuk pencarian publik? Jika Anda melakukannya, bot akan menggunakannya untuk memasak saus bagi semua orang yang menggunakan bot tersebut.
+AddSuccess=Apikey Anda telah berhasil disimpan.
+Yes=Ya
+No=Tidak

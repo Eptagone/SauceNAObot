@@ -1,0 +1,6 @@
+# -------- ApiKey --------
+ApiKeyHelp=If you're already supporting <a href="https://www.patreon.com/saucenao">Xamayon</a> (the original creator of saucenao.com), then you can use your own apikey with the bot.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Adds a new apikey\n/apikey list - Lists your saved apikeys\n/apikey delete &lt;apikey_name&gt; - Deletes an apikey\n/apikey show &lt;apikey_name&gt; - Shows an apikey</pre>
+ApiKeyList=Your saved apikeys:\n{0}\n\nAdd a new one using <code>/apikey add</code>.\nRemove an apikey using <code>/apikey delete &lt;apikey_name&gt;</code>.\nDid you forget your apikey? Use <code>/apikey show &lt;apikey_name&gt;</code> to get it again.
+ApiKeyListEmpty=You haven't added any apikeys yet. Use <code>/apikey add</code> to add one.
+ApiKeyDetail=Your apikey is: <code>{0}</code>\n
+NotFound=The apikey was not found.

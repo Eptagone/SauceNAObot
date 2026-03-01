@@ -1,0 +1,38 @@
+using SauceNAO.Core.Entities;
+using SauceNAO.Core.Entities.UserAggregate;
+using Telegram.BotAPI.AvailableTypes;
+
+namespace SauceNAO.Core.Services;
+
+/// <summary>
+/// Provides a method to retrieve the stored user and group data from a Telegram message
+/// </summary>
+public interface IContextProvider
+{
+    /// <summary>
+    /// Load the user context from the given message.
+    /// </summary>
+    /// <param name="message">The received message</param>
+    /// <param name="cancellationToken">A cancellation token to cancel the operation</param>
+    /// <returns>A tuple containing the user, group, and language code</returns>
+    public Task<UserEntity> LoadAsync(Message message, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Load the user context from the given telegram user object
+    /// </summary>
+    /// <param name="user">The telegram user object</param>
+    /// <param name="cancellationToken">A cancellation token to cancel the operation</param>
+    /// <returns></returns>
+    public Task<UserEntity> LoadAsync(User user, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Load and return the full context from the given message.
+    /// </summary>
+    /// <param name="message">The received message</param>
+    /// <param name="cancellationToken">A cancellation token to cancel the operation</param>
+    /// <returns></returns>
+    public Task<(UserEntity user, ChatEntity? group)> LoadAllAsync(
+        Message message,
+        CancellationToken cancellationToken
+    );
+}
