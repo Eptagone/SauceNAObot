@@ -1,0 +1,3 @@
+HistoryHelp=机器人会存储您的搜索记录，以便您可以通过机器人发送带有酱汁的相同图像。酱汁会定期删除。\n如果您想立即删除历史记录，请输入 <code>/history clear</code>。
+HistoryHelpButton=查看您的搜索历史记录
+HistoryCleared=您的搜索历史记录已被删除。

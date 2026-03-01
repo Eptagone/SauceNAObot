@@ -20,6 +20,7 @@ This bot was created by a third party to use SauceNAO on Telegram. The project h
 | :------ | :---------------------------------- | :------------------------------- |
 | apikeys | Manage your apikeys                 | **/apikey** _args_               |
 | help    | Help                                | **/help** _args_                 |
+| history | Manage your sauces                  | **/help** _args_                 |
 | sauce   | Look for the image source           | Reply to a image with **/sauce** |
 | temp    | Create a temporary link to an image | Reply to a image with **/temp**  |
 

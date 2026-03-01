@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using SauceNAO.Core.Data;
@@ -81,4 +84,9 @@ sealed class SearchHistoryRepository(SnaoDbContext context)
         context.Entry(entity.Media).State = EntityState.Detached;
         return value;
     }
+
+    public Task ClearUserHistoryAsync(long userId, CancellationToken cancellationToken = default) =>
+        context
+            .SearchRecords.Where(s => s.User.UserId == userId)
+            .ExecuteDeleteAsync(cancellationToken);
 }

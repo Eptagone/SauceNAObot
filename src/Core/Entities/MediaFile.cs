@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using SauceNAO.Core.Entities.Abstractions;
 using SauceNAO.Core.Models;
 
 namespace SauceNAO.Core.Entities;
@@ -5,7 +9,7 @@ namespace SauceNAO.Core.Entities;
 /// <summary>
 /// Represents a media like an image or video that which sauce was searched for.
 /// </summary>
-public class MediaFile(string fileUniqueId, string fileId) : EntityBase, ITimestampable
+public class MediaFile(string fileUniqueId, string fileId) : TimestampableEntity
 {
     /// <summary>
     /// Unique identifier for this file, which is supposed to be the same over time and for different bots.
@@ -37,12 +41,6 @@ public class MediaFile(string fileUniqueId, string fileId) : EntityBase, ITimest
     /// Used to send a message to the user with the media if needed.
     /// </summary>
     public TelegramMediaType MediaType { get; set; }
-
-    /// <inheritdoc />
-    public DateTimeOffset CreatedAt { get; set; }
-
-    /// <inheritdoc />
-    public DateTimeOffset UpdatedAt { get; set; }
 
     /// <summary>
     /// List of sauces that were found for this media.

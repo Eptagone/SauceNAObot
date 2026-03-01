@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
 using SauceNAO.Core.Entities.UserAggregate;
 
 namespace SauceNAO.Core.Data;
@@ -37,4 +40,12 @@ public interface ISearchHistoryRepository : IRepository<SearchRecord>
         int offset = 0,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Clears the search history for a specific user.
+    /// </summary>
+    /// <param name="userId">Unique identifier for the user.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> to cancel the operation.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    Task ClearUserHistoryAsync(long userId, CancellationToken cancellationToken = default);
 }

@@ -1,0 +1,5 @@
+ApiKeyHelp=Если вы уже поддерживаете <a href="https://www.patreon.com/saucenao">Xamayon</a> (первоначального создателя saucenao.com), то можете использовать свой собственный API-ключ с ботом.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Добавляет новый API-ключ\n/apikey list - Отображает список сохраненных API-ключей\n/apikey delete &lt;apikey_name&gt; - Удаляет API-ключ\n/apikey show &lt;apikey_name&gt; - Отображает API-ключ</pre>
+ApiKeyList=Сохраненные вами API-ключи:\n{0}\n\nДобавьте новый, используя <code>/apikey add</code>.\nУдалите API-ключ, используя <code>/apikey delete &lt;apikey_name&gt;</code>.\nЗабыли свой API-ключ? Используйте <code>/apikey show &lt;apikey_name&gt;</code>, чтобы получить его снова.
+ApiKeyListEmpty=Вы еще не добавили ни одного API-ключа. Используйте <code>/apikey add</code>, чтобы добавить его.
+ApiKeyDetail=Ваш API-ключ: <code>{0}</code>\n
+NotFound=Ключ API не найден.

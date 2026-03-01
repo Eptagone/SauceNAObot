@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using System.ComponentModel.DataAnnotations;
+using SauceNAO.Core.Entities.Abstractions;
 
 namespace SauceNAO.Core.Entities;
 
@@ -7,7 +11,7 @@ namespace SauceNAO.Core.Entities;
 /// </summary>
 /// <param name="chatId">Unique identifier for this chat.</param>
 /// <param name="title">Title of the group or channel.</param>
-public class ChatEntity(long chatId, string title) : LocalizableEntityBase
+public class ChatEntity(long chatId, string title) : LocalizableEntity
 {
     /// <summary>
     /// Unique identifier for this chat.

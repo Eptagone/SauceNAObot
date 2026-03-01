@@ -1,0 +1,3 @@
+HistoryHelp=The bot stores yours searches so you can send the same images with sauce via bot. Sauces are erased periodically.\nIf you want to delete your history right now, type <code>/history clear</code>.
+HistoryHelpButton=View your search history
+HistoryCleared=Your search history has been erased.

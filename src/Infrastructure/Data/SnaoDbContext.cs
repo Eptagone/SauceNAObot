@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
 using Microsoft.EntityFrameworkCore;
 using SauceNAO.Core.Entities;
 using SauceNAO.Core.Entities.UserAggregate;
@@ -21,7 +24,9 @@ partial class SnaoDbContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<MediaFile>().HasIndex(u => u.FileId).IsUnique();
         modelBuilder.Entity<MediaFile>().ComplexCollection(e => e.Sauces, b => b.ToJson());
 
-        modelBuilder.ApplyConfiguration(new WithCreationDateConfiguration<MediaFile>());
-        modelBuilder.ApplyConfiguration(new WithCreationDateConfiguration<SearchRecord>());
+        modelBuilder.ApplyConfiguration(new TimestampableConfiguration<UserEntity>());
+        modelBuilder.ApplyConfiguration(new TimestampableConfiguration<ChatEntity>());
+        modelBuilder.ApplyConfiguration(new TimestampableConfiguration<MediaFile>());
+        modelBuilder.ApplyConfiguration(new TimestampableConfiguration<SearchRecord>());
     }
 }

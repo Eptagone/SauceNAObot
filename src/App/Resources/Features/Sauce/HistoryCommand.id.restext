@@ -1,0 +1,3 @@
+HistoryHelp=Bot menyimpan pencarian Anda sehingga Anda dapat mengirim gambar yang sama dengan saus melalui bot. Saus dihapus secara berkala.\nJika Anda ingin menghapus riwayat Anda sekarang, ketik <code>/history clear</code>.
+HistoryHelpButton=Lihat riwayat pencarian Anda
+HistoryCleared=Riwayat pencarian Anda telah dihapus.

@@ -1,11 +1,15 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
 using System.ComponentModel.DataAnnotations;
+using SauceNAO.Core.Entities.Abstractions;
 
 namespace SauceNAO.Core.Entities.UserAggregate;
 
 /// <summary>
 /// Represents a user on Telegram.
 /// </summary>
-public class UserEntity(long userId, string firstName) : EntityBase, ILocalizableEntity
+public class UserEntity(long userId, string firstName) : LocalizableEntity
 {
     /// <summary>
     /// Unique identifier for this user.

@@ -1,8 +1,10 @@
+// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
 using SauceNAO.App.Resources;
 using SauceNAO.Core;
 using SauceNAO.Core.Exceptions;
 using SauceNAO.Core.Exceptions.Media;
-using SauceNAO.Core.Models;
 using SauceNAO.Core.Services;
 using Telegram.BotAPI;
 using Telegram.BotAPI.AvailableMethods;

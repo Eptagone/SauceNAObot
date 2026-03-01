@@ -1,0 +1,3 @@
+HistoryHelp=El bot almacena tus búsquedas para que puedas enviar las mismas imágenes con salsa a través del bot. Las salsas se eliminan periódicamente.\nSi deseas eliminar tu historial ahora, escribe <code>/history clear</code>.
+HistoryHelpButton=Ver tu historial de búsqueda
+HistoryCleared=Tu historial de búsquedas ha sido eliminado.

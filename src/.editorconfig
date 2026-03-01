@@ -5,3 +5,7 @@ dotnet_style_qualification_for_event = true:warning
 dotnet_style_qualification_for_field = true:warning
 dotnet_style_qualification_for_property = true:warning
 dotnet_style_qualification_for_method = true:warning
+
+# Header
+dotnet_diagnostic.IDE0073.severity = warning
+file_header_template = Copyright (c) 2026 Quetzal Rivera.\nLicensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.

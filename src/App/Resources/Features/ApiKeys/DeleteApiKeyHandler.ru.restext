@@ -1,0 +1,6 @@
+ApiKeyConfirmDelete=Вы уверены, что хотите удалить свой API-ключ?
+ApiKeyDeleted=Ваш API-ключ был удален.
+ApiKeyNotFound=У вас нет API-ключа с таким именем.
+DeletionCancelled=Удаление отменено.
+Yes=Да
+No=Нет

@@ -1,8 +1,7 @@
-// Copyright (c) 2025 Quetzal Rivera.
+// Copyright (c) 2026 Quetzal Rivera.
 // Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
 
 using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 using System.Web;
 using Microsoft.Extensions.Caching.Distributed;

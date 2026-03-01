@@ -13,7 +13,7 @@ using SauceNAO.Infrastructure.Data;
 namespace SauceNAO.Infrastructure.Migrations
 {
     [DbContext(typeof(SnaoDbContext))]
-    [Migration("20260222014402_InitialCreate")]
+    [Migration("20260301214952_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -39,6 +39,12 @@ namespace SauceNAO.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("chat_id");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("LanguageCode")
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)")
@@ -49,6 +55,12 @@ namespace SauceNAO.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("title");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Username")
                         .HasMaxLength(32)
@@ -107,8 +119,10 @@ namespace SauceNAO.Infrastructure.Migrations
                         .HasColumnName("thumbnail_mime_type");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now()");
 
                     b.ComplexCollection(typeof(List<Dictionary<string, object>>), "Sauces", "SauceNAO.Core.Entities.MediaFile.Sauces#Sauce", b1 =>
                         {
@@ -214,8 +228,10 @@ namespace SauceNAO.Infrastructure.Migrations
                         .HasColumnName("similarity");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer")
@@ -242,6 +258,12 @@ namespace SauceNAO.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -261,6 +283,12 @@ namespace SauceNAO.Infrastructure.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasColumnName("last_name");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<bool>("UseFixedLanguage")
                         .HasColumnType("boolean")

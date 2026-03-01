@@ -23,18 +23,18 @@ services:
       - ${PORT:-80}:80
     # depends_on:
     #   - db
-    #   - redis
+    #   - cache
     #   - local-bot-api-server
 
   # db:
-  #   image: postgres:alpine
+  #   image: postgres:latest
   #   environment:
   #     POSTGRES_USER: snao_user
   #     POSTGRES_DB: snao
   #     POSTGRES_PASSWORD:
   #     POSTGRES_HOST_AUTH_METHOD: scram-sha-256
   #   volumes:
-  #     - data:/var/lib/postgresql/data
+  #     - data:/var/lib/postgresql
 
   # local-bot-api-server:
   #   build: local-server
@@ -42,11 +42,11 @@ services:
   #     TELEGRAM_API_ID:
   #     TELEGRAM_API_HASH:
 
-  # redis:
-  #   image: redis:alpine
+  # cache:
+  #   image: valkey/valkey:latest
   #   environment:
-  #     REDIS_ARGS: "--maxmemory 512mb --maxmemory-policy allkeys-lru"
+  #     VALKEY_EXTRA_FLAGS: "--maxmemory 512mb --maxmemory-policy allkeys-lru"
   #   ports:
-  #     - ${REDIS_PORT:-6379}:6379
+  #     - ${VALKEY_PORT:-6379}:6379
 # volumes:
 #   data:

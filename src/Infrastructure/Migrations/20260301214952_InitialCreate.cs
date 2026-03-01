@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿// Copyright (c) 2026 Quetzal Rivera.
+// Licensed under the GNU General Public License v3.0, See LICENCE in the project root for license information.
+
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -11,16 +14,6 @@ namespace SauceNAO.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(
-                @"
-                CREATE FUNCTION ""UpdatedAt_Function""() RETURNS TRIGGER LANGUAGE PLPGSQL AS $$
-                BEGIN
-                    NEW.""updated_at"" := now();
-                    RETURN NEW;
-                END;
-                $$;"
-            );
-
             migrationBuilder.CreateTable(
                 name: "groups",
                 columns: table => new
@@ -41,6 +34,16 @@ namespace SauceNAO.Infrastructure.Migrations
                         type: "character varying(32)",
                         maxLength: 32,
                         nullable: true
+                    ),
+                    created_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: false,
+                        defaultValueSql: "now()"
+                    ),
+                    updated_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: false,
+                        defaultValueSql: "now()"
                     ),
                     language_code = table.Column<string>(
                         type: "character varying(8)",
@@ -77,7 +80,8 @@ namespace SauceNAO.Infrastructure.Migrations
                     ),
                     updated_at = table.Column<DateTimeOffset>(
                         type: "timestamp with time zone",
-                        nullable: false
+                        nullable: false,
+                        defaultValueSql: "now()"
                     ),
                     sauces = table.Column<string>(type: "jsonb", nullable: false),
                 },
@@ -85,13 +89,6 @@ namespace SauceNAO.Infrastructure.Migrations
                 {
                     table.PrimaryKey("pk_media_files", x => x.id);
                 }
-            );
-            migrationBuilder.Sql(
-                @"CREATE TRIGGER ""UpdateMediaTimestamp""
-                BEFORE INSERT OR UPDATE
-                ON ""media_files""
-                FOR EACH ROW
-                EXECUTE FUNCTION ""UpdatedAt_Function""();"
             );
 
             migrationBuilder.CreateTable(
@@ -127,6 +124,16 @@ namespace SauceNAO.Infrastructure.Migrations
                     ),
                     use_fixed_language = table.Column<bool>(type: "boolean", nullable: false),
                     has_started_dm = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: false,
+                        defaultValueSql: "now()"
+                    ),
+                    updated_at = table.Column<DateTimeOffset>(
+                        type: "timestamp with time zone",
+                        nullable: false,
+                        defaultValueSql: "now()"
+                    ),
                 },
                 constraints: table =>
                 {
@@ -190,7 +197,8 @@ namespace SauceNAO.Infrastructure.Migrations
                     ),
                     updated_at = table.Column<DateTimeOffset>(
                         type: "timestamp with time zone",
-                        nullable: false
+                        nullable: false,
+                        defaultValueSql: "now()"
                     ),
                 },
                 constraints: table =>
@@ -211,13 +219,6 @@ namespace SauceNAO.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                 }
-            );
-            migrationBuilder.Sql(
-                @"CREATE TRIGGER ""UpdateSearchTimestamp""
-                BEFORE INSERT OR UPDATE
-                ON ""search_records""
-                FOR EACH ROW
-                EXECUTE FUNCTION ""UpdatedAt_Function""();"
             );
 
             migrationBuilder.CreateIndex(
@@ -265,15 +266,34 @@ namespace SauceNAO.Infrastructure.Migrations
                 column: "user_id",
                 unique: true
             );
+
+            // Update the updated_at column for all tables automatically when an update is made.
+            migrationBuilder.Sql(
+                @"
+                CREATE FUNCTION ""update_timestamp""() RETURNS TRIGGER LANGUAGE PLPGSQL AS $$
+                BEGIN
+                    NEW.""updated_at"" := now();
+                    RETURN NEW;
+                END;
+                $$;"
+            );
+
+            var timestampableTables = new[] { "users", "groups", "media_files", "search_records" };
+            foreach (var tableName in timestampableTables)
+            {
+                migrationBuilder.Sql(
+                    @$"CREATE TRIGGER ""update_{tableName}_timestamp""
+                        BEFORE INSERT OR UPDATE
+                        ON ""{tableName}""
+                        FOR EACH ROW
+                        EXECUTE FUNCTION ""update_timestamp""();"
+                );
+            }
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DROP TRIGGER ""UpdateMediaTimestamp"" ON ""media_files"";");
-            migrationBuilder.Sql(@"DROP TRIGGER ""UpdateSearchTimestamp"" ON ""search_records"";");
-            migrationBuilder.Sql(@"DROP FUNCTION ""UpdatedAt_Function"";");
-
             migrationBuilder.DropTable(name: "api_keys");
 
             migrationBuilder.DropTable(name: "groups");
