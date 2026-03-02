@@ -130,7 +130,7 @@ sealed class SauceHandler(
             replyParameters: new()
             {
                 AllowSendingWithoutReply = true,
-                MessageId = message.MessageId,
+                MessageId = target.MediaMessage?.MessageId ?? target.Message.MessageId,
             },
             cancellationToken: cancellationToken
         );
