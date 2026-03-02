@@ -1,0 +1,4 @@
+NoApiKeys=Não foram encontradas chaves de API públicas para realizar a pesquisa. Tente novamente mais tarde ou entre em contato com o suporte pelo chat.
+NotFound=Nenhum molho encontrado. Talvez tente <a href="{0}">Pesquisa reversa do Google</a> ou <a href="{1}">Yandex</a> em vez disso? Ou veja no <a href="{2}">site SauceNAO</a> para ver todos os resultados.
+SupportChat=Chat de suporte
+UnknownError=Ocorreu um erro desconhecido. Tente novamente mais tarde.

@@ -1,0 +1,6 @@
+ApiKeyConfirmDelete=Tem certeza de que deseja excluir sua chave de API?
+ApiKeyDeleted=Sua chave de API foi excluída.
+ApiKeyNotFound=Você não possui nenhuma chave de API com esse nome.
+DeletionCancelled=Exclusão cancelada.
+Yes=Sim
+No=Não

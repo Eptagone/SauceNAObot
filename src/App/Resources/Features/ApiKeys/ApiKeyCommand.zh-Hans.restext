@@ -1,6 +1,5 @@
-# -------- ApiKey --------
 ApiKeyHelp=如果您已经支持 <a href="https://www.patreon.com/saucenao">Xamayon</a>（saucenao.com 的原始创建者），那么您可以在机器人中使用自己的 apikey。\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - 添加新的 apikey\n/apikey list - 列出您保存的 apikey\n/apikey delete &lt;apikey_name&gt; - 删除 apikey\n/apikey show &lt;apikey_name&gt; - 显示 apikey</pre>
 ApiKeyList=您保存的 apikey：\n{0}\n\n使用 <code>/apikey add</code> 添加新的 apikey。\n使用 <code>/apikey delete &lt;apikey_name&gt;</code> 删除 apikey。\n您忘记了 apikey 吗？使用 <code>/apikey show &lt;apikey_name&gt;</code> 重新获取。
 ApiKeyListEmpty=您尚未添加任何 apikey。使用 <code>/apikey add</code> 添加一个。
-ApiKeyDetail=您的 apikey 是：<code>{0}</code>\n
+ApiKeyDetail=您的 apikey 是：<code>{0}</code>
 NotFound=找不到 apikey。

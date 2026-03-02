@@ -2,6 +2,6 @@ NameAlreadyExists=您已拥有同名 API 密钥。请使用其他名称或删除
 AlreadyExists=您已保存此 API 密钥。请尝试其他密钥或使用 /cancel 命令取消操作。
 NotPremium=此 API 密钥所属的 SauceNAO 帐户使用的是免费套餐。免费帐户受 IP 地址限制，因此您需要升级到高级帐户才能保存此 API 密钥。\n请尝试使用其他密钥或使用 /cancel 命令取消操作。
 InvalidKey=提供的 API 密钥无效。请尝试使用其他密钥或使用 /cancel 命令取消操作。
-SearchLimitReached=糟糕，由于速率限制，API 密钥验证失败。请稍等片刻后重试。\n或者，请使用 /cancel 命令取消操作。
+SearchLimitReached=糟糕，由于速率限制，API 密钥验证失败。请稍等片刻后重试。
 CannotValidateKey=目前无法验证提供的 API 密钥。请稍后再试。
 UnknownError=保存 API 密钥时发生未知错误。请稍后重试。

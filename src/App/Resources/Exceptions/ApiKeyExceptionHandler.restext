@@ -2,6 +2,6 @@ NameAlreadyExists=You already have an API key with this name. Please use a diffe
 AlreadyExists=You already saved the given API key. Please try a different one or use /cancel to cancel the operation.
 NotPremium=The SauceNAO account to which this API key belongs is using a free tier. Unfortunately, free accounts are ratelimited by IP, so, you'll need an enhanced account to save this API key.\nPlease try again with a different one or use /cancel to cancel the operation.
 InvalidKey=The given API key is invalid. Please try a different one or use /cancel to cancel the operation.
-SearchLimitReached=Ups, the api key validation failed due rate limits. Please wait a moment and try again.\nOr use /cancel to cancel the operation.
+SearchLimitReached=Ups, the api key validation failed due rate limits. Try again later.
 CannotValidateKey=Cannot validate the given API key right now. Try again later.
 UnknownError=An unknown error occurred while saving your apikey. Try again later.

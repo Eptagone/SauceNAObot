@@ -2,6 +2,6 @@ NameAlreadyExists=Ya tienes una clave API con este nombre. Por favor usa un nomb
 AlreadyExists=La clave de API que proporcionaste ya existe. Por favor prueba con una diferente o usa /cancel para cancelar la operación actual.
 NotPremium=La cuenta de SauceNAO a la que pertenece esta clave API es de nivel gratuito. Lamentablemente, las cuentas gratuitas tienen un límite de busqueda por IP, por lo que necesitará una cuenta de paga usar su clave con el bot.\nInténtelo de nuevo con una diferente o use /cancel para cancelar la operación.
 InvalidKey=La clave API proporcionada es inválida. Por favor prueba con una diferente o use /cancel para cancelar la operación.
-SearchLimitReached=Ups, la validación de la clave API fallo debido a los límites de busqueda. Por favor espere un momento y vuelva a intentarlo.\nO usa /cancel para cancelar la operación.
+SearchLimitReached=Ups, la validación de la clave API fallo debido a los límites de busqueda. Por favor espere un momento y vuelva a intentarlo.
 CannotValidateKey=No se puede validar la clave API actualmente. Inténtelo de nuevo mas tarde.
 UnknownError=Ocurrio un error desconocido al guardar su clave API. Inténtelo de nuevo mas tarde.

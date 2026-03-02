@@ -2,6 +2,6 @@ NameAlreadyExists=Anda sudah memiliki API key dengan nama ini. Silakan gunakan n
 AlreadyExists=Anda sudah menyimpan API key yang diberikan. Silakan coba yang berbeda atau gunakan /cancel untuk membatalkan operasi.
 NotPremium=Akun SauceNAO yang terkait dengan API key ini menggunakan tingkat gratis. Sayangnya, akun gratis dibatasi oleh IP, jadi Anda perlu membutuhkan akun yang ditingkatkan untuk menyimpan API key ini.\nSilakan coba lagi dengan yang berbeda atau gunakan /cancel untuk membatalkan operasi.
 InvalidKey=API key yang diberikan tidak valid. Silakan coba yang berbeda atau gunakan /cancel untuk membatalkan operasi.
-SearchLimitReached=Ups, validasi API key gagal karena batasan tarif. Silakan tunggu sebentar dan coba lagi.\nAtau gunakan /cancel untuk membatalkan operasi.
+SearchLimitReached=Ups, validasi API key gagal karena batasan tarif. Silakan tunggu sebentar dan coba lagi.
 CannotValidateKey=Tidak dapat memvalidasi API key yang diberikan saat ini. Silakan coba lagi nanti.
 UnknownError=Terjadi kesalahan yang tidak diketahui saat menyimpan API key Anda. Silakan coba lagi nanti.

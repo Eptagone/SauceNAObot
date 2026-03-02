@@ -1,0 +1,4 @@
+InvalidPhoto=Isso não parece ser um arquivo de foto.
+TooBigFile=O arquivo é muito grande. Tente novamente com um arquivo menor.
+UnsupportedFormat=O formato do arquivo não é compatível. Tente novamente com outro arquivo.
+MissingApplicationUrl=A ação solicitada não está disponível no momento porque nenhum URL de aplicativo foi definido. Tente novamente mais tarde.

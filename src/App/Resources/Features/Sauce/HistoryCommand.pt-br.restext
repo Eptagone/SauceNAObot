@@ -1,0 +1,3 @@
+HistoryHelp=O bot armazena suas buscas para que você possa enviar as mesmas imagens com a mesma fonte através do bot. As fontes são apagadas periodicamente.\nSe você quiser apagar seu histórico agora, digite <code>/history clear</code>.
+HistoryHelpButton=Veja seu histórico de pesquisa
+HistoryCleared=Seu histórico de pesquisa foi apagado.

@@ -1,0 +1,7 @@
+NameAlreadyExists=Você já possui uma chave de API com este nome. Por favor, use um nome diferente ou exclua a chave existente.\nOu use /cancel se desejar cancelar a operação atual.
+AlreadyExists=Você já salvou a chave de API fornecida. Tente usar uma chave diferente ou utilize o comando /cancel para cancelar a operação.
+NotPremium=A conta SauceNAO à qual esta chave de API pertence está usando um plano gratuito. Infelizmente, contas gratuitas têm limite de requisições por IP, portanto, você precisará de uma conta premium para salvar esta chave de API.\nTente novamente com uma conta diferente ou use /cancel para cancelar a operação.
+InvalidKey=A chave de API fornecida é inválida. Tente usar outra ou utilize /cancel para cancelar a operação.
+SearchLimitReached=Ops, a validação da chave da API falhou devido aos limites de taxa. Aguarde um momento e tente novamente.
+CannotValidateKey=Não foi possível validar a chave de API fornecida neste momento. Tente novamente mais tarde.
+UnknownError=Ocorreu um erro desconhecido ao salvar sua chave de API. Tente novamente mais tarde.

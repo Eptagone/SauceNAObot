@@ -1,0 +1,5 @@
+ApiKeyHelp=Se você já apoia <a href="https://www.patreon.com/saucenao">Xamayon</a> (o criador original do saucenao.com), então você pode usar sua própria chave de API com o bot.\n<pre>/apikey add &lt;name&gt; &lt;apikey&gt; [--public] - Adiciona uma nova chave de API\n/apikey list - Lista suas chaves de API salvas\n/apikey delete &lt;apikey_name&gt; - Exclui uma chave de API\n/apikey show &lt;apikey_name&gt; - Exibe uma chave de API</pre>
+ApiKeyList=Suas chaves de API salvas:\n{0}\n\nAdicione uma nova usando <code>/apikey add</code>.\nRemova uma chave de API usando <code>/apikey delete &lt;nome_da_chave_de_API&gt;</code>.\nEsqueceu sua chave de API? Use <code>/apikey show &lt;nome_da_chave_de_API&gt;</code> para obtê-la novamente.
+ApiKeyListEmpty=Você ainda não adicionou nenhuma chave de API. Use <code>/apikey add</code> para adicionar uma.
+ApiKeyDetail=Sua chave de API é: <code>{0}</code>
+NotFound=A chave de API não foi encontrada.

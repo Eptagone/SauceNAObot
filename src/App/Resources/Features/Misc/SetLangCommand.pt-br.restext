@@ -1,0 +1,2 @@
+SetLangHelp=Use este comando para definir seu idioma preferido ao usar o bot.\nSe você estiver em um grupo, o idioma especificado será usado por padrão para todos os membros que não definiram um idioma.\nObservação: nem todos os idiomas estão disponíveis.\n<b>Sintaxe:</b>\n<code>/setlang &lt;código do idioma&gt;</code>
+LanguageSet=Suas preferências de idioma foram salvas.

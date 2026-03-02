@@ -1,0 +1,6 @@
+AskForName=Por favor, insira um nome para sua chave de API:\nDigite /cancel para cancelar.
+AskForKey=Envie-me sua nova chave de API. Somente chaves de API Premium podem ser adicionadas.
+AskForShare=Deseja compartilhar sua chave de API para buscas públicas? Se sim, o bot a utilizará para criar receitas para todos que o utilizarem.
+AddSuccess=Sua chave de API foi salva com sucesso.
+Yes=Sim
+No=Não
