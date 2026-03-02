@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using SauceNAO.Core.Configuration;
+using Telegram.BotAPI;
+using Telegram.BotAPI.Extensions;
 
 namespace SauceNAO.App.Controllers;
 
 [ApiController]
 public sealed class TemporalFileController(
+    ITelegramBotClient client,
     IHttpClientFactory httpClientFactory,
     IOptions<BotConfiguration> options
 ) : ControllerBase
@@ -49,10 +52,7 @@ public sealed class TemporalFileController(
             return this.NotFound("File not found.");
         }
 
-        var downloadUrl = new Uri(
-            new Uri(options.Value.ServerAddress),
-            $"/file/bot{options.Value.BotToken}/{fileName}"
-        );
+        var downloadUrl = client.BuildFileDownloadLink(fileName);
         using var httpClient = httpClientFactory.CreateClient();
 
         try
