@@ -16,9 +16,10 @@ public interface IUserRepository : IRepository<UserEntity>
     /// If the user already exists, the existing data is updated with the provided information.
     /// </summary>
     /// <param name="user">The Telegram user.</param>
+    /// param name="startDm">Whether the user started a direct message conversation.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The updated Telegram user data.</returns>
-    Task<UserEntity> UpsertAsync(User user, CancellationToken cancellationToken);
+    Task<UserEntity> UpsertAsync(User user, bool isDm, CancellationToken cancellationToken);
 
     /// <summary>
     /// Retrieves the list of language codes used by users.

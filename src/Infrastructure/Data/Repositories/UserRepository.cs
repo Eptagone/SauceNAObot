@@ -12,7 +12,7 @@ sealed class UserRepository(SnaoDbContext context)
     : RepositoryBase<UserEntity>(context),
         IUserRepository
 {
-    public Task<UserEntity> UpsertAsync(User user, CancellationToken cancellationToken)
+    public Task<UserEntity> UpsertAsync(User user, bool isDm, CancellationToken cancellationToken)
     {
         var userEntity = context
             .Users.AsNoTrackingWithIdentityResolution()
@@ -24,6 +24,7 @@ sealed class UserRepository(SnaoDbContext context)
                 Username = user.Username,
                 LastName = user.LastName,
                 LanguageCode = user.LanguageCode,
+                HasStartedDm = isDm,
             };
             return this.InsertAsync(userEntity, cancellationToken);
         }
@@ -34,6 +35,10 @@ sealed class UserRepository(SnaoDbContext context)
         if (!userEntity.UseFixedLanguage)
         {
             userEntity.LanguageCode = user.LanguageCode;
+        }
+        if (userEntity.HasStartedDm == false && isDm)
+        {
+            userEntity.HasStartedDm = true;
         }
         return this.UpdateAsync(userEntity, cancellationToken);
     }

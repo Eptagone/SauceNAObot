@@ -25,7 +25,7 @@ sealed class ContextProvider(
 
     public async Task<UserEntity> LoadAsync(User from, CancellationToken cancellationToken)
     {
-        var user = await users.UpsertAsync(from, cancellationToken);
+        var user = await users.UpsertAsync(from, false, cancellationToken);
         if (user.LanguageCode is not null)
         {
             localizerFactory.ChangeCulture(user.LanguageCode);
@@ -38,11 +38,11 @@ sealed class ContextProvider(
         CancellationToken cancellationToken
     )
     {
-        var user = await users.UpsertAsync(message.From!, cancellationToken);
-        var group =
-            message.Chat.Type == ChatTypes.Private
-                ? null
-                : await groups.UpsertFromMessageAsync(message, cancellationToken);
+        var isPrivateChat = message.Chat.Type == ChatTypes.Private;
+        var user = await users.UpsertAsync(message.From!, isPrivateChat, cancellationToken);
+        var group = isPrivateChat
+            ? null
+            : await groups.UpsertFromMessageAsync(message, cancellationToken);
         if (user.LanguageCode is not null)
         {
             localizerFactory.ChangeCulture(user.LanguageCode);
