@@ -1,3 +1,4 @@
 NoApiKeys=未找到用于执行搜索的公共 API 密钥。请稍后重试或在支持聊天中询问。
 NotFound=未找到调味料。或许可以尝试<a href="{0}">Google 反向搜索</a>或<a href="{1}">Yandex</a>？或者访问<a href="{2}">SauceNAO 网站</a>查看所有结果。
 SupportChat=支持聊天
+UnknownError=发生未知错误。请稍后重试。

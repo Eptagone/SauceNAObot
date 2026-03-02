@@ -82,11 +82,6 @@ sealed class MediaUrlGenerator(
                 if (!File.Exists(inputFileName))
                 {
                     var downloadUrl = client.BuildFileDownloadLink(file)!;
-                    Console.WriteLine(
-                        "Download URL: {0}. FilePath: {1}",
-                        downloadUrl,
-                        file.FilePath
-                    );
                     try
                     {
                         var stream = await httpClient.GetStreamAsync(
@@ -151,10 +146,15 @@ sealed class MediaUrlGenerator(
         }
         else
         {
+            var fileName = file
+                .FilePath?.Split(botOptions.Value.BotToken)
+                .Last(x => !string.IsNullOrEmpty(x))
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                .TrimStart(Path.AltDirectorySeparatorChar);
             safeUrl = links.GetUriByAction(
                 nameof(TemporalFileController.GetFile),
                 nameof(TemporalFileController).Replace("Controller", string.Empty),
-                new { fileName = file.FilePath },
+                new { fileName },
                 applicationUrl.Scheme,
                 new HostString(applicationUrl.Host, applicationUrl.Port),
                 new PathString(applicationUrl.PathAndQuery),

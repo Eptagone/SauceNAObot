@@ -14,7 +14,7 @@
   },
   "editor.formatOnSave": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "dotnet.defaultSolution": "${workspaceFolder}/SauceNAO.slnx",
+  "dotnet.defaultSolution": "SauceNAO.slnx",
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,

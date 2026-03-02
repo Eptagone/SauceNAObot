@@ -34,10 +34,6 @@ public class UserEntity(long userId, string firstName) : LocalizableEntity
     [MaxLength(32)]
     public string? Username { get; set; }
 
-    /// <inheritdoc />
-    [StringLength(8)]
-    public string? LanguageCode { get; set; }
-
     /// <summary>
     /// Indicates if the user specified a fixed language code.
     /// If true, the language code won't be updated automatically.

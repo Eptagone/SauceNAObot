@@ -24,10 +24,4 @@ public class SearchRecord(float similarity) : TimestampableEntity
     /// The media that was searched for.
     /// </summary>
     public required MediaFile Media { get; set; }
-
-    /// <inheritdoc />
-    public DateTimeOffset CreatedAt { get; set; }
-
-    /// <inheritdoc />
-    public DateTimeOffset UpdatedAt { get; set; }
 }

@@ -1,3 +1,4 @@
 NoApiKeys=No public API keys were found to perform the search. Please try again later or ask in the support chat.
 NotFound=No sauce found. Maybe try <a href="{0}">Google Reverse Search</a> or <a href="{1}">Yandex</a> instead? or see on <a href="{2}">SauceNAO website</a> to see all the results.
 SupportChat=Support Chat
+UnknownError=An unknown error occurred. Try again later.

@@ -1,3 +1,4 @@
 NoApiKeys=No se encontro ninguna clave API para realizar la búsqueda. Por favor, inténtalo de nuevo más tarde o pregunte en el chat de soporte.
 NotFound=No se encontró ninguna salsa. ¿Quieres probar con <a href="{0}">una búsqueda inversa de Google</a> o <a href="{1}">Yandex</a>? También puedes ver todos los resultados en <a href="{2}">la página de SauceNAO</a>.
 SupportChat=Soporte
+UnknownError=Se produjo un error desconocido. Inténtalo de nuevo mas tarde.
