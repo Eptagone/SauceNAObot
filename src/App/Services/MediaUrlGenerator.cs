@@ -54,6 +54,11 @@ sealed class MediaUrlGenerator(
         }
 
         var applicationUrl = new Uri(appOptions.Value.ApplicationUrl);
+        var hostString =
+            (applicationUrl.Scheme == "https" && applicationUrl.Port == 443)
+            || (applicationUrl.Scheme == "http" && applicationUrl.Port == 80)
+                ? new HostString(applicationUrl.Host)
+                : new HostString(applicationUrl.Host, applicationUrl.Port);
         var targetFileId = target.Media.ThumbnailFileId ?? target.Media.FileId;
         var file = await this.GetFileAsync(targetFileId, cancellationToken);
 
@@ -104,7 +109,7 @@ sealed class MediaUrlGenerator(
                 nameof(TemporalFileController).Replace("Controller", string.Empty),
                 new { fileName },
                 applicationUrl.Scheme,
-                new HostString(applicationUrl.Host, applicationUrl.Port),
+                hostString,
                 new PathString(applicationUrl.PathAndQuery),
                 new FragmentString(applicationUrl.Fragment)
             );
@@ -139,7 +144,7 @@ sealed class MediaUrlGenerator(
                 nameof(TemporalFileController).Replace("Controller", string.Empty),
                 new { fileName },
                 applicationUrl.Scheme,
-                new HostString(applicationUrl.Host, applicationUrl.Port),
+                hostString,
                 new PathString(applicationUrl.PathAndQuery),
                 new FragmentString(applicationUrl.Fragment)
             );
@@ -156,7 +161,7 @@ sealed class MediaUrlGenerator(
                 nameof(TemporalFileController).Replace("Controller", string.Empty),
                 new { fileName },
                 applicationUrl.Scheme,
-                new HostString(applicationUrl.Host, applicationUrl.Port),
+                hostString,
                 new PathString(applicationUrl.PathAndQuery),
                 new FragmentString(applicationUrl.Fragment)
             );

@@ -299,6 +299,18 @@ sealed class SauceHandler(
         var keyboard = new InlineKeyboardBuilder();
         foreach (var originalUrl in sauces.SelectMany(r => r.Links).Distinct())
         {
+            // Validate the URL.
+            if (!Uri.IsWellFormedUriString(originalUrl, UriKind.Absolute))
+            {
+                continue;
+            }
+            // Validate bad URLs like:
+            // "https://art.nhttps://www.furaffinity.net/view/59728913/gfiles.com/images/6416000/6416521_1672979_wildblur_untitled-6416521.b61209a6093e030e4fd03825117abadb.png?f1738443385"
+            if (originalUrl.Split("://").Length > 2)
+            {
+                continue;
+            }
+
             var finalUrl = originalUrl;
             var text = "URL";
             // Fix Pixiv URLs
