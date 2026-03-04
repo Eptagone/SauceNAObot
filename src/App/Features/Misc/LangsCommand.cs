@@ -41,7 +41,12 @@ class LangsCommand(
                     .OrderByDescending(lc => lc.Value)
                     .Select(lc => $"<b>{lc.Key}:</b> [{lc.Value}]")
             );
-            await cache.SetStringAsync("languages", languages, cancellationToken);
+            await cache.SetStringAsync(
+                "languages",
+                languages,
+                new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30) },
+                cancellationToken
+            );
         }
 
         var text = localizer["Languages", languages];

@@ -34,7 +34,7 @@ static class ServiceCollectionExtensions
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = redisConnectionString;
-                options.InstanceName = "snao";
+                options.InstanceName = "snao/";
             });
         }
 

@@ -83,7 +83,7 @@ class SauceNAOClient(HttpClient httpClient, IDistributedCache cache) : ISauceNAO
         CancellationToken cancellationToken = default
     )
     {
-        var cacheKey = $"snao-service/apikey-is-premium/{apikey}";
+        var cacheKey = $"snao_client/apikey-is-premium/{apikey}";
         try
         {
             var item = await cache.GetAsync(cacheKey, cancellationToken);
