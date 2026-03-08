@@ -66,9 +66,11 @@ class SauceExceptionHandler(
             );
             replyMarkup = new InlineKeyboardMarkup(builder);
         }
-
         errorKey ??= "UnknownError";
-        string text = localizer[errorKey];
+        string text =
+            errorKey == "Busy"
+                ? localizer[errorKey, options.Value.SupportChatInvitationLink ?? string.Empty]
+                : localizer[errorKey];
         if (exception is SauceNotFoundException snf)
         {
             text = string.Format(

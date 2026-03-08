@@ -2,3 +2,4 @@ NoApiKeys=Tidak ada kunci API publik yang ditemukan untuk melakukan pencarian. S
 NotFound=Tidak ditemukan saus. Mungkin mencoba <a href="{0}">Google Reverse Search</a> atau <a href="{1}">Yandex</a> saja? atau lihat di <a href="{2}">situs web SauceNAO</a> untuk melihat semua hasilnya.
 SupportChat=Obrolan Dukungan
 UnknownError=Terjadi kesalahan yang tidak diketahui saat melakukan pencarian. Silakan coba lagi nanti.
+Busy=SauceNao sangat sibuk saat ini. Silakan coba lagi nanti atau coba gunakan perintah /temp.\nJika pesan ini sering muncul, silakan periksa <a href="{0}">obrolan dukungan</a>.

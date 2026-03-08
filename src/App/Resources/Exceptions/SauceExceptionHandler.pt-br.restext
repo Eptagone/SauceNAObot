@@ -2,3 +2,4 @@ NoApiKeys=Não foram encontradas chaves de API públicas para realizar a pesquis
 NotFound=Nenhum molho encontrado. Talvez tente <a href="{0}">Pesquisa reversa do Google</a> ou <a href="{1}">Yandex</a> em vez disso? Ou veja no <a href="{2}">site SauceNAO</a> para ver todos os resultados.
 SupportChat=Chat de suporte
 UnknownError=Ocorreu um erro desconhecido. Tente novamente mais tarde.
+Busy=O SauceNao está muito ocupado no momento. Tente novamente mais tarde ou tente usar o comando /temp.\nSe esta mensagem aparecer com frequência, verifique o <a href="{0}">chat de suporte</a>.
