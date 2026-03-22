@@ -9,7 +9,7 @@ namespace SauceNAO.Core.Data;
 /// <summary>
 /// Provides a helper to manage group data.
 /// </summary>
-public interface IChatRepostory : IRepository<ChatEntity>
+public interface IChatRepository : IRepository<ChatEntity>
 {
     /// <summary>
     /// Retrieves the updated group preferences from the database or creates a entry if it doesn't exist.

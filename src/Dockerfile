@@ -33,7 +33,6 @@ RUN dotnet publish "./SauceNAO.App.csproj" -c $BUILD_CONFIGURATION -o /app/publi
 FROM dotnet-runtime AS runtime
 USER root
 WORKDIR /app
-ENV ASPNETCORE_HTTP_PORTS=8080
-EXPOSE 8080
+ENV ASPNETCORE_HTTP_PORTS=80
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "SauceNAO.App.dll"]

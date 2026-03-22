@@ -8,7 +8,7 @@ using Telegram.BotAPI.AvailableTypes;
 namespace SauceNAO.Core.Services;
 
 /// <summary>
-/// Provides a method to retrieve the stored user and group data from a Telegram message
+/// Provides methods to retrieve the stored data from users and chats
 /// </summary>
 public interface IContextProvider
 {

@@ -34,7 +34,7 @@ public static class ServiceCollectionExtensions
 
         // Add repositories
         services.AddScoped<IApiKeyRespository, ApiKeyRepository>();
-        services.AddScoped<IChatRepostory, ChatRepository>();
+        services.AddScoped<IChatRepository, ChatRepository>();
         services.AddScoped<IMediaFileRepository, MediaFileRepository>();
         services.AddScoped<ISearchHistoryRepository, SearchHistoryRepository>();
         services.AddScoped<IUserRepository, UserRepository>();

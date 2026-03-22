@@ -26,7 +26,7 @@ sealed class SetLangCommand(
     IContextProvider contextProvider,
     ITelegramBotClient client,
     IUserRepository users,
-    IChatRepostory groups,
+    IChatRepository groups,
     IBetterStringLocalizer<SetLangCommand> localizer
 ) : ICommandHandler
 {

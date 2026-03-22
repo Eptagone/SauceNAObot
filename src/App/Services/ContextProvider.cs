@@ -13,7 +13,7 @@ namespace SauceNAO.App.Services;
 
 sealed class ContextProvider(
     IUserRepository users,
-    IChatRepostory groups,
+    IChatRepository groups,
     IBetterStringLocalizerFactory localizerFactory
 ) : IContextProvider
 {

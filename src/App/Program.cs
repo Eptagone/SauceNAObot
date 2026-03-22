@@ -11,5 +11,5 @@ builder.Services.AddSauceNaoServices(builder.Configuration);
 var app = builder.Build();
 
 app.MapControllers();
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "SauceNAO bot.");
 app.Run();

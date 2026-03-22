@@ -10,7 +10,7 @@ namespace SauceNAO.Infrastructure.Data.Repositories;
 
 sealed class ChatRepository(SnaoDbContext context)
     : RepositoryBase<ChatEntity>(context),
-        IChatRepostory
+        IChatRepository
 {
     /// <inheritdoc/>
     public Task<ChatEntity> UpsertFromMessageAsync(
