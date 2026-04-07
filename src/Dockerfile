@@ -2,7 +2,8 @@
 FROM debian:stable-slim AS base
 ENV APP_UID=1654
 ENV DOTNET_RUNNING_IN_CONTAINER=true
-RUN apt update && apt upgrade && apt install -y --no-install-recommends wget ca-certificates
+RUN apt update && apt upgrade -y
+RUN apt install -y --no-install-recommends wget ca-certificates
 RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
 RUN rm packages-microsoft-prod.deb

@@ -13,7 +13,7 @@
     <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.5" />
     <PackageVersion Include="NeoSmart.Caching.Sqlite.AspNetCore" Version="9.0.1" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
-    <PackageVersion Include="Telegram.BotAPI" Version="9.5.0" />
+    <PackageVersion Include="Telegram.BotAPI" Version="9.6.0" />
     <PackageVersion Include="Telegram.BotAPI.Extensions" Version="0.8.2" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 # Telegram Bot API Server
 FROM debian:stable-slim AS base
-RUN apt update
-RUN apt upgrade -y
+RUN apt update && apt upgrade -y
 RUN apt install -y --no-install-recommends libc++-dev
 
 # Telegram Bot API server - Build deps
