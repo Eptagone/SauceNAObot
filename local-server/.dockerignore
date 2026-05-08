@@ -1,9 +1,0 @@
-# macOS-specific files
-.DS_Store
-
-# dotenv environment variables file
-.env
-
-# Docker compose
-*compose.yml
-*compose.override.yml
