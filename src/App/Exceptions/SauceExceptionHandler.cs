@@ -103,7 +103,7 @@ class SauceExceptionHandler(
             await client.EditMessageTextAsync(
                 exception.SentMessage.Chat.Id,
                 exception.SentMessage.MessageId,
-                text,
+                text: text,
                 parseMode: FormatStyles.HTML,
                 linkPreviewOptions: new() { IsDisabled = true },
                 replyMarkup: replyMarkup,

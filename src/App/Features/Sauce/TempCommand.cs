@@ -76,7 +76,7 @@ sealed class TempCommand(
             await client.EditMessageTextAsync(
                 sentMessage.Chat.Id,
                 sentMessage.MessageId,
-                localizer["TemporalUrlDone", imageUrl],
+                text: localizer["TemporalUrlDone", imageUrl],
                 parseMode: FormatStyles.HTML,
                 linkPreviewOptions: new() { IsDisabled = true },
                 replyMarkup: new InlineKeyboardMarkup(keyboard),

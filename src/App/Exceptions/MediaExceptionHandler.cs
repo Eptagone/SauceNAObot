@@ -72,7 +72,7 @@ sealed class MediaExceptionHandler(
             await client.EditMessageTextAsync(
                 exception.SentMessage.Chat.Id,
                 exception.SentMessage.MessageId,
-                localizer[errorKey],
+                text: localizer[errorKey],
                 parseMode: FormatStyles.HTML,
                 cancellationToken: cancellationToken
             );
