@@ -36,8 +36,8 @@ sealed class HelpCommand(
         }
         var replyMarkup = builder.Any() ? new InlineKeyboardMarkup(builder) : null;
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["Help"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new()
             {

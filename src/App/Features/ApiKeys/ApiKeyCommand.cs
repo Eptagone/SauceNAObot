@@ -96,8 +96,8 @@ sealed class ApiKeyCommand(
                             ]
                             : localizer["ApiKeyListEmpty"];
                         await client.SendMessageAsync(
-                            message.Chat.Id,
                             text,
+                            chatId: message.Chat.Id,
                             parseMode: FormatStyles.HTML,
                             replyParameters: new()
                             {
@@ -130,8 +130,8 @@ sealed class ApiKeyCommand(
                         if (string.IsNullOrEmpty(value))
                         {
                             await client.SendMessageAsync(
-                                message.Chat.Id,
                                 localizer["NotFound"],
+                                chatId: message.Chat.Id,
                                 parseMode: FormatStyles.HTML,
                                 replyParameters: new()
                                 {
@@ -144,8 +144,8 @@ sealed class ApiKeyCommand(
                         else
                         {
                             await client.SendMessageAsync(
-                                message.Chat.Id,
                                 localizer["ApiKeyDetail", value],
+                                chatId: message.Chat.Id,
                                 parseMode: FormatStyles.HTML,
                                 replyParameters: new()
                                 {
@@ -163,8 +163,8 @@ sealed class ApiKeyCommand(
                     {
                         await contextProvider.LoadAsync(message, cancellationToken);
                         await client.SendMessageAsync(
-                            message.Chat.Id,
                             localizer["ApiKeyHelp"],
+                            chatId: message.Chat.Id,
                             parseMode: FormatStyles.HTML,
                             linkPreviewOptions: new() { IsDisabled = true },
                             replyParameters: new()

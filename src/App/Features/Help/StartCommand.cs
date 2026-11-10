@@ -30,8 +30,8 @@ sealed class StartCommand(
 
         await contextProvider.LoadAsync(message, cancellationToken);
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["About"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             linkPreviewOptions: new() { IsDisabled = true },
             replyParameters: new()

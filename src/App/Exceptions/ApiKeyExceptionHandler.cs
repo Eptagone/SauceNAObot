@@ -56,8 +56,8 @@ sealed class ApiKeyExceptionHandler(
         };
         await contextProvider.LoadAsync(exception.ReceivedMessage, cancellationToken);
         await client.SendMessageAsync(
-            exception.ReceivedMessage.Chat.Id,
             text,
+            chatId: exception.ReceivedMessage.Chat.Id,
             replyParameters: new()
             {
                 AllowSendingWithoutReply = true,

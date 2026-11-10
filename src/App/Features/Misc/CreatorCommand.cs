@@ -28,8 +28,8 @@ sealed class CreatorCommand(
     {
         await contextProvider.LoadAsync(message, cancellationToken);
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["Creator"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new()
             {

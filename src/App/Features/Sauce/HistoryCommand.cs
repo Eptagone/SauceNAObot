@@ -51,8 +51,8 @@ class HistoryCommand(
                     );
 
                     await client.SendMessageAsync(
-                        message.Chat.Id,
                         localizer["HistoryCleared"],
+                        chatId: message.Chat.Id,
                         replyParameters: new()
                         {
                             AllowSendingWithoutReply = true,
@@ -64,8 +64,8 @@ class HistoryCommand(
 
                 default:
                     await client.SendMessageAsync(
-                        message.Chat.Id,
                         localizer["HistoryHelp"],
+                        chatId: message.Chat.Id,
                         parseMode: FormatStyles.HTML,
                         replyParameters: new ReplyParameters
                         {

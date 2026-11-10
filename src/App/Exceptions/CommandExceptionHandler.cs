@@ -39,8 +39,8 @@ sealed class CommandExceptionHandler(
         if (exception.SentMessage is null)
         {
             await client.SendMessageAsync(
-                exception.ReceivedMessage.Chat.Id,
                 localizer["Message"],
+                chatId: exception.ReceivedMessage.Chat.Id,
                 cancellationToken: cancellationToken
             );
         }

@@ -50,8 +50,8 @@ sealed class AddApiKeyHandler(
             if (string.IsNullOrEmpty(input))
             {
                 await client.SendMessageAsync(
-                    message.Chat.Id,
                     localizer["AskForName"],
+                    chatId: message.Chat.Id,
                     parseMode: FormatStyles.HTML,
                     replyParameters: new ReplyParameters
                     {
@@ -92,8 +92,8 @@ sealed class AddApiKeyHandler(
             if (string.IsNullOrEmpty(input))
             {
                 await client.SendMessageAsync(
-                    message.Chat.Id,
                     localizer["AskForKey"],
+                    chatId: message.Chat.Id,
                     parseMode: FormatStyles.HTML,
                     replyParameters: new ReplyParameters
                     {
@@ -167,8 +167,8 @@ sealed class AddApiKeyHandler(
             if (string.IsNullOrEmpty(input))
             {
                 await client.SendMessageAsync(
-                    message.Chat.Id,
                     localizer["AskForShare"],
+                    chatId: message.Chat.Id,
                     parseMode: FormatStyles.HTML,
                     replyParameters: new ReplyParameters
                     {
@@ -209,8 +209,8 @@ sealed class AddApiKeyHandler(
         );
         await this.ClearStateAsync(message, cancellationToken);
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["AddSuccess"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new ReplyParameters
             {

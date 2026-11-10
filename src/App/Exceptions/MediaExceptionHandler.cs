@@ -56,8 +56,8 @@ sealed class MediaExceptionHandler(
         if (exception.SentMessage is null)
         {
             await client.SendMessageAsync(
-                message.Chat.Id,
                 localizer[errorKey],
+                chatId: message.Chat.Id,
                 replyParameters: new()
                 {
                     ChatId = message.Chat.Id,

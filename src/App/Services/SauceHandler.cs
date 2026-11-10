@@ -95,8 +95,8 @@ sealed class SauceHandler(
             }
             var (text, keyboard) = this.CookSauces(sauces);
             await client.SendMessageAsync(
-                message.Chat.Id,
                 text,
+                chatId: message.Chat.Id,
                 parseMode: FormatStyles.HTML,
                 replyParameters: new()
                 {
@@ -124,8 +124,8 @@ sealed class SauceHandler(
 
         var user = await contextProvider.LoadAsync(message, cancellationToken);
         var sentMessage = await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["Searching"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new()
             {

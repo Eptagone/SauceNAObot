@@ -27,8 +27,8 @@ sealed class SettingsExceptionHandler(
         {
             await contextProvider.LoadAsync(ilce.ReceivedMessage, cancellationToken);
             await client.SendMessageAsync(
-                ilce.ReceivedMessage.Chat.Id,
                 localizer["InvalidLanguageCode"],
+                chatId: ilce.ReceivedMessage.Chat.Id,
                 cancellationToken: cancellationToken
             );
             return true;

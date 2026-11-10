@@ -61,8 +61,8 @@ sealed class SetLangCommand(
         if (languageCode is null)
         {
             await client.SendMessageAsync(
-                message.Chat.Id,
                 localizer["SetLangHelp"],
+                chatId: message.Chat.Id,
                 parseMode: FormatStyles.HTML,
                 replyParameters: new()
                 {
@@ -93,8 +93,8 @@ sealed class SetLangCommand(
         }
 
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["LanguageSet"],
+            chatId: message.Chat.Id,
             cancellationToken: cancellationToken
         );
     }

@@ -51,8 +51,8 @@ sealed class TempCommand(
             };
 
         var sentMessage = await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["GeneratingTmpUrl"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new()
             {

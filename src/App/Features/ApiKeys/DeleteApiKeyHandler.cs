@@ -38,8 +38,8 @@ sealed class DeleteApiKeyHandler(
         {
             await this.ClearStateAsync(message, cancellationToken);
             await client.SendMessageAsync(
-                message.Chat.Id,
                 localizer["ApiKeyNotFound"],
+                chatId: message.Chat.Id,
                 parseMode: FormatStyles.HTML,
                 replyParameters: new()
                 {
@@ -60,8 +60,8 @@ sealed class DeleteApiKeyHandler(
             if (string.IsNullOrEmpty(input))
             {
                 await client.SendMessageAsync(
-                    message.Chat.Id,
                     localizer["ApiKeyConfirmDelete"],
+                    chatId: message.Chat.Id,
                     parseMode: FormatStyles.HTML,
                     replyParameters: new()
                     {
@@ -89,8 +89,8 @@ sealed class DeleteApiKeyHandler(
             {
                 await this.ClearStateAsync(message, cancellationToken);
                 await client.SendMessageAsync(
-                    message.Chat.Id,
                     localizer["ApiKeyDeleteCanceled"],
+                    chatId: message.Chat.Id,
                     parseMode: FormatStyles.HTML,
                     replyParameters: new()
                     {
@@ -113,8 +113,8 @@ sealed class DeleteApiKeyHandler(
         }
         await this.ClearStateAsync(message, cancellationToken);
         await client.SendMessageAsync(
-            message.Chat.Id,
             localizer["ApiKeyDeleted"],
+            chatId: message.Chat.Id,
             parseMode: FormatStyles.HTML,
             replyParameters: new()
             {

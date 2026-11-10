@@ -39,8 +39,8 @@ sealed class UserStateExceptionHandler(
         if (exception is UserStateCancelledException)
         {
             await client.SendMessageAsync(
-                exception.ReceivedMessage.Chat.Id,
                 localizer["CancelMessage"],
+                chatId: exception.ReceivedMessage.Chat.Id,
                 replyParameters: new()
                 {
                     AllowSendingWithoutReply = true,
@@ -53,8 +53,8 @@ sealed class UserStateExceptionHandler(
         else
         {
             await client.SendMessageAsync(
-                exception.ReceivedMessage.Chat.Id,
                 localizer["CommandsDisabled"],
+                chatId: exception.ReceivedMessage.Chat.Id,
                 parseMode: FormatStyles.HTML,
                 replyParameters: new()
                 {

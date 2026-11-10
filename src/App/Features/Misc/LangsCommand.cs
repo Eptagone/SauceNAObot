@@ -51,8 +51,8 @@ class LangsCommand(
 
         var text = localizer["Languages", languages];
         await client.SendMessageAsync(
-            message.Chat.Id,
             text,
+            chatId: message.Chat.Id,
             replyParameters: new()
             {
                 AllowSendingWithoutReply = true,

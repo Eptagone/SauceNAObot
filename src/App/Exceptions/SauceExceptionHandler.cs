@@ -84,8 +84,8 @@ class SauceExceptionHandler(
         if (exception.SentMessage is null)
         {
             await client.SendMessageAsync(
-                message.Chat.Id,
                 text,
+                chatId: message.Chat.Id,
                 parseMode: FormatStyles.HTML,
                 linkPreviewOptions: new() { IsDisabled = true },
                 replyParameters: new()
